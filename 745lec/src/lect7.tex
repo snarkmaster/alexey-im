@@ -1,0 +1,304 @@
+\documentclass[11pt]{article}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{pstricks}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf 18.745 Introduction to Lie Algebras } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Scribe: #4}{Lecture #1}}
+
+%\DeclareMathOperator{\gl}{gl}
+\DeclareMathOperator{\rank}{rank}
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\N}{\mathbin}{AMSb}{"4E}
+\DeclareMathSymbol{\Z}{\mathbin}{AMSb}{"5A}
+\DeclareMathSymbol{\R}{\mathbin}{AMSb}{"52}
+\DeclareMathSymbol{\Q}{\mathbin}{AMSb}{"51}
+\DeclareMathSymbol{\I}{\mathbin}{AMSb}{"49}
+\DeclareMathSymbol{\C}{\mathbin}{AMSb}{"43}
+\DeclareMathSymbol{\F}{\mathbin}{AMSb}{"46}
+\DeclareMathOperator{\sla}{sl}
+\newcommand{\sll}{\mbox{sl}}
+\newcommand{\gl}{\mbox{gl}}
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\tr}{\mbox{tr\ }}
+\newcommand{\Mat}{\mbox{Mat}}
+\newcommand{\Lie}{\mbox{Lie}}
+\newcommand{\Der}{\mbox{Der\ }}
+\newcommand{\End}{\mbox{End\ }}
+\newcommand{\ad}{\mbox{ad\ }}
+\newcommand{\im}{\mbox{im\ }}
+\newcommand{\Ker}{\mbox{ker\ }}
+
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\He}{\mathfrak{H}}
+
+\newcommand{\sk}{\vspace*{1em}}
+
+\newtheorem{defn}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{prop}{Proposition}
+\newtheorem{proof}{Proof}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{7 --- September 30, 2004}{Fall 2004}{Prof.\ Victor Ka\v{c}}{Karola M\'esz\'aros}
+
+In the course of this lecture, $\F$  denotes an algebraically closed field of characteristic $0$, $\g$ denotes a finite dimensional Lie algebra over $\F$, $\h$ is a nilpotent subalgebra of $\g$, and $\pi$ is a representation of $\h$ in a finite dimensional vector space $V$ over $\F$. 
+
+Last time we proved the validity of the \textit{ generalized weight space decomposition:} $$V=\bigoplus_{\lambda \in {\h}^{*}} V_{\lambda},$$ where $V_{\lambda}$ is the generalized eigenspace $V_{\lambda}=\{v \in V | (\pi(h)-\lambda(h))^{N}v=0$ for $N>>0\}$. In particular, taking the adjoint representation on $\g$, we get the \textit{generalized root space decomposition:}
+
+$$\g=\bigoplus_{\alpha \in {\g}^{*}} {\g}_{\alpha},$$ where $\g_{\alpha}$ is the generalized rootspace $\g_{\alpha}=\{g\in \g | (ad(h)-\lambda(h))^{N}g=0$ for $N>>0\}$. The reasons for calling such a decomposition a root space decomposition are historic. A relation between these two  decompositions is given by $\pi(\g_\alpha) V_\lambda \subset V_{\alpha + \lambda}$, which follows from a proposition we proved in lecture $6$, namely that  $\pi({\g}^{a}_{\alpha}) V^{a}_{\lambda} \subset V^{a}_{\alpha + \lambda}$. Futhermore, considering $\pi$ to be the adjoint representation we obtain that $[\g_\alpha, \g_\beta]\subset \g_{\alpha+\beta}$. These two relations play a very important role in the structure and representation theory of Lie algebras. 
+
+\begin{center}
+{\large \bf A digression to topological spaces}
+\end{center}
+
+
+\begin{defn} A \emph{topological space} is a set $X$ together with a collection of its \emph{closed subsets}, subject to the following axioms: 
+
+
+(i) $X$ and $\emptyset$ are closed
+
+
+(ii) the union of any finite collection of closed subsets is closed
+
+(iii)  the intersection  of any  collection of closed subsets is closed
+
+(iv) (weak separation axiom) given $x, y \in X$, $x\neq y$, there exists a closed subset $F$ such that $x \in F$ and $y \not \in F$. 
+
+\end{defn}
+
+
+\begin{defn}
+A set $U \subset X$  is called \emph{open} if there exists a closed set $V$ such that $U=X\setminus V$. 
+\end{defn}
+
+Note that the weak separation axiom means that for any $x\neq y$ from $X$ there exists an open set $U$ such that $x \in U$ and $y \not \in U$. 
+
+\begin{defn}
+The  \emph{Zariski topology} is a topology defined on $X={\F}^n$ such that a closed subest is the set of common zeros of a set of polynomials in $n$ indeterminates $\{P_{\alpha}(x)\}_{\alpha \in I}$, where $I$ is some index set that could be infinite. 
+\end{defn} 
+
+
+
+
+\sk\noindent
+{\bf Exercise 7.1.} Prove that the Zariski topology is a topology. 
+
+Given a set $S$ of polynomials we denote by $\mathbb{V}(S) \subset {\F}^n$ the set of common zeros of the polynomials in $S$. The notation $\mathbb{V}$ stands for \textit{variety}. Expressed with this new notation all the closed subests of the Zariski topology on ${\F}^n$ are of the form $\mathbb{V}(S)$ for some set $S$ of polynomials. A special case of a variety is a \textit{hypersurface} $\mathbb{V}(P)$ where $P$ is a given nonconstant polynomial. Note that by definition, any closed subset which is not the whole ${\F}^n$ lies in some hypersurface. 
+
+
+\paragraph{Solution to Ex.7.1.} 
+
+We need to check the four axioms for a topological space: 
+
+(a) $X$ and $\emptyset$ are closed since  $\mathbb{V}(0)=X$, and  $\mathbb{V}(1)=\emptyset$
+
+(b) The union of any finite collection of closed sets is closed: 
+
+Let  $\mathbb{V}(S_1)$ and $\mathbb{V}(S_2)$ be two closed sets and let $S=\{f_1 f_2 | f_1 \in S_1 \text{and } f_2 \in S_2\}$. Then, if $x \in \mathbb{V}(S_1) \cup \mathbb{V}(S_2)$, then for any $f_1 \in S_1$, $f_2 \in S_2$, $f_1f_2(x)=0$, as either $f_1(x)$ or $f_2(x)$ is zero. Thus 
+$\mathbb{V}(S_1) \cup \mathbb{V}(S_2) \subset \mathbb{V}(S)$. 
+
+Conversely, if $x \in \mathbb{V}(S)$ and  $x \not \in \mathbb{V}(S_1)$, then 
+there is an $f_1 \in \mathbb{V}(S_1)$ such that $f_1(x) \neq 0$, and so $f_2(x)=0$ for all $f_2 \in S_2$, thus $x \in \mathbb{V}(S_2)$, therefore
+$\mathbb{V}(S) \subset \mathbb{V}(S_1) \cup \mathbb{V}(S_2)$. 
+
+We have obtained that $\mathbb{V}(S) \subset \mathbb{V}(S_1) \cup \mathbb{V}(S_2)$, and this solves the problem as we can now perform induction since we have a finite collection of sets. 
+
+(c) The intersection of any collection of closed subsets is closed: 
+
+Let $\{ \mathbb{V}(S_\alpha)\}_{\alpha \in I}$ be any collection of closed subsets. We shall show that $\cap_{\alpha \in I}\mathbb{V}(S_\alpha)=\mathbb{V}(\cup_{\alpha \in I}S_{\alpha})$. 
+
+Indeed, id $x \in \cap_{\alpha \in I}\mathbb{V}(S_\alpha)$, then $f(x)=0$ for all $f \in \cup_{\alpha \in I}S_{\alpha}$, thus $\cap_{\alpha \in I}\mathbb{V}(S_\alpha) \subset \mathbb{V}(\cup_{\alpha \in I}S_{\alpha})$.
+
+On the other hand, if $f(x)=0$ for all $f \in \cup_{\alpha \in I}S_{\alpha}$, then $x \in \mathbb{V}(S_{\alpha})$ for every $\alpha \in I$, and so
+$ \mathbb{V}(\cup_{\alpha \in I}S_{\alpha}) \subset \cap_{\alpha \in I}\mathbb{V}(S_\alpha)$. Therefore,  $\cap_{\alpha \in I}\mathbb{V}(S_\alpha)=\mathbb{V}(\cup_{\alpha \in I}S_{\alpha})$ and so $\cap_{\alpha \in I}\mathbb{V}(S_\alpha)$ is closed.
+
+(d) Weak separation axiom:
+
+Let $x \neq y$ be in $X$ and define $f_i(z)=z_i-x_i$ for each $i \in [n]$ ($X={\F}^n$), where $x_i, z_i$ denote the $i^{th}$ coordinates of $x$ and $z$, respectively. Then, $\mathbb{V}(\{f_i\}_{i \in [n]})=\{x\}$, thus $F=\{x\}$ is a closed subset of $X$ containing $x$ and not containing $y$. 
+
+
+\begin{prop}
+Suppose that $\F$ is an infinite field and $n \geq 1$. 
+
+(a) The complement to a hypersurface in $\F^n$ is an infinite set. In particular the complement to any Zariski closed subset not equal to $\F^n$ is an infinite set. 
+
+(b) Every two non-empty Zariski open subsets have non-empty intersection. 
+
+(c) If a polynomial $Q(x)$ vanishes on a non-empty Zariski open subset, then $P(x) \equiv 0.$
+
+\end{prop}
+
+\paragraph{Proof.} 
+
+
+(a) Perform induction on $n$.
+
+ The base case for $n=1$ is easy, since  any  polynomial $p$ has finitely many zeroes, thus $\mathbb{V}(S)$, $S=\{p\}$,  is finite and $\mathbb{V}(S)$ is finite even so more if $S$ contains more than one polynomial. Thus, the  complement to any Zariski closed subset not equal to $\F$ is an infinite set. 
+
+
+If $P=P(x_1, x_2, \ldots, x_n) \neq 0$, then write $P=a_0(\bar{x})x^N_i+a_1(\bar{x})x^{N-1}_i+\cdots+a_N(\bar{x})$, where $\bar{x}=(x_1, x_2, \ldots, \hat{x_i}, \ldots, x_N)$ and $a_0(\bar{x})\neq 0$. By the inductive assumption there are infinitely many points for which $a_0(\bar{x})\neq 0$ and for each such point there is a value of $x_i$ for which $P(x_1, x_2, \ldots, x_n) \neq 0$. So there are infinitely many points where $P$ does not vanish. 
+
+(b) A non-empty Zariski open subset contains the complement to a hypersurface $\mathbb{V}(P)$. Taking two non-empty Zariski open subsets they contain the complements to   $\mathbb{V}(P_1)$ and 
+$\mathbb{V}(P_2)$, respectively. Therefore, their intersection contains complement to their union, which is $\mathbb{V}(P_1) \cup \mathbb{V}(P_2)=
+\mathbb{V}(P_1 P_2)$, and by (a) it contains infinitely many points. 
+
+
+(c) If a polynomial $P\not \equiv 0$ and vanishes on a non-empty Zariski open subset $U$, then we know that  $\mathbb{V}(P)$ is a hypersurface. Furthermore,   since  
+  the intersection of the complement of $\mathbb{V}(P)$ and $U$  non-empty by (b), we obtain that for $x$ in the  intersection of the complement of $\mathbb{V}(P)$ and $U$  $P(x)\neq 0$ and $P(x)=0$, contradiction.
+
+
+
+\begin{center}
+{\large \bf Regular elements}
+\end{center}
+
+
+Let $a \in \g$, where $\g$ is a $d$-dimensional Lie algebra ($d<\infty$)  over the field $\F$. Consider the characteristic polynomial of $\ad a$: 
+
+$$det_{\g}(\ad a-\lambda I)=(-\lambda)^d+(tr_{\g} \ad a) \lambda^{d-1}+\cdots+det_{\g} \ad a.$$
+
+Note that $\ad a $ is a singular operator since (\ad a)a=[a, a]=0, hence, $det_{\g}\ad a=0$, i.e.  the characteristic polynomial of $\ad a$ has a vanishing constant term. Write $det(\ad a-\lambda I)=(-\lambda)^d+c_{d-1}(a) \lambda^{d-1}+\cdots+c_{r}(a) \lambda^{r},$ where the coefficients $c_{d-1}, c_{d-2}, \ldots, c_0$ are polynomial functions on $\g$ and $r$ is the smallest integer such that $c_r(a)\not \equiv 0$ (recall that $c_0\equiv 0$).
+
+\begin{defn} The above $r$ is called the \emph{rank} of $\g$. An element $a \in \g$ is called regular if $c_r(a)\neq 0$. 
+\end{defn}
+
+\begin{prop}
+(a) The inequalities $1\leq r\leq d$ hold, where $r$ is as  above, and $d$ is the dimension of the Lie algebra $\g$.
+
+(b) The equation $r=d$ holds  if and only if $\g$ is a nilpotent Lie algebra. 
+
+(c) If $\g$ is a nilpotent Lie algebra, then  the set of non-regular elements of  $\g$ is $\g$, whereas if  $\g$ is not nilpotent, then the set of non-regular elements  is a complement to a hypersurface in $\g$. In particular, the set of regular elements is Zariski open, and  $\g$ contains infinitely many regular elements if $\F$ is an infinite field. 
+
+\end{prop}
+
+
+\paragraph{Proof.} The statement of \textit{(a)} follows since $c_0\equiv 0$. 
+
+
+In \textit{(b)} $r=d$ means that $det(\ad a-\lambda I)=(-\lambda)^d$, which means that $\ad a$ is a nilpotent operator for all $a$, which is the case if and only if $\g$ is nilpotent (by Engel's theorem). 
+
+(c) If $\g$ is nilpotent, then $r=d$ and $c_d\equiv 1$, therefore every element of $\g$ is regular. If $\g$ is not nilpotent, then we shall use the statement of an exercise that we shall proof later. 
+
+
+\sk\noindent
+{\bf Exercise 7.2.} The polynomial $c_r(x)$ is homogeneous of degree $d-r$. 
+
+Indeed, if $\g$ is not nilpotent, then $r\neq d$, thus $c_r$ is a non-constant polynomial, and thus the set of non-regular elements of $\g$ is the hypersurface $\mathbb{V}(c_r(x))$. But, by Proposition 1 the complement to this hypersurface is infinite as $\F$ is infinite. 
+
+
+\paragraph{Solution of Ex.7.2.}
+We shall actually prove the statement for all $c_l$ not only for $c_r$. 
+Note that the determinant of a matrix $A=(a_{i, j})$ is a homogeneous polynomial in $a_{ij}$, thus,  the determinant of $\ad a-\lambda I$ is homogeneous of degree $n$ in $a_{ij},a_{ii}-\lambda,i\ne j$, where $A=\ad a$. It follows that 
+ $det (\ad a - \lambda I)$ is  homogeneous
+in $a_{ij}$ and $\lambda$. We are interested in the coefficient
+of $\lambda^{l}$, and hence of terms that contain exactly $l$ multiples
+of $\lambda$, the rest of the $n$ variables in each term are $a_{ij}$,
+so $c_{l}(x)$ is a homogeneous polynomial of degree $n-i$ in $a_{ij}$.
+
+
+\paragraph{Example} 
+What are the regular elements of $\gl_n$? 
+Let $\g=\gl_n(\F)$, and $a \in \g$, $a=a_s+a_n$, where $a_s$ is diagonalizable, $a_n$ is nilpotent, and $a_s$ and $a_n$ commute. Then, $\ad a=\ad a_s+\ad a_n$, where $\ad a_s$ is semisimple, and $\ad a_n$ is nilpotent. The answer to the question will be given in the exercise below and in the comments following it, and we shall find that     $a \in \gl_n(\F)$ is regular if and only if all eigenvalues of the matrix $a$ are distinct.
+
+
+\sk\noindent
+{\bf Exercise 7.3}.
+
+(a) If  $a_{s}$ is semisimple with eigenvalues $\lambda_{1},\dots,\lambda_{n}$,
+then $\ad a_{s}$ is diagonalizable with eigenvalues $\{\lambda_{i}-\lambda_{j}\}$.
+
+(b) $\ad a$ has the same eigenvalues as $\ad a_{s}$.
+
+
+
+\paragraph{Solution.}
+
+(a) Choose a  basis of ${\F}^n$ in which $a_{s}$ is diagonal, and let
+ $e_{ij}$ be the matrix with zero entry  everywhere but
+the $(i,j)^{th}$ position where it has a $1$. Then, $\ad (a_s) e_{ij}= 
+a_{s}e_{ij}-e_{ij}a_{s}=(\lambda_{i}-\lambda_{j})e_{ij}$, 
+thus  $\ad a_{s}$ is diagonalizable with eigenvalues $\lambda_{i}-\lambda_{j}$, $i, j \in [n]$.
+
+(b) Take the Jordan decomposition of $a=a_{s}+a_{n}$. Then
+$\ad a_{n}$ is nilpotent since $a_n$ is nilpotent, 
+and by (a) $\ad a_{s}$ is semisimple. Hence, we have a decomposition of $\ad a$ into
+a semisimple and nilpotent part, which commute,  thus this decomposition  by the uniqueness of the Jordan
+decomposition is the Jordan decomposition of $\ad a$.
+Since  the eigenvalues of the
+semisimple part of a Jordan decomposition are the same as those of
+the original matrix, it follows that $\ad a$ and $\ad a_s$ have the same eigenvalues.
+
+
+
+By exercise $7.3.$\textit{(b)} we have that 
+ 
+$det(\ad a-\lambda I)=det(\ad a_{s}-\lambda I)
+%\underset{\text{Ex.7.3(a)}{=}
+=\prod_{i,j=1}^{n}((\lambda_{i}-\lambda_{j})-\lambda)=\\
+=(-\lambda)^{n}\prod_{i\ne j}((\lambda_{i}-\lambda_{j})-\lambda)$,
+
+
+hence $c_j(a)\equiv 0$ for $j=0, 1, \ldots, n-1$, and $c_n(a)=\prod_{i\ne j}(\lambda_{i}-\lambda_{j})\not \equiv 0$ if and only if the eigenvalues $\lambda_i$ are all different. Hence, $\rank \gl_n(\F)=n$ and $a \in \gl_n(\F)$ is regular if and only if all eigenvalues of the matrix $a$ are distinct. The hypersurface of non-regular elements is given by the polynomial $\prod_{i\ne j}(\lambda_{i}-\lambda_{j})=0$. This polynomial is called the \textit{discriminant}. 
+
+
+
+
+\sk\noindent
+{\bf Exercise 7.4}.
+ Compute explicitly the discriminant for $\gl_{2}(\F)$. Then,  find the rank of $\sla_{n}(\F)$.\\
+
+
+\paragraph{Solution.}
+
+The discriminant is $\prod_{i\ne j}(\lambda_{i}-\lambda_{j})=-(\lambda_{1}-\lambda_{2})^{2}=-(\lambda_1+\lambda_2)^2 +4\lambda_1 \lambda_2=-(trA)^2+4 detA=-(a+d)^2+4(ad-bc).$
+
+ We can find  the rank of $\sla_n$ in an analogous way as that of $\gl_n$ above. Notice, that the only difference is that there is one less zero eigenvalue for $\ad a_s$, that is not hard to see if in the solution of Ex.7.3.(a) one takes the matrices $e_{ij}$ for $i\neq j$ and $e_{jj}-e_{11}$ for $j\neq 1$ (which are all in $\sla_n$) instead of the matrices $e_{ij}$ as we did for $\gl_n$. Thus, we can    write 
+$det(\ad a-\lambda I)=det(\ad a_{s}-\lambda I)
+=(-\lambda)^{n-1}\prod_{i\ne j}
+((\lambda_{i}-\lambda_{j})-\lambda),$
+
+ so $\rank\sla_{n}(\F)\ge n-1$. The coefficient of $\lambda^{n-1}$ is
+ $\prod_{i\ne j}(\lambda_{i}-\lambda_{j})$, which would be identically zero only if all matrices in $\sla_{n}(\F)$ had
+multiple eigenvalues. This is however not the case. Thus, $\rank\sla_{n}(\F)=n-1$.
+
+
+
+\end{document}
+
+

@@ -1,0 +1,228 @@
+\documentclass[11pt]{article}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{pstricks}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf 18.745 Introduction to Lie Algebras } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Scribe: #4}{Lecture #1}}
+
+%\DeclareMathOperator{\gl}{gl}
+\DeclareMathOperator{\rank}{rank}
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\N}{\mathbin}{AMSb}{"4E}
+\DeclareMathSymbol{\Z}{\mathbin}{AMSb}{"5A}
+\DeclareMathSymbol{\R}{\mathbin}{AMSb}{"52}
+\DeclareMathSymbol{\Q}{\mathbin}{AMSb}{"51}
+\DeclareMathSymbol{\I}{\mathbin}{AMSb}{"49}
+\DeclareMathSymbol{\C}{\mathbin}{AMSb}{"43}
+\DeclareMathSymbol{\F}{\mathbin}{AMSb}{"46}
+\DeclareMathOperator{\sla}{sl}
+\newcommand{\sll}{\mbox{sl}}
+\newcommand{\gl}{\mbox{gl}}
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\tr}{\mbox{tr\ }}
+\newcommand{\Mat}{\mbox{Mat}}
+\newcommand{\Lie}{\mbox{Lie}}
+\newcommand{\Der}{\mbox{Der\ }}
+\newcommand{\End}{\mbox{End\ }}
+\newcommand{\ad}{\mbox{ad\ }}
+\newcommand{\im}{\mbox{im\ }}
+\newcommand{\Ker}{\mbox{ker\ }}
+
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\He}{\mathfrak{H}}
+
+\newcommand{\sk}{\vspace*{1em}}
+
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{prop}{Proposition}
+\newtheorem{proof}{Proof}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{17 --- November 5, 2004}{Fall 2004}{Prof.\ Victor Ka\v{c}}{Karola M\'esz\'aros}
+
+
+\begin{defn}
+Let $(V, \bigtriangleup)$ be an abstract root system. Let $f$ be a linear function on $V$ such that $f(\alpha)\neq 0$ for all $\alpha \in \bigtriangleup$. The set $\bigtriangleup_{+}$ (respectively $\bigtriangleup_{-}$) is equal to $\{\alpha \in \bigtriangleup | f(\alpha)>0 \textit{ (respectively, }f(\alpha)<0)\}$ is called the subset of positive (respectively, negative) roots. 
+\end{defn}
+
+Note that $\bigtriangleup_{-}=-\bigtriangleup_{+}$ and $\bigtriangleup=\bigtriangleup_{+}\sqcup \bigtriangleup_{-}$.    
+
+
+A positive root is \textit{simple} if it cannot be represented as a sum of two positive roots. Let $\Pi \subset \bigtriangleup_{+}$ denote the set of simple roots. 
+
+\textit{A short philosophical digression.} It is often very important to break the symmetry of systems in order to get more information about them; although, ancient Greeks believed one should just observe the system one studies, and so they did not interfere with the systems they were studying, therefore, they also  did not break their symmetry, which explains their slow progress in natural sciences. However, we used this symmetry breaking when classifying Lie algebras by choosing a Cartan subalgebra. Here again we are breaking the symmetry of $\bigtriangleup$ by considering $\bigtriangleup_{+}$ and $\bigtriangleup_{-}$.    
+
+The set $\Pi$ is called \textit{indecomposable} if it cannot be decomposed into a union of orthogonal non-empty subsets: $\Pi=\Pi^{'} \cup \Pi^{''}$, $( \Pi^{'}, \Pi^{''})=0.$ A \textit{highest root} is a root $\theta$ with maximal value of $f(\theta)$. 
+
+\textbf{Exercise 17.1.} Show that $\theta$ is unique in an indecomposable root system. 
+
+
+We shall show this after the following theorem. 
+
+\begin{thm}
+(a) If $\alpha, \beta \in \Pi,$ $\alpha\neq \beta$, then $\alpha-\beta \not \in \bigtriangleup$ and $(\alpha, \beta)\leq 0$. Also, $(\theta, \alpha) \geq 0$ and $\theta+\alpha \not \in \bigtriangleup$ for any $\alpha \in \bigtriangleup_{+}$.
+
+(b) Any positive root is a linear combination of simple roots with nonnegative integer coefficients.
+
+(c) If $\alpha \in \bigtriangleup_{+} \setminus \Pi$, then $\alpha-\gamma$ is a root for some $\gamma \in \Pi$. Moreover, $\alpha -\gamma \in \bigtriangleup_{+}$. 
+
+(d) $\Pi$ is a basis of $V$ over $\mathbb{R}$, and a basis of the root lattice $Q$ over $\mathbb{Z}$. Also, $\bigtriangleup_{+} \subset \mathbb{Z}_{+}\Pi$, and    $\bigtriangleup_{-} \subset -\mathbb{Z}_{+}\Pi$.
+
+(e) $\bigtriangleup$ is indecomposable if and only if $\Pi$ is indecomposable.
+
+\end{thm}
+
+
+\paragraph{Proof.}
+\textit{(a)} Suppose the contrary, $\alpha-\beta=\gamma \in \bigtriangleup$. If $\gamma \in \bigtriangleup_{+}$, then $\alpha=\beta+\gamma$ contradicts the simplicity of $\alpha$. Similary, if $-\gamma \in \bigtriangleup_{+}$, then $\beta=\alpha+(-\gamma)$ contradicts the simplicity of $\beta$. Next, by the string property we have that $p-q=\frac{2(\alpha, \beta)}{(\beta, \beta)}$, but as $\alpha-\beta \not \in \bigtriangleup$ as we have just seen, it follows that $p=0$, and thus $(\alpha, \beta) \leq 0$. Furthermore, it is clear that $\theta+\alpha \not \in \bigtriangleup$ since $f(\theta)+f(\alpha)=f(\theta+\alpha)> f(\theta)$, and $\theta$ is the highest root. Finally, by the string property $(\theta, \alpha)\geq 0$. This concludes the proof of (a).
+
+\textit{(b)} If $\alpha$ is a positive root that is simple, there is nothing to prove. If $\alpha \in \bigtriangleup_{+}$ and $\alpha$ is not simple, then $\alpha=\beta+\gamma$ for some $\beta, \gamma \in \bigtriangleup_{+}$. But, $f(\alpha)=f(\beta)+f(\gamma)$, hence, $f(\alpha)>f(\beta), f(\gamma)> 0$, and applying induction on the finite ordered set ${\{f(\alpha)\}}_{\alpha \in \bigtriangleup_{+}}$ shows the statement of (b). This shows that $\Pi$ spans $\bigtriangleup_{+}$ over $\mathbb{Z}_{+}$. 
+
+
+\textit{(c)} Supposing the opposite, we obtain $(\alpha, \gamma)\leq 0$ for all $\gamma \in \Pi$ by the string property. Hence $(\alpha, \alpha)=(\alpha, \sum_{\gamma \in \Pi} k_{\gamma} \gamma) \leq 0$, as $k_{\gamma} \in \mathbb{Z}_{+}$ for all $\gamma \in \Pi$ by (b) and $(\alpha, \gamma)\leq 0$ by our assumption. However, $(\alpha, \alpha)\leq 0$ is impossible for $\alpha \in \bigtriangleup_{+}\setminus \Pi$, thus, $\alpha-\gamma \in \bigtriangleup \cup \{0\}$. Since $\alpha \not \in \bigtriangleup$ and $\gamma \in \Pi$, it follows that $\alpha -\gamma \in \bigtriangleup$. All we need to show now is that $\alpha-\gamma \in \bigtriangleup_{+}$. Indeed, if $\alpha -\gamma=\beta <0$, then $\gamma=\alpha+(-\beta)$, which contradicts the simplicity of $\gamma$. This shows (c). 
+  
+
+\textit{(d)} We already know by (b) that $\Pi$ spans $\bigtriangleup_{+}$ over $\mathbb{Z}_{+}$, and thus $\Pi$ spans  $Q$ over $\mathbb{Z}$, hence spans $V$ over $\mathbb{R}$. Thus, it suffices to prove linear independence over $\mathbb{R}$ (and then it will follow for $\mathbb{Z}$). In the contrary case, there is a linear dependence between simple roots: $a:=\sum_{\alpha \in \Pi^{'}} k_{\alpha} \alpha=\sum_{\beta \in \Pi^{''}} k_{\beta} \beta=:b$, $k_\alpha, k_\beta>0$, and $\Pi^{'} \cap \Pi^{''}= \emptyset$, $\Pi^{'}, \Pi^{''}< \Pi$ and $(\Pi^{'}, \Pi^{''})\leq 0$. Taking the inner product of both sides with $a$, we obtain: $(a, a)=(a, b)\leq 0$ and since $(a, a)\geq 0$ it follows that $(a, a)=0$, thus, $a=0$. However, then $0=f(a)=\sum_{\alpha \in \Pi^{'}} k_{\alpha} f(\alpha)>0$ as $k_\alpha>0$ for all $\alpha \in \Pi^{'}$, therefore, $\Pi^{'}=\emptyset$. Similarly, $\Pi^{''}=\emptyset$. Therefore there is no notrivial linear independence of simple roots. 
+
+
+
+\textit{(e)} If $\bigtriangleup$ is decomposable, i.e. $\bigtriangleup=\bigtriangleup^{'} \sqcup \bigtriangleup^{''}$, $(\bigtriangleup^{'}, \bigtriangleup^{''})=0$, let $\Pi^{'}$ (respectively $\Pi^{''}$) be simple roots in $\bigtriangleup^{'}$ (respectively $\bigtriangleup^{''}$), so, $\Pi=\Pi^{'}\cup \Pi^{''}$, $(\Pi^{'}, \Pi^{''})=0$. Using (d) we conclude that $\Pi^{'}$ and $\Pi^{''}$ are non-empty. 
+
+Conversely, if  $\Pi=\Pi^{'}\cup \Pi^{''}$ and $(\Pi^{'}, \Pi^{''})=0$, we have to show that any $\alpha \in \bigtriangleup_{+}$ is a linear combination of elements either all in $\Pi^{'}$ or all in $\Pi^{''}$. Suppose the contrary: $\alpha \in \bigtriangleup_{+}$ and $\alpha=\alpha^{'}+\alpha^{''}$, where $\alpha^{'}\in \mathbb{Z}_{+} \Pi^{'}$ and  $\alpha^{''}\in \mathbb{Z}_{+} \Pi^{''}$. Using (c) we may substract simple roots until, say, $\alpha^{'}$ is simple. So we assume that $\alpha^{'} \in \Pi$ and  $\alpha^{''}\in \mathbb{Z}_{+} \Pi^{''}$. But, 
+$(\alpha, \alpha^{'})=(\alpha^{'}, \alpha^{'})>0$, hence we can use the string property to conclude that $\alpha^{''}\in   \bigtriangleup_{+}$. Using the string property again, we get that $\alpha^{'}-\alpha^{''} \in  \bigtriangleup$, which is impossible by (d). This conludes the proof of (e).
+  
+
+
+\textit{Proof of Ex.17.1.} 
+By Theorem 1 (b) we know that a highest root $\theta$ is of form $\theta=\sum_{\alpha_i \in \Pi} k_i \alpha_i$, such that $k_i \geq 0$. We now show that if the root system is indecomposable then $k_i\geq 1$ for all simple roots. Suppose this is not the case, i.e. there exist $k_i$'s such that $k_i=0$. Since $\theta$ is the highest root it is clear that there must also be $k_i$'s such that $k_i \neq 0$. Let $S$ be the span of all the $\alpha_i$'s in $\Pi$ such that $k_i\neq 0$. Then, we show that for every $\beta \in S$, $(\beta, \alpha_j)=0$ for all $\alpha_j$ such that $k_j=0$. Indeed, by Theorem 1 (a) we know that $\theta+\alpha_j\not \in \bigtriangleup$, and by (b) we know that  $\theta-\alpha_j\not \in \bigtriangleup$ if $k_j=0$ (since we would get mixed signs in front of the simple roots). Thus, by the string property, $(\theta, \alpha_j)=0$, and on the other hand, $(\theta, \alpha_j)=\sum k_i (\alpha_i, \alpha_j)$, and by Theorem 1 (a), $(\alpha_i, \alpha_j)\leq 0$. Therefore, the only way $(\theta, \alpha_j)=0$ is if $(\alpha_i, \alpha_j)=0$ for all $\alpha_i$ such that $k_i \neq 0$ and $\alpha_j$ such that $k_j=0$. Thus, for every $\beta \in S$, $(\beta, \alpha_j)=0$ for all $\alpha_j$ such that $k_j=0$. Indeed, if $S^{'}$ is the span of all $\alpha_j$ such that $k_j=0$, then we can conclude that $(S, S^{'})=0$, by assumption $S$ and $S^{'}$ are nonempty. Thus, by the second proposition in lecture 15 we conclude that the root system is decomposable, contrary to assumption. Therefore, in an indecomposable root system if a highest root $\theta=\sum_{\alpha_i \in \Pi}k_i \alpha_i$, then, $k_i \geq 1$.  
+
+Now, suppose that there are two different highest roots $\theta_1$ and $\theta_2$ in an indecomposable root system. It follows immediately that 
+ that $\theta_1+\theta_2$ and $\theta_1-\theta_2$ are not roots, since $f(\theta_1+\theta_2)>f(\theta_1)$, and $f(\theta_1-\theta_2)=0$. Thus, by the string property we have $0=(\theta_1, \theta_2)$. However, by the above we know that
+$\theta_1=\sum_{\alpha_i \in \Pi}k_i \alpha_i$,  with $k_i \geq 1$, and   $\theta_2=\sum_{\alpha_i \in \Pi}l_i \alpha_i$, with $l_i \geq 1$. Also, by Theorem 1 (a), $(\theta_1, \alpha_i) \geq 0$ for all $\alpha_i \in \Pi$, and, by (c) we can find an $\alpha_n$ such that $\theta_1 - \alpha_n \in \bigtriangleup_{+}$ and since  $\theta_1 +\alpha_n \not \in \bigtriangleup_{+}$ as $\theta_1$ is a highest root, it follows by the string property that $(\theta_1, \alpha_n)>0$. However, expanding $(\theta_1, \theta_2)$ by expanding $\theta_2=\sum_{\alpha_i \in \Pi}l_i \alpha_i$, with $l_i \geq 1$, we obtain that $(\theta_1, \theta_2)\neq 0$, thus obtaining that in an indecomposable root system there is a unique highest root. 
+
+
+
+
+
+\begin{defn} Let $(V,  \bigtriangleup)$ be an abstract root system, $\Pi=\{\alpha_1, \alpha_2, \ldots, \alpha_r\}$ ($r=dimV$) a set of simple roots. Then, the matrix 
+$A={(\frac{2(\alpha_i, \alpha_j)}{(\alpha_i, \alpha_i)})}^{r}_{i, j=1}$
+ is called the Cartan matrix of $(V,  \bigtriangleup)$.
+
+\end{defn}
+
+We shall later show that $A={(\frac{2(\alpha_i, \alpha_j)}{(\alpha_i, \alpha_i)})}^{r}_{i, j=1}$
+  is independent of the choice of $f$ up to the reordering of the index set. 
+
+
+\textit{Properties of Cartan matrices} $A={(a_{ij})}^{r}_{i, j=1}$, where $a_{ij}=\frac{2(\alpha_i, \alpha_j)}{(\alpha_i, \alpha_i)}$. 
+
+\textit{(1)} $a_{ii}=2$
+
+\textit{(2)} $a_{ij}$ is nonpositive integer if $i \neq j$. If $a_{ij}\neq 0$ then $a_{ji}\neq 0$. 
+
+\textit{(3)} All principal minors of $A$ are positive, in particular, $detA>0$. 
+
+Recall that a principal minor is a determinant of a submatrix of $A$ obtained from $A$ by deleting the rows indexed by  $i_1, i_2, \ldots, i_t$ and deleting the 
+columns indexed by  $i_1, i_2, \ldots, i_t$. 
+
+\paragraph{Proof.} The statement of (1) is trivial, and the statement of (2) follows from part (a) of Theorem 1. To prove (3), note that $A$ can be written as a product of a diagonal matrix with the $(j, j)^{th}$ entry equal to $\frac{2}{(\alpha_j, \alpha_j)}$ and a matrix $B={((\alpha_i, \alpha_j))}^{r}_{i, j=1}$, and $B$ is a symmetric positive definite matrix. By Sylvester's criterion all principal minors of $B$ are positive, hence the same holds for $A$. 
+
+
+\begin{defn}
+Let $\alpha_0=\theta$, where $\theta$ is the highest root, and let 
+ $\tilde{A}={(\frac{2(\alpha_i, \alpha_j)}{(\alpha_i, \alpha_i)})}^{r}_{i, j=0}$. 
+
+\end{defn}
+
+Then, $\tilde{A}$ satisfies (1) and (2) above, and $det\tilde{A}=0$, since  
+${((\alpha_i, \alpha_i))}^{r}_{i, j=0}$ is the Gramm matrix of the linearly dependent set of vectors $\alpha_0, \alpha_1, \ldots, \alpha_r$. 
+
+We wish to classify matrices with properties (1), (2), (3), called abstract Cartan matrices. For $r=1$, $A=(2)$, $r=2$, 
+$A=
+\left(
+\begin{array}{cc}
+2 & -a\\
+-b & 2\\
+\end{array}
+\right)
+$, where either $a=b=0$ or both $a$ and $b$ are non-negative integers. Since $detA=4-ab>0$, it follows that up to the reordering of the index set $A$ is one of the following matrices:  
+$
+\left(
+\begin{array}{cc}
+2 & 0\\
+0 & 2\\
+\end{array}
+\right),
+\left(
+\begin{array}{cc}
+2 & -1\\
+-1 & 2\\
+\end{array}
+\right),
+\left(
+\begin{array}{cc}
+2 & -1\\
+-2 & 2\\
+\end{array}
+\right),
+\left(
+\begin{array}{cc}
+2 & -1\\
+-3 & 2\\
+\end{array}
+\right)
+$. An abstract Cartan matrix $A$ is depicted by a \textit{Dynkin diagram} $D(A)$ as follows. $D(A)$ is a graph with $r$ vertices such that the connection of the $i^{th}$ vertex and the $j^{th}$ vertex depends on the matrix
+$\left(
+\begin{array}{cc}
+a_{ii} & a_{ij}\\
+a_{ji} & a_{jj}\\
+\end{array}
+\right)$. For the four martices above, we use the following diagrams, respectively:  
+\begin{center}
+\epsfbox{lect17.eps}
+\end{center}
+
+Obviously, $D(A)$ is a connected graph if and only if $\Pi$ is indecomposable. 
+
+
+\end{document}
+
+

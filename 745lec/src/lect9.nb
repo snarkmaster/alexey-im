@@ -1,0 +1,841 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     29752,        750]*)
+(*NotebookOutlinePosition[     30883,        785]*)
+(*  CellTagsIndexPosition[     30839,        781]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    RowBox[{
+      StyleBox["\[IndentingNewLine]",
+        FontWeight->"Plain"], 
+      RowBox[{
+        StyleBox[\(Lecture\ 9\  - \ October\ 7, \ 2004\),
+          FontFamily->"Times",
+          FontSize->16,
+          FontWeight->"Plain"], 
+        StyleBox["\[IndentingNewLine]",
+          FontFamily->"Times",
+          FontSize->16,
+          FontWeight->"Plain"], 
+        StyleBox["\[IndentingNewLine]",
+          FontFamily->"Times",
+          FontSize->16,
+          FontWeight->"Plain"], 
+        StyleBox[\(Prof . \ Victor\ Ka\[CHacek]\),
+          FontFamily->"Times",
+          FontWeight->"Plain"], 
+        StyleBox["\[IndentingNewLine]",
+          FontFamily->"Times",
+          FontWeight->"Plain"], 
+        StyleBox[\(Scribe : \ Yaim\ Cooper\),
+          FontFamily->"Times",
+          FontWeight->"Plain"], 
+        StyleBox["\[IndentingNewLine]",
+          FontWeight->"Plain"]}]}]], "Input",
+  PageWidth->PaperWidth,
+  TextAlignment->Center],
+
+Cell[BoxData[
+    RowBox[{\(Definition . \ \ A\ Polynomial\ map\ \(f : \
+\[DoubleStruckCapitalF]\^m\) \[Rule] \ \(\[DoubleStruckCapitalF]\^\(\(n\)\(\ \
+\)\)\) is\ a\ map\ of\ the\ following\ form\), ",", " ", 
+      RowBox[{
+        RowBox[{"f", 
+          RowBox[{"(", GridBox[{
+                {\(x\_1\)},
+                {"."},
+                {"."},
+                {"."},
+                {\(x\_m\)}
+                }], ")"}]}], " ", "\[Rule]", " ", 
+        RowBox[{
+          RowBox[{"(", GridBox[{
+                {\(\(P\_1\) \((\(x\_\(1.  .. \)\) x\_m)\)\)},
+                {"."},
+                {"."},
+                {"."},
+                {\(\(P\_n\) \((\(x\_\(1.  .. \)\) x\_m)\)\)}
+                }], ")"}], "  ", "where", " ", \(P\_\(\(i\)\(\ \)\)\), "are", 
+          " ", \(\(polynomials\)\(.\)\(\ \ \)\)}]}]}]], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{
+        RowBox[{
+          StyleBox["Exercise",
+            FontVariations->{"Underline"->True}], 
+          StyleBox[" ",
+            FontVariations->{"Underline"->True}], 
+          StyleBox["9.1",
+            FontVariations->{"Underline"->True}], "  ", "Let", " ", "A", " ", 
+          "be", " ", "a", " ", "nilpotent", " ", "operator", " ", "in", " ", 
+          "a", " ", "finite", " ", "dimensional", " ", "vector", " ", "space",
+           " ", "V", " ", "over", " ", "a", " ", "field", " ", 
+          "\[DoubleStruckCapitalF]", " ", "of", " ", "charachteristic", " ", 
+          "0.", "  ", "Let", " ", "Exp", \((A)\)}], 
+        "=", \(\[Sum]\+\(j = 1\)\%\[Infinity] A\^j\/\(j!\)\)}], 
+      " "}], "\[IndentingNewLine]", 
+    RowBox[{
+      "   ", \(Show\ that\ Exp \((A)\) : V \[Rule] 
+        V\ is\ an\ invertible\ linear\ map\ with\ inverse\ Exp \(\((\(-A\))\)\
+\(.\)\)\)}]}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    RowBox[{\(Solution . \ \ A\ is\ nilpotent\ so\ A\^m = \(0\ for\ some\ m \
+\[Element] \[DoubleStruckCapitalN] . \[IndentingNewLine]Let\ n\ be\ the\ \
+smallest\ natural\ number\ for\ which\ A\^n = 0. \ Then\)\), 
+      " "}], "\[IndentingNewLine]", 
+    RowBox[{\(Exp \((A)\)\), " ", "=", 
+      RowBox[{
+        StyleBox[\(\[Sum]\+\(j = 1\)\%\(n - 1\)\),
+          FontSize->14], 
+        RowBox[{
+          StyleBox[\(A\^j\/\(j!\)\),
+            FontSize->9], 
+          StyleBox[".",
+            FontSize->14], "   "}]}]}]}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(\((1)\)\ \ Exp \((A)\)\ is\ \(\(linear\)\(:\)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    RowBox[{"\t", 
+      RowBox[{
+        RowBox[{\(\((Exp \((A)\))\) \((\(c\_1\) v\_1 + \(c\_2\) v\_2\ )\)\), 
+          "=", 
+          RowBox[{
+            RowBox[{"(", 
+              StyleBox[\(\[Sum]\+\(j = 1\)\%\(n - 1\)A\^j\/\(j!\)\),
+                FontSize->9], 
+              StyleBox[")",
+                FontSize->9]}], \((\(c\_1\) v\_1 + \(c\_2\) v\_2\ )\)}]}], 
+        "\[IndentingNewLine]", \(\(=\)\(\[Sum]\+\(j = 1\)\%\(n - \
+1\)\(\(A\^j\) \((\(c\_1\) v\_1 + \(c\_2\) v\_2)\)\)\/\(j!\) = \[Sum]\+\(j = 1\
+\)\%\(n - 1\)\((\(c\_1\) \(A\^j\) v\_1 + \(c\_2\) \(A\^j\) \
+v\_2)\)\/\(j!\)\)\), 
+        "\[IndentingNewLine]", \(\(=\)\(\(c\_1\) \(\[Sum]\+\(j = 1\)\%\(n - 1\
+\)\(\(A\^j\) v\_1\)\/\(j!\)\) + \(c\_2\) \(\[Sum]\+\(j = 1\)\%\(n - \
+1\)\(\(A\^j\) v\_2\)\/\(j!\)\) = \(c\_1\) Exp \((A)\) v\_1 + \(c\_2\) 
+                Exp \((A)\) \(\(v\_2\)\(.\)\(\ \ \)\)\)\)}]}]], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(\((2)\)\ \ Exp \((\(-A\))\) 
+        is\ the\ inverse\ of\ Exp \((A)\) . \ \ Note\ that\ if\ we\ show\ Exp \
+\((\(-A\))\) Exp \((A)\) = 
+      I, \ \[IndentingNewLine]it\ follows\ that\ Exp \((A)\) 
+        Exp \((\(-A\))\) = \(I\ \ since\  - \((\(-A\))\) = A\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Consider\ Exp \((xA)\) Exp \((cA)\)\ and\ Exp \((\((x + c)\) A)\), \ 
+    where\ x\ and\ c\ are\ real\), "\[IndentingNewLine]", 
+    \(numbers . \ \ \ Since\ differentiation\ with\ respect\ to\ x\ gives\ \
+the\ same\ result\ on\ both\ sides, \ 
+    and\ the\ expressions\ are\ equal\ when\ x\  = \ 0, \ 
+    these\ two\ expressions\ are\ equal\ \ \), "\[IndentingNewLine]", 
+    \(Using\ x\  = \(1\ and\ a = \(-1\)\ \ gives\ the\ desired\ \
+\(\(result\)\(.\)\(\ \ \)\)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        StyleBox[\(Exercise\ 9.2\),
+          FontVariations->{"Underline"->True}], ":", 
+        "  ", \(If\ in\ addition\)}], ",", 
+      " ", \(V\ is\ an\ algebra\ and\ A\ is\ a\ nilpotent\ derivation\ of\ \
+V\), ",", 
+      "\[IndentingNewLine]", \(then\ Exp \((A)\)\ is\ an\ automorphism\ of\ \
+the\ \(\(algebra\)\(.\)\)\)}]], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Solution . \ \ We' ve\ shown\ in\ 9.1  
+      that\ Exp \((A)\)\ is\ an\ invertivble\ linear\ map\ so\ we\ only\ have\
+\ \), "\[IndentingNewLine]", 
+    \(left\ to\ show\ that\ Exp \((A)\)\ preserves\ multiplication\ in\ \(\(V\
+\)\(.\)\(\ \ \)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    RowBox[{\(First\ we\ show\ by\ induction\ that\ \(A\^j\) \((\(v\_1\) 
+            v\_2)\)\), "=", 
+      RowBox[{
+        RowBox[{\(\[Sum]\+\(k = 0\)\%j\), 
+          RowBox[{
+            RowBox[{"(", 
+              FractionBox["j", "k",
+                FractionLine->None], 
+              ")"}], \(A\^k\), \(v\_1\), \(A\^\(j - 
+                  k\)\), \(v\_2 . \ \ \[IndentingNewLine]Base\), 
+            " ", \(case : \ A \((\(v\_1\) v\_2)\)\)}]}], 
+        "=", \(\((Av\_1)\) 
+            v\_2 + \(v\_1\) \((Av\_2)\)\ by\ the\ definition\ of\ a\ \
+derivation\)}]}], "\[IndentingNewLine]", 
+    RowBox[{\(Inductive\ \(step : \ \ \(A\^j\) \((\(v\_1\) v\_2)\)\)\), "=", 
+      RowBox[{"A", 
+        RowBox[{"(", 
+          RowBox[{\(\[Sum]\+\(k = 0\)\%\(j - 1\)\), 
+            RowBox[{
+              RowBox[{"(", 
+                FractionBox[\(j - 1\), "k",
+                  FractionLine->None], 
+                ")"}], \(A\^k\), \(v\_1\), \(A\^\(j - k - 1\)\), \(v\_2\)}]}],
+           ")"}]}]}], "\[IndentingNewLine]", 
+    RowBox[{"=", 
+      RowBox[{
+        RowBox[{\(\[Sum]\+\(k = 0\)\%\(j - 1\)\), 
+          RowBox[{
+            RowBox[{"(", 
+              FractionBox[\(j - 1\), "k",
+                FractionLine->None], 
+              ")"}], \((\(A\^\(k + 1\)\) \(v\_1\) \(A\^\(j - k - 1\)\) 
+                  v\_2 + \(A\^k\) \(v\_1\) \(A\^\(j - k\)\) v\_2)\)}]}], "=", 
+        
+        RowBox[{\(\[Sum]\+\(k = 0\)\%j\), 
+          RowBox[{
+            RowBox[{"(", 
+              FractionBox["j", "k",
+                FractionLine->None], 
+              ")"}], \(A\^k\), \(v\_1\), \(A\^\(j - 
+                  k\)\), \(v\_2\)}]}]}]}]}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    RowBox[{\(So\ Exp \((A)\) \((\(v\_1\) v\_2)\)\), "=", 
+      RowBox[{\(\((\[Sum]\+\(j = 1\)\%\(n - 1\)A\^j\/\(j!\))\) \((\(v\_1\) 
+              v\_2)\)\), "=", 
+        RowBox[{\(\[Sum]\+\(j = 1\)\%\(n - 1\)\), 
+          FractionBox[
+            RowBox[{\(\[Sum]\+\(k = 0\)\%j\), 
+              RowBox[{
+                RowBox[{"(", 
+                  FractionBox["j", "k",
+                    FractionLine->None], 
+                  ")"}], \(A\^k\), \(v\_1\), \(A\^\(j - 
+                      k\)\), \(v\_2\)}]}], \(j!\)]}]}]}], \
+"\[IndentingNewLine]", 
+    RowBox[{"=", 
+      RowBox[{
+        RowBox[{\(\[Sum]\+\(j = 1\)\%\(n - 1\)\), 
+          RowBox[{\((1\/\(j!\))\), 
+            RowBox[{
+              UnderoverscriptBox[
+                StyleBox["\[Sum]",
+                  FontSize->12], \(i = 0\), \(n - 
+                  1\)], \(\((1\/\(i!\))\) \(A\^j\) \(v\_1\) \(A\^i\) 
+                v\_2\)}]}]}], "=", 
+        RowBox[{\((\[Sum]\+\(j = 1\)\%\(n - 1\)\((1\/\(j!\))\) \(A\^j\) 
+                v\_1)\), 
+          RowBox[{"(", 
+            RowBox[{
+              UnderoverscriptBox[
+                StyleBox["\[Sum]",
+                  FontSize->12], \(i = 0\), \(n - 
+                  1\)], \(\((1\/\(i!\))\) \(A\^i\) v\_2\)}], 
+            ")"}]}]}]}], "\[IndentingNewLine]", \(\(=\)\(\((Exp \((A)\) 
+            v\_1)\) \(\((Exp \((A)\) v\_2)\)\(.\)\(\ \ \)\)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(Thus\ Exp \((A)\)\ is\ an\ automorphism\ of\ \(\(V\)\(.\)\(\ \ \)\)\)], \
+"Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Lemma\ 3. \ \ If\ \(f : \[DoubleStruckCapitalF]\^\(\(n\)\(\ \)\)\) \
+\[Rule] \ \(\(\(\(\[DoubleStruckCapitalF]\^\(\(n\)\(\ \)\)\) 
+              is\ a\ polynomial\ map\ such\ that\ df\)\( | \_\(\(a\)\(\ \
+\)\)\)\) : \ \[DoubleStruckCapitalF]\^n \[Rule] \ \[DoubleStruckCapitalF]\^\(\
+\(n\)\(\ \)\)\ is\ a\)\), "\[IndentingNewLine]", 
+    \(nonsingular\ linear\ operator\ for\ some\ a \[Element] \(\
+\[DoubleStruckCapitalF]\^n\) 
+        then\ f \((\[DoubleStruckCapitalF]\^n)\)\ contains\ a\ nonempty\ \
+Zariski\), "\[IndentingNewLine]", 
+    \(\ open\ subset\ containing\ f \((a)\) . \[IndentingNewLine]\ \((Note : \
+\ this\ is\ like\ the\ implicit\ function\ theorem\ with\ Zariski\ open\ sets\
+\ replacing\ open\ sets)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(Lemma\ 4. \ \ Take\ \[GothicH]\ to\ be\ a\ Cartan\ subalgebra\ of\ \
+\[GothicG]\ with\ a \[Element] \[GothicH]\ a\ regular\ element . \ \ Then\ \
+\[GothicH] \[Element] \(\(\[GothicG]\_0\^a\)\(.\)\(\ \)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Proof . \ \ \[GothicH]\ is\ a\ nilpotent\ subalgebra\ so\ \ ad \
+\((a)\)\( | \_\[GothicH]\)\ 
+      is\ nilpotent\ \ so\ \[GothicH]\  \[Subset] \ \[GothicG]\_0\^a\ \ But\ \
+\[GothicG]\_0\^a\ is\ a\), "\[IndentingNewLine]", 
+    \(\ nilpotent\ Lie\ Algebra\ and\ \[GothicH]\ is\ a\ maximal\ nilpotent\ \
+subalgebra . \ \ Thus\ \[GothicH]\  = \(\(\[GothicG]\_0\^a\)\(.\)\)\)}], \
+"Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Proof\ of\ Theorem . \ \ Take\ \[GothicH]\ a\ Cartan\ subalgebra\ of\ \
+\[GothicG] . \ \ Then\ the\ root\ space\), "\[IndentingNewLine]", 
+    \(decomposition\ is\ given\ by\ \[GothicG] = \(\[CirclePlus]\_\(\[Alpha] \
+\[Element] \(\[GothicH]\^*\)\)\ \ \[GothicG]\_\[Alpha]\), \
+\[IndentingNewLine]where\ \[GothicG]\_\[Alpha]\  = \ {a \[Element] \[GothicG] \
+| \(\((ad \((h)\) - \[Alpha] \((h)\))\)\^n\) a = 
+          0\ for\ n\ sufficiently\ large}\), "\[IndentingNewLine]", 
+    \(Moreover, \ \([\[GothicG]\_\[Alpha], \ \[GothicG]\_\[Beta]]\) \[Subset] \
+\[GothicG]\_\(\[Alpha] + \[Beta]\)\ \ and\ \[GothicG]\_0 = \
+\(\(\[GothicH]\)\(.\)\(\ \ \)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{\(Note\ that\ if\ a \[Element] \[GothicG]\_\[Alpha]\ and\ \
+\[Alpha] \[NotEqual] 0, \ 
+    then\ ad \((a)\) 
+      is\ a\ nilpotent\ operator\), "\[IndentingNewLine]", \((since\ \(\((ad \
+\((a)\))\)\^N\) \[GothicG]\_\[Beta] \[Subset] \[GothicG]\_\(\[Beta] + N\
+\[Alpha]\)\ and\ \[GothicG]\_\[Alpha] \[NotEqual] 
+          0  for\ a\ finite\ number\ of\ \[IndentingNewLine]distinct\ \
+\[Alpha]' 
+            s\ since\ the\ dimension\ of\ \[GothicG]\ is\ finite)\), "\
+\[IndentingNewLine]", 
+    RowBox[{\(\(Let\ b\_1 ... \) 
+        b\_n\ be\ the\ union\ of\ \ bases\ of\ \[GothicG]\_\[Alpha], \
+\[GothicG]\_\[Alpha] \[NotEqual] 0. \ \ Define\ the\ polynomial\ map\), 
+      " "}], "\[IndentingNewLine]", \(f : \[GothicG] \[Rule] \[GothicG]\ \
+by\), "\[IndentingNewLine]", 
+    RowBox[{\(f \((\[Sum]\+\(i = 1\)\%m\( x\_i\) b\_i + h)\)\), " ", "=", " ",
+       
+      RowBox[{
+        StyleBox["(",
+          FontSize->18], 
+        RowBox[{"Exp", " ", 
+          RowBox[{"(", 
+            RowBox[{
+              RowBox[{\(\(x\_1\) \((ad \((b\_1)\))\) ... \), "Exp", 
+                RowBox[{
+                  StyleBox["(",
+                    FontSize->14], \(\(x\_m\) \((ad \((b\_m)\))\)\), 
+                  StyleBox[")",
+                    FontSize->18]}], \((h)\), "\[IndentingNewLine]", "where", 
+                " ", \(x\_i\), \(b\_i\)}], 
+              "\[Element]", \(\(\[CirclePlus]\_\(\[Alpha] \[Element] \(\
+\[GothicH]\^*\)\)\ \ \[GothicG]\_\[Alpha]\ for\ \[Alpha]\) \[NotEqual] \ 
+                0\ \ and\ h\), " ", "\[Element]", 
+              RowBox[{
+              "\[GothicH]", "  ", "Note", " ", "that", "\[IndentingNewLine]", 
+                " ", 
+                RowBox[{
+                  StyleBox["(",
+                    FontSize->18], 
+                  RowBox[{"Exp", " ", 
+                    RowBox[{"(", 
+                      RowBox[{
+                        
+                        RowBox[{\(\(x\_1\) \((ad \((b\_1)\))\) ... \), "Exp", 
+                          
+                          RowBox[{
+                            StyleBox["(",
+                              FontSize->14], \(\(x\_m\) \((ad \((b\_m)\))\)\),
+                             
+                            StyleBox[")",
+                              FontSize->18]}], "is", " ", "an", " ", 
+                          "automorphism", " ", "of", " ", "\[GothicG]"}], ",",
+                         " ", \(by\ Lemma\ 2. \ \ Moreover\), ",", 
+                        " ", \(f\ is\ a\ polynomial\ map\ in\ the\ entries\ h\
+\ and\ \(\(x\_i\)\(.\)\(\ \ \)\)\)}]}]}]}]}]}]}]}]}]}]}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Now, \ 
+    apply\ Lemma\ 3. \ \ Take\ a\  \[Element] \ \[GothicH]\ such\ that\ \
+\[Alpha] \((a)\) \[NotEqual] 
+        0\ for\ all\ nonzero\ \[Alpha]\ for\ which\ \[GothicG]\_\[Alpha]\ is\ \
+\), "\[IndentingNewLine]", 
+    \(\(\(nonzero\)\(.\)\(\ \ \)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(Compute\ df\( | \_a\)\((b + h)\) = 
+      d\/dt\( | \_\(t = 
+              0\)\)\((f \((t \((\[Sum]\+\(i = 1\)\%m\( x\_i\) b\_i + h)\) + 
+                    a)\))\) . \ \ Taylor\ expanding\ we\ get\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(\(\(=\)\(\((\(\((I + \(tx\_1\) adb\_1 + 
+                    o \((t\^2)\))\) ... \) \((I\  + \(tx\_m\) adb\_m)\) + 
+            o \((t\^2)\))\) \((a + th)\)\)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(\(\(=\)\(d\/dt\( | \_\(t = 0\)\)\ \ \ t[b, a] + 
+          Ith\)\)\), "\[IndentingNewLine]", 
+    \(\(\(=\)\(d\/dt\( | \_\(t = 0\)\)\ \ \ t \((\([b, a]\) + 
+              h)\)\)\)\), "\[IndentingNewLine]", 
+    \(\(\(=\)\(\([b, a]\) + h\)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(So\ df\( | \_a\)\((b + h)\) = \([b, a]\) + 
+        h\ which\ is\ nonsingular\ since\ it\ is\ the\ identity\ on\ \(\
+\[GothicG]\_0\) and\ on\ \[GothicG]\_\[Alpha]\), "\[IndentingNewLine]", 
+    \(for\ all\ nonzero\ \[Alpha]\ it\ is\  - \(\(ad\)\(\ \)\(a\)\(\ \
+\)\(which\)\(\ \)\(is\)\(\ \)\(invertible\)\(\ \)\(because\)\(\ \)\(ad\)\(\ \
+\)\(a\)\(\ \)\(has\)\(\ \)\(the\)\(\ \)\(form\)\(\ \)\)\), "\
+\[IndentingNewLine]", 
+    \(\[Alpha] \((a)\)*
+        Identity\  + \ \(\(nilpotent\)\(\ \)\(part\)\(\ \ \)\(and\)\(\ \)\(\
+\[Alpha]\) \((a)\)\(\ \)\(is\)\(\ \)\(nonzero\)\(\ \)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(By\ Lemma\ 3, \  (*\()\) \((Exp \((\(\(x\_1\) \((ad \((b\_1)\))\) \
+... \) Exp \((\(x\_m\) \((ad \((b\_m)\))\))\) \[GothicH]\ contains\ a\ \
+Zariski\ open\ subset\ \(\[CapitalOmega]\_h\) 
+                of\ \[GothicG], \ \(since\ x\_1 ... \) 
+                  x\_m \[Element] \(\(\[DoubleStruckCapitalF]\)\(.\)\(\ \
+\)\)\)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Let\ \[CapitalOmega]\_r\ be\ the\ set\ of\ regular\ elements\ of\ \
+\[GothicG] . \ \ We\ know\ it\ is\ a\ nonempty\ Zariski\ open\ set . \ \ Let\ \
+\[CapitalOmega]\_i = \[CapitalOmega]\_\(\[GothicH]\_i\)\), "\
+\[IndentingNewLine]", 
+    \(for\ i\  = \ 1, 2. \)}], "Input",
+  PageWidth->Infinity,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(Since\ the\ intersection\ of\ finitely\ many\ Zariski\ open\ sets\ is\ \
+nonempty, \ \[CapitalOmega]\_\(\[GothicH]\_1\) \[Intersection] \
+\[CapitalOmega]\_\(\[GothicH]\_2\) \[Intersection] \[CapitalOmega]\_r\ is\ \(\
+\(nonempty\)\(.\)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Take\ b \[Element] \ \[CapitalOmega]\_\(\[GothicH]\_1\) \[Intersection] \
+\[CapitalOmega]\_\(\[GothicH]\_2\) \[Intersection] \[CapitalOmega]\_r . \ \ b\
+\ is\ regular\ and\ contained\ in\ \(\[Sigma]\_1\) \((\[GothicH]\_1)\)\ and\ \
+in\ \(\[Sigma]\_2\) \((\[GothicH]\_2)\)\), "\[IndentingNewLine]", 
+    \(for\ some\ automorphisms\ \[Sigma]\_1\ and\ \[Sigma]\_2\ due\ to\  \
+(*\()\)\(.\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{\(Hence\ \(\[Sigma]\_1\^\(-1\)\) \((b)\) \[Element] \
+\[GothicH]\_1\ and\ \(\[Sigma]\_2\^\(-1\)\) \((b)\) \[Element] \[GothicH]\_2 \
+. \ \ These\ are\ regular\ elements\ in\ \[GothicH]\_1\ and\ \[GothicH]\_2\), \
+"\[IndentingNewLine]", 
+    RowBox[{"respectively", ",", " ", \(hence\ by\ Lemma\ 4\), ",", " ", 
+      RowBox[{\(\[GothicH]\_1\), 
+        StyleBox["=",
+          FontSize->16], 
+        StyleBox[\(\[GothicG]\_0\^\(\(\[Sigma]\_1\^\(-1\)\) \((b)\)\)\),
+          FontSize->9]}], 
+      StyleBox[",",
+        FontSize->9], 
+      StyleBox[" ",
+        FontSize->9], 
+      RowBox[{\(\[GothicH]\_2\), 
+        StyleBox["=",
+          FontSize->16], 
+        StyleBox[\(\(\[GothicG]\_0\^\(\(\[Sigma]\_2\^\(-1\)\) \
+\((b)\)\)\)\(.\)\),
+          FontSize->9]}]}]}], "Input",
+  PageWidth->Infinity,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    RowBox[{\(Take\ \[Sigma]\), "=", 
+      RowBox[{\(\[Sigma]\_2\^\(-1\)\[SmallCircle]\[Sigma]\_1 . \ \ Then\ \
+\[Sigma] \((\(\[Sigma]\_1\^\(-1\)\) \((b)\))\)\), "=", 
+        RowBox[{\(\[Sigma]\_2\^\(-1\)\), \((b)\), " ", "maps", 
+          " ", \(\[GothicH]\_1\), "to", " ", 
+          RowBox[{\(\[GothicH]\_2\), 
+            StyleBox[".",
+              FontSize->9], 
+            StyleBox["  ",
+              FontSize->16]}]}]}]}]], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Note : \ \ We\ reduced\ this\ theorem\ to\ the\ construction\ of\ a\ \
+certain\ map . \ \ This\), "\[IndentingNewLine]", 
+    \(idea\ was\ developed\ further\ by\ Grothendieck\ who\ realized\ that\ \
+maps\ between\), "\[IndentingNewLine]", 
+    \(objects\ are\ often\ more\ important\ than\ the\ objects\ \
+\(\(themselves\)\(.\)\(\ \ \)\)\)}], "Input",
+  PageWidth->Infinity,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        StyleBox["Exercise",
+          FontVariations->{"Underline"->True}], 
+        StyleBox[" ",
+          FontVariations->{"Underline"->True}], 
+        RowBox[{
+          StyleBox["9.3",
+            FontVariations->{"Underline"->True}], 
+          StyleBox[".",
+            FontVariations->{"Underline"->True}], "  ", "Prove"}], " ", "the",
+         " ", "second", " ", "part", " ", "of", " ", "the", " ", "theorem"}], 
+      ",", " ", \(ie . \ that\ any\ \[GothicH] = \[GothicG]\_0\^a\), ",", 
+      " ", \(for\ \[DoubleStruckCapitalF] = \[DoubleStruckCapitalC]\), ",", 
+      " ", \(\(using\)\(\ \)\(the\)\(\ \)\(implicit\)\(\ \)\(function\)\(\ \)\
+\(theorem\)\(\ \)\(instead\)\(\ \)\(of\)\(\ \)\(Lemma\)\(\ \)\(3.\)\(\ \ \
+\)\)}]], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{\(Solution . \ \ The\ proof\ holds\ as\ above\ until\ the\ line\
+\ where\ Lemma\ 3\ is\ used . \ \ In\ place\ of\), "\[IndentingNewLine]", 
+    RowBox[{\(Lemma\ 3\ we\ use\ the\ implicit\ function\ theorem\ which\ \
+shows\ that\ because\ df\( | \_a\)is\ nonsingular\ f \((\[GothicG])\)\ \
+contains\ an\ open\ neighborhood\ \[CapitalOmega]\_\[GothicH]\ of\ f \((a)\) \
+. \ \ We\ need\ only\), " "}], "\[IndentingNewLine]", 
+    RowBox[{\(to\ show\ that\ \[CapitalOmega]\_\[GothicH] \[Intersection] \
+\[CapitalOmega]\_r\ is\ nonempty . \ \ After\ this\ take\ b \[Element] \
+\[CapitalOmega]\_\[GothicH] \[Intersection] \[CapitalOmega]\_r\  . \ \ Since\ \
+b\ is\ regular\), " "}], "\[IndentingNewLine]", 
+    RowBox[{\(and\ contained\ in\ the\ image\ of\ \[GothicH]\ under\ some\ \
+automorphism\ \[Sigma], \ \(\[Sigma]\^\(-1\)\) \((b)\) \[Element] \[GothicH]\ \
+and\ is\ a\), " "}], "\[IndentingNewLine]", 
+    RowBox[{\(regular\ element\ since\ it\ is\ the\ image\ under\ \
+automorphism\ of\ a\ regular\ element\), ",", " ", 
+      RowBox[{\(and\ thus\ \[GothicH]\), 
+        StyleBox["=",
+          FontSize->16], 
+        RowBox[{
+          StyleBox[\(\[GothicG]\_0\^\(\(\[Sigma]\^\(-1\)\) \((b)\)\)\),
+            FontSize->12], 
+          StyleBox[".",
+            FontSize->9], 
+          StyleBox["  ",
+            FontSize->9]}]}]}]}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Finally, \ 
+    we\ show\ that\ the\ intersection\ of\ an\ open\ set\ with\ a\ nonempty\ \
+Zariski\), "\[IndentingNewLine]", 
+    \(open\ set\ is\ nonempty . \ \ We\ use\ the\ fact\ that\ if\ a\ \
+polynomial\ vanishes\ on\ an\ open\ \), "\[IndentingNewLine]", 
+    \(nonempty\ subset\ of\ \[DoubleStruckCapitalC]\^n, \ 
+    the\ polynomial\ is\ identically\ zero . \ \ The\ corresponding\), "\
+\[IndentingNewLine]", 
+    \(Zariski\ open\ set\ is\ the\ empty\ set . \ \ So\ if\ a\ Zariski\ open\ \
+set\ does\ not\ intersect\ an\ open\ \), "\[IndentingNewLine]", 
+    \(neighborhood\ in\ \[DoubleStruckCapitalC]\^n, \ 
+    it\ is\ the\ empty\ set . \ \ The\ contrapositive\ of\ this\ statement\), \
+"\[IndentingNewLine]", 
+    \(gives\ the\ desired\ \(\(result\)\(.\)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(\(--\(--\(--\(--\(--\(--\(--\(--\(--\(--\(--\(--\(--\(--\(--\(--\(--\(\
+--\(--\(--\(--\(--\(--\(--\(----\)\)\)\)\)\)\)\)\)\)\)\)\)\)\)\)\)\)\)\)\)\)\)\
+\)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(Trace\ \(\(form\)\(.\)\(\ \ \)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(Let\ \[Pi]\ be\ a\ representation\ of\ a\ Lie\ Algebra\ \[GothicG]\ in\ \
+a\ finite\ dimensional\ vector\ space\ \(\(V\)\(.\)\(\ \ \)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(Definition . \ \ A\ trace\ form\ on\ \[GothicG]\ is\ the\ following\ \
+bilinear\ \(form : \ \((a, b)\)\_V\) = 
+      Tr \(\((\[Pi] \((a)\) \[Pi] \((b)\))\)\(.\)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Note\ the\ following\ properties\ of\ the\ trace\ \(form : \ \
+\[IndentingNewLine]\((1)\) Bilinearity\)\), "\[IndentingNewLine]", 
+    \(\ \ \ \ \ \ \ \ \ \((2)\) Symmetry\), "\[IndentingNewLine]", 
+    \(\ \ \ \ \ \ \ \ \ \((3)\)\ Invariance\ \ \((ie . \ \((\([a, b]\), \ \
+c)\)\_V + \((b, \([a, \ c]\))\)\_V = 0, 
+        which\ is\ equivalent\ to\ \ \((\([a, b]\), \ c)\)\_V = \ \((a, \([b, \
+\ c]\))\)\_V)\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(\(\(Proof\)\(.\)\(\ \)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(\((1)\)\ Follows\ from\ bilinearity\ of\ matrix\ multiplication\ and\ \
+the\ linearity\ of\ the\ trace\ \(\(operation\)\(\ \)\(.\)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(\((2)\)\ Clear, \ as\ Tr \((\([A, B]\))\) = 0\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(\((3)\) Tr \((\([\[Pi] \((a)\), \[Pi] \((b)\)]\) \[Pi] \((c)\))\) + 
+      Tr \((\[Pi] \((b)\)[\[Pi] \((a)\), \[Pi] \((c)\)])\)\), "\
+\[IndentingNewLine]", 
+    \(\(\(=\)\(Tr \((\[Pi] \((a)\) \[Pi] \((b)\) \[Pi] \((c)\)\  - \ \[Pi] \
+\((b)\) \[Pi] \((a)\) \[Pi] \((c)\) + \[Pi] \((b)\) \[Pi] \((a)\) \[Pi] \((c)\
+\) - \[Pi] \((b)\) \[Pi] \((c)\) \[Pi] \((a)\))\)\)\)\), \
+"\[IndentingNewLine]", 
+    \(\(\(=\)\(Tr \((\([\[Pi] \((a)\), \ \[Pi] \((b)\) \[Pi] \
+\((c)\)]\))\)\)\)\), "\[IndentingNewLine]", 
+    \(\(\(=\)\(0\)\)\), "\[IndentingNewLine]", 
+    \(Exchanging\ a\ and\ b\ gives\ \((\([b, a]\), \ c)\)\_V + \ \((a, \([b, \
+\ c]\))\)\_V = \(0\  \[Implies] \((\([a, b]\), \ c)\)\_V = \ \((a, \([b, \ c]\
+\))\)\_V\)\)}], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[{
+    \(Proposition . \ \ If\ \[GothicG]\ is\ a\ Lie\ Algebra\ and\ \
+\((\(.\)\(\(,\)\(.\)\))\)\ is\ an\ invariant\ symmetric\ bilinear\ form, \ 
+    then\ \(M\^ \[UpTee] \) 
+      is\ an\ ideal\ of\ \[GothicG]\ if\ M\ is\ an\ ideal\ of\ \(\(\[GothicG] \
+. \ \ \((Where\ \(M\^ \[UpTee] \) = \(\({a \[Element] \[GothicG] | \((a, 
+                      M)\) = 0}\)\(.\)\))\)\)\(\ \)\)\), \
+"\[IndentingNewLine]", 
+    \(In\ particular, \ \(\[GothicG]\^ \[UpTee] \) = 
+      ker \((\(.\)\(\(,\)\(.\)\))\)\ is\ an\ ideal\ of\ \(\(G\)\(.\)\)\)}], \
+"Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"],
+
+Cell[BoxData[
+    \(Proof . \ \ If\ a \[Element] \(M\^ \[UpTee] \), \ 
+    then\ \((a, m)\) = 0, \ \ for\ any\ m \[Element] 
+      M . \ \ Then\ for\ any\ c \[Element] \[GothicG], \ \ \((\([a, c]\), 
+        m)\) = \(\((a, \ \([c, m]\))\) = 0\), 
+    since\ [c, m] \[Element] 
+      M . \ \ Thus\ for\ any\ a \[Element] \(M\^ \[UpTee] \) 
+        and\ c \[Element] \[GothicG], \ \[IndentingNewLine]\([a, 
+        c]\)\  \[Element] \(M\^ \[UpTee] \) 
+        and\ \(M\^ \[UpTee] \)\ is\ an\ \(\(ideal\)\(.\)\)\)], "Input",
+  PageWidth->PaperWidth,
+  FontFamily->"Times New Roman",
+  FontWeight->"Plain"]
+},
+FrontEndVersion->"5.0 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+ScreenStyleEnvironment->"Working",
+WindowSize->{1016, 651},
+WindowMargins->{{24, Automatic}, {Automatic, 40}},
+PrintingPageRange->{1, 1},
+PrintingOptions->{"PrintingMargins"->{{54, 54}, {72, 72}},
+"PaperSize"->{612, 792},
+"PaperOrientation"->"Portrait",
+"PrintCellBrackets"->False,
+"PrintRegistrationMarks"->False,
+"PrintMultipleHorizontalPages"->False,
+"PostScriptOutputFile":>FrontEnd`FileName[{$RootDirectory, "afs", \
+"athena.mit.edu", "user", "y", "a", "yaim"}, "Lie_Algebra_Lecture_9.nb.ps", \
+CharacterEncoding -> "iso8859-1"],
+"Magnification"->1},
+Magnification->1.5
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 977, 29, 157, "Input"],
+Cell[2734, 82, 921, 24, 180, "Input"],
+Cell[3658, 108, 1024, 23, 153, "Input"],
+Cell[4685, 133, 635, 16, 153, "Input"],
+Cell[5323, 151, 161, 4, 40, "Input"],
+Cell[5487, 157, 993, 21, 274, "Input"],
+Cell[6483, 180, 375, 8, 64, "Input"],
+Cell[6861, 190, 586, 11, 112, "Input"],
+Cell[7450, 203, 463, 12, 64, "Input"],
+Cell[7916, 217, 361, 8, 64, "Input"],
+Cell[8280, 227, 1762, 44, 253, "Input"],
+Cell[10045, 273, 1500, 36, 221, "Input"],
+Cell[11548, 311, 183, 5, 40, "Input"],
+Cell[11734, 318, 839, 15, 137, "Input"],
+Cell[12576, 335, 317, 6, 64, "Input"],
+Cell[12896, 343, 488, 10, 65, "Input"],
+Cell[13387, 355, 765, 13, 120, "Input"],
+Cell[14155, 370, 2683, 57, 525, "Input"],
+Cell[16841, 429, 370, 9, 64, "Input"],
+Cell[17214, 440, 312, 7, 78, "Input"],
+Cell[17529, 449, 274, 6, 47, "Input"],
+Cell[17806, 457, 356, 8, 138, "Input"],
+Cell[18165, 467, 696, 13, 88, "Input"],
+Cell[18864, 482, 440, 9, 112, "Input"],
+Cell[19307, 493, 372, 8, 68, "Input"],
+Cell[19682, 503, 350, 7, 68, "Input"],
+Cell[20035, 512, 502, 9, 68, "Input"],
+Cell[20540, 523, 876, 22, 77, "Input"],
+Cell[21419, 547, 540, 13, 47, "Input"],
+Cell[21962, 562, 452, 9, 88, "Input"],
+Cell[22417, 573, 871, 20, 65, "Input"],
+Cell[23291, 595, 1443, 27, 196, "Input"],
+Cell[24737, 624, 883, 17, 160, "Input"],
+Cell[25623, 643, 270, 6, 40, "Input"],
+Cell[25896, 651, 146, 4, 40, "Input"],
+Cell[26045, 657, 249, 5, 64, "Input"],
+Cell[26297, 664, 276, 6, 64, "Input"],
+Cell[26576, 672, 527, 10, 137, "Input"],
+Cell[27106, 684, 138, 4, 40, "Input"],
+Cell[27247, 690, 246, 5, 64, "Input"],
+Cell[27496, 697, 159, 4, 40, "Input"],
+Cell[27658, 703, 836, 16, 137, "Input"],
+Cell[28497, 721, 646, 13, 88, "Input"],
+Cell[29146, 736, 602, 12, 88, "Input"]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+
+

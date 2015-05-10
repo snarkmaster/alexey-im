@@ -1,0 +1,429 @@
+\documentclass[11pt]{article}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{pstricks}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf 18.745 Introduction to Lie Algebras } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Scribe: #4}{Lecture #1}}
+
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\sll}{\mbox{sl}}
+\newcommand{\gl}{\mbox{gl}}
+\newcommand{\so}{\mbox{so}}
+\newcommand{\spl}{\mbox{sp}}
+\newcommand{\tr}{\mbox{tr}}
+\newcommand{\diag}{\mbox{diag}}
+\newcommand{\ad}{\mbox{ad}}
+\newcommand{\charr}{\mbox{char}}
+\newcommand{\centerr}{\mbox{center}}
+
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\gb}{\overline{\g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\hb}{\overline{\h}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\p}{\mathfrak{p}}
+\newcommand{\D}{\mathfrak{D}}
+\newcommand{\He}{\mathcal{H}}
+
+\newcommand{\sk}{\vspace*{1em}}
+
+\newtheorem{defn}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{10 --- October 12, 2004}{Fall 2004}{Prof.\ Victor Ka\v{c}}{Steven 
+Sivek}
+
+Recall that a \emph{trace form} on a Lie algebra $\g$, given a 
+representation $\pi$ of $\g$ in a finite dimensional vector space $V$, is 
+defined as $(a,b)_V = \tr_V(\pi(a)\pi(b))$.
+
+\begin{defn}
+The \emph{Killing form} on a finite-dimensional Lie algebra $\g$ is the 
+trace form $K(a,b) = \tr_{\g}((\ad\ a)(\ad\ b))$ in the adjoint 
+representation of $\g$.
+\end{defn}
+
+\paragraph{Exercise 10.1.} Show that the trace form for the defining 
+representation of $\gl_n(\F)$, $\sll_n(\F)$, $\so_n(\F)$, $\spl_n(\F)$ 
+is nondegenerate.
+
+\paragraph{Solution.}
+Let $e_{xy}$ denote the $n$x$n$ matrix with the element in row $x$, column 
+$y$ equal to 1 and all other elements 0.  We note that $\tr(e_{ij}e_{kl}) 
+= \tr(\delta_{jk}e_{il}) = \delta_{jk}\delta_{il}$.  To show that this 
+form is nondegenerate for a Lie algebra $\g \subset \gl_n(\F)$, it 
+suffices to show for any $a \in \g$ that $\tr(ab) \not= 0$ for some $b \in 
+\g$, so this is how we will proceed.  (We will assume that $\charr(\F) = 
+0$ for simplicity, since e.g. the trace form for $\sll_n(\F)$ is 
+degenerate when $\charr(F)\ |\ n$.)
+
+$\g = \gl_n(\F)$: Take nonzero $a = (a_{ij}) \in \g$, and pick $x,y$ such 
+that $a_{xy} \not= 0$.  Then $\tr(a e_{yx}) = a_{xy} \not= 0$.
+
+$\g = \sll_n(\F)$:  Choose nonzero $a = (a_{ij}) \in \g$.  If $a$ is not 
+a diagonal matrix, then we may pick $x \not= y$ such that $a_{xy} \not= 
+0$, and as before we have $\tr(a e_{yx}) \not= 0$.  Otherwise, let $a = 
+\diag(b_1, \dots, b_n)$.  Then $a \not= \alpha I_n$ for any 
+$\alpha$, since otherwise we would have either $a=0$ or $\tr(a) = n\alpha$ 
+with $n,\alpha \not= 0$.  It follows that for some $k < n$ we must have 
+$b_k \not= b_{k+1}$; we calculate that $\tr(a (e_{kk} - e_{k+1}{k+1})) = 
+b_k-b_{k+1} \not= 0$.
+
+$\g = \so_n(\F)$: Pick a basis for $\F^n$ such that $\so_n(\F)$ is the 
+algebra of skew-symmetric matrices, i.e. $\so_n(\F) = \{ a \in \gl_n(\F)\ 
+|\ a^T = -a \}$.  Then $\g$ has as a basis $\mathcal{B} = \{ 
+e_{ij}-e_{ji}\ |\ i<j \}$.  We may easily calculate that for any $b_1, b_2 
+\in \mathcal{B}$, we have $\tr(b_1b_2) = -2$ if $b_1 = b_2$ and 
+$\tr(b_1b_2) = 0$ otherwise.  Then take nonzero $a = (a_{ij}) \in \g$, and 
+pick $x < y$ such that $a_{xy} \not= 0$; we calculate that $\tr(a 
+(e_{xy}-e_{yx})) = -2a_{xy} \not= 0$.
+
+$\g = \spl_n(\F)$: Note that $n$ mus be even, and write $n = 2m$.  If we 
+pick as a representative skew-symmetric form the matrix {\tiny $\left( 
+\begin{array}{cc} 0 & I_m \\ -I_m & 0 \end{array} \right)$}, then $\g$ 
+consists of matrices expressible in block form as $a = {\tiny \left( 
+\begin{array}{cc} A & B \\ C & -A^T \end{array} \right) }$, where each 
+block is $m$x$m$, and $B$ and $C$ are symmetric.  Take $a \in \spl_n(\F)$ 
+of this form; if $B = C = 0$, then $\tr(a \cdot {\tiny \left( 
+\begin{array}{cc} D & 0 \\ 0 & -D^T \end{array} \right)} ) = 2\tr(AD)$, 
+and since $A \not= 0$ and the trace form on $\gl_m(\F)$ is nondegenerate, 
+we can find $D \in \gl_m(\F)$ such that $2\tr(AD) \not= 0$. Otherwise, 
+assume without loss of generality that $B \not= 0$.  Then $\tr(a \cdot 
+{\tiny \left( \begin{array}{cc} 0 & 0 \\ E & 0 \end{array} \right) }) = 
+\tr(BE)$, so we wish to find a symmetric matrix $E$ such that $\tr(BE) 
+\not= 0$.  Take the basis $\mathcal{B} = \{e_{ii}\}_{i=1}^m \cup \{e_{ij} 
++ e_{ji}\ |\ i<j\}$ of the $m$x$m$ symmetric matrices; then we can compute 
+that for $b_1, b_2 \in \mathcal{B}$, $\tr(b_1b_2) \not= 0$ if and only if 
+$b_1 = b_2$.  Write $B = \sum_{b_i \in \mathcal{B}} c_ib_i$ for some 
+constants $c_i \in \F$, and fix $k$ such that $c_k \not= 0$; then $\tr(B 
+\cdot b_k) = c_k\tr(b_k^2) \not= 0$, as desired.
+
+\paragraph{Exercise 10.2.}  Show that the Killing form on $\sll_n(\F)$, 
+$\charr(\F) \not= 2$, is nondegenerate if and only if $\charr(\F) \not|\ 
+n$.
+
+\paragraph{Solution.}
+Assume that $K$ is nondegenerate but that $\charr(\F)\ |\ n$.  Then 
+$\tr(I_n) = n = 0$ in $\F$, so $I_n \in \sll_n(\F)$.  But $\ad\ I_n = 0$,
+so for all $g \in \sll_n(\F)$ we have $K(I_n, g) = \tr_\g (\ad\ I_n)(\ad\ 
+g) = \tr_\g 0 = 0$, contradicting the nondegeneracy of $K$. Thus if $K$ is 
+nondegenerate, we must have $\charr(\F)\ \not|\ n$.
+
+Now suppose that $\charr(\F) \not|\ n$.  Let $\g = \sll_n(\F)$ have basis 
+$\mathcal{B} = \{ e_{xy}\ |\ x \not= y \} \cup \{ e_{ii}-e_{nn}\ |\ i<n 
+\}$; then for any $a,b \in g$, $K(a,b) = \tr_\g(\ad\ a)(\ad\ b)$ is the 
+sum of the $b_i$-components of $(\ad\ a)(\ad\ b)b_i$ over all $b_i \in 
+\mathcal(B)$.  Let $a = (a_{xy}) \in \g$.  We first calculate 
+$K(a, e_{xy})$ for $x \not= y$ by computing that $[a,[e_{xy},e_{pq}]]$ has 
+$e_{pq}$-component $\delta_{py}a_{px} + \delta_{xq}a_{yq} = 
+(\delta_{py}+\delta{xq})a_{yx}$, and that $[a,[e_{xy},e_{ii}-e_{nn}]]$ has 
+$(e_{ii}-e_{nn})$-component $(\delta_{iy}(1+\delta_{nx}) + 
+\delta_{ix}(1+\delta_{ny}))a_{yx}$, so that
+\begin{eqnarray*}
+K(a,e_{xy})
+  &=& \sum_{p \not= q} \sum_{q=1}^n (\delta_{py}+\delta_{xq}) a_{yx}
+       + \sum_{i=1}^{n-1} (\delta_{iy}(1+\delta_{nx}) + 
+                           \delta_{ix}(1+\delta_{ny}) )a_{yx} \\
+  &=& 2(n-1)a_{yx} + (1+\delta_{nx}-\delta_{ny})a_{yx}
+                   + (1+\delta_{ny}-\delta_{nx})a_{yx} = 2na_{yx}. 
+\end{eqnarray*}
+Hence if $a$ is not diagonal, we may pick some $x \not= y$ such that 
+$a_{xy} \not= 0$, and then $K(a,e_{yx}) = 2na_{xy} \not= 0$ as long as 
+$\charr(\F)\ \not|\ n$.  A similar calculation yields $K(a, e_{ii}-e_{nn}) 
+= 2n(a_{ii}-a_{nn})$.  If $a \not= \alpha I_n$ for any $\alpha$, then 
+there is some $k < n$ such that $a_{kk} \not= a_{nn}$, and so $K(a, 
+e_{kk}-e_{nn}) = 2n(a_{kk}-a_{nn}) \not= 0$.  Otherwise, take $\alpha$ 
+such that $a = \alpha I_n$; then $\tr(a) = n\alpha = 0$, so (since 
+$\charr(\F)\ \not|\ n$) we must have $\alpha = 0$ and hence $a = 0$.  
+Since we can thus find a basis element $b$ for any nonzero $a \in \g$ such 
+that $K(a, b) \not= 0$, it follows that $K$ is nondegenerate.  Therefore 
+the Killing form on $\g = \sll_n(\F)$ is nondegenerate if and only if 
+$\charr(\F)\ \not|\ n$, as desired.
+
+\paragraph{}
+Having computed these examples, we now proceed to our first practical 
+application of trace forms.  We will need the following lemma:
+
+\begin{lem}[Cartan's lemma]
+Let $\g$ be a finite-dimensional Lie algebra over an algebraically closed 
+field $\F$ of characteristic 0, and let $\pi$ be a representation of $\g$ 
+in a finite-dimensional vector space $V$ over $\F$.  Let $\h$ be a Cartan 
+subalgebra of $\g$, yielding generalized root and weight space 
+decompositions $\g = \oplus_{\alpha \in \h^*} \g_\alpha$ and $V = 
+\oplus_{\lambda \in \h^*} V_\lambda$.  Take $e \in \g_\alpha$, $f \in 
+\g_{-\alpha}$, so that if $h = [e,f]$ then $h \in \g_0 = \h$.  Suppose 
+that $V_\lambda \not= 0$ for some $\lambda \in \h^*$.  Then $\lambda(h) = 
+r \cdot \alpha(h)$, where $r$ is a rational number which depends only on 
+$\alpha$ and $\lambda$.
+\end{lem}
+
+\begin{proof}
+Let $U = \oplus_{n \in \Z} V_{\lambda + n\alpha}$.  Then $U$ is invariant 
+with respect to the operators $\pi(e), \pi(f)$, since 
+$\pi(\g_{\pm \alpha})V_\mu \subset V_{\pm \alpha+\mu}$.  Hence we can 
+restrict $\pi$ to $U$ and compute that $\tr_U(\pi(h)) = \tr_U(\pi([e,f])) 
+= 0$.  On the other hand, each $V_{\lambda+n\alpha}$ is invariant with 
+respect to $h \in \g_0$, so we can compute $tr_U \pi(h) = \sum_n 
+\tr_{V_{\lambda+n\alpha}} \pi(h)$.  But $\pi(h)|_{V_\mu}$ has an upper 
+triangular matrix with all diagonal entries $\mu$, so we get
+\begin{eqnarray*}
+0 = \tr_U(\pi(h)) & = & \sum_n \dim(V_{\lambda + n\alpha})
+                        (\lambda+n\alpha)(h) \\
+& = & \lambda(h) \sum_n \dim(V_{\lambda+n\alpha})
+      + \alpha(h) \sum_n (n \dim(V_{\lambda+n\alpha})).
+\end{eqnarray*}
+Let the two sums be $P$ and $Q$, respectively; they are clearly both 
+integers, since each of the summands is, and $P = \dim(U) > 0$, so 
+$\lambda(h) = \frac{-Q}{P} \alpha(h)$, where the ratio $\frac{-Q}{P}$ 
+depends only on $\lambda$ and $\alpha$, as desired.
+\end{proof}
+
+We may use this to describe solvable subalgebras of $\gl_V$ in several 
+ways in terms of trace forms.
+
+\begin{thm}[Cartan's criterion]
+Let $\g$ be a subalgebra of $\gl_V$ for $V$ a finite-dimensional vector 
+space over a an algebraically closed field $\F$ of characteristic 0.  Then 
+the following are equivalent:
+\begin{enumerate}
+\item $(\g, [\g,\g])_V = 0$.
+\item $(a,a)_V = 0$ for any $a \in [\g,\g]$.
+\item $\g$ is a solvable Lie algebra.
+\end{enumerate}
+\begin{proof}
+$(1) \Rightarrow (2)$:  Take $a \in [\g,\g]$, and write $a=[b,c]$.  Then 
+since $(a,[b,c])_V = 0$, we have $(a,a)_V=0$.
+
+$(2) \Rightarrow (3)$: Suppose that $\g$ is not solvable.  Then the 
+derived series of $\g$ stabilizes to some nonzero subalgebra $\p = 
+\g^{(N)} = \g^{(N+1)} = \cdots$, so $[\p, \p] = \p$.  In particular, since 
+$\p \subset \g$, we have $(a,a)_V = 0$ for any $a \in [\p,\p] = \p$ by our 
+assumption.  Let $\h$ be a Cartan subalgebra of $\p$, and consider the 
+root and weight space decompositions
+\begin{eqnarray*}
+\p = \bigoplus_{\alpha \in \h^*} \p_\alpha,\ 
+V = \bigoplus_{\lambda \in \h^*} V_\lambda.
+\end{eqnarray*}
+Since $[\p_\alpha, \p_\beta] \subset \p_{\alpha+\beta}$ and $[\p,\p] = 
+\p$, we conclude that $\h = \p_0 = \sum_\alpha [\p_\alpha, 
+\p_{-\alpha}]$; that is, $\h$ is a span of elements of the form 
+$h_{\alpha,i} = [e_{\alpha,i}, f_{\alpha,i}]$, where $e_{\alpha,i} \in 
+\p_\alpha$ and $f_{\alpha,i} \in \p_{-\alpha}$.
+
+Suppose that $V_\lambda \not= 0$ for some fixed $\lambda \in \h^*$.  By 
+Cartan's lemma, we can write $\lambda(h_{\alpha,i}) = r_{\alpha,\lambda} 
+\alpha(h_{\alpha,i})$ for all $\alpha$ and $i$, where $r_{\alpha,\lambda} 
+\in \Q$.  Since we are assuming (2), $(h_{\alpha,i}, h_{\alpha,i})_V = 0$.  
+But we compute that $(h_{\alpha,i}, h_{\alpha,i})_V = \sum_\lambda 
+\lambda(h_{\alpha,i})^2\dim(V_\lambda)$ by considering the restriction of 
+$h_{\alpha,i}$ to each subspace $V_\lambda$ as in the proof of Cartan's 
+lemma; this is then equal to $\sum_\lambda r_{\alpha,\lambda}^2 
+\alpha(h_{\alpha,i})^2 \dim(V_\lambda)$ by the lemma, so 
+$\alpha(h_{\alpha,i})^2 \left( \sum_\lambda r_{\alpha,\lambda}^2 
+\dim(V_\lambda) \right) = 0$.  Hence, since all the $r_{\alpha,\lambda}$ 
+are rational numbers, either $\alpha(h_{\alpha,i}) = 0$, or 
+$r_{\alpha,\lambda} = 0$ whenever $V_\lambda \not= 0$, and in either case 
+we have $\lambda(h_{\alpha,i}) = r_{\alpha,\lambda} \alpha(h_{\alpha,i}) = 
+0$ whenever $V_\lambda \not= 0$.
+
+For any $\lambda \in \h^*$ such that $V_\lambda \not= 0$, since the 
+elements $\{h_{\alpha,i}\}$ span $\h$, and $\lambda = 0$ on all of these 
+elements, we conclude that $\lambda \equiv 0$ on $\h$.  Therefore the 
+weight space decomposition of $V$ is $V = V_0$.  But for any $\alpha \not= 
+0$ we have $\p_\alpha V_0 \subset V_\alpha = 0$, so $\p_\alpha = 0$; hence 
+$\p = \p_0 = \h$.  But if $\p = \h$ then $\p$ is nilpotent, and so $[\p, 
+\p]$ is a proper subset of $\p$.  This is a contradiction, so $\g$ must in 
+fact be solvable.
+
+$(3) \Rightarrow (1)$: By a corollary to Lie's theorem, we may pick a 
+basis of $V$ such that all of the matrices in $\g$ are upper triangular,
+hence all matrices in $[\g,\g]$ are strictly upper triangular.  Then 
+$\tr_V(ab) = 0$ for any $a \in \g$ and $b \in [\g,\g]$, since $ab$ is 
+strictly upper triangular, and so $(\g,[\g,\g])_V = 0$.
+\end{proof}
+\end{thm}
+
+This theorem leads almost immediately to a characterization of solvable 
+Lie algebras, as follows:
+
+\begin{cor}
+A finite dimensional Lie algebra $\g$ over an algebraically closed 
+field of characteristic 0 is solvable if and only if $K(\g,[\g,\g]) = 0$.
+\begin{proof}
+We know that $\g$ is solvable if and only if $\g/\centerr(\g)$ and 
+$\centerr(\g)$ are both solvable, hence if and only if $\g/\centerr(\g)$ 
+is solvable. Consider the adjoint representation $\ad: \g \rightarrow 
+\gl_{\g}$.  Since $\ker(\ad) = \centerr(\g)$, this proof reduces to 
+consideration of the subalgebra $\ad\ \g \subset \gl_\g$; we now apply the 
+fact that conditions (1) and (3) of Cartan's criterion are equivalent, and 
+we are done.
+\end{proof}
+\end{cor}
+
+Up until this point, we have restricted many of our results to Lie 
+algebras over algebraically closed fields $\F$ of characteristic zero, 
+since root space and weight space decompositions exist for such algebras.  
+Requiring $\F$ to be algebraically closed is not always necessary, as we 
+shall see:
+
+\begin{remark}
+Let $\F$ be a field of characteristic zero which is not necessarily 
+algebraically closed, and let $\g$ be a Lie algebra over $\F$.  Then the 
+following are true:
+\begin{enumerate}
+\item Cartan's criterion and the corollary which followed it are both true 
+over $\F$.
+\item $\h_0^a$ is a Cartan subalgebra of $\g$ if $a \in \g$ is regular.
+\item $[\g,\g]$ is nilpotent if $\g$ is finite-dimensional and solvable.
+\end{enumerate}
+\end{remark}
+In order to show this, we will introduce some notation: let 
+$\overline{\F}$ be the algebraic closure of $\F$, and let $\gb = 
+\overline{\F} \otimes_\F \g$.
+
+\paragraph{Exercise 10.3.}
+(a) Show that $\g$ is solvable (resp. nilpotent, abelian) if and only if 
+$\gb$ is, and that $\overline{[\g,\g]} = [\gb, \gb]$.
+(b) Prove the above remark for $\F$ not algebraically closed.
+
+\paragraph{Solution.}
+Given two Lie algebras $\g$ and $\h$ over $\F$, we claim that $[\gb, \hb] 
+= \overline{[\g,\h]}$.  Clearly since $\g \subset \gb$ and $\h \subset 
+\hb$, we have $\overline{[\g,\h]} \subset \overline{[\gb,\hb]} = [\gb, 
+\hb]$.  Given bases $\{ g_\alpha \}_{\alpha \in I}$ of $\g$ and $\{ 
+h_\beta \}_{\beta \in J}$ of $\h$, these same bases generate $\gb$ and 
+$\hb$ when combined over $\overline{\F}$ rather than $\F$.  Hence the set 
+$\{[g_\alpha, h_\beta]\}_{\alpha \in I, \beta \in J}$ generates 
+$[\gb,\hb]$ over $\overline{\F}$.  But this set also generates $[\g,\h]$ 
+with coefficients in $\F$, so when we extend this to $\overline{F}$ we get 
+$[\gb,\hb] \subset \overline{[\g,\h]}$.  Thus $[\gb, \hb] = 
+\overline{[\g,\h]}$.
+
+Part (a) now follows easily, since we note that $\gb^i = \overline{\g^i}$ 
+and $\gb^{(i)} = \overline{\g^{(i)}}$ for all $i$.  Then $\g$ is solvable 
+if and only if $\g^{(n)} = 0$ for some $n$; but this is equivalent to 
+$\overline{\g^{(n)}} = 0$, or $\gb^{(n)} = 0$, and so $\g$ is solvable iff 
+$\gb$ is.  The same is true of nilpotency, as we see by replacing 
+$g^{(n)}$ with $g^n$ in this argument, and abelianness, which comes from 
+the solvability argument with $n = 1$.  In particular, letting $\h = \g$ 
+above yields $\overline{[\g,\g]} = [\gb,\gb]$.
+
+For part (b), we first look at Cartan's criterion.  Since $\g$ is solvable 
+if and only if $\gb$ is, we have the equivalent conditions (1) $(\gb, 
+[\gb,\gb]_V = 0$; (2) $(a,a)_V = 0$ for all $a \in [\gb,\gb]$; and (3) 
+$\g$ is solvable.  But $(\gb, [\gb,\gb])_V = (\gb, \overline{[\g,\g]})_V = 
+\overline{(\g,[\g,\g])_V}$, so $(\g,[\g,\g])_V = 0$ if and only if 
+$(\gb,[\gb,\gb])_V = 0$.  Furthermore, $(a,a)_V = 0$ for all $a \in 
+[\gb,\gb] = \overline{[\g,\g]}$ iff it does for all $a \in [\g,\g]$, since 
+$[\g,\g]$ and $\overline{[\g,\g]}$ share the same basis over different 
+fields and thus $(a,a)_V = 0$ for all $a$ in one iff it does for all $a$ 
+in the other.  Therefore Cartan's criterion holds for $\g$ given that it 
+does for $\gb$; the corollary's proof over $\g$ is identical to its 
+original proof, since it only needed algebraic closure to satisfy Cartan's 
+criterion.
+
+Next, we consider the proof that $\h_0^a$ is a Cartan subalgebra if $a$ is 
+regular.  If $a \in \g$ is regular, it is regular in $\gb$, so we know 
+that $\overline{\h_0^a}$ is a Cartan subalgebra of $\gb$, or 
+$\overline{\h_0^a} = N_{\gb}(\overline{\h_0^a})$.  Since $[b, 
+\overline{\h_0^a}] \subset \overline{\h_0^a}$ if and only if $[b, \h_0^a] 
+\subset \h_0^a$ for any $b \in \g$, Åwe conclude that $N_{\g}(\h_0^a) = 
+\h_0^a$, and so $\h_0^a$ is a Cartan subalgebra of $\g$.
+
+Finally, assume $\g$ is finite dimensional and solvable.  Then $\gb$ is 
+finite dimensional and solvable, so we know that $[\gb,\gb]$ is nilpotent.  
+But $[\gb,\gb] = \overline{[\g,\g]}$, so $\overline{[\g,\g]}$ is 
+nilpotent, hence $[\g,\g]$ is nilpotent.
+
+\paragraph{}
+\begin{remark}
+The basic properties of a trace form are that it is symmetric (i.e. 
+$(a,b)_V = (b,a)_V$) and invariant (i.e. $([a,b],c)_V = (a,[b,c])_V$).  
+The basic results on trace forms (like Cartan's criterion) fail, however, 
+if we assume only that the bilinear forms involved are symmetric and 
+invariant.
+\end{remark}
+
+We can construct an example of this as follows:
+\paragraph{Exercise 10.4.}
+Consider the 4-dimensional Lie algebra $\D = \F p + \F q + \F c + \F d$, 
+where $[p,q] = c$, $c$ is central, $[d,p] = p$, and $[d,q] = d$.  
+Construct a nondegenerate symmetric invariant bilinear form on $\D$.
+
+\paragraph{Solution.}
+Define a bilinear form $B(x,y)$ on $\D$ by the values $B(p,q) = B(q,p) = 
+1$; $B(c,d) = B(d,c) = 1$; $B = 0$ on all other pairs of basis 
+elements; and all other values of $B$ follow by symmetry and bilinearity.  
+Then $B$ is nondegenerate, since it has matrix
+{\tiny $\left( \begin{array}{cccc} 0&1&0&0 \\ 1&0&0&0 \\
+0&0&0&1 \\ 0&0&1&0 \end{array} \right)$ }
+with respect to the basis $\{p,q,c,d\}$ and this matrix is invertible.  
+Invariance is also easy to check, so we are done.
+
+\paragraph{}
+The algebra $\D$ is solvable, since $[\D,\D] = \He_1$ is solvable, so by 
+Cartan's criterion, any trace form on $\D$ must satisfy $(\D, \He_1)_V = 
+0$.  But $B(d,c) = 1$, so $B$ cannot be a trace form.
+
+\paragraph{}
+We conclude the lecture by defining a new class of Lie algebras:
+
+\begin{defn}
+A Lie algebra $\g$ is called \emph{semisimple} if it contains no nonzero 
+solvable ideals.  Equivalently, $\g$ is semisimple if it contains no 
+nonzero abelian ideals.
+\end{defn}
+Equivalence can be proved as follows: If $\g$ has a nonzero abelian ideal, 
+then it has a nonzero solvable ideal, since abelian ideals are solvable.  
+Conversely, if $\g$ has a nonzero solvable ideal $\h$, take $n$ such that 
+$\h^{(n)} \not= 0$ but $\h^{(n+1)} = 0$; then $\h^{(n)}$ is a nonzero 
+abelian ideal.
+
+In the next lecture, we'll prove that a finite-dimensional Lie algebra 
+$\g$ over a field of characteristic zero is semisimple if and only if the 
+Killing form on $\g$ is nondegenerate.
+
+\end{document}

@@ -1,0 +1,410 @@
+\documentclass[11pt]{article}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{pstricks}
+\usepackage{graphics}
+\usepackage{graphicx}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf 18.745 Introduction to Lie Algebras } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Transcribed by: #4}{#1}}
+
+
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\N}{\mathbin}{AMSb}{"4E}
+\DeclareMathSymbol{\Z}{\mathbin}{AMSb}{"5A}
+\DeclareMathSymbol{\R}{\mathbin}{AMSb}{"52}
+\DeclareMathSymbol{\Q}{\mathbin}{AMSb}{"51}
+\DeclareMathSymbol{\I}{\mathbin}{AMSb}{"49}
+\DeclareMathSymbol{\C}{\mathbin}{AMSb}{"43}
+\DeclareMathSymbol{\F}{\mathbin}{AMSb}{"46}
+
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\tr}{\mbox{tr\ }}
+\newcommand{\Mat}{\mbox{Mat}}
+\newcommand{\Lie}{\mbox{Lie}}
+\newcommand{\Der}{\mbox{Der\ }}
+\newcommand{\End}{\mbox{End\ }}
+\newcommand{\ad}{\mbox{ad\ }}
+\newcommand{\im}{\mbox{im\ }}
+\newcommand{\Ker}{\mbox{ker\ }}
+
+\newcommand{\sll}{\ensuremath{\mathfrak{sl}}}
+\newcommand{\gl}{\ensuremath{\mathfrak{gl}}}
+\newcommand{\g}{\ensuremath{\mathfrak{g}}}
+\newcommand{\h}{\ensuremath{\mathfrak{h}}}
+\newcommand{\m}{\ensuremath{\mathfrak{m}}}
+\newcommand{\He}{\ensuremath{\mathcal{H}}}
+\newcommand{\be}{\ensuremath{\mathfrak{b}_2}}
+\newcommand{\bk}{\ensuremath{\mathfrak{b}}}
+\newcommand{\nk}{\ensuremath{\mathfrak{n}}}
+%\renewcommand{\ad}[1]{\ensuremath{{\bf ad}(#1)}}
+
+
+
+\newcommand{\sk}{\vspace*{1em}}
+
+\newtheorem{defn}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{proof}{Proof}
+\newtheorem{prop}{Proposition}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{Lecture 20: Constructing Lie Algebras from Root Systems (cont.)}{Fall 2004}{Prof.\ Victor
+Ka\v{c}}{Anthony Tagliaferro and Alan Dunn}
+
+
+
+Recall that $A = (a_{ij})$ is a symmetric Cartan matrix, $\Delta$ is the
+corresponding root system, $Q = \Z \Delta$ is the root lattice, and
+$\Delta = \{ \alpha \in Q | (\alpha,\alpha)=2 \} $
+
+We construct the Lie algebra associated with this Cartan matrix as:
+\begin{equation*}
+\g = \h \oplus \left( \oplus_{\alpha \in \Delta} \F E_{\alpha} \right)
+\end{equation*}
+where $\h = \F \otimes_{\Z} Q$ and $E_{\alpha}$ are some nonzero vectors.
+Also, $(\bullet,\bullet)$ is extended from $Q$ to \h~ by bilinearity.
+The following is a list of commutation relations where it is understood
+that $h,h' \in \h$:
+\begin{align*}
+(i)~~ & [h,h'] = 0 &\\
+(ii)~~ & [h, E_{\alpha}] = (\alpha,h) E_{\alpha}& \\
+(iii)~~ & [E_{\alpha},E_{-\alpha}] = -\alpha & \\
+(iv)~~ & [E_{\alpha},E_{\beta}] = 0  & \text{if} ~~ \alpha +\beta \notin \Delta \cup \{ 0 \} \\
+(v)~~ & [E_{\alpha},E_{\beta}] = \epsilon(\alpha,\beta)E_{\alpha+\beta} & \text{if} ~~ \alpha +\beta \in \Delta
+\end{align*}
+
+Notice that for skew symmetry, we need: $\epsilon(\alpha,\beta) =
+-\epsilon(\beta,\alpha)$. We have to find $\epsilon(\alpha,\beta)$ for which
+the Jacobi identity holds. After last time, it remains to check that the 
+Jacobi identity holds for $E_{\alpha}, E_{\beta}, E_{\gamma}$ where
+$\alpha, \beta$ and $\gamma$ are all distinct. Thus we need that:
+\begin{equation*}
+[[E_{\alpha},E_{\beta}],E_{\gamma}] + [[E_{\beta},E_{\gamma}],E_{\alpha}]
++ [[E_{\gamma},E_{\alpha}],E_{\beta}] = 0
+\end{equation*}
+
+\paragraph{Case 1}
+$\alpha + \beta + \gamma \notin \Delta \cup \{0 \}$. Then all three summands
+are zero, and the Jacobi identity holds.
+
+\paragraph{Case 2}
+$\alpha + \beta +\gamma \in \Delta$. Then $(\alpha +\beta+\gamma, \alpha
++\beta +\gamma)=2$, or $6+2(\alpha,\beta)+2(\beta,\gamma)+2(\alpha,\gamma)=2$.
+Hence:
+\begin{equation*}
+(\alpha,\beta) + (\beta,\gamma)+(\alpha,\gamma) = -2
+\end{equation*}
+
+But each of these numbers is $1,0,$ or $-1$ as already been
+discussed. Hence say $(\alpha,\beta)=-1$, $(\beta,\gamma)=-1$ and
+$(\alpha,\gamma)=0$. Hence $\alpha + \gamma \notin \Delta \cup \{ 0
+\}$, but $\alpha +\beta, \beta + \gamma \in \Delta$.  Then the Jacobi
+identity becomes: $[[E_{\alpha},E_{\beta}],E_{\gamma}] =
+[E_{\alpha},[E_{\beta},E_{\gamma}]]$. This translates into:
+\begin{equation*}
+\epsilon(\alpha,
+\beta)\epsilon(\alpha+\beta,\gamma)E_{\alpha+\beta+\gamma} =
+\epsilon(\beta,
+\gamma)\epsilon(\alpha,\beta+\gamma)E_{\alpha+\beta+\gamma}
+\end{equation*}
+Hence the the condition on $\epsilon$ is:
+\begin{equation*}
+\epsilon(\alpha,\beta)\epsilon(\alpha+\beta,\gamma) = \epsilon(\beta,\gamma)
+\epsilon(\alpha,\beta+\gamma)
+\end{equation*}
+This condition holds if $\epsilon(\alpha,\beta)$ is {\it bimulitplicative}:
+\begin{align*}
+\epsilon(\alpha+\alpha',\beta) &= \epsilon(\alpha,\beta)
+\epsilon(\alpha',\beta) \\
+\epsilon(\alpha,\beta+\beta') &= \epsilon(\alpha,\beta)
+\epsilon(\alpha,\beta') \\
+\epsilon(0,\beta) &= \epsilon(\alpha,0)=1
+\end{align*}
+
+\paragraph{Case 3}
+$\alpha + \beta +\gamma = 0$. This happens if $(\alpha,\beta)=(\alpha,\gamma)
+=(\beta,\gamma)=-1$. In other words, $\alpha + \beta, \beta +\gamma, \alpha
++\gamma \in \Delta$. The Jacobi identity becomes: 
+\begin{equation*}
+\epsilon(\alpha,\beta)[E_{\alpha+\beta},E_{-\alpha-\beta}]+ \epsilon(\beta,
+\gamma)[E_{-\alpha},E_{\alpha}]+\epsilon(-\alpha-\beta,\alpha)[E_{-\beta},
+E_{\beta}]=0
+\end{equation*}
+From this equation, we determine that $-\epsilon(\alpha,\beta)(\alpha+\beta)
++\epsilon(\beta,-\alpha-\beta)\alpha + \epsilon(-\alpha-\beta,\alpha)\beta=0$.
+But since $\alpha$ and $\beta$ are linearly independent:
+\begin{align*}
+\epsilon(\beta,-\alpha-\beta) &=\epsilon(\alpha,\beta) \\
+\epsilon(-\alpha-\beta,\alpha) &= \epsilon(\alpha,\beta)
+\end{align*}
+Therefore, using the bimultiplicativity of $\epsilon$:
+\begin{equation}\label{equn1}
+\begin{split}
+\epsilon(\alpha,\beta)\epsilon(\beta,\alpha)&=\epsilon(\beta,\beta)^{-1} \\
+\epsilon(\alpha,\beta)\epsilon(\beta,\alpha)&=\epsilon(\alpha,\alpha)^{-1}
+\end{split}
+\end{equation}
+
+\paragraph{Lemma}
+There exists a bimultiplicative function $\epsilon : Q \times Q \rightarrow
+\{ \pm 1 \}$ such that $\epsilon(\alpha,\alpha)=(-1)^{\frac{1}{2}(\alpha,
+\alpha)}$ for any even lattice $Q$.
+
+\paragraph{Remark} Why does the $\epsilon$ given by the Lemma guarantee
+the Jacobi identity? Observe that:
+\begin{align*}
+\epsilon(\alpha+\beta,\alpha+\beta)&=(-1)^{\frac{1}{2}(\alpha,\alpha)}
+(-1)^{\frac{1}{2}(\beta,\beta)}(-1)^{(\alpha,\beta)} \\
+\epsilon(\alpha,\alpha)\epsilon(\beta,\beta)\epsilon(\alpha,\beta)\epsilon(
+\beta,\alpha)&= (-1)^{\frac{1}{2}(\alpha,\alpha)}
+(-1)^{\frac{1}{2}(\beta,\beta)}(-1)^{(\alpha,\beta)} \\
+\epsilon(\alpha,\beta)\epsilon(\beta,\alpha)&=(-1)^{(\alpha,\beta)}
+\end{align*}
+This is consistent with skew symmetry since if $\alpha+\beta \in \Delta$, then
+$(\alpha,\beta)=-1$. This is consistent with (\ref{equn1}): $(-1)^{(\alpha,
+\beta)}=\epsilon(\beta,\beta)^{-1}=-1$ if $\alpha, \beta,$ and $\alpha+\beta$
+are all roots.
+
+\paragraph{Proof of the Lemma}
+Choose an ordered basis of simple roots $\{ \alpha_1, \dots , \alpha_n \}$
+of $Q$ and define $\epsilon$ on any two pair as follows:
+\begin{equation*}
+\epsilon(\alpha_i,\alpha_j)= \begin{cases}
+-1 & \text{if $i<j$ and $(\alpha_i,\alpha_j)=-1$} \\
+1  & \text{if $i>j$ and $(\alpha_i,\alpha_j)=1$} \\
+1  & \text{if $i>j$ and $(\alpha_i,\alpha_j)=0$} \\
+-1 & \text{if $i=j$} \end{cases}
+\end{equation*}
+Extend this by bilinearity to any pair $\alpha = \sum_{i=1}^r k_i\alpha_i$,
+$\beta=\sum_{i=1}^r m_i \alpha_i \in Q$. Check $\epsilon(\alpha,\alpha)
+=(-1)^{\frac{1}{2}(\alpha,\alpha)}$:
+\begin{align*}
+\epsilon(\alpha,\alpha) &= \prod_{i,j}\epsilon(\alpha_i,\alpha_j)^{k_ik_j} \\
+ &= \prod_i \epsilon(\alpha_i,\alpha_i)^{k_i^2} \prod_{i<j} \left( 
+\epsilon(\alpha_i,\alpha_j)\epsilon(\alpha_j,\alpha_i) \right)^{k_ik_j} \\
+&= \prod_i (-1)^{k_i^2 \frac{(\alpha_i,\alpha_j)}{2}}\prod_{i<j}(-1)^{(
+\alpha_i,\alpha_j)k_ik_j} \\
+&= (-1)^{\frac{1}{2}(\alpha,\alpha)}
+\end{align*}
+
+\paragraph{Remark}
+So, $\g$ is a Lie algebra. Why is $\g$ semisimple? If $I$ is an ideal, then
+by a lemma proved last time, either $h \in I$, $h \neq 0$, for $h \in \h$, 
+or one of the $E_{\alpha}$ is in $I$. But then all $E_{\beta}$ with
+$\beta(h) \neq 0$ are in $I$, or $[E_{\alpha},E_{-\alpha}]=-\alpha \in I$.
+So in both cases $I$ is not abelian. Since $\Delta$ is indecomposable,
+$\g$ is simple.
+
+\paragraph{Discussion}
+It remains to treat $F_4$ and $G_2$. It suffices to prove that ($\clubsuit$) dim $\g(A)
+< \infty$ if $A = F_4$ or $G_2$. Indeed, then $\g(A)$ is a semisimple finite
+dimensional Lie algebra, since $A$ is indecomposable, it is simple.
+
+\paragraph{Excercise 20.1}
+The root system of a simple Lie algebra is determined by $\Pi=\{\alpha_1,
+\dots,\alpha_r\}$ and $(\alpha_i,\alpha_j)$ from the axioms of roots systems.
+Hence the root system of $\g(A)$ in both cases will be $\Delta_{F_4}$ and
+$\Delta_{G_2}$ respectively.
+
+\paragraph{Solution}
+We have $\Delta$ determined by $\Pi$ and $A_{i j} = (\alpha_i,\alpha_j)$ because of the following property: Start with any $\alpha_i \in \Pi$, and we can figure out the form of all of the roots by using the string property to figure out how many times we can add $\alpha_j$ to a particular root (normally the string property tells us how many roots are in a line, but we know all roots in $\Delta_+$ can be formed by adding $\alpha_i$'s, so we never have to worry about subtracting $\alpha_i$'s only adding them since $\alpha_i - \alpha_j$ is not a root if $i \ne j$).  In fact, we can form a convex hull that contains all of the roots by starting with each $\alpha_i$, proceeding as far in the $\alpha_j$ direction as possible, and continuing to proceed in directions that so far have zero coefficient to find the points that define the hull.  Then the roots contained therein are the positive ones.  We take $\Delta_- = \{-v | v \in \Delta_+\}$, and then we have the set of all roots $\Delta_+ \bigcup \Delta_-$.
+
+\paragraph{Discussion (cont.)}
+In order to prove ($\clubsuit$), consider $\g=E_6$ and $\g=D_4$ respectively
+and the automorphism $\sigma$:
+\begin{align*}
+\sigma(E_i)&=E_{\sigma(i)} \\
+\sigma(F_i)&=F_{\sigma(i)} \\
+\sigma(\alpha_i) &= \alpha_{\sigma_i}
+\end{align*}
+
+\begin{figure} \label{fig1}
+\begin{center}
+\includegraphics[width=0.45 \textwidth]{dynkindiagram}
+\end{center}
+\end{figure}
+
+How to make sure that $\epsilon(\sigma(\alpha),\sigma(\beta)) = \epsilon(
+\alpha,\beta)$? For that, order the indices so that $i<j$ if there is
+an arrow going from the $i^{th}$ root of the Dynkin diagram to the $j^{th}$
+root.
+
+Now, construct the following elements of $E_6$:
+\begin{align*}
+E_1' &= E_4+E_5, & E_2' &= E_2+E_3, & E_3'&=E_1, & E_4'&=E_6 \\
+F_1' &= F_4+F_5, & F_2' &= F_2+F_3, & F_3'&=F_1, & F_4'&=F_6 \\
+H_1' &= H_4+H_5, & H_2' &= H_2+H_3, & H_3'&=H_1, & H_4'&=H_6
+\end{align*}
+
+And for $D_4$:
+\begin{align*}
+E_1' &= E_1 & E_2' &= E_2+E_3+E_4 \\
+F_1' &= F_1 & F_2' &= F_2+F_3+F_4 \\
+H_1' &= H_1 & H_2' &= H_2+H_3+H_4 \\
+\end{align*}
+
+\paragraph{Excercise 20.2}
+Show that these elements satisfy the relation of the Lie algebra $\tilde{\g}
+(A)$ with $A=F_4$ and $G_2$ repectively.
+
+\paragraph{Solution}
+Begin with the $E_6$ case.  Obviously the H' variables commute since they are sums of H's which all commute. As for the relations between the H's and the E's:
+
+\begin{align*}
+[H_1',E_1'] &= [H_4+H_5,E_4+E_5] &= 2E_1'&\\
+[H_1',E_2'] &= [H_4+H_5,E_2+E_3] &= -E_2'&\\
+[H_1',E_3'] &= [H_4+H_5,E_1] &= 0&\\
+[H_1',E_4'] &= [H_4+H_5,E_6] &= 0&\\
+[H_2',E_1'] &= [H_2+H_3,E_4+E_5] &= -E_1'&\\
+[H_2',E_2'] &= [H_2+H_3,E_2+E_3] &= 2E_2'&\\
+[H_2',E_3'] &= [H_2+H_3,E_1] &= -E_3'&\\
+[H_2',E_4'] &= [H_2+H_3,E_6] &= 0&\\
+[H_3',E_1'] &= [H_1,E_4+E_5] &= 0&\\
+[H_3',E_2'] &= [H_1,E_2+E_3] &= -2E_2'&\\
+[H_3',E_3'] &= [H_1,E_1] &= 2E_3'&\\
+[H_3',E_4'] &= [H_1,E_6] &= -E_4'&\\
+[H_4',E_1'] &= [H_6,E_4+E_5] &= 0&\\
+[H_4',E_2'] &= [H_6,E_2+E_3] &= 0&\\
+[H_4',E_3'] &= [H_6,E_1] &= -E_3'&\\
+[H_4',E_4'] &= [H_6,E_6] &= 2E_4'&\\
+\end{align*}
+So we see that [$H_i'$,$E_j'$] = $A_{i j}E_j'$ for A = $F_4$.
+
+Since [$H_i$,$F_j$] = -$A_{i j}F_j$ for A = $E_6$, and [$H_i'$,$E_j'$] = $A_{i j}E_j'$ for A = $F_4$, it is evident that we will have [$H_i'$,$F_j'$] = -$A_{i j}F_j'$ for A = $F_4$ since the F' variables are defined in the exact same way as the E' variables except with $F_i$ in place of $E_i$.
+
+Furthermore, [$E_i'$,$F_j'$] = $H_i' \delta_{i j}$ since $E_i'$, $F_j'$ only contain the same $E_a$ and $F_b$ variables when i = j, and then exactly one H is produced per commutator of an $E_a$ with an $F_a$.  So we have shown the {$X_n'$} satisfy the relations for $\tilde{\g}(F_4)$.
+
+Now for the $D_4$ case.  The same argument for the commutators of H's with each other and E's with F's apply as before. Consider again the commutation relations between the H's and the E's:
+
+\begin{align*}
+[H_1',E_1'] &= [H_1,E_1] &= 2E_1'&\\
+[H_1',E_2'] &= [H_1,E_2+E_3+E_4] &= -E_2'&\\
+[H_2',E_1'] &= [H_2+H_3+H_4,E_1] &= -3E_1'&\\
+[H_2',E_2'] &= [H_2+H_3+H_4,E_1+E_2+E_3] &= 2E_2'&\\
+\end{align*}
+
+So [$H_i'$,$E_j'$] = $A_{i j}E_j'$ for A = $G_2$ and similarly for the F's.
+
+\paragraph{(continuing)}
+Hence we have a homomorphism $\tilde{\g}(F_4) \rightarrow \g(E_6)$ and
+$\tilde{\g}(G_2) \rightarrow \g(D_4)$ where the kernal is an ideal
+which intersects \h~ trivially. But since $\g(E_6)$ and $\g(D_4)$ are
+finite dimensional, the images of these maps are finite dimensional as well.
+But $\g(F_4)$ and $\g(G_2)$ are quotients of these images, hence they are
+finite dimensional.
+
+\paragraph{Corollary}
+All abstract root systems and abstract Cartan matrices are concrete. In other
+words, they come from a semisimple Lie algebra.
+
+\paragraph{Excercise 20.3} a) Show that on a simple Lie algebra over $\F$,
+the nondegenerate symmetric invariant bilinear form is unique up to a constant factor.
+
+b) Check that the form in the simply-laced $\g$ as follows is invariant:
+\begin{align*}
+(i) & (\bullet,\bullet)\vert_{\h}~~~ \text{is the given one (the Killing form).} \\
+(ii) & (E_{\alpha},\h)=0,~(E_{\alpha},E_{\beta})= 0 ~~~ \text{if $\alpha+\beta
+\neq 0$} \\
+(iii)& (E_{\alpha},E_{-\alpha})=-1
+\end{align*}
+
+\paragraph{Solution}
+There are three cases to consider: (h,h'), (h,$E_\alpha$), and ($E_\alpha$,$E_\beta$) for h, h' $\in \Pi$ and $E_\alpha$ and $E_\beta$ $\notin \h$ where (,) is another non-degenerate, bilinear form on $\g$ (the Killing form is one already by the semisimplicity of $\g$).  We know (,) and K must be the same (up to a constant) on $\h$, which is the first case, and we can use the invariant property of (,) to show (,) is proportional to K (by the same constant) in the latter two cases.
+
+a.  Consider generic non-degenerate, invariant, bilinear form $C$:
+
+$C(\alpha,[\beta,E_\beta]) = C(\alpha,(\beta,\beta)E_\beta) = (\beta,\beta) C(\alpha,E_\beta) = C([\alpha,\beta],E_\beta) = C(0,E_\beta) = 0$
+
+Thus $C(\alpha,E_\beta) = 0 = K(\alpha,E_\beta) = (\alpha,E_\beta)$.
+\begin{align*}
+C(\beta,[E_\beta,E_\gamma]) &= C(\beta,\epsilon(\beta,\gamma)E_{\beta+\gamma}) \mbox{     $(\beta + \gamma \in \Delta)$} \\
+&= 0 \mbox{ by the previous case} \\
+&= C([\beta,E_\beta],E_\gamma) \\
+&= C((\beta,\beta)E_\beta,E_\gamma) \rightarrow C(E_\beta,E_\gamma) = 0 \mbox{     $(\beta + \gamma \in \Delta)$} \\
+&= C(\beta,- \beta) \mbox{$(\beta = -\gamma)$} \\
+&\rightarrow C(E_\beta,E_{-\beta}) = -C(\beta,\beta)/(\beta,\beta), \mbox{ and since } K(\beta,\beta) \mbox{ is proportional to } (\beta,\beta),\\
+& K(E_\beta,E_{-\beta}) \mbox{ is proportional to } (E_\beta,E_{-\beta}) \mbox{ by the same constant for all $\beta$.} \\
+\end{align*}
+Thus $K$ is proportional to $(,)$.
+
+b.  There are four cases to check, when exactly zero, one, two, or three elements in the relation $(a,[b,c]) = ([a,b],c)$ are from $\h$. (Note, in this proof, $\alpha$, $\beta$, and $\gamma$ all represent values in $\Delta$.)
+
+Case 1, where $a,b,c \in \h$ is evident since the Killing form is invariant.
+
+Case 2, where $a,b \in \h$ also holds because each on the left hand side, $a \in \h$, while $b \in \h$ and $c \notin \h$ implies $[b,c] \notin h$, which means $(a,[b,c]) = 0$ by (ii). On the right hand side, $[a,b] = 0$, and so both sides are equal to zero and thus equal.
+
+Case 3, where $a \in \h$ means that $b = E_\alpha, c = E_\beta$.  We have both sides equal to 0 in the case $\alpha + \beta \ne 0$ and the left hand side equal to $-(a,\alpha) $ and the right hand side equal to $(a,\alpha) (E_\alpha,E_{-\alpha}) = -(a,\alpha)$ when $\beta = -\alpha$. Thus both sides are equal in this case as well.
+
+Case 4, where $a = E_\alpha, b = E_\beta, c = E_\gamma$.  Thus both sides are equal to zero unless $\alpha = - (\beta + \gamma)$ or $\alpha + \beta = -\gamma$, or in other words, $\alpha + \beta + \gamma = 0$.  In this case, the left hand side is equal to $\epsilon(\beta,\gamma) (E_\alpha,E_{\beta+\gamma}) = -\epsilon(\beta,\gamma)$, while the right hand side is equal to $-epsilon(\alpha,\beta)$.  $\epsilon(\beta,\gamma) = -\epsilon(\gamma,\beta) = -\epsilon(-\alpha-\beta,\beta) = \epsilon(\alpha,\beta)$ by the antisymmetry of $\epsilon$, and thus both sides are equal and we are done.
+
+\paragraph{Remark}
+A remark on the compact form (simply-laced case). Let $\g_{\R} = \h_{\R}
+\oplus \left(\oplus_{\alpha \in \Delta} \R E_{\alpha}\right)$. This is a
+simple Lie algebra over $\R$. Then $\omega_{\R}$ defined by
+$\omega_{\R}\vert_{\h_{\R}} = -I$ and $\omega_{\R}(E_{\alpha})=E_{-\alpha}$.
+Extend $\omega_{\R}$ to $\g_{\C}$ by anti-linearity: $\omega(\lambda a)
+=\bar{\lambda}\omega(a)$ for $a \in \g_{\R}$ and $\lambda \in \C$.
+
+\paragraph{Excercise 20.4} Show that $\omega_{\R}$ is an automorphism, hence the
+fixed point set $R$ of $\omega$ on $\g_{\C}$ is a real subalgebra. Show that
+$(\bullet,\bullet)\vert_R$ is negative definite.
+
+\paragraph{Solution}
+\begin{align*}
+\g_{\C} &= \C \otimes \g_{\R} \\
+&= \C \otimes (\h_{\R} \oplus (\oplus_{\alpha \in \Delta} \R E_\alpha)), \h_{\R} = \oplus_{\alpha \in \Pi} \R \alpha \\
+&= \oplus_i (\C \otimes_{\R} v_i), \mbox{ where $v_i$ ranges over $\Pi, E_\alpha$} \\
+\omega_{\R}(v &= \sum_i a_i \otimes_{\R} v_i) = v \rightarrow \mbox{ for } v_i = \alpha \in \Pi \mbox{ that } a_i = - a_i^* \rightarrow a_i \mbox{ is imaginary} \\
+& \mbox{for $v_i$ = $E_\alpha$, $E_{-\alpha}$ cases that these come in pairs $a E_\alpha + a^* E_{-\alpha}$.}
+\end{align*}
+
+$\omega_{\R}$ is an automorphism of $\g_{\R}$ since it is evidently surjective and a homomorphism, and for something of the form $\sum_i a_i v_i$ to be in the kernel, all of the $a_i$'s must be 0. Thus the kernel is 0 as well, and a surjective homomorphism from a Lie algebra to itself with zero kernel is an automorphism.
+
+K = $\{ v | \omega_{\R}(v) = v\}$ is a real subalgebra generated by $\{ i \otimes_{\R} \alpha, \alpha \in \Pi, i \otimes_{\R} (E_\alpha - E_{-\alpha}), \alpha \in \Delta\}$
+
+Consider $(,)\vert_K$:
+\begin{align*}
+(i \otimes_{\R} \alpha, i \otimes_{\R} \alpha) &= - (\alpha, \alpha) < 0 \mbox{ ($\alpha \in \Pi$, since (,) is positive definite on $\h$)} \\
+(i \otimes_{\R} (E_\alpha - E_{-\alpha}), i \otimes_{\R} (E_\alpha - E_{-\alpha})) &= 2 (E_\alpha, E_{-\alpha}) = -2 < 0 \\
+(1 \otimes_{\R} (E_\alpha + E_{-\alpha}), 1 \otimes_{\R} (E_\alpha + E_{-\alpha})) &= 2 (E_\alpha, E_{-\alpha}) = -2 < 0 \\
+\end{align*}
+So $(,)$ is negative definite on K.
+
+\paragraph{Definition} The real Lie algebra $R$ is called the {\it compact
+form} of $\g_{\C}$ since the corresponding Lie group is compact.
+
+\end{document}

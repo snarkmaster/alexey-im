@@ -1,0 +1,171 @@
+ \documentclass[aps,onecolumn,secnumarabic,nobalancelastpage,amsmath,amssymb]{revtex4}
+
+\usepackage{amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{yfonts}
+
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Center}{Z}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Lie}{Lie}
+
+\begin{document}
+\title{18.745 Lecture Notes - Lecture 2 \\
+Introduction and Basic Definitions - Part II}
+\author{Alan M. Dunn}
+\email{amdunn@mit.edu}
+\date{\today}
+\maketitle
+
+\newcommand{\g}[0]{\ensuremath{\mathord{\mathfrak{g}}}}
+\newcommand{\f}[0]{\ensuremath{\mathbb{F}}}
+\newcommand{\s}[0]{\ensuremath{\text{ }}}
+\newcommand{\K}[0]{\ensuremath{\Ker \phi}}
+\newcommand{\I}[0]{\ensuremath{\Image \phi}}
+\newcommand{\+}[0]{\ensuremath{\oplus}}
+
+A {\slshape homomorphism} of Lie algebras {\g} is a linear map $\phi: \g
+\rightarrow \g_1$ which preserves the bracket, that is, $\phi([a,b]) =
+[\phi(a),\phi(b)]$.  The {\slshape kernel} of a homomorphism $\phi$, denoted
+\K, is a subset of {\g} such that $\K = \{ a \in \g | \phi(a) = 0\}$.  The
+{\slshape image} of a such a homomorphism, $\I \equiv \{\phi(a) | a \in
+\g_1\}$ is a subset of $\g_1$. A homomorphism $\phi$ is called an {\slshape
+isomorphism} if it is bijective, i.e. if $\K = 0$, $\I = \g_1$. 
+
+\renewcommand{\labelenumi}{\alph{enumi})}
+\begin{description}
+\item[Exercise 2.1:] Prove the following claims:
+\begin{enumerate}
+\item {\K} is an ideal in {\g}.
+\item {\I} is a subalgebra of {\g}.
+\item The Lie algebra {\I} is isomorphic to the Lie algebra {\g}/{\K}.
+\end{enumerate}
+\begin{proof}\ 
+
+\begin{enumerate}
+\item Given $a \in \K, b \in \g.\text{ }\phi([a,b]) = [\phi(a),\phi(b)] = [0,\phi(b)] = 0 \rightarrow [a,b] \in \K \rightarrow [\K,\g] \subset \K \rightarrow \K$ is an ideal.
+\item $a,b \in \I \rightarrow a = \phi(a'), b = \phi(b') \rightarrow \phi(\lambda a' + \nu b') = \lambda a + \nu b$ (by the linearity of $\phi$) $\rightarrow \lambda a + \nu b \in \I \rightarrow \I$ a subspace.
+
+$[a,b] = [\phi(a'),\phi(b')] = \phi([a',b']) \rightarrow [a,b] \in \I \rightarrow \I$ a subalgebra of {\g}
+
+\item Define $\psi: \g/\K \rightarrow \I, \psi(a+\K) = \phi(a).$ $\psi(\g/\K)$ is evidently equal to {\I}, which implies $\psi$ is surjective.
+
+$\psi$ is well defined, since choosing any representatives $c,d \in a+\K$ will both yield $\phi(a)$ under $\psi$.
+
+$\psi(a+\K) = \psi(b+\K) \rightarrow \phi(a) = \phi(b) \rightarrow a = b+c, c \in \K \rightarrow a+\K=b+\K \rightarrow \psi$ is bijective, which implies that $\psi$ is an isomorphism. 
+\end{enumerate}
+\end{proof}
+\end{description}
+The {\slshape center} of a Lie algebra \g, denoted $\Center(\g)$, is the set of elements commuting with {\g} i.e. $\Center(\g) = \{ a \in \g | [a,\g] = 0\}$. This is obviously an ideal.
+\begin{description}
+\item[Exercise 2.2:] If {\g} is a non-abelian Lie algebra, then $\dim \Center(\g) \le \dim(\g) - 2$.
+\begin{proof}
+{\g} non-abelian implies that there are at least two linearly independent elements $a,b \in \g$ such that $[a,b] = c, c \ne 0 \rightarrow a,b \notin \Center(\g) \rightarrow \dim \Center(\g) \le \dim(\g) - 2$ since the subspace spanned by $a$ and $b$ is not in $\Center(\g)$: $[Aa + Bb,a] = -Bc$, and $[Aa + Bb,b] = Ac$ for $A,B \in \f$, which are only 0 for $B$ and $A$ equal to 0 respectively. 
+\end{proof}
+
+\item[Exercise 2.3:] If {\g} is a Lie algebra of dimension $n \ge 3$ with a 1 dimensional derived subalgebra, then {\g}, up to isomorphism, is one of the following:
+\begin{itemize}
+\item $b_2 \+ ab_{n - 2}$
+\item $H_k \+ ab_{n - 2k - 1}$
+\end{itemize}
+where $b_2$ is the unique two-dimensional non-abelian Lie algebra, $ab_{k}$ is a k-dimensional abelian Lie algebra, and $H_k$ is the k-th Heisenberg algebra of dimension $2k + 1$. 
+\begin{proof}
+$[\g,\g]$ 1 dimensional implies that $[\g,\g] = \f a, a \in \g, a \ne 0$. 
+
+\paragraph*{Case 1} $\exists b \in \g | [b,a] \ne 0 \rightarrow [b,a] = \lambda a\text{ }(\lambda \ne 0).$ Send $b \rightarrow \frac{1}{\lambda}b$, that is, instead choose $b' = \frac{1}{\lambda}b$ and take that as a basis element. Then $[b,a] = a$.  We can now construct a basis for the remaining $n-2 \ge 1$ dimensions of the algebra: Take any element that is linearly independent from $a$ and $b$, call it $e_1$. $[a,e_1] = \lambda_1 a \rightarrow [a, e_1+\lambda_1 b] = 0$, so send $e_1 \rightarrow e_1 + \lambda_1 b$.  $[b, e_1] = \lambda_2 a \rightarrow [b, e_1 - \lambda_2 a] = 0$, and also $[a, e_1 - \lambda_2 a] = 0 \rightarrow$ sending $e_1 \rightarrow e_1 - \lambda_2 a$ creates $e_1$ that commutes with both $a$ and $b$, while leaving $e_1$ linearly independent of $a$ and $b$.  Now we can construct a mutually commuting basis $\{e_1,\ldots,e_{n-2}\}$ that commutes with $a$ and $b$ by induction:  Given $\{e_1,\ldots,e_i\}$ mutually commuting and commuting with $a$ and $b$, select $e_{i+1}$ linearly independent of $\{a,b,e_1,\ldots,e_i\}$, which can be done if $i \le n+2$. $e_{i+1}$ can be made to commute with $a$ and $b$ by the same process as before.  Furthermore, given any $e_a, [e_{i+1},e_a] = \lambda a$, and thus by the Jacobi identity $\lambda a = [b,[e_{i+1},e_a]] = [[b,e_{i+1}],e_a] + [e_{i+1},[b,e_a]] = 0$ and thus $e_{i+1}$ will commute with all the $e_a$ for $a \le i+1$.  Thus we have $\{a,b\}$ composing $b_2$, the unique two dimensional non-abelian Lie algebra, and $\{e_1,\cdots,e_{n-2}\}$ which span an $n-2$ dimensional abelian Lie algebra, and thus $\g = b_2 \+ab_{n-2}$ 
+\paragraph*{Case 2} $\nexists b \in \g | [b,a] \ne 0, \g$ non-abelian since $[\g,\g] \ne 0$ and thus $\exists p_1,q_1 \in \g | [p_1,q_1] \ne 0 \rightarrow [p_1,q_1] = \lambda a,$ sending $p_1 \rightarrow \frac{1}{\lambda}p_1 \rightarrow [p_1,q_1] = a$.  Now if {\g} is three dimensional we have $\g = H_1$, otherwise we can construct a basis for the remaining $n-3 \ge 1$ dimensional subspace.  Choose $d$ linearly independent from $p_1, q_1,$ and $a$.  $[d,a] = 0, [d,p_1] = \lambda_1 a \rightarrow$ send d to $d + \lambda_1 q_1 \rightarrow [d,p_1] = 0, [d,q_1] = \lambda_2 a \rightarrow$ send d to $d - \lambda_2 p_1 \rightarrow [d,q_1] = 0$ while keeping $[d,p_1] = 0$. Thus $d$ commutes with the vectors $p_1,q_1,a$. While we do not have enough basis vectors we can use the previous algorithm to construct more.  Now that we have $\{v_1,\ldots,v_{n-3}\}$ such that these all commute with $\{a,p_1,q_1\}$.  Let $H = \{p_1,q_1\}$.  We can put the basis into an appropriate form as follows:
+
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\begin{enumerate}
+\item Consider the complement subspace $H^c$ to $H$. Since $a$ is in this subspace, the subspace is a Lie algebra.
+\item If $[H^c,H^c] = 0$, all the vectors in $H^c$ commute and we are done.
+\item If $[H^c,H^c] \ne 0, \exists p,q \in H^c | [p,q] = \lambda a \ne 0$, sending $p \rightarrow \frac{1}{\lambda}p$ will make $[p,q] = a$. We can also make $p,q$ commute with all the vectors in $H$ by taking the vectors in $H$ pairwise and performing the same process as before.  Move the new vectors we have created from $H^c$ to $H$ and go to the first step (recalculate $H^c$).
+\end{enumerate}
+\renewcommand{\labelenumi}{\alph{enumi})}
+
+Since the last step decreases the dimension of $H^c$ and $\dim(H^c)$ begins at a finite number, the algorithm must terminate, and then $H \cup \{a\}$ forms the Heisenberg algebra $H_{\dim(H)/2}$ since $H$ contains pairs of vectors $\{p,q\}$ such that $[p,q] = a, [p,t] = 0$ for $t$ not proportional to $q$ and $[q,t] = 0$ for $t$ not proportional to $p$.  The vectors still in $H^c$ will all commute with each other and form an abelian subalgebra of dimension $n-dim(H)-1$. So $\g = H_{\dim(H)/2} \+ ab_{n-\dim(H)-1}$. 
+\end{proof}
+\end{description}
+A digression on Lie algebras formed from algebraic groups: 
+
+An {\slshape algebraic group} over a field {\f} is a collection of polynomials $\{p_\alpha | \alpha \in J\}$ for some indexing set $J$ on the space of n by n matrices $Mat_n(F)$ such that for any commutative associative unital algebra A over F, the set $G(A) \equiv \{ g \in Mat_n(A) | g$ invertible and $p_\alpha(g) = 0$ for all $\alpha \in I \}$ is a group with respect to matrix multiplication. 
+
+\begin{description}
+\item[Examples:]\ 
+
+\begin{enumerate}
+\item If we set $\{p_\alpha\} = \phi$ then the corresponding algebraic group is called the general linear algebraic group and is denoted $GL_n$. $GL_n(A) = \{$ invertible matrices $a \in Mat_n(A) \}$.
+\item Since the determinant of a matrix is a polynomial in the entries of the matrix, we can set $\{p_\alpha\} = \{det - 1\}$. The corresponding algebraic group is known as the special algebraic group, denoted $SL_n$. $SL_n(A) = \{ a \in Mat_n(A) | det$ $a = 1\}$.
+\item Let $B \in Mat_n(\f)$. Define $O_{n,B}(A) \equiv \{ a \in GL_n(A) | a^T B a = B\}$. 
+\end{enumerate}
+
+\item[Exercise 2.4:] Prove that $O_{n,B}(A)$ is a subgroup of $GL_n(A)$. 
+\end{description}
+\begin{proof}
+$O_{n,B} = \{a \in GL_n(A) | a^T B a = B\}$.
+
+Let $a,b \in O_{n,B}$.  $a^T B a = B, b^T B b = B \rightarrow (a b)^T B (a b) = b^T a^T B a b = b^T B b = B \rightarrow a b \in O_{n,B}$.  $a^T B a = B \rightarrow (a^{-1})^T B a^{-1} = B \rightarrow a^{-1} \in O_{n,B}$. 
+\end{proof}
+
+If $B$ is non-degenerate and symmetric (respectively, skew-symmetric) then $O_{n,B}(A)$ is called the orthogonal (respectively, symplectic) algebraic group. 
+
+Let $D$ = $\f[\epsilon]/(\epsilon^2) = \{a + b\epsilon | a,b \in \f, \epsilon^2 = 0\}$. $D$ is called the algebra of dual numbers.  Multiplication in $D$ is carried out as follows:
+\begin{align*}
+(a + b\epsilon)(c + d\epsilon) = ac + (bc + ad)\epsilon
+\end{align*}
+The {\slshape Lie algebra of an algebraic group} $G$, denoted $\Lie G$, is a subalgebra $\{X \in \mathfrak{gl}_n(\f) | I + \epsilon X \in G(D)\}$.
+\begin{description}
+\item[Theorem 2.5:] $\Lie G$ is a subalgebra of the Lie algebra $\mathfrak{gl}_n(\f)$. 
+\begin{proof}
+$X \in \Lie G \iff p_\alpha(I + \epsilon X) = 0$ for all $\alpha$ and $I + \epsilon X$ is invertible in $Mat_n(D)$.
+
+$(I + \epsilon X)^{-1} = I - \epsilon X$ since $\epsilon^2 = 0 \rightarrow I + \epsilon X$ invertible.  Also, $p_\alpha(I) = 0$ since $G(D)$ is a group. We can Taylor expand the constraints for elements of the algebraic group as follows:
+\begin{align*}
+0 = p_\alpha(I + \epsilon X) = p_\alpha(I) + \sum_{i,j} \frac{\partial p_\alpha}{\partial X_{ij}}(I) \epsilon X_{ij} (\epsilon^2 = 0)
+\end{align*}
+Hence $X \in \Lie G$ if and only if
+ \begin{align*}
+ \sum_{i,j} \frac{\partial p_\alpha}{\partial X_{ij}}(I) X_{ij} = 0, \alpha \in J.
+ \end{align*}
+Thus $\Lie G$ is a subspace of $Mat_n(\f)$.  If $X, Y \in \Lie G$, consider two elements in $G(D)$:  $1 + \epsilon X \in G(\f[\epsilon]/(\epsilon^2))$ and $1 + \epsilon' Y \in G(\f[\epsilon']/(\epsilon'^2))$.  Both of these are in $G(\f[\epsilon,\epsilon']/(\epsilon^2,\epsilon'^2))$ and we can consider an equation in this group:
+ \begin{align*}
+ (1 + \epsilon X)(1 + \epsilon' Y)(1 + \epsilon X)^{-1}(1 + \epsilon' Y)^{-1} & = & (1 + \epsilon X)(1 + \epsilon' Y)(1 - \epsilon X)(1 - \epsilon Y) \\
+ & = & 1 + \epsilon \epsilon' (X Y - Y X) \in G(\f[\epsilon\epsilon']/(\epsilon\epsilon')^2)
+ \end{align*}
+which is isomorphic again to the algebra of dual numbers. So $\Lie G$ is a subalgebra and we are finished.
+\end{proof}
+\item[Examples:]\ 
+
+\begin{enumerate}
+\item If $G = GL_n(\f)$, then Lie G $= \mathfrak{gl}_n(\f)$.
+\item If $G = SL_n(\f)$, then Lie G $= \{ X | det(I + \epsilon X) = 1\}$.  By writing out the determinant we can see that:
+
+\[ \left| \begin{array}{cccc}
+1 + \epsilon x_{11} & \epsilon x_{12} & \cdots & \epsilon x_{1n} \\
+\epsilon x_{21} & 1 + \epsilon x_{12} & \cdots & \epsilon x_{2n} \\
+\vdots & & \ddots & \\
+\epsilon x_{n1} & \epsilon x_{n2} & \cdots & 1 + \epsilon x_{nn} \end{array} \right| = 0 \] 
+
+$ = 1 + \epsilon (x_{11} + x_{22} + \cdots + x_{nn}) + O(\epsilon^2)
+= 1 + \epsilon tr X \rightarrow tr X = 0$. 
+
+So, Lie $SL_n(\f) = \mathfrak{sl}_n(\f)$. 
+\end{enumerate}
+\item[Exercise 2.6:] Lie $O_{n,B} = \mathfrak{o}_{n,B}(\f)$. 
+\begin{proof}
+Let $G = O_{n,B}$.  $X \in \Lie G \rightarrow (1+\epsilon X)^T B (1+\epsilon X) = B \rightarrow B + \epsilon(X^T B + B X) = B \rightarrow X^T B + B X = 0$.
+\end{proof}
+\end{description}
+Next we prepare to prove Engel's theorem by establishing the following definition and lemma: 
+\begin{description}
+\item[Definition:] An operator $A \in End\text{ }V$ is {\slshape nilpotent} if $A^N = 0$ for some positive integer N. 
+\item[Lemma:] If A is nilpotent (on V), then ad A is nilpotent on $gl_V$. 
+\end{description}
+\begin{proof}
+Note $\ad A = L_A - R_A,$ where $L_A$ and $R_A$ are the operations of left and right multiplication by $A$ (in the space of endomorphisms of V) respectively. Since A is nilpotent, $L_A$ and $R_A$ raised to some power $N$ are each zero for large enough $N$.  Moreover, $L_A$ and $R_B$ commute since matrix composition in the space of endomorphisms of V is associative. $ (\ad A)^{2N} = \sum_{i=0}^{2N} {2N \choose i} L_A^{2N-i} R_A^i$, and for all $i$, $2N-i \ge N$ or $i \ge N \rightarrow L_A^{2N-i} = 0$ or $R_A^i = 0 \rightarrow (\ad A)^{2N} = 0$. 
+\end{proof}
+\end{document}

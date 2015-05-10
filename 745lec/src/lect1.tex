@@ -1,0 +1,439 @@
+\documentclass[11pt]{article}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{pstricks}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf 18.745 Introduction to Lie Algebras } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Scribe: #4}{Lecture #1}}
+
+
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\N}{\mathbin}{AMSb}{"4E}
+\DeclareMathSymbol{\Z}{\mathbin}{AMSb}{"5A}
+\DeclareMathSymbol{\R}{\mathbin}{AMSb}{"52}
+\DeclareMathSymbol{\Q}{\mathbin}{AMSb}{"51}
+\DeclareMathSymbol{\I}{\mathbin}{AMSb}{"49}
+\DeclareMathSymbol{\C}{\mathbin}{AMSb}{"43}
+\DeclareMathSymbol{\F}{\mathbin}{AMSb}{"46}
+
+\newcommand{\sll}{\mbox{sl}}
+\newcommand{\gl}{\mbox{gl}}
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\tr}{\mbox{tr\ }}
+\newcommand{\Mat}{\mbox{Mat}}
+\newcommand{\Lie}{\mbox{Lie}}
+\newcommand{\Der}{\mbox{Der\ }}
+\newcommand{\End}{\mbox{End\ }}
+\newcommand{\ad}{\mbox{ad\ }}
+\newcommand{\im}{\mbox{im\ }}
+\newcommand{\Ker}{\mbox{ker\ }}
+
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\He}{\mathfrak{H}}
+
+\newcommand{\sk}{\vspace*{1em}}
+
+\newtheorem{defn}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{proof}{Proof}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{1 --- September 7, 2004}{Fall 2004}{Prof.\ Victor Ka\v{c}}{Patrick Lam}
+
+\begin{defn}
+(a) An \emph{algebra} is a vector space over a field $\F$, endowed
+with a multiplication $ab$, which is bilinear:
+
+\begin{eqnarray*}
+a(\lambda b+\mu c) &=& \lambda ab + \mu ac \\
+(\lambda b + \mu c) a &=& \lambda ba + \mu ca
+\end{eqnarray*}
+An altebra is associative if $(ab)c = a(bc)$.
+
+(b) A \emph{Lie algebra} is an algebra $\g$ with product $[a, b]$, called
+the \emph{bracket} of $a$ and $b$, subject to two axioms:
+\begin{itemize}
+\item skew commutativity: $[a,a] = 0$
+\item Jacobi identity: $[a, [b, c]] + [b, [c, a]] + [c, [a,b]] = 0$.
+\end{itemize}
+
+\begin{center}
+% PSTricks TeX macro
+% Title: l1-diag.dia
+% Creator: Dia v0.94
+% CreationDate: Mon Sep 20 13:20:15 2004
+% For: plam
+% \usepackage{pstricks}
+% The following commands are not supported in PSTricks at present
+% We define them conditionally, so when they are implemented,
+% this pstricks file will use them.
+\ifx\setlinejoinmode\undefined
+  \newcommand{\setlinejoinmode}[1]{}
+\fi
+\ifx\setlinecaps\undefined
+  \newcommand{\setlinecaps}[1]{}
+\fi
+% This way define your own fonts mapping (for example with ifthen)
+\ifx\setfont\undefined
+  \newcommand{\setfont}[2]{}
+\fi
+\pspicture(5.550000,-7.350000)(9.088962,-3.350000)
+\scalebox{1.000000 -1.000000}{
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\newrgbcolor{diafillcolor}{1.000000 1.000000 1.000000}
+\psset{fillcolor=diafillcolor}
+\newrgbcolor{dialinecolor}{1.000000 1.000000 1.000000}
+\psset{linecolor=dialinecolor}
+\psellipse*(7.000000,5.450000)(1.000000,1.000000)
+\psset{linewidth=0.050000}
+\psset{linestyle=solid}
+\psset{linestyle=solid}
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\psellipse(7.000000,5.450000)(1.000000,1.000000)
+\setfont{Helvetica}{0.800000}
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\rput[l](6.750000,4.000000){\scalebox{1 -1}{a}}
+\setfont{Helvetica}{0.800000}
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\rput[l](8.175000,6.975000){\scalebox{1 -1}{b}}
+\setfont{Helvetica}{0.800000}
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\rput[l](5.550000,7.000000){\scalebox{1 -1}{c}}
+\psset{linewidth=0.050000}
+\psset{linestyle=solid}
+\psset{linestyle=solid}
+\setlinecaps{0}
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\psline(6.950000,4.253750)(6.950000,4.778750)
+\psset{linewidth=0.050000}
+\psset{linestyle=solid}
+\psset{linestyle=solid}
+\setlinecaps{0}
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\psline(7.600000,5.903750)(8.000000,6.303750)
+\psset{linewidth=0.050000}
+\psset{linestyle=solid}
+\psset{linestyle=solid}
+\setlinecaps{0}
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\psline(6.400000,6.003750)(6.050000,6.353750)
+\psset{linewidth=0.060000}
+\psset{linestyle=solid}
+\psset{linestyle=solid}
+\setlinecaps{0}
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\psclip{\pswedge[linestyle=none,fillstyle=none](5.429375,6.587915){4.884727}{316.263492}{336.748666}}
+\psellipse(5.429375,6.587915)(3.454024,3.454024)
+\endpsclip
+\psset{linewidth=0.060000}
+\psset{linestyle=solid}
+\setlinejoinmode{0}
+\setlinecaps{0}
+\newrgbcolor{dialinecolor}{0.000000 0.000000 0.000000}
+\psset{linecolor=dialinecolor}
+\psline(8.216726,4.906880)(8.626435,5.287193)(8.684860,4.731238)
+}\endpspicture\end{center}
+\end{defn}
+
+\paragraph{Remark.} In a Lie algebra, one has $[b, a] = -[a,b]$.
+
+\paragraph{Proof.} $0 = [a+b, a+b] = [a, b] + [b, a] + \cancel{[a, a]} + \cancel{[b, b]}$ \hfill $\Box$  
+
+\paragraph{Examples.}
+\begin{enumerate}
+\item $\g$ a vector space with bracket $[a,b] = 0$.  This is called an 
+\emph{abelian Lie algebra}.
+\item $\R^3$ with vector multiplication $\times$ (cross product).
+\item If $A$ is an associative algebra, then $[a,b] = ab - ba$ satisfies the
+two identities.  This Lie algebra is denoted by $A_-$.
+
+\sk\noindent
+{\bf Exercise 1.1}.  Check the Jacobi identity on $[a, b] = ab-ba$.  Moreover, this is
+true if $A$ is only quasi-associative, \emph{i.e.} $(ab)c-a(bc)$ is symmetric in $a, b$ $(= (ba)c-b(ac))$.
+
+\paragraph{Solution.} First, we show that associativity implies quasi-associativity.
+Let $(ab)c = a(bc)$.  Then $(ab)c - a(bc) = 0 = (ba)c - b(ac)$.
+Hence we only need to show that $[a,b]$ satisfies the Jacobi
+identity if $A$ is quasi-associative.
+
+Here are some consequences of quasi-associativity.
+\begin{eqnarray*}
+(ab)c-a(bc)-(ba)c+b(ac) &=& 0 \\
+(cb)a-c(ba)-(bc)a+b(ca) &=& 0 \\
+(ac)b-a(cb)-(ca)b+c(ab) &=& 0 \\
+(ba)c-b(ac)-(ab)c+a(bc) &=& 0 \\
+\end{eqnarray*}
+
+We expand the Jacobi identity, group terms, and apply
+quasi-associativity:
+\begin{eqnarray*}
+&& [a, [b, c]] + [b, [c, a]] + [c, [a, b]] \\
+&=& a(bc-cb) - (bc-cb)a + b(ca-ac) - (ca-ac)b + c(ab-ba) - (ab-ba)c\\
+&=& \quad [(cb)a-c(ba)-(bc)a+b(ca)] \\
+&& +\; [(ac)b-a(cb)-(ca)b+c(ab)] \\
+&& +\; [(ba)c-b(ac)-(ab)c+a(bc)]\\
+&=& 0 \mbox{ (since all these terms $= 0$ by quasi-associativity)}
+\end{eqnarray*}
+$\Box$
+
+A special case is $A = \End V$, then $A_- = \gl_V$ is called the 
+\emph{general linear Lie algebra}.  In particular, $A = \Mat_n \F$, then
+$A_- = \gl_n(\F)$.
+
+\item Any subalgebra of a Lie algebra is a Lie algebra.
+
+Notation: for subsets $M, N$ of $\g$ we denote $[M,N]$ the span of all
+commutators $[m, n]$, where $m \in M$ and $n \in N$.  For example,
+subspace $\h$ is a subalgebra of $\g$ if $[\h, \h'] \in \h$.
+
+\paragraph{Example.} $\sll_n(\F) = \{ a \in \gl_n(\F) \mid \tr a = 0 \}$
+
+\sk\noindent
+{\bf Exercise 1.2}. Show that $\mbox{tr} [a,b] = 0$ when $a, b \in
+\gl_n(\F)$.  Also show that if $f:\gl_n(\F) \rightarrow \F$ is a
+linear function such that $f([a, b]) = 0, a, b \in \gl_n(\F)$, then
+$f(k) = c \cdot \tr k$.
+
+\paragraph{Solution.} We have
+\[ \tr [a, b] = \tr ab - \tr ba = \sum_i \sum_j a_{ji} b_{ij} - \sum_i \sum_j b_{ji} a_{ij} = 0 \]
+
+Now, any matrix $e_{ij}, i \neq j$ can be expressed as
+a commutator $[a,b]$ where $a, b \in \gl_n(\F)$, because $e_{ij}e_{jj} - e_{jj}e_{ij}
+= e_{ij}$.  Hence $f(e_{ij}) = 0$ for all such matrices.  
+
+But $f(e_{ii}) = f(e_{jj}) = c$ for all $i, j$ because
+$f(e_{ii})-f(e_{jj}) = f(e_{ii}) - f(e_{jj}) = 
+f(e_{ij}e_{ji} - e_{ji}e_{ij}) = 0$.
+
+Any $x \in \gl_n(\F)$ can be split into $x' + x''$ where
+$x'$ is the sum of $e_{ij}, i \neq j$, 
+and $x''$ is of the form $\sum_i \lambda_i e_{ii}$.  By linearity,
+\[f(x) = 0 + f(x'') = c \sum_i \lambda_i = c \cdot \mbox{tr}.\]
+$\Box$
+
+\begin{defn}
+An \emph{ideal} $\m \subset \g$ is a subspace such that $[\m, \g] \subset \m$.
+\end{defn}
+
+\paragraph{Example.} $\sll_n(\F)$ is an ideal of $\gl_n(\F)$ by Exercise 1.2.
+
+\item Factor algebras: If $\g$ is a Lie algebra and $\m$ is an ideal,
+then $\g / \m$ is a Lie algebra with bracket $[a+\m, b+\m] = [a, b]+\m$.
+
+\item Direct sum of two (Lie) algebras $\g_1 \oplus \g_2$: $[(a, b), (a_1, b_1)] = ([a, a_1], [b, b_1])$ where $a, a_1 \in \g_1, b, b_1 \in \g_2$.
+\end{enumerate}
+
+
+More examples of subalgebras of $\gl_V$: Let $B$ be a bilinear ($\F$-valued)
+form on a vector space $V$ over $\F$, define $o_{V,B} = \{ a \in \gl_V \mid
+B(a(u), v) + B(u, a(v)) = 0 \}$.
+
+\sk\noindent
+{\bf Exercise 1.3}. Let $B$ be a bilinear $\F$-valued form on a vector space
+$V$ over $\F$.  Define
+\[ o_{V,B} = \{a \in \gl_V \ \mid \ B(a(u), v) + B(u, a(v)) = 0 \]
+Check that this is a subalgebra of the Lie algebra $\gl_V$.
+
+\paragraph{Solution.} To show that $o_{V,B}$ is a subalgebra (it is clearly a subspace), 
+we need only show that
+$o_{V,B}$ is closed under the bracket.  Let $x, y \in o_{V,B}$.
+
+Consider
+\[ B(x(y(u)), v) = -B(y(u), x(v)) = B(u, y(x(v))) \]
+
+But since $B$ is bilinear and $yx = [y,x]-xy$, $B(u, y(x(v))) = B(u,
+[x, y] - xy) = -B(u, x(y(v))) + B(u, [x, y])$ where $B(u, [x, y])$ is
+0 from above, implying that $B(x(y(u)), v) = -B(u, x(y(v)))$, giving
+closure:
+\[ B(x(y(u)), v) + B(u, x(y(v))) = 0 \]
+$\Box$
+
+Important special cases: $\dim V < \infty$, $B$ is non-degenerate
+(\emph{i.e.} det of the matrix of $B$ in some basis is non-zero).
+\begin{itemize}
+\item case 1: $B$ is symmetric.  $B(a,b) = B(b,a)$, then $o_{V,B}$ 
+is called the orthogonal Lie algebra, notation $so_{V,B}$.
+\item case 2: $B$ is skew-symmetric.  $B(a,b) = -B(b,a)$, then $o_{V,B}$ 
+is called the symplectic Lie algebra, notation $sp_{V,B}$.
+\end{itemize}
+
+\sk\noindent
+{\bf Exercise 1.4}. Suppose $\dim V = n$, choose a basis of $V$, let
+$so_{V, B}$ and $sp_{V, B} \subset \gl_n$.  Let $B$
+be the matrix of the bilinear form.  Show
+\begin{eqnarray*}
+so_{V,B} &=& \{ a \in \gl_n(\F) \ \mid \ a^T B + Ba = 0 \}\\
+sp_{V,B} &=& \{ a \in \gl_n(\F) \ \mid \ a^T B + Ba = 0 \}
+\end{eqnarray*}
+
+\paragraph{Solution.} 
+Recall that $\gl_n$ is associative, and that $so_{V,B}$ is the
+set of $a \in A$ such that $B(u, a(v)) + B(a(u), v) = 0$ and $B$ symmetric;
+similarly, $sp_{V,B}$ is the corresponding set when $B$ is skew-symmetric.
+For $so_{V,B}$, we expand the definition of the bilinear form to get
+\[ u^T B a(v) + (a(u))^T B v = 0 \] 
+and expressing $a$ as matrix multiplication,
+\[ u^T (Ba) v + (au)^T Bv = 
+u^T (Ba) v + u^T a^TB v =
+0 \] 
+which is equivalent to the matrix condition
+\[ a^T B + Ba = 0 \]
+when $B$ is a symmetric matrix; similarly, for a skew-symmetric $B$,
+we expand to get
+\[ u^T B a(v) + (a(u))^T B v = 0 \] 
+and expressing $a$ as matrix multiplication,
+\[ u^T (Ba) v + (au)^T Bv = 
+u^T (Ba) v + u^T a^TB v =
+0 \] 
+which is equivalent to the matrix condition
+\[ a^T B + Ba = 0. \]
+$\Box$
+
+\begin{defn}
+The \emph{derived algebra} of $\g$ is $[\g, \g]$.  Obviously, this
+is an ideal, and hence a subalgebra.
+\end{defn}
+
+We now classify Lie algebras in dimensions 1 and 2.
+
+\paragraph{dim 1.} $\g = \F a, [a, a] = 0$.  Only the abelian one.
+
+\paragraph{dim 2.} $\g = \F a + \F b, [\g, \g] = \F[a,b]$.  
+case 1.  $[a,b] = 0$.  Then $\g$ abelian.  case 2. $[a,b] = c \neq 0$.
+So $\g' = \F c$.  Take $d \not\in \g'$ such that $d \neq 0$.  Then 
+$[d, c] = 
+\alpha c$, since $\F c$ is an ideal, and $\alpha \neq 0$, since $\g$ nonabelian.
+Replacing $d$ by $\frac{1}{\alpha}d$, we get $[d, c] = c$.  Thus we have
+a unique non-abelian Lie algebra, $[a, b] = b$.
+
+\sk\noindent
+The two most important ways to construct Lie algebras:
+\begin{enumerate}
+\item as a subalgebra (of $\gl_n$);
+\item by structure constants: choose a basis $e_1, \ldots, e_n$ of $\g$;
+then $[e_i, e_j] = \sum_{k=1}^n c_{ij}^k e_k$.  The scalars $c_{ij}^k$
+are called \emph{structure constants}.  Of course, $c_{ii}^k = 0$ and
+$c_{ij}^k = -c_{ij}^k$ by skew-commutativity and a quadratic equation 
+which is the Jacobi identity.
+\end{enumerate}
+
+\begin{remark}
+The non-abelian 2-dimensional Lie algebra is 
+\[ \left\{ \left( \begin{array}{cc} \alpha & \beta \\ 0 & 0 \end{array} \right) \right\} \subset \gl_2(\F) \]
+If $a = \left( \begin{array}{cc} 1 & 0 \\ 0 & 0 \end{array} \right)$ and
+$b = \left( \begin{array}{cc} 0 & 1 \\ 0 & 0 \end{array} \right)$, then
+$[a,b] = b$.
+\end{remark}
+
+\begin{example}
+The Heisenberg Lie algebra $\He_n$ has basis $p_i, q_i (i = 1, \ldots, n), c$.
+($\dim \He_n = 2n+1$) where $[p_i, q_j] = \delta_{ij} c, [c, p_i] = 0, 
+[c, q_i] = 0, [p_i, p_j] = 0, [q_i, q_j] = 0$.  Jacobi trivially holds.
+Realization by operators: $p_i = \frac{\partial}{\partial x},
+q_i = x_i, c = 1$ on $\C[x_1, \ldots, x_n]$.
+\end{example}
+
+The first important meaning of the Jacobi identity: Rewrite it as follows:
+\begin{equation}
+\label{jac1}
+[a, [b, c]] = [[a, b], c] + [b, [a, c]]. 
+\end{equation}
+
+\begin{defn}
+For any algebra $A$, an endomorphism $D$ is called a \emph{derivation}
+if the Leibniz rule holds, \emph{i.e.} 
+\[D(ab) = (Da)b + a(Db).\]
+\end{defn}
+
+\begin{defn}
+Given an element $a \in \g$, define the operator $\ad a$ (adjoint) on $\g$
+by: 
+\[ (\ad a) b = [a, b]. \]
+\end{defn}
+Equation \ref{jac1} means that $\ad a$ is a derivation of the Lie algebra $\g$.
+It is called an \emph{inner derivation}.
+
+Notation: Given an algebra $A$, denote by $\Der A (\subset \End A)$
+the space of derivations of $A$.
+
+\sk\noindent
+{\bf Exercise 1.5}. a) $\Der A$ is closed under the bracket in $\End A$ i.e.
+bracket of two derivations is a derivation, or $\Der A$ is a
+subalgebra of $\gl_A$. (b) If $A = \g$ is a Lie
+algebra, then $[D, \ad a] = \ad(D(a))$ for any derivation
+$F \in \Der \g$ and $a \in \g$.  Hence
+inner derivations form an ideal of the Lie algebra $\Der \g$.
+
+\paragraph{Solution.} 
+a) Let $D_1, D_2$ be derivations.  Consider (by parts) $[D_1, D_2]$:
+\begin{eqnarray*}
+D_1D_2(ab) &=& D_1((D_2a)b + a(D_2b)) \\
+       &=& D_1((D_2a)b) + D_1(a(D_2b)) \\
+       &=& (D_1(D_2a))b+(D_2a)(D_1b)+(D_1a)(D_2b) + a(D_1D_2b) \\
+D_2D_1(ab) &=& (D_2(D_1a))b+(D_1a)(D_2b)+(D_2a)(D_1b) + a(D_2D_1b) \\
+D_1D_2(ab) - D_2D_1(ab) &=& (D_1D_2a-D_2D_1a)b + a(D_1D_2b-D_2D_1b) \\
+        &=& ((D_1D_2-D_2D_1)a)b + a((D_1D_2-D_2D_1)b) 
+\end{eqnarray*}
+showing that the bracket is a derivation.
+
+\sk\noindent
+b) Consider 
+\begin{eqnarray*}
+[D, \ad a] &=& (D(\ad a))b - ((\ad a)D)b \\
+ &=& D[a,b] - [a, D(b)]\\
+ &=& D(ab) - D(ba) - aD(b) + D(b)a\\
+ &=& D(a)b + \cancel{aD(b)} - \cancel{D(b)a} - bD(a) - \cancel{aD(b)} + \cancel{D(b)a} \\
+ &=& [D(a), b]\\
+ &=& \ad D(a)
+\end{eqnarray*}
+which shows that inner derivations form an ideal of the Lie algebra
+$\Der \g$. $\Box$
+
+\end{document}
+
+
+

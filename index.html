@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Alexey Spiridonov: Links to elsewhere</title>
+  <style type="text/css">
+    /* XXX need a print stylesheet */
+    @import url(adapted-jello.css);
+
+    em { font-weight: bold; font-style: normal; }  
+  
+    /* Links */
+    a { text-decoration: none; 
+        font-weight: bold; 
+        color: blue; }
+    a:hover { color: #e9bb00; 
+              text-decoration: underline; }
+    a:active { color: red; 
+               text-decoration: underline; }
+    a:visited { color: #551a8b; }
+    
+
+    /* all dividers have the same color*/
+    .divider { background-color: #ddf; }
+    /* horizontal dividers */
+    hr.divider { height: 2px;
+                 color: #ddf; /* for iewin */
+                 border: none; }
+    /* for header and footer */
+    hr.hfdiv { width: 100%; clear: both; }
+    /* for sections */
+    hr.secdiv { margin-left: -1.5%;
+                width: 103%; }
+
+    /* Header stuff */
+    /* for the little graphic and vertical divider */
+    #header pre { font-size: 0.5em; 
+                  margin-top: 0.2em; margin-bottom: 0; }
+    /* table elements used in the header*/      
+    #header td { padding-top: 0;
+                 padding-bottom: 0; }
+    /* main title of the page */
+    #header p { font-weight: bold; font-size: 1.35em;
+                margin: 0 0 0 1em; } 
+
+    /* Tiny elements forming the wavy borders on the sides of the page */
+    div.border { line-height: 0;
+                 width: 0;
+                 height: 0;
+                 border-style: solid; }
+    div.lborder { clear: left; float: left;
+                  border-color: #ccf white #ccf #ccf; }
+    div.rborder { clear: right; float: right;
+                  border-color: #ccf #ccf #ccf white; }
+    
+    div.section p { clear: left; }
+
+    /* Section title */
+    div.sectitle { float: left;
+                   font-weight: bold;
+                   padding-left: 0.5em; 
+                   padding-right: 0.5em;
+                   margin-top: 0.3em;
+                   font-size: 1.25em; }
+    /* Triangle delimiters */
+    div.triangle { float: left; margin-top: 0.4em;
+                   border-style: solid; 
+                   border-color: white #ccf white #ccf;
+                   height: 0; width: 0; line-height: 0; 
+                   margin-bottom: 1.25em; }
+    div.trileft { border-width: 0.75em 1em 0.75em 0em; }
+    div.triright { border-width: 0.75em 0 0.75em 1em; }
+                             
+    /* Sub-section titles */
+    div.subsectitle { margin-bottom: 0.5em;
+                      border-top: 1px solid #ccf; 
+                      border-bottom: 1px solid #ccf;
+                      font-weight: bold;
+                      float: left; }
+    div.subsectitle a { padding: 0 0.1em 0 0.1em; 
+                        line-height: 1.4em;
+                        color: blue; }
+    div.subsectitle a:hover { text-decoration: none;
+                              color: blue; /* for iewin */ 
+                              background-color: #fd5; }
+    div.subsectitle a:visited { color: #551a8b; }
+/*
+    div.subsectitle a:visited { border-right: 1px solid #551a8b;
+                                border-left: 1px solid #551a8b; }
+*/                                
+    div.subsectitle a.self-link { border-left: 1px solid #ccf; 
+                                  border-right: 1px solid #ccf; }
+/* not needed given above 
+    *for iewin*
+    div.subsectitle a.self-link:visited { border-left: 1px solid #ccf; 
+                                          border-right: 1px solid #ccf; }
+*/                      
+    /* Navigation bar */
+    #navbar ul { text-align: center;
+                 list-style-type: none;
+                 padding: 0 0 0 0;
+                 margin: 0 0 0 0; }
+    #navbar ul li { border-left: 2px solid #ccf;
+                    border-right: 2px solid #ccf;
+                    padding: 0 0.2em 0 0.2em;
+                    margin: 0 0.5em 0 0.5em;
+                    line-height: 2em;
+                    display: inline; }
+    #navbar a { color: blue; }                    
+    #navbar a:hover { text-decoration: none;
+                      background-color: #fd5; }
+    #navbar a:visited { color: #551a8b; }
+
+/*
+    #navbar a:visited { border-bottom: 2px solid #551a8b;
+                        border-top: 2px solid #551a8b; }
+*/
+                    
+    #intro { padding-top: 0.25em; padding-bottom: 0.25em; }
+    
+    p.sidenote { font-style: italic; }
+    
+    p.date { font-style: italic; font-size: small; 
+             border-right: 1px solid #ccf;
+             border-left: 1px solid #ccf; 
+             float: left; 
+             padding: 0 4px 0 3px;
+             margin: 0 0 0.5em 0; }
+    
+    #license { color: #55f; font-size: small; }
+    #license a { color: #55a; 
+                 border-bottom: 1px dotted; 
+                 text-decoration: none; }
+    #license a:hover { color: #e9bb00; }
+    
+    #validated { color: #77f; text-align: center; }
+    #validated a { color: #77f;
+                   border-bottom: 1px dotted; 
+                   text-decoration: none; }
+    #validated a:hover { color: #e9bb00; 
+                         border-bottom: 1px dotted; }
+
+    /* built-in class of show-hide.js */
+    .hide-by-default { /* for semantics only */ }
+    /* these are passed into initShowHide */ 
+    .add-hiding-link { /* for semantics only */ }
+    a.hiding-link { font-size: 80%; cursor: pointer; }
+    /*a.self-link is defined above, with subsectitle */
+    a.self-link { color: red; font-size: small; }
+</style>
+</head>
+<body onclick="initWave();" onload="initPage();">
+<!-- XXX: animate letters of headings! position: relative; top: -0.1em; -->
+<!-- XXX: measure performance of show-hide? and pageload performance in
+          general -->
+<!-- XXX: judicious use of colors for section headings? --> 
+<!-- XXX: deprecate 'a name' for subsections if there are no old-browser
+          visitors -->
+<!-- list of browser bugs i don't get:
+
+  - ems & pts in ff are not consistently sized. 2pt in this element is more
+    pixels than 2pt in that element.
+  
+  - iewin fade doesn't work if the 'a name' is above the 'div id'
+  
+  - why do i need the iewin hacks for the various 'a' tags above? 
+  
+  - the stuff with the date floats wrapping (see iewin near date p) is
+    just weird
+  
+  - ems in iewin don't scale at all.
+-->
+<script src="common.js" type="text/javascript"></script>
+<script src="wave-borders.js" type="text/javascript"></script>
+<script src="yellow-fade.js" type="text/javascript"></script>
+<script src="show-hide.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+function initPage() {
+  initShowHide({ link_name: '[hide]',
+                 link_class: 'hiding-link',
+                 match_classes: { 'add-hiding-link': true } },
+               { link_name: '+',
+                 link_class: 'self-link',
+                 match_classes: { 'subsectitle': true } });
+  showElts('plus_sidenote'); 
+  // Should be called after initShowHide so that + links get fades too.
+  initFade();
+  // Hack to deal with Firefox failing to scroll because the page 
+  // is being reshuffled.
+  var cur_url_anchor = getCurUrlAnchor();
+  if (cur_url_anchor) {
+    document.getElementById(cur_url_anchor).scrollIntoView(true);
+  }
+}
+-->
+</script>
+<!-- Jello divs -->
+<div id="sizer"><div id="expander"><div id="wrapper" class="clearfix">
+
+<!-- Sidebars (wavy-animation happens here). Set the height explicitly
+     because the JS code expects it --> 
+<div id="lsidebar" style="height: 70em;"></div>
+<div id="rsidebar" style="height: 70em;"></div>
+
+<div id="content">
+
+
+  <div id="header">
+    <hr class="hfdiv divider" style="margin-bottom: 0; margin-top: 1em;"/>
+        <!-- smiling bat by yours truly -->
+    <table><tr>
+      <td>
+<pre title="A smiling, text-only bat welcomes you!">
+     )\./(
+_V  ( o o )  V_
+ )`-,)`-'(,-'( 
+ ),'; /^\ :`.(
+  )/ | . | \( 
+   `).\_/.('
+   '  m m  `
+</pre>
+      </td>
+      <td>
+        <!-- this pre is a vertical bar of the same height as the drawing, 
+             so it should have the same number of lines. -->
+<pre class="divider" style="width: 2px;">
+
+
+
+
+
+
+
+</pre>
+      </td>
+      <td>
+        <!-- the fade is easy to do dynamically, but i'm going for 
+             compatibility, so I use a local script instead -->
+        <!-- this is a lightness-based fade, as opposed to a 
+             componentwise rgb fade -->
+        <p>
+          <span style="color: #000000;">A</span><span
+                style="color: #00000d;">l</span><span
+                style="color: #00001a;">e</span><span
+                style="color: #000026;">x</span><span
+                style="color: #000033;">e</span><span
+                style="color: #000040;">y</span><span
+                style="color: #00004d;"> </span><span
+                style="color: #000059;">S</span><span
+                style="color: #000066;">p</span><span
+                style="color: #000073;">i</span><span
+                style="color: #000080;">r</span><span
+                style="color: #00008c;">i</span><span
+                style="color: #000099;">d</span><span
+                style="color: #0000a6;">o</span><span
+                style="color: #0000b3;">n</span><span
+                style="color: #0000bf;">o</span><span
+                style="color: #0000cc;">v</span><span
+                style="color: #0000d9;">:</span><span
+                style="color: #0000e6;"> </span><a 
+                href="http://en.wikipedia.org/wiki/Transitional_fossil"><span
+                style="color: #0000f2;">L</span><span
+                style="color: #0000ff;">i</span><span
+                style="color: #0d0dff;">n</span><span
+                style="color: #1a1aff;">k</span><span
+                style="color: #2626ff;">s</span></a><span
+                style="color: #3333ff;"> </span><span
+                style="color: #4040ff;">t</span><span
+                style="color: #4d4dff;">o</span><span
+                style="color: #5959ff;"> </span><span
+                style="color: #6666ff;">e</span><span
+                style="color: #7373ff;">l</span><span
+                style="color: #8080ff;">s</span><span
+                style="color: #8c8cff;">e</span><span
+                style="color: #9999ff;">w</span><span
+                style="color: #a6a6ff;">h</span><span
+                style="color: #b3b3ff;">e</span><span
+                style="color: #bfbfff;">r</span><span
+                style="color: #ccccff;">e</span><span
+                style="color: #ddddff;">.</span><span
+                style="color: #e5e5ff;">.</span><span
+                style="color: #eeeeff;">.</span><span
+                style="color: #ffffff;"> </span><span
+                style="color: #ffffff;">=</span><span
+                style="color: #ffffff;">)</span>&nbsp;
+        </p>
+      </td>
+    </tr></table>
+    <hr class="hfdiv divider" style="margin-top: 0;"/>
+  </div> <!-- end of header -->
+  
+  <div id="navbar">
+    <ul>
+      <li><a href="#papers">Papers</a></li>
+      <li><a href="#software">Software</a></li>
+      <li><a href="#notes">Notes and Homework</a></li>
+      <li><a href="#changelog">Changelog</a></li>
+    </ul>
+  </div>
+  
+  <!-- page introduction -->
+  <div id="intro">
+    <p>
+
+      This page collects links to various things that I put on the Web at
+      various times. 
+
+    </p>
+    <p>
+    
+      I have a (rather dated) <a href="papers/cv.pdf">curriculum vitæ</a>
+      and a <a href="papers/industry-resume.pdf">résumé</a>.
+    
+    </p>
+    <p>
+    
+      Contact me on <a href="http://fb.me/lesha">Facebook</a>.
+
+    </p>  
+    <p id="plus_sidenote" class="sidenote" style="display: none;">
+    <!-- this is hidden by default so that if JS is disabled, 
+         we won't confuse the user with wrong information. 
+         XXX: this should probably be written *by* javascript -->
+
+    A plus
+ 
+    <span style="font-style: normal; font-weight: bold; color: #ccf;">
+      |<span style="color:blue; font-size: small; ">+</span>|</span>
+    
+    next to a sub-section heading is a link to that very sub-section, useful
+    for bookmarking a specific place on this page.
+    
+    </p>
+  </div>
+  
+  <hr class="secdiv divider"/>
+  
+  <div class="section">
+    <div>
+      <div class="trileft triangle"></div>
+      <div id="papers" class="sectitle">Papers</div>
+      <div class="triright triangle"></div>
+      <a name="papers"></a>
+    </div>
+    <p>
+
+      This section is an annotated list of files from <a
+      href="papers/index.html">papers/</a>. It does not cover my <a
+      href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;cmd=DetailsSearch&amp;term=spiridonov+an">
+      computational biology work</a> &mdash; 4 more submitted or in
+      preparation as of December 2008. It also omits an old <a
+      href="http://portal.acm.org/citation.cfm?id=977677">memory profiling
+      paper</a> (<a href="papers/cgo-memory-profiling.pdf">pdf</a>).
+    
+    </p>
+    <p class="sidenote"> 
+    
+    The dates in this section denote when the paper was finished; I may have
+    made minor corrections after the date.
+    
+    </p>
+    <div id="fpsac-pattern-avoidance-sec">
+      <div id="fpsac-pattern-avoidance" class="subsectitle"> 
+        <a href="papers/pattern-pair-avoidance-extended-abstract.pdf">
+          Pattern-pair avoidance in binary fillings of grid shapes (extended abstract) <tt>(pdf)</tt>
+      </a></div>
+      <a name="fpsac-pattern-avoidance"></a>
+      <p class="date">April, 2008 (to appear)</p>
+      <p>
+      
+      	This is a 14-page overview of a part of my Ph. D. thesis-to-be. I
+      	presented a <a href="papers/fpsac-2008-poster.pdf">poster</a> of
+      	this at <a href="http://inst-mat.utalca.cl/fpsac2008">FPSAC
+      	2008</a>; it will be published in the proceedings.
+
+      </p>
+      <p>
+      	
+      	My patterns are pairs of 2x2 matrices, with all entries equal to 0
+      	or 1. Grid shapes are arbitrary subsets of boxes on graph paper
+      	&mdash; Young diagrams are a very particular case. Choose a
+      	particular grid shape <i>S</i>, and some two patterns <i>a</i> and
+      	<i>b</i> (each is a pair of matrices). For <em>some</em> such choices,
+      	the number of ways of filling <i>S</i> with 0s and 1s so that it
+      	avoids <i>a</i> is equal to the number of fillings avoiding
+      	<i>b</i>. Then, we say <i>a</i> is <em>equivalent</em> to <i>b</i> in
+      	<i>S</i> &mdash; a close relative of Wilf-equivalence. This paper
+      	makes the "some" precise, systematically describing which
+      	equivalences hold in what classes of shapes.
+      	
+      </p>
+    </div>
+    <div id="graph-rigidity-paper-sec">
+      <div id="graph-rigidity-paper" class="subsectitle"> 
+        <a href="papers/graph-rigidity-preprint.pdf">
+          The Parallel Rigidity Index of a Graph <tt>(pdf)</tt>
+      </a></div>
+      <a name="graph-rigidity-paper"></a>
+      <p class="date">April, 2007 (preprint)</p>
+      <p>
+      	
+      	This is joint work with <a href="http://math.mit.edu/~apost">Alex Postnikov</a>, my Ph. D.
+      	thesis advisor.
+      	
+      </p>
+      <p>
+      
+	Imagine that you are to build a system of space stations (graph
+	vertices), which communicate via laser beams (edges). The edge
+	directions were already chosen, but you must place the stations so that
+	none of the beams miss their targets. In this paper, we let the edge
+	directions be generic and independent, a choice that constrains 
+	vertex placement the most. We then give an elegant combinatorial
+	characterization of the number of degrees of freedom in this system,
+	and prove some other related results.
+
+      </p>
+    </div>
+    <div id="srg-near-zero-sec"> 
+      <div id="srg-near-zero" class="subsectitle">
+        <a href="papers/sparse-random-graphs-near-zero-final-project-S06-18.318.pdf">
+          Sparse Random Graphs Near Zero <tt>(pdf)</tt>
+      </a></div>
+      <a name="srg-near-zero"></a>
+      <p class="date">May, 2006</p>
+      <p>
+
+        The first few pages of this paper give a quick overview of the
+        results of my <a href="#srg-thesis">senior thesis</a>. The remainder
+        has some additional results about the decay of the spectrum near
+        zero. Due to time constraints, I did not prove one key conjecture
+        -- which later turned out to be known (see below).  This was my
+        final project for 18.318 in Spring 2006.
+
+      </p>
+      <p>
+      	
+      	<em>Update:</em> In 2007, I repeated my regular search for "least
+        positive tree eigenvalue", and discovered <a
+        href="http://www.springerlink.com/content/m58168l847t23125/">this
+        paper</a>, which completes my result on near-zero asymptotics:
+        
+      </p>
+      <p>
+        
+        C. D. Godsil, "Inverses of trees", Combinatorica <b>5</b> (1985), No. 1, 33-9
+      
+      </p>
+      <p>
+      	
+      	It proves that the least positive eigenvalue on even trees occurs on
+        a path. As far as I know, the case of odd trees (conjectured to be a
+        "forked path" &mdash; a <i>2n</i>-path with an extra edge added to
+        the second vertex), is still open.
+
+      </p>
+    </div>
+    <div id="srg-thesis-sec">
+      <div id="srg-thesis" class="subsectitle"> 
+        <a href="papers/sparse-random-graphs-senior-thesis.pdf">
+          Spectra of Sparse Random Graphs and Matrices <tt>(pdf)</tt>
+      </a></div>
+      <a name="srg-thesis"></a>
+      <p class="date">May, 2004</p>
+      <p>
+
+        This was my Princeton undergraduate senior thesis, written under
+        Professor <a href="http://en.wikipedia.org/wiki/Yakov_G._Sinai">
+        Yakov G. Sinai</a>. It concerns studied the <em>adjacency</em> spectra
+        of sparse random matrices. I established that the spectra are
+        well-defined, gave some bounds on the tail asymptotics, provided a
+        numerical overview of the various regimes, and made some steps
+        towards quantifying the spectrum in the neighborhood of zero (see
+        more on this <a href="#srg-near-zero">here</a>).  Here are the
+        relevant computer programs:
+
+      </p>
+      <ul style="list-style-type: none;">
+        <li style="margin-bottom: 0.5em;">
+          <a href="papers/moment_progs.tar.gz">
+            Calculating moments <tt>(tgz)</tt>:
+          </a>
+
+          Includes a program to calculate the moments of the limiting
+          adjacency spectrum of a sparse graph, and one for a
+          gaussian-weight sparse graph.
+
+        </li>
+        <li>
+          <a href="papers/tree_progs.tar.gz">
+            Tree enumeration <tt>(tgz)</tt>:
+          </a>
+
+          This is an implementation of my <i>O(n)</i> cpu, <i>O(sqrt(n))</i>
+          memory algorithm for enumerating free trees. It uses more memory
+          than the <i>O(1)</i> of the
+
+          <a href="http://theory.cs.uvic.ca/inf/tree/FreeTrees.html">
+            Li-Ruskey algorithm</a>, 
+
+          but provides every tree's automorphism group size at no cost.
+          The implementation also computes tree adjacency spectra, and
+          characteristic polynomials.
+
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div id="srg-numerics" class="subsectitle">
+        <a href="papers/sparse-random-graphs-jp-for-sinai.pdf">
+          Sparse Random Graph Numerics <tt>(pdf)</tt>
+      </a></div>
+      <a name="srg-numerics"></a>
+      <p class="date">May, 2003</p>
+      <p>
+      
+        This was a small numerical investigation that I did during my junior
+        year. It has some spectrum pictures that are not in the <a
+        href="#srg-thesis">senior thesis</a>, but is otherwise obsolete.
+      
+      </p>
+    </div>
+    <div>
+      <div id="moore-and-self-dual" class="subsectitle">
+        <a href="papers/moore-and-self-complementary-dual-graphs-for-seymour.pdf">
+          Moore Graphs as Maximal-Girth Graphs, and Self-Dual,
+          Self-Complementary Graphs on the Plane and Torus <tt>(pdf)</tt>
+      </a></div>
+      <a name="moore-and-self-dual"></a>
+      <p class="date">January, 2003 </p><!-- space needed for iewin -->
+      <p>
+        
+        A pair of graph theory exercises that I solved in 2002
+        (they were suggested by Professor
+        <a href="http://www.math.princeton.edu/~pds/">Paul Seymour</a>
+        for my junior paper). There are probably no new results;
+        I'm not 100% certain that anybody else worked out at the torus case,
+        but the rest is known. 
+      
+      </p>
+    </div>
+    <div>
+      <div id="hoffman-puzzle" class="subsectitle">
+        <a href="papers/hoffman-puzzle-for-conway.pdf">
+          Hoffman's Packing Puzzle in 3 and 4 Dimensions <tt>(pdf)</tt>
+      </a></div>
+      <a name="hoffman-puzzle"></a>
+      <p class="date">May, 2003</p>
+      <p>
+      
+      Professor <a href="http://en.wikipedia.org/wiki/John_Horton_Conway">
+      John H. Conway</a> introduced me to this neat puzzle. Take 27 <i>a</i>
+      by <i>b</i> by <i>c</i> blocks, and try to assemble them into an 
+      (<i>a + b + c</i>)<sup>3</sup> cube. It's hard, but certainly doable.
+      This paper shows how. If you think about it, this proves the 
+      arithmetic-geometric mean inequality for 3 variables! :) 
+      </p>
+      <p>
+      
+      I also tried to tackle the 4D case, but ran out of time. There was
+      some progress made; it might be doable as well. The paper refers to
+      this <a href="papers/hoffman-puzzle.tgz">puzzle-solving code
+      <tt>(tgz)</tt></a>.
+      
+      </p>
+      <p>
+      
+      You can make your own copy of the puzzle! Take a 68-inch <a
+      href="http://en.wikipedia.org/wiki/Dimensional_lumber">2" x 4"</a>,
+      and saw it into 27 2.5-inch bricks (half-an-inch to spare). Sand them
+      a bit, and go impress your friends! Note: you're probably better off
+      with a circular saw, not a hand saw, since the cuts should be rather
+      straight.
+      
+      </p>
+    </div>
+    <div>
+      <div id="waring-problem" class="subsectitle">
+        <a href="papers/waring's-problem-final-project-mat403.pdf">
+          Waring's Problem <tt>(pdf)</tt>
+      </a></div>
+      <a name="waring-problem"></a>
+      <p class="date">May, 2004</p>
+      <p>
+      
+      This is a re-telling of a book (see reference in paper) chapter on
+      solving <a href="http://mathworld.wolfram.com/WaringsProblem.html">
+      Waring's problem</a> with Linnik's approach, using Shnirel'man
+      density. Written rather hastily (class final project), and not
+      certainly not cribbed. Thus, it is probably less readable than the
+      book.  But, it is written from a different angle, so who knows, you
+      might find it helpful.
+      
+      </p>
+    </div>
+    <div>
+      <div id="alexandrov-n-dim-frame" class="subsectitle">
+        <a href="papers/rigidity-n-dimensional-frame-final-project-S05-18.318.pdf">
+          Rigidity of the <i>n</i>-Dimensional Frame  <tt>(pdf)</tt>
+      </a></div>
+      <a name="alexandrov-n-dim-frame"></a>
+      <p class="date">May, 2005 (unfinished)</p>
+      <p>
+   
+      The paper is <em>very</em> sloppily written, the work is unfinished, and
+      the proofs may be wrong.  I'm putting it out here in the hope that it
+      will be useful to somebody working on the same problem &mdash; I do not
+      plan to come back to this soon.
+      
+      </p>
+      <p>
+      
+      I wrote this after Professor <a href="http://www.math.umn.edu/~pak/">
+      Igor Pak</a> suggested I look at the paper
+      <a href="http://math.nsc.ru/~vaalex/pub.html">
+      "A new example of a flexible polyhedron"</a> by 
+      <a href="http://math.nsc.ru/~vaalex/">Victor Alexandrov</a>.
+      The original paper uses some fairly tricky trigonometry to prove
+      that the described 3D polyhedron is flexible, and has zero volume. 
+      
+      </p>
+      <p>
+
+      I constructs a generalization of Alexandrov's polyhedron in <i>n</i>
+      dimensions, and sketches what might be a nicer proof (if correct :) of
+      Alexandrov's result for dimension 3. It also argues that the
+      construction in 4 or more dimensions would be rigid.
+      
+      </p>
+    </div>
+  </div>
+ 
+  <hr class="secdiv divider"/>
+
+  <div class="section">
+    <div>
+      <div class="trileft triangle"></div>
+      <div id="software" class="sectitle">Software</div>
+      <div class="triright triangle"></div>
+      <a name="software"></a>
+    </div>
+    <p>
+    
+    Here is the small fraction of my hacks that I bothered to clean up and
+    package. Let me know if you find something useful &mdash; I might improve it
+    :)
+    
+    </p>
+    <p class="sidenote"> 
+    
+    The dates in this section denote first release. Software evolves a lot
+    more than papers do. I've usually use a program for a while before
+    releasing it, and change it substantially post-release.
+    
+    </p>
+    <div>
+      <div id="dynkin-diagrams" class="subsectitle">
+        <a href="dynkin-diagrams.html">Dynkin Diagrams</a>
+      </div>
+      <a name="dynkin-diagrams"></a>
+      <p class="date">December 2006</p>
+      <p>
+      
+      This is a program that I wrote at Professor
+      <a href="http://www.math.cornell.edu/~ebd/">Eugene B. Dynkin</a>'s
+      suggestion. It draws nice diagrams in HTML and EPS (for use in
+      LaTeX). It lets you choose labels for the vertices of Dynkin diagrams. 
+      It has a catalog of all Dynkin diagrams (up to size 8), and of all
+      extended and affine Dynkin diagrams (up to size 9). It can be used
+      offline. It's written using a combination of JavaScript / XHTML / CSS,
+      and runs in the major browsers (but works/looks best in Firefox).
+      
+      </p>
+      <p>
+      You may also be interested in the <a href="http://dynkincollection.library.cornell.edu/">Eugene B. Dynkin Collection of Mathematics Interviews</a>.
+      </p>
+    </div>
+    <div>
+      <div id="audio-coding" class="subsectitle">
+        <a href="audio-coding/index.html">Lossless, Peelable Audio Coding</a>
+      </div>
+      <a name="audio-coding"></a>
+      <p class="date">April 2006</p>
+      <p>
+
+      Well, I had this crazy idea, and this is the result of my 30-minute
+      feasibility study. It turned out to work pretty well, in my opinion.
+    
+      </p>
+    </div>
+    <div>
+      <div id="xwmconsole" class="subsectitle">
+        <a href="software/xwmconsole.tar.bz2">xwmconsole <tt>(tbz2)</tt></a>
+      </div>
+      <a name="xwmconsole"></a>
+      <p class="date">November 2003</p>
+      <p>
+      
+      A couple of scripts to replace XDM/GDM. Allows you to run many X
+      sessions with ease, log directly into X from the console, and 
+      makes you impervious to window manager crashes.
+      
+      </p>
+      <p class="sidenote">
+      
+      Some assembly required &mdash; you should be at ease editing shell
+      configuration files.
+      
+      </p>
+    </div>
+    <div>
+      <div id="xv-package" class="subsectitle">
+        <a href="software/xv-package.tar.bz2">
+          xv custom keys / lossless rotation / annotation patch 
+          <tt>(tbz2)</tt>
+        </a>
+      </div>
+      <a name="xv-package"></a>
+      <p class="date">November 2003</p>
+      <p>
+      
+      This small patch for XV, the image viewer, which allows you to run
+      scripts by pressing a key from F1 through F12. Included are scripts to
+      losslessly rotate JPEGs, to edit JPEG comments, to run batch
+      rotations, and to perform <em>reversible</em> crops. Another easy
+      application of this patch is a script for face annotation (see
+      README).  If you don't know how, and ask nicely, I can write it for
+      you.  If you write one, let me know, and I'll include it.
+      
+      </p>
+      <p class="sidenote">
+      
+      Some assembly required, but detailed instructions are provided.
+      
+      </p>
+    </div>
+    <!-- XXX: more code (e.g. timed-cat, plottool) -->
+  </div>
+
+  <hr class="secdiv divider"/>
+
+  <div class="section">
+    <div>
+      <div class="trileft triangle"></div>
+      <div id="notes" class="sectitle">Notes and Homework</div>
+      <div class="triright triangle"></div>
+      <a name="notes"></a>
+    </div>
+    <p>
+    
+      I habitually typed homework solutions in <a href="http://www.lyx.org">
+      LyX</a>, and, on occasion also typed up or scanned (the latter are
+      typically by some friendly person with nicer handwriting) lecture
+      notes. If you are studying one of the topics below, I hope that these
+      materials will help you learn.
+      
+    </p>
+    
+    <p>
+    
+      <em>Concerning homeworks:</em> I don't recommend that anyone crib
+      solutions. Even if your professor allows the use of outside sources
+      (if not, go away!), or you're studying on your own, the point is still
+      to try to do the problems. On the other hand, there's not much
+      learning happening while you're out of ideas and running in circles.
+      So, the recommended use is:
+    
+    </p>
+
+    <ol>
+      <li>
+        Think about a problem until you're seriously stuck. (Hey, you 
+        might not even get there!)
+      </li>
+      <li>
+        Look at a solution line-by-line up to the point when you become
+        less stuck. Odds are it won't be easy to read anyway :)
+      </li>
+      <li>
+        Repeat until you're done.
+      </li>
+    </ol>
+    <p class="sidenote"> 
+    
+    The dates here denote when the body of notes/lectures for the course 
+    was completed.
+    
+    </p>
+
+      <!-- XXX - notes for benny's class. also, what else might I have 
+           in scanned form? -->
+       
+    <div>
+      <div id="lyx-spams-notes" class="subsectitle">
+        <a href="lyx/index.html">LyX SPAMS Talk Notes</a>
+      </div>
+      <a name="lyx-spams-notes"></a>
+      <p class="date">February 2008</p>
+      <p>
+
+	During the semester's first installment of the <a
+	href="http://math.mit.edu/spams/"> Simple Person's Applied Math
+	Seminar</a>, I tried to convince attendees that <a
+	href="http://www.lyx.org">LyX</a> is a great way to create LaTeX
+	documents. This page lists some caveats and "how to" ideas.
+
+      </p>
+    </div>
+    <div>
+      <div id="lie-algebra-notes" class="subsectitle">
+        <a href="745lec/index.html">18.745 Lie Algebras Notes</a>
+      </div>
+      <a name="lie-algebra-notes"></a>
+      <p class="date">January 2005</p>
+      <p>
+
+        The class was taught by Professor 
+        <a href="http://math.mit.edu/~kac/index.html">Victor Kac</a>.
+        This compilation of lecture notes was typed by the students.
+        Exercises are stated and solved in every lecture
+        write-up. PDFs are available for every lecture, with LaTeX 
+        source for most.
+
+      </p>
+    </div>
+  </div>
+
+  <hr class="secdiv divider"/>
+
+  <div class="section">
+    <div>
+      <div class="trileft triangle"></div>
+      <div id="changelog" class="sectitle">Changelog</div>
+      <div class="triright triangle"></div>
+      <a name="changelog"></a>
+    </div>
+    <p> 
+    
+    This section lists substantial page updates, just so you know when
+    this site kicks the bucket.
+       
+    </p>
+    <div>
+      <div id="cl-20150510" class="subsectitle">
+        Moved hosting
+      </div>
+      <a name="cl-20150510"></a>
+      <p class="date">May 10, 2015</p>
+      <p>
+      
+      	Trying to be a grown-up and have my own domain. Thanks for all the
+      	bits, <a href="http://andreygoder.com/">Andrey</a>!
+      	
+      </p>
+    </div>
+    <div>
+      <div id="cl-20110601" class="subsectitle">
+        Moved hosting
+      </div>
+      <a name="cl-20110601"></a>
+      <p class="date">June 1, 2011</p>
+      <p>
+      
+        The MIT math department doesn't host pages indefinitely, so I moved
+        to the domain of my awesome friend 
+        <a href="http://andreygoder.com/">Andrey Goder</a>.
+         
+      </p>
+    </div>
+    <div>
+      <div id="cl-20081215" class="subsectitle">
+        The job hunt is on
+      </div>
+      <a name="cl-20081215"></a>
+      <p class="date">December 15, 2008</p>
+      <p>
+      
+        Added a resume, CV, some more papers, fixed some typos, improved
+        writing and visual consistency.
+         
+      </p>
+    </div>
+    <div>
+      <div id="cl-20080208" class="subsectitle">
+        Not dead yet!
+      </div>
+      <a name="cl-20080208"></a>
+      <p class="date">February 8, 2008</p>
+      <p>
+      
+        Added a LyX notes link, hope to find time to add more material.
+         
+      </p>
+    </div>
+    <div>
+      <div id="cl-20070115" class="subsectitle">
+        Initial Release
+      </div>
+      <a name="cl-20070115"></a>
+      <p class="date">January 15, 2007</p>
+      <p>
+      
+        Things I hope to add in the future: some art/photos, more code and
+        lecture notes, lots of math homeworks.
+         
+      </p>
+    </div>
+    <div>
+      <div id="history" class="subsectitle"> History</div>
+      <a name="history"></a>
+      <p class="date">wasting your bandwidth since 1999</p>
+      <p>
+
+        Before Facebook obviated the need for self-description, I made a
+        couple of personal homepages. The current one, I hope, is more of a
+        "here's some interesting stuff" homepage. Here are the links to the
+        previous iterations:
+
+      </p>
+      <p>
+        <a href="old-page/index.html">Princeton era (2003-2005)</a>
+      </p>
+      <p>
+        <a href="http://ahel.freehostia.com">
+          Ithaca High era (1999-present)</a>
+        <span style="color: red;">[warning :) ugly]</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- XXX: don't forget art & music -->
+  
+  <!-- footer with validation and licensing -->
+  <hr class="hfdiv divider"/>
+  <div id="license">
+    <p>
+   
+    Text, papers, XHTML / CSS markup, and homeworks are licensed under the 
+    <a href="#mit_x_license">MIT X License</a>. JavaScript code, software, 
+    and lecture notes are licensed on separate terms, listed in each item's
+    documentation.
+   
+    </p>
+    <div id="mit_x_license_sec" class="hide-by-default add-hiding-link">
+      <h3 id="mit_x_license">
+        <a name="mit_x_license"></a>
+        The MIT X License
+      </h3>
+      <p>
+        <span style="font-style: italic; font-size: smaller">The 
+        license text comes from 
+        <a href="http://www.opensource.org/licenses/mit-license.php">here</a>.
+        It is only being applied to the text and XHTML / CSS markup on this
+        page.</span>
+      </p>
+      <p>
+        Copyright (c) 2007 Alexey Spiridonov
+      </p>
+      <p>
+
+      Permission is hereby granted, free of charge, to any person obtaining
+      a copy of this software and associated documentation files (the
+      "Software"), to deal in the Software without restriction, including
+      without limitation the rights to use, copy, modify, merge, publish,
+      distribute, sublicense, and/or sell copies of the Software, and to
+      permit persons to whom the Software is furnished to do so, subject to
+      the following conditions:
+
+      </p>
+      <p>
+
+      The above copyright notice and this permission notice shall be
+      included in all copies or substantial portions of the Software.
+
+      </p>
+      <p>
+
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+      EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+      MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+      IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+      CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+      TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+      SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+      </p>
+    </div>
+   
+    
+  </div>
+  <p id="validated">
+    [<a href="http://validator.w3.org/check?uri=referer">valid XHTML</a>]
+    [<a href="http://jigsaw.w3.org/css-validator/check/referer">valid
+    CSS</a>]
+    [JavaScript checked by <a href="http://www.jslint.com">JSLint</a>.]
+  </p>  
+
+</div><!-- end of content div -->
+
+</div></div></div> <!-- close Jello divs -->
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+<!-- 
+var sc_project=2199414; 
+var sc_invisible=1; 
+var sc_partition=20; 
+var sc_security="4b02d35c"; 
+var sc_remove_link=1; 
+//-->
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter_xhtml.js"></script><noscript><div
+class="statcounter"><img class="statcounter"
+src="http://c21.statcounter.com/counter.php?sc_project=2199414&amp;java=0&amp;security=4b02d35c&amp;invisible=1"
+alt="simple hit counter" /></div></noscript>
+<!-- End of StatCounter Code -->
+
+<!-- Google Analytics Code -->
+<script src="http://www.google-analytics.com/urchin.js"
+type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1203959-1";
+urchinTracker();
+</script>
+</body>
+</html>

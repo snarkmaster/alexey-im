@@ -1,0 +1,143 @@
+\documentclass[11pt]{article}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{pstricks}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf 18.745 Introduction to Lie Algebras } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Scribe: #4}{Lecture #1}}
+
+
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\N}{\mathbin}{AMSb}{"4E}
+\DeclareMathSymbol{\Z}{\mathbin}{AMSb}{"5A}
+\DeclareMathSymbol{\R}{\mathbin}{AMSb}{"52}
+\DeclareMathSymbol{\Q}{\mathbin}{AMSb}{"51}
+\DeclareMathSymbol{\I}{\mathbin}{AMSb}{"49}
+\DeclareMathSymbol{\C}{\mathbin}{AMSb}{"43}
+\DeclareMathSymbol{\F}{\mathbin}{AMSb}{"46}
+
+\newcommand{\sll}{\mbox{sl}}
+\newcommand{\gl}{\mbox{gl}}
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\tr}{\mbox{tr\ }}
+\newcommand{\Mat}{\mbox{Mat}}
+\newcommand{\Lie}{\mbox{Lie}}
+\newcommand{\Der}{\mbox{Der\ }}
+\newcommand{\End}{\mbox{End\ }}
+\newcommand{\ad}{\mbox{ad\ }}
+\newcommand{\im}{\mbox{im\ }}
+\newcommand{\Ker}{\mbox{ker\ }}
+
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\He}{\mathfrak{H}}
+
+\newcommand{\sk}{\vspace*{1em}}
+
+\newtheorem{defn}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{proof}{Proof}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{14}{Fall 2004}{Prof.\ Victor Ka\v{c}}{Maksim Lipyanskiy}
+
+Recall that $g = h\oplus (\oplus_{\alpha \in \Delta}  g_{\alpha})$, dim $g_{\alpha}=1$ and $h$ is abelian.
+Let us compute the Killing form on $h$:
+
+$K(h_1,h_2) = tr_g(ad(h_1)ad(h_2))=tr_h(ad(h_1)ad(h_2))+\sum tr_{g_\alpha}(ad(h_1)ad(h_2))$
+
+Thus, $K(h_1,h_2) = \sum_{\alpha} \alpha(h_1) \alpha(h_2)$.  On $h^*$, $K(\lambda, \mu)  = \sum_{\alpha} K(\lambda,\alpha)K(\mu,\alpha)$.
+
+{Theorem 4.} 
+(a) $\Delta$ span $h^*$ over $\mathbb{F}$. \\
+(b) $K(\alpha,\beta) \in \mathbb{Q}$ if $\alpha, \beta \in \Delta$ \\
+(c) $ K $ on $h^* \mathbb{Q}$ is a positive-definite, $\mathbb{Q}$-valued, symmetric bilinear form. 
+
+
+Proof. (a)  In the contrary case, there exists a nonzero $h_1 \in h$ such that $\alpha(h_1)=0$ for all $\alpha \in \Delta$.
+Hence $[h_1,g_\alpha] =0$, and $[h_1,h]=0$ hence $h_1$ is in the center which is not possible. \\
+(b) Recall that $2K(\alpha,\beta)K(\alpha,\alpha)^{-1} = p-q \in \mathbb{Z}$.  But by the formula above $K(\alpha,\alpha)=\sum K(\alpha,\gamma)^2$
+thus, $4K(\alpha,\alpha)^{-1} = \sum_\gamma 2K(\alpha,\gamma)K(\alpha,\alpha)^{-1}  \in \mathbb{Z}$.  The result follows from polarization identity.\\
+(c) $K(\lambda,\lambda)$, $(\lambda \in h^*)  = \sum_\alpha K(\alpha,\lambda)^2 \geq 0$ with equality iff all $K(\alpha,\lambda)=0$. Hence $\lambda=0$
+since $K$ on $h$ is nondegenerate.       
+
+Proposition.  If $g$ is semisimple and $a \subset g$ is an ideal then $K$ restricted to $a$ is nondegenerate and $g=a\oplus a^\bot$.  Thus, $a$ is semisimple.
+
+Proof.  $K(a \cap a^\bot,a \cap a^\bot)=0$, hence by Cartan's criterion $a \cap a^\bot$ is a solvable ideal.  This contradicts the semisimplicity of $g$.  Since dim$(g) \leq $ dim$(a) + $dim$(a^\bot)$ the result follows.
+
+Definition.  A Lie algebra is $simple$ if it is not abelian and has no proper nonzero ideals. 
+
+
+Corollary.  $g$ is semisimple iff it is a direct sum of simple Lie algebras.
+
+Exercise 14.1  Show that decomposition is unique up to permutation and  any ideal is a subsum of the ideals in decomposition. \\
+Solution. It suffices to prove the second statement.  So let $g=\bigoplus_i g_i$ where the $g_i$ are simple.  If $a$ is an ideal $a \cap g_i$ is either zero or $g_i$.  We need only establish that $a$ is homogeneous, i.e. $a=\bigoplus_i a \cap g_i$.  If $a$ has a nontrivial projection to $g_i$ we have $[g_i,a]=g_i$ since $g_i$ has trivial center.  But $[g_i,a]\subset a$.   
+ 
+Let $g=g_1\oplus g_2$ be a direct sum of semisimple Lie algebras.  If $h_1$, $h_2$ are Cartan subalgebras then $h_1\oplus h_2$ is a Cartan subalgebra.  If $g_1 = h_1\oplus \bigoplus_{\alpha \in \Delta_1}  g_{\alpha}, g_2 = h_2\oplus \bigoplus_{\beta \in \Delta_2 } g_{\beta}$ then $g$ has root space $\Delta = \Delta_1 \sqcup \Delta_2$ where we extend $\Delta_i$ by zero to the other Cartan subalgebra.
+
+This decomposition has the property that:\\
+(*) If $\alpha \in \Delta_1$, $\beta \in \Delta_2$ then $\beta + \alpha \notin \Delta \cup 0$. 
+ 
+Definition.  A set of roots is $indecomposable$ if there is no nontrivial decomposition such that (*) holds.
+Clearly an indecomposable semisimple Lie algebra must be simple.   $\Delta$ is indecomposable iff for any $\alpha, \beta \in \Delta$ there exists a sequence $\alpha = \gamma_1, . . .,\gamma_n=\beta$ such that $\gamma_i+\gamma_{i+1} \in \Delta$ or $0$.
+
+Example 1.  $g=sl_n (n \geq2)$, $h=$ diagonal matrices with trace zero.  Let $\epsilon_i(a_{jj})=\delta_{ij}$ and restrict $\epsilon_i$ to $h$.  The eigenvectors for the Cartan subalgebra are $E_{ij}$.  Note that the corresponding root is $\epsilon_i -\epsilon_j$.  Hence we have root space decomposition $sl_n\mathbb{F}=h\oplus\bigoplus_{i,j}\mathbb{F}E_{ij}$.  The root space $\epsilon_i-\epsilon_j$ where $i\neq j$ is indecomposable.  Indeed, $(\epsilon_i-\epsilon_j) +(\epsilon_l -\epsilon_k)$ is a root or zero if $j=l$ and $(\epsilon_i-\epsilon_j) +(\epsilon_j -\epsilon_l)$, $(\epsilon_j-\epsilon_l) +(\epsilon_l -\epsilon_k)$ are roots or zero otherwise.       
+
+Example 2.  $g=so_n(\mathbb{F}) = A\in gl_n(\mathbb{F})$ such that $A^TB+BA=0$.  The best choice of $B$ is $B_{i,n+1-i}=1$ and zero otherwise.  
+
+Exercise 14.2  $A\in so_n(\mathbb{F})$ iff $A'=-A$ where $A'_{ij}=A_{n-j+1,n-i+1}$. \\
+Solution.  We have $(AB)_{ij}=A_{i,n+1-j}$ and $(BA)_{ij}=A_{n+1-i,j}$.  From this it is easy to see that $A^TB+BA=0$ iff $A_{n+1-j,i}+A_{n+1-i,j}=0$.  Make the substitution $i'=n+1-i$.  We have: $A_{n+1-j,n+1-i'}+A_{i',j}=0$ which is what we wanted.  
+
+In this case the Cartan subalgebra $h$ is diag$(a_1, ...,a_r,-a_r, ...,-a_1)$.  The roots are $F_{ij}=E_{ij}-E_{n+1-j,n+1-i}$ where the $i,j$ are determined below.  Observe that $\epsilon_i=-\epsilon_{n+1-i}$ when restricted to $h$.  $F_{ij}$ is a root vector with root $\epsilon_i-\epsilon_j$.  Note that a basis for the root system is formed by the vectors $e_1, ..., e_r$ where either $n=2r$ or $n=2r+1$.  In the case $n=2r+1$ the roots are $\{ \epsilon_i-\epsilon_j, \epsilon_i, -\epsilon_i,\epsilon_i+\epsilon_j,-\epsilon_i-\epsilon_j \}$ where $i\neq j$ and $i,j \leq r$.  This follows from the fact that $e_{r+1}=0$ and that $\epsilon_i=-\epsilon_{n+1-i}$.\\  
+The case $n=2r$ is almost identical.  Here the roots are $\{ \epsilon_i-\epsilon_j,\epsilon_i+\epsilon_j,-\epsilon_i-\epsilon_j \}$ where $i\neq j$ and $i,j \leq r$.  
+
+Exercise 14.3  Do the case $r=2n$. \\
+Solution.  See above.    
+
+Exercise 14.4 (a) $\Delta_{so_{2r+1}}$ is indecomposable iff $r\geq 1$.  Thus $so_{2r+1}$ is simple iff $r\geq 1$.  \\
+(b) $\Delta_{so_{2r}}$ is indecomposable iff $r\geq 3$. \\
+$\Delta_{so_4}=\{\pm (\epsilon_1-\epsilon_2) \} \cup \{\pm (\epsilon_1+\epsilon_2 )\} $, Thus, it is not simple.  ($so_2$ is abelian). \\
+Solution.  (a) Notice that each $\epsilon_i$ is connected to $\epsilon_j$.  Note the obvious fact that roots are connected to their inverses. Furthermore, each $\pm \epsilon_i \pm \epsilon_j$ is connected to an $\pm \epsilon_i$ by choosing the sign of this last root judiciously. \\
+(b) Note that $\pm \epsilon_i + \mu \epsilon_j$ is connected to $-\mu \epsilon_j \pm \epsilon_k$ where $i, j, k$ are distinct and $\mu =\pm 1$ ($r \geq 3$). We have shown that one can change one index of any root without leaving the component.  Thus we can connect all roots by changing one index at a time.     
+         
+ 
+
+
+
+\end{document}
+
+

@@ -1,0 +1,279 @@
+% -*- Mode: LaTeX -*-
+\documentclass[12pt, fullpage]{article}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{amssymb}
+%\setlength{\parskip}{\baselineskip}
+\setlength{\parindent}{0em}
+%\renewcommand{\baselinestretch}{2}
+%\renewcommand{\theenumi}{(\arabic{enumi})}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+%\newtheorem{coroflem}{Corollary of the Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}[section]
+
+%\newcounter{Lcount}
+%\newenvironment{letterlist}{\setcounter{Lcount}{1}\begin{list}{\alph{Lcount})}}{\end{list}}
+
+\title{Lecture 8 -- October 5, 2004}
+\author{Prof. Victor Ka\v{c}\\ Scribe: Genya Zaytman}
+\date{}
+
+\renewcommand{\b}{\mathfrak{b}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\n}{\mathfrak{n}}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\sL}{\mathfrak{sl}}
+\newcommand{\ad}{{\rm ad\ }}
+\newcommand{\rank}{{\rm rank\ }}
+\renewcommand{\char}{{\rm char\ }}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\H}{\mathfrak{H}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\Ngh}{N_\g(\h)}
+\newcommand{\nFI}{\n_n+\F I_n}
+\newcommand{\go}{\g_0}
+\newcommand{\goa}{{\g_0^a}}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{8}
+
+\begin{definition}
+Let $\h$ be a subalgebra of a Lie algebra $\g$.  The \emph{normalizer} of
+$\h$ in $\g$ is the subalgebra $N_\g(\h)=\{a\in\g|[a,\h]\in\h\}$. 
+\end{definition}
+
+It is a subalgebra by the Jacobi identity and one has $\h\subset
+N_\g(\h)$.
+
+\begin{lemma}
+If $\g$ is nilpotent and $\h\subsetneq\g$ is a subalgebra then
+$\h\subsetneq N_\g(\h)$.
+\end{lemma}
+\begin{proof}
+We have $\g\supset\g^2\supset\ldots
+\supset\g^j\supset\g^{j+1}\supset\ldots \supset\g^N=0$ for $N\gg 0$.
+Consider the maximum $j$ such that $\g^j\not\subset\h$, so
+$\g^{j+1}\subset\h$.  Then $[\h,\g^j]\subset\g^{j+1}$.  Hence
+$\g^j\subset\Ngh$.
+\end{proof}
+
+\begin{definition}
+A \emph{Cartan subalgebra} of a Lie algebra $\g$ is a nilpotent
+subalgebra, $\h$ such that $\h=\Ngh$.
+\end{definition}
+
+\begin{corollary}
+Any Cartan subalgebra is maximal among nilpotent subalgebras.
+\end{corollary}
+
+\begin{exercise}
+The subalgebra $\n_n$ (of strictly upper triangular matrices) is a
+maximal nilpotent subalgebra in $\b_n$, $\sL_n$ and $\gl_n$, it is not
+Cartan in any of them.
+\end{exercise}
+\begin{proof}[Solution]
+$\n_n$ is not Cartan since, as was shown earlier,
+$[\b_n,\n_n]\subset\n_n$ and thus $\b_n\subset N_\g(\n_n)$.
+
+Unfortunately, $\n_n$ is not maximal.  Consider the algebra $\n_n+\F
+I_n\supsetneq\n_n$.  Since $I_n$ commutes with everything, this
+algebra is equal to $\n_n\oplus\F I_n$.  Hence, it is nilpotent and
+strictly contains $\n_n$.
+\end{proof}
+
+{\bf Correction to Exercise.} $\n_n+\F I_n$ is a maximal nilpotent
+subalgebra in $\b_n$ and $\gl_n$.  Unless $n=\char \F=2$, in which the
+embedding of $\H_1$ given in Exercise 5.2 is a counter-example.  (Note:
+that $\n_n+\F I_n$ is not Cartan either since $\b_n\subset
+N_\g(\n_n)\subset N_\g(\n_n+\F I_n)$.
+
+\begin{proof}[Solution]
+We have shown earlier that $\n_n+\F I_n$ is nilpotent.  Note that it
+suffices to show $\nFI$ is maximal in $\gl_n$.  Suppose there exists
+some nilpotent $\h\supsetneq\nFI$.  First note that in fact we have
+$\b_n=N_{\gl_n}(\nFI)$, since if $b=\sum_{i,j}c_{ij}E_{ij}\in
+N_\g(\nFI)$ with $c_{i'j'}\neq 0$ for $i'>j'$, then
+$E_{j'i'}\in\n_n\subset \nFI$ and $[b,E_{j'i'}]= \sum_i
+c_{ij'}E_{ii'}-\sum_j c_{i'j}E_{j'j}$.  Note that the $(i',i')^{\rm
+th}$ and the $(j',j')^{\rm th}$ entries are $c_{i'j'}$ and
+$-c_{i'j'}$, both of which are non-zero.  Thus
+$[b,E_{j'i'}]\not\in\nFI$, unless $n=\char \F=2$.  Now by the lemma
+above we must have $\h\cap N_{\gl_n}(\nFI)\supsetneq \nFI$.  Thus $\h$
+contains some element of $\b_n\setminus \nFI$, but all elements of
+$\b_n\setminus \nFI$ have at least two distinct eigenvalues, and hence
+are not ad-nilpotent, contradicting Engel's theorem.
+\end{proof}
+
+Examples of Cartan subalgebras:
+
+\begin{enumerate}%{(\arabic{\theemumi})}{}
+\item Let $\g$ be a nilpotent Lie algebra.  Then all Cartan
+  subalgebras are just $\g$.
+\item Let $\g\subset\gl_n$ be a subalgebra containing a diagonal
+  matrix with distinct eigenvalues.  Then $\h=\g\cap\{{\rm subalgebra\
+  of\ all\ diagonal\ matrices}\}$ is a Cartan subalgebra of $\g$.
+
+\begin{proof}
+$\h$ is commutative, hence nilpotent.  Let
+  $b=\sum_{i,j}c_{ij}E_{ij}\in\Ngh$ then $[a,b]$ is a diagonal matrix,
+  but $[a,E_{ij}=(\lambda_i-\lambda_j)E_{ij}$ where
+  $a=diag(\lambda_1,\ldots,\lambda_n)$.  Therefore, $c_{ij}=0$ for
+  $i\neq j$ and $b$ is a diagonal matrix.
+\end{proof}
+\end{enumerate}
+
+\begin{proposition}
+Assume $\F$ is an algebraicly closed field of characteristic $0$.  Let
+$\h\subset\g$ be a Cartan subalgebra.  Since $\h$ is nilpotent, we may
+consider the generalized root space decomposition:
+$\g=\bigoplus_{\alpha\in\h^*} \g_\alpha$, $\g_\alpha=\{v\in\g|(\ad
+h-\alpha(h))^Nv=0\ {\rm for}\ N\gg0\ {\rm and\ all}\ h\in\h\}$.  Then
+$\g_0=\h$.
+\end{proposition}
+\begin{proof}
+$\h\subset\go$ since $(\ad h)^Nh'=0$ for $h,h'\in\h$ by nilpotency.
+
+Now suppose $\h\neq\go$.  Consider the adjoint representation of $\h$
+on $\go$ and $\go/\h$.  Since $\ad h$ is a nilpotent operator on $\go$
+for each $h\in\h$, it is also nilpotent on $\go/\h$.  Hence by Engel's
+theorem, we have $\bar{a}\in\go/\h$ $\bar{a}\neq 0$, which is
+annihilated by $\h$.  But this means that if $a$ is a pre-image of
+$\bar{a}$ in $\go$ then $[\h,a]\subset\h$ so $a\in\Ngh\setminus\h$, a
+contradiction.
+\end{proof}
+
+\begin{theorem}
+\emph{(E. Cartan)}
+Let $\g$ be a finite-dimensional Lie algebra over an algebraicly
+closed  field $\F$.  Let $a$ be a regular element of $\g$, and let
+$\g=\bigoplus_{\lambda\in\F} \g_\lambda^a$ be the generalized
+eigenspace decomposition for $\ad a$.  Then $\go^a$ is a Cartan
+subalgebra of $\g$.  Consequently, any finite-dimensional Lie algebra
+over an algebraicly closed field contains a Cartan subalgebra.
+\end{theorem}
+\begin{proof}
+The fact that $a$ is regular means that $\dim \go^a=\rank \g\leq\dim
+\go^b$ for all $b\in\g$.
+
+We can decompose $\g=\goa\oplus V$, where $V=\bigoplus_{\lambda\neq
+0} \g_\lambda^a$.  Since $[\g_\lambda^a,\g_\mu^a]\subset
+\g_{\lambda+\mu}^a$, we see that $[\go^a,V]\subset V$.  Hence the
+adjoint representation induces a representation $\pi$ of $\goa$ on
+$V$.
+
+First we show that $\goa$ is a nilpotent Lie algebra.  Consider the
+following subsets of $\goa$:\\
+$\U=\{u\in\goa|(\ad u)_\goa {\rm
+  is\,not\,a\,nilpotent\,operator}\}$,\\
+$\V=\{v\in\goa|(\ad v)_V {\rm is\,a\,nonsingular\,operator}\}$.\\
+$a\in\V$ by definition of $V$.  Notice that both $\U$ and $\V$ are
+Zariski open subsets and that $\V$ is not empty.  Suppose that $\goa$
+is not a nilpotent Lie algebra.  By Engel's theorem this means $\ad u$
+on $\goa$ is a non-nilpotent operator for some $u\in\goa$.  This means
+that $\U$ is non-empty.  Thus $\U\cap\V\neq\emptyset$.  Take
+$b\in\U\cap\V$.  Then $\ad b$ is non-singular on $V$ and not nilpotent
+on $\goa$.  Hence, $\go^b\subsetneq\goa$.  This contradicts the
+regularity of $a$.
+
+It remains to show that $N_\g(\goa)=\goa$.  If $b\in N_\g(\goa)$ then
+(in particular) $[a,b]\in\goa$.  Therefore, $(\ad a)^N[a,b]=0$ for
+$N\gg0$, thus $(\ad a)^{N+1}b=0$.  Hence $b\in\goa$, and
+$N_\g(\goa)=\goa$.
+\end{proof}
+
+{\bf Application.}  Classification of $3$-dimensional Lie algebras
+over an algebraicly closed field.  Let $\g$ be a $3$-dimensional Lie
+algebra.  Let $\h$ be a Cartan subalgebra obtained by the above
+procedure so that $r=\rank\g=\dim\h$.
+
+\begin{description}
+\item[Case 1: $\rank\g=3$.]  Then $\g$ is nilpotent.  Hence, either
+$\g$ is abelian, or it is non-abelian hence $\dim Z(\g)=1$.
+Therefore, by Exercise 3.1, $\g\cong\H_1$, the Heisenberg algebra.
+\item[Case 2: $\rank\g=2$.]  Then $\h$ is a $2$-dimensional nilpotent
+algebra.  Hence $\h$ is abelian.  Consider its generalized eigenspace
+decomposition, $\g=\h\oplus\F b$.
+
+\begin{exercise}
+Prove that in this case $\g\cong\langle a,b|[a,b]=b\rangle\oplus \F c$
+{\rm (}$\h=\F a+\F c${\rm )}.
+\end{exercise}
+\begin{proof}[Solution]
+Since $\b\not\in\h=\Ngh$, there must exits some $a\in\h$ such that
+$[a,b]\not\in\h$.  Thus $[a,b]=b+d$ for $d\in\h$.  Replacing $b$ by
+$b+d$ we may assume $[a,b]=b$.  Since $\dim\h=2$, and $\dim\g/\h=1$
+there must exist a $c\in\h$ such that $[b,c]\in\h$.  Then we have: $0=
+[b,0]= [b,[a,c]]= [[b,a],c]+[a,[b,c]]= [-b,c]+0$, since $\h$ is
+abelian.  Thus $[b,c]=0$, and $\g$ must have the given structure.
+\end{proof}
+
+\item[Case 3: $\rank\g=1$.]  Then $\h=\F a$.
+
+\begin{exercise}
+One has $3$ possibilities:
+\begin{enumerate}
+\item $[a,b]=b$,  $[a,c]=c+b$,  $[b,c]=0$.
+\item $[a,b]=b$,  $[a,c]=\lambda c$,  $[b,c]=0$,\\
+where $\lambda\in\F\setminus\{0\}$ is a parameter.
+\item $[a,b]=b$,  $[a,c]=-c$,  $[b,c]=a$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}[Solution]
+Let $V=[a,\g]$.  Since $\F a$ is a Cartan subalgebra, $V$ must have
+dimension precisely $2$, and $\ad a$ acts on $V$ without singularities.
+Scaling $a$ if necessary, we may assume one of the eigenvalues of $\ad
+a|_V$ is $1$.  Suppose first that $\ad a|_V$ is not semisimple.  Thus
+$\ad a|_V= \left( \begin{array}{ccc} 1 & 1 \\ 0 & 1 \end{array}
+\right)$ in some basis, $\{b,c\}$, that is, $[a,b]=b$ and $[a,c]=b+c$.
+Also $[a,[b,c]]= [[a,b],c]+[b,[a,c]]= [b,c]+[b,b+c]= 2[b,c]$.  But $2$
+can't be an eigenvector of $\ad a$, thus $[b,c]=0$, this is the first
+possibility.  Now suppose $\ad a|_V$ is semisimple.  Then $\ad a|_V=
+\left( \begin{array}{ccc} 1 & 0 \\ 0 & \lambda \end{array} \right)$ in
+some basis $\{b,c\}$, that is, $[a,b]=b$ and $[a,c]=\lambda c$.  Now
+$[a,[b,c]]= [[a,b],c]+[b,[a,c]]= [b,c]+[b,\lambda c]=
+(1+\lambda)[b,c]$.  Thus we must have either $[b,c]=0$, possibility 2,
+and in this case $\lambda$ is arbitrary and uniquely defined by $\g$
+up to to inverting it (swap $b$ and $c$ and scale $a$ appropriately),
+or $1+\lambda$ an eigenvalue of $\ad a$, this requires $1+\lambda=0$,
+thus $\lambda=-1$ and that $[b,c]$ be a multiple of $a$, scaling $b$
+if necessary we may assume $[b,c]=a$, possibility 3.
+\end{proof}
+
+\end{description}
+
+\begin{exercise}
+Show that the third algebra in case 3 is isomorphic to $\sL_2(\F)$
+{\rm (}if the characteristic of $\F$ is not $2${\rm )}, and that all
+the algebras from exercise 8.3 are not isomorphic.
+\end{exercise}
+\begin{proof}[Solution]
+The standard basis for $\sL_2(\F)$ consists of $\{h=\left(
+\begin{array}{ccc} 1 & 0 \\ 0 & -1 \end{array} \right), x=\left(
+\begin{array}{ccc} 0 & 1 \\ 0 & 0 \end{array} \right), y=\left(
+\begin{array}{ccc} 0 & 0 \\ 1 & 0 \end{array} \right)\}$.  With
+$[h,x]=2x$, $[h,y]=-2y$, $[x,y]=h$.  Setting $a=\frac{h}{2}$,
+$b=\frac{x}{\sqrt{2}}$, and $c=\frac{y}{\sqrt{2}}$, gives the
+relations for the third algebra in case 3.
+
+That all the algebras from exercise 8.3 are not isomorphic follows
+from the proof of exercise 8.3 since every step in the classification,
+except when otherwise mentioned and dealt with, i.e., that for the
+second algebra $\lambda$ and $\frac{1}{\lambda}$ give the same
+algebra, every step was uniquely determined from the algebra.
+\end{proof}
+
+\end{document}
+
+% LocalWords:  subalgebra Cartan subalgebras eigenspace Zariski nilpotency
+% LocalWords:  semisimple

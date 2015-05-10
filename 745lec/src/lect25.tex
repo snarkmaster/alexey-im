@@ -1,0 +1,256 @@
+%% LyX 1.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=1in,bmargin=1in,lmargin=1.2in,rmargin=1.2in}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \theoremstyle{plain}
+ \newtheorem{thm}{Theorem}[section]
+ \newtheorem{prop}{Proposition}[section]
+ \numberwithin{equation}{section} %% Comment out for sequentially-numbered
+ \numberwithin{figure}{section} %% Comment out for sequentially-numbered
+ \theoremstyle{plain}
+ \theoremstyle{definition}
+  \newtheorem{xca}[section]{Exercise}%%Delete [section] for sequential numbering
+ \theoremstyle{definition}
+ \newtheorem{defn}[thm]{Definition}
+ \theoremstyle{definition}
+  \newtheorem{example}[thm]{Example}
+ \theoremstyle{remark}
+ \newtheorem*{note*}{Note}
+ \newtheorem{lemma}{Lemma}
+  \newtheorem*{obs*}{Observation}
+ \newtheorem*{conclusion*}{Conclusion}
+ \theoremstyle{plain}
+ \newtheorem{cor}[thm]{Corollary} %%Delete [thm] to re-start numbering
+ \theoremstyle{definition}
+ \newtheorem*{defn*}{Definition}
+ \theoremstyle{plain}
+ \newtheorem*{thm*}{Theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\e}{\varepsilon}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\D}{\Delta}
+\newcommand{\gln}{gl_n(\F)}
+\let\ker=\undefined
+\DeclareMathOperator{\ker}{Ker}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Z}{Z}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\s}{span}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\gl}{gl}
+\newcounter{xcacount}
+\let\xca=\undefined
+\newtheorem{xca}[xcacount]{Exercise}
+\newcommand{\sln}{\text{sl}_n(\F)}
+\newcommand{\son}{\text{so}_n(\F)}
+\newcommand{\spn}{\text{sp}_n(\F)}
+\newcommand{\spr}{\text{sp}_{2r}(\F)}
+\newcommand{\slr}{\text{sl}_{2r}(\F)}
+\newcommand{\sori}{\text{sl}_{2r}(\F)}
+\newcommand{\sor}{\text{so}_{2r}(\F)}
+
+\usepackage{babel}
+
+\makeatother
+
+\begin{document}
+
+\title{18.745: Lecture 25}
+
+
+\author{Professor: Victor Ka\v{c}\\
+Scribe: Maksim Maydanskiy}
+
+\maketitle
+
+
+\setcounter{section}{25}
+Let $\g$ be as in the last lecture - finite dimesional semisimple lie algebra. Let $\h$ be a Cartan subalgebra, and $\Pi=\{\alpha_{1}, \ldots,
+\alpha_{r}\}\subset \D_{+}\subset\D$, as before, a system of simple roots. We have the triangular decomposition $\g=\mathfrak{n}_{-}+\h+\mathfrak{n}_{+} $, $\mathfrak{b}=\h_{+}+\mathfrak{n}_{+}$,
+with $\mathfrak{b}$ - a Borel subalgebra, and $[\mathfrak{b},\mathfrak{b}]=\mathfrak{n}_{+}$. Let $(\cdot,\cdot)$ be a nondegenerate
+invariant symmetric bilinear form on $\g$, let $\rho=\frac{1}{2} \Sigma_{\alpha \in \D_{+}}\alpha $. Let $\{E_{i}, H_{i}, F_{i}\}$
+ be the Chevalley generators satisfying $H_{i}=\frac{2 \nu^{-1}(\alpha_{i})}{(\alpha_{i}, \alpha_{i})}$,
+  $E_{i}\in \g_{\alpha}$, 
+ $F_{i}\in \g_{-\alpha}$ and such that $<E_{i},H_{i},F_{i}>$ form the standard basis of $\text{sl}_2(\F)$. Recall that $E_{i}$'s 
+ (respectively $F_{i}$'s) generate $\mathfrak{n}_{+}$ (respectively $\mathfrak{n}_{-}$) and $H_{i}$'s form a basis of $\h$.
+ We have the weight lattice $P=\{\lambda\in \h^{*} |\lambda(H_{i})\in \Z \text{ for all } i=1, \ldots r\}$. 
+ Note that $Q\subset P$, since $\alpha_{i}(H_{j})\in \Z$. Define the subset 
+ $P_{+}=\{\lambda\in \h^{*} |\lambda(H_{i})\in \Z_{+} \text{ for all }i=1, \ldots r\}$, called the set of dominant integral weights.
+ 
+ \begin{thm}(Cartan)
+ \label{cartan}
+ The $\g$-modules $\{L(\Lambda)\}_{\Lambda \in P_{+}}$ are, up to isomorphism, all irreducible finite-dimensional $\g$-modules. 
+ (Recall from previous lectures that $L(\Lambda)$ is the irreducible heigest weight module with heighest weight $\lambda$.)
+ \end{thm}
+\begin{thm}(Weyl's dimension formula) \label{dimension}
+$\emph{dim}L(\Lambda)=\Pi_{\alpha\in \D}\frac{(\Lambda+\rho, \alpha)}{(\rho, \alpha)}$ 
+provided that $\Lambda \in P_{+}$
+\end{thm}
+
+\begin{note*} $\rho(H_{i})=1$ for all $i$. Indeed, 
+$s_{i}(\rho)=s_{i}\left( \frac{1}{2}\alpha_{i}+\Sigma_{\alpha\in \D_{+}\setminus\{\alpha_{i}\}} \alpha \right)=-\frac{1}{2}\alpha_{i}+\Sigma_{\alpha\in \D_{+}\setminus\{\alpha_{i}\}} \alpha =\rho - \alpha_{i}$. 
+But for any $\lambda$ we have $s_{i}(\lambda)=\lambda-\lambda(H_{i})\alpha_{i}$. Hence $\rho(H_{i})=1$
+\end{note*}
+
+\begin{example} $\g=\text{sl}_2$. All finite dimensional irreducible $\text{sl}$-modules are $L(\Lambda(m\rho))$ for $m\in \Z_{+}$ 
+(observe that $m\rho(H)=m$). $\text{dim}L(m\rho)=m+1$.
+\end{example}
+\begin{example} $\g=\text{sl}_{3}$. We have $\Pi=\{\alpha_{1},\alpha_{2}\}$,
+ $(\alpha_{i},\alpha_{j})= \left( \begin{array}{cc}
+2 & -1\\
+-1 & 2 \end{array} \right)$,
+$\rho=\alpha_{1}+\alpha_{2}$, $\rho(\alpha_{i})=1$, $\Lambda=k_{1}\Lambda_{1}+k_{2}\Lambda_{2}$, where $(\Lambda_{i},\alpha_{j})=\delta_{ij}$. By Cartan's theorem, 
+$\text{dim}L(\Lambda)< \infty$ iff $k_{1},k_{2}\in \Z_{+}$. We compute $(\Lambda+\rho,\alpha_{1})=k_{1}+1$, $(\Lambda+\rho,\alpha_{2})=k_{2}+1$, and $(\Lambda+\rho,\alpha_{1}+\alpha_{2})=k_{1}+k_{2}+1$, 
+so the Weyl's dimension formula gives $\text{dim}L(\Lambda)=\frac{(k_{1}+1)(k_{2}+1)(k_{1}+k_{2}+1)}{2}$.
+\end{example}
+
+In general, we may write $\Lambda=\Sigma_{i} k_{i}\Lambda_{i}$, where $\Lambda_{i}(H_{j})=\delta_{ij}$. Then $\text{dim}L(\Lambda)<\infty$ iff $k_{i}\in \Z_{+}$.
+ These $k_{i}$ are called \emph{labels} of the heighest weight. They are depicted on the Dynkin diagram:
+\begin{picture}(60,23)(0,-4)
+\put (6,8){$k_{1}$}
+\put (36,8){$k_2$}
+\put (15,2){\line(1,0){20}}
+\put (14,-3){\line(1,0){22}}
+\put (10,0){\circle{10}}
+\put (40,0){\circle{10}}
+\end{picture}
+
+Operations on modules can then often be described by manipulations of such labeled Dynkin diagrams. 
+\begin{proof}[Proof of Theorem~\ref{cartan}.] First suppose that $V$ is a finite dimensional irreducible $\g$-module. 
+By Lie's theorem, since $\mathfrak{b}$ is solvable, there exists a non-zero vector $v\in V$ and $\lambda \in \mathfrak{b}^{*}$ such that  $b(v)=\lambda(b)v$
+ for any $b\in \mathfrak{b}$. Now if $n\in \mathfrak{n}_{+}=[\mathfrak{b}, \mathfrak{b}]$, 
+ then 
+ $\lambda(n)=\Sigma_{i}\lambda([b_{i},b_{i}'])=\Sigma_{i} \lambda{(b_{i})}\lambda{(b_{i}')}-\lambda{(b_{i}')}\lambda{(b_{i})}=0$. 
+So we have $h v= \lambda(h)v$ and $\mathfrak{n}_{+}v=0$. Also $\mathcal{U}(\g)v=V$, since $V$ is irreducible, and $\mathcal{U}(\g)v$
+is a non-zero submodule (it contains $v$). Hence $V=L(\lambda)$. Why is $\lambda\in P_{+}$? 
+This is because $V$ is a finite-dimeensional module with respect to $<E_{i},H_{i},F_{i}>\cong \text{sl}_2$, and since $E_{i}v=0$,
+$H_{i}v=\lambda(H_{i})v$, by the key lemma on $\text{sl}_{2}$-modules we conclude that $\lambda(H_{i})\in \Z_{+}$.
+It remains to show that $\text{dim}L(\Lambda)< \infty $ if $\Lambda \in P_{+}$. This follows from the Weyl's dimension formula, which we will
+in turn deduce from the Weyl's character formula.
+\end{proof}
+
+\begin{defn*} Let $V$ be a $\g$-module, such that $V=\bigoplus_{\mu \in \h^{*}} V_{\mu}$, where
+ $V_{\mu}=\{v|hv=\mu(h)v \text{ for all } h\in \h\}$ (we assume $\text{dim}V  < \infty $). Then the (formal) character of $V$ is 
+ $\text{ch}V=\Sigma_{\mu\in \h^{*}} (\text{dim}V_{\mu}) e^{\mu}$, where $e^{\mu}$ are formal symbols, which obey the property of exponentials,
+ $e^{\lambda}e^{\mu}=e^{\lambda+\mu}$, $e^{0}=1$. 
+\end{defn*}
+
+\begin{thm} (Weyl's character formula.) \label{character}
+Let $R=\Pi_{\alpha \in \D_{+}}(1-e^{-\alpha})$. Provided that $\Lambda \in P_{+}$, one has:
+$e^{\rho}R \emph{ ch}L(\Lambda)=\Sigma_{w\in W} (\emph{det}w) e^{w(\Lambda+\rho)}$ 
+ 
+\end{thm}
+
+\begin{example} $\text{sl}_{2}$. We get $e^{\frac{\alpha}{2}} (1-e^{-\alpha})\text{ ch}L(m\rho)=e^{(m+1)\rho}-e^{-(m+1)\rho}$, 
+so that $\text{ ch}L(m\rho)= \frac{e^{(m+1)\rho}-e^{-(m+1)\rho}}{e^{\rho}-e^{-\rho}}= e^{m\rho}+e^{(m-2)\rho}+\ldots+e^{-m\rho}$,
+ which exactly corresponds to what we would expect from last lecture, since applying $F$ means subtracting $\alpha=2\rho$.
+\end{example}
+
+\begin{proof}[Derivation of Theorem~\ref{dimension} from Theorem~\ref{character}.] 
+Given $v \in \h^{*}$, consider the linear map $F_{\nu}$ characterised by $e^{\lambda}\mapsto e^{t(\nu,\lambda)}$. 
+It maps linear combinations to linear combinations and products to products. Applying $F_{\rho}$ to both sides of Weyl's character formula:
+$$e^{t(\rho,\rho)}\Pi_{\alpha\in \D_{+}}\left( 1-e^{-t(\rho, \alpha)}\right) \Sigma_{\lambda}\left(\text{ dim}L(\Lambda)_{\lambda}\right)e^{t(\rho, \lambda)}=\Sigma_{w\in W} (\text{det}w) e^{t(\rho,w(\Lambda+\rho))}=$$
+$$=\Sigma_{w\in W} (\text{det}w) e^{t(w^{-1}(\rho),\Lambda+\rho)}=\Sigma_{w\in W} (\text{det}w) e^{t(w(\rho),\Lambda+\rho)}=F_{\Lambda+\rho}\left(\Sigma_{w\in W} (\text{det}w) e^{w(\rho)}\right).$$
+Letting $\Lambda=0$ in the Weyl character formula, we get the Weyl denominator identity:
+$$e^{\rho}R\cdot 1=\Sigma_{w\in W}\left(\text{det}w\right)e^{w(\rho)}. $$
+Substituting in, we obtain  $$F_{\Lambda+\rho}\left(\Sigma_{w\in W} (\text{det}w) e^{w(\rho)}\right)=e^{t(\Lambda+\rho, \rho)}\Pi_{\alpha\in \D_{+}}\left(1-e^{-t(\Lambda+\rho, \alpha)}\right).$$
+Together with the first eguality, this gives $$e^{t(\rho,\rho)}\Sigma\text{ dim}L(\Lambda)_{\lambda} e^{-t(\rho, \alpha)}=e^{t(\Lambda+\rho, \rho)}\Pi_{\alpha\in \D_{+}} \frac{1-e^{-t(\Lambda+\rho,\alpha)}}{1-e^{-t(\rho,\alpha)}}$$ 
+Taking the limit as $t$ goes to $0$, we get, by L'Hopital's rule, $\text{ dim}L(\Lambda)=\lim_{t \to  0} \Pi_{\alpha\in \D_{+}} \frac{(\Lambda+\rho, \alpha)e^{-t(\Lambda+\rho,\alpha)}}{(\rho,\alpha)e^{-t(\rho,\alpha)}} = \Pi_{\alpha \in \D_{+}}\frac{(\Lambda+\rho, \alpha)}{(\rho,\alpha)}$
+\end{proof}
+
+
+\begin{proof}[Proof of the Weyl's character formula.] The Weyl group acts on the linear combinations of formal exponentials in an obvious way:
+ $w\left(\Sigma_{\lambda}c_{\lambda}e^{\lambda}\right)= \Sigma_{\lambda} c_{\lambda} e^{w(\lambda)}$.
+\begin{lemma} If $\Lambda(H_{i})\in \Z_{+}$, then $\text{ch}L(\Lambda)$ is $r_{i}$-invariant.
+\end{lemma}
+\begin{proof} By the key $\text{sl}_{2}$ lemma, $F_{i}^{\Lambda(H_{i}+1)}v_{\Lambda}$ is a singular vector of $L(\Lambda)$
+ (it is killed by $E_{i}$ by the key lemma, and by $E_{j}$ for $j\neq i$ since $F_{i}$ and $E_{j}$ commute). As $L(\Lambda)$ is irreducible, 
+we conclude that $F_{i}^{\Lambda(H_{i})+1}v_{\Lambda}=0$. 
+But $L(\Lambda)=\mathcal{U}(\g)v_{\Lambda}$. Since $\left(\text{ad}F_{i}\right)^{N}u=0$ for all $N\gg 0$, 
+given $u \in \mathcal{U}(\g)$, we conclude that $F_{i}^{N}v=0$ for $N \gg 0$, given $v \in V$.
+It is easy to deduce, using Weyl's complete reducibility theorem, that $L(\Lambda)$ is isomorphic to a direct sum of irreducible 
+$\text{sl}_{2}=<E_{i},H_{i},F_{i}>$-modules, say $V_{j}:L(\Lambda)=\oplus_{j}V_{j}$. 
+But for each $V_{j}$  the lemma holds, since $V_{j} \cong \text{sl}_{2}$-module $L(m\rho)$.
+ Hence the lemma holds for $L(\Lambda)$ as well.   
+\end{proof}
+
+\begin{lemma} For the Verma module $M(\Lambda)$ we have $R \text{ ch}M(\Lambda)=e^{\lambda}$
+\end{lemma}
+
+\begin{proof} By Proposition 2 from the last lecture, vectors $E^{k_{1}}_{-\beta_{1}}\ldots E^{k_{N}}_{-\beta_{N}}$ 
+form a basis of $M(\Lambda)$. Hence 
+$\text{ ch} M(\Lambda)=\Sigma_{(k_{1},\ldots k_{N})\in \Z_{+}^{N}}e^{\Lambda-k_{1}\beta_{1}\ldots -k_{N}\beta_{N}}= e^{\Lambda}\Pi_{\beta\in \D_{+}}(1+e^{-\beta}+e^{-2\beta}+\ldots)$. 
+Multiplying both sides by $R$ we get the desired result.
+\end{proof}
+
+\begin{lemma}
+$w(e^{\rho}R)=(\text{det}w)e^{\rho}R$
+\end{lemma} 
+
+\begin{proof}
+Since $s_{i}$'s generate $W$, it suffices to prove $s_{i}(e^{\rho}R)=-e^{\rho}R$. Indeed, 
+$s_{i}(e^{\rho}R)=s_{i}(e^{\rho}(1-e^{-\alpha_{i}})\left(\Pi_{\alpha \in \D_{+} \setminus \alpha_{i}} (1-e^{-\alpha})\right)=e^{\rho-\alpha_{i}}(1-e^{\alpha_{i}})\Pi_{\alpha \in \D_{+} \setminus \alpha_{i}} (1-e^{-\alpha})= -e^{\rho}R$, as wanted.
+\end{proof}
+
+\begin{lemma} Let $\Lambda \in \h^{*}_{\R}$ and let $V$ be a heighest weight module with heighest weight $\Lambda$. 
+Let $D(\Lambda)=\{ \Lambda -\Sigma k_{i}\alpha_{i}, k_{i}\in \Z_{+}\}$. Then 
+$\text{ch}V= \Sigma_{\lambda\in B(\Lambda)} a_{\lambda}\text{ ch}L(\lambda),$ where $a_{\Lambda}=1$, $a_{\lambda}\in \Z_{+}$, and
+ $B(\Lambda)=\{\lambda \in D(\Lambda)|(\Lambda+\rho,\Lambda+\rho)=(\lambda+\rho,\lambda+\rho)\}.$
+\end{lemma}
+
+\begin{proof}
+By induction on $\text{dim} V = \Sigma_{\lambda\in B(\Lambda)} \text{dim} V_{\lambda} < \infty$, since $B(\Lambda)$ is finite (by Proposition 1 from last lecture).
+If $v_{\lambda}$ is the only singular vector of $V$, then $V=L(\Lambda)$ and we are done. If we have another singular vector $v_{\lambda}$ then by Proposition 1 from last time $\lambda\in B(\Lambda)$. 
+Let $U=\mathcal{U}(\g)v_{\lambda}$, a heighest weight submodule of $V$. Then we have an exact sequence of $\g$-modules
+$0\to U \to V \to V/U \to 0 $. Then $\text{ch}V=\text{ch}U+\text{ch}{U/V}$, and we apply the induction assumption to both summands.  
+\end{proof}
+
+\begin{lemma} In the assumptions of Lemma 4  and presuming $V$ is irreducible, we have 
+$\text{ch}V=\Sigma_{\lambda \in B(\lambda)} b_{\lambda}\text{ch}M_{\lambda}$, where $b_{\Lambda}=1$ and $b_{\lambda}\in  Z$.
+\end{lemma}
+
+\begin{proof}
+By Lemma 4 we have for any $\mu \in M(\Lambda)$: 
+$\text{ch}M_{\mu}=\Sigma_{\lambda\in B(\mu)} a_{\lambda,\mu} \text{ch}L(\lambda)$.
+Now $B(\Lambda)=\{\lambda_{1}, \ldots, \lambda_{s}\}$, where $\lambda_{i}-\lambda_{j}\notin \{\Sigma k_{i}\alpha_{i}|k_{i}\in \Z_{+}\}$ if $i>j$. 
+We therefore have a system of linear equations $\text{ch}M_{\mu}=\Sigma_{\lambda\in B(\mu)} a_{\lambda,\mu} \text{ch}L(\lambda)$, 
+for which the matrix $(a_{ij})_{ij}$ is upper triangular matrix of integers with ones on the diagonal, 
+and so its inverse, which expresses $\text{ch}L(\Lambda)$'s in terms of $\text{ch}M(\mu)$'s for $\mu \in B(\Lambda)$
+ is a matrix of integers with ones on the diagonal as well, and we are done. 
+\end{proof}
+
+Now, to deduce the theorem from the lemmas, observe that 
+by Lemma 5 $\text{ch}V=\Sigma_{\lambda \in B(\lambda)} a_{\lambda}\text{ch}M_{\lambda}$, where $a_{\Lambda}=1$ and $a_{\lambda}\in  Z$
+We multiply both sides by $e^{\rho}R$ and use Lemma 2 to obtain
+$e^{\rho}R\text{ ch}L(\Lambda)=\Sigma_{\lambda \in B(\lambda)} a_{\lambda}e^{\rho+\lambda}$, $a_{\Lambda}=1$, $a_{\lambda}\in  Z$.
+By Lemma 1 $\text{ch}L(\Lambda)$ is $W$-invariant, and by Lemma 3 $e^{\rho}R$ is $W$-anti-invariant (i.e. multiplied by the determinant). 
+Hence the left hand side of the equation is anti-invariant, and therefore so is the right hand side.  We have 
+$$e^{\rho}R \text{ ch}L(\Lambda)=\Sigma_{w\in W}(\text{det}w) e^{w(\Lambda+\rho)}+\Sigma_{ \lambda \in B(\Lambda)\setminus \{\Lambda\}, \lambda+\rho \in P_{+}}a_{\lambda}\Sigma_{w\in W}(\text{det}w) e^{w(\lambda+\rho)}$$
+It remains to show that the second term in this sum is empty, i.e. that there are no $\lambda$ with
+ $\lambda+\rho \in P_{+}$, $\lambda=\Lambda-\alpha$ for  $\alpha=\Sigma k_{i}\alpha_{i}, k_{i}\in \Z_{+}, \alpha \neq 0$ 
+and $(\lambda+\rho, \lambda+\rho)=(\Lambda+\rho, \Lambda+\rho)$.
+Indeed, for such a $\lambda$ we would have 
+$0=(\Lambda+\rho, \Lambda+\rho)-(\lambda+\rho,\lambda+\rho)=(\lambda+\Lambda+2\rho, \alpha) > 0$,
+since $(\Lambda, \alpha_{i})=\frac{2\Lambda(H_{i})}{(\alpha_{i},\alpha_{i})} \geq 0$ 
+and similarly $(\lambda+\rho,\alpha_{i}) \geq 0$, and $(\rho, \alpha)>0$ since $\frac{2}{(\alpha_{i},\alpha_{i})}>0$. 
+This gives a contradictionand complets the proof.
+
+\end{proof}
+
+\end{document}

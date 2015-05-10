@@ -1,0 +1,413 @@
+%% LyX 1.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=1in,bmargin=1in,lmargin=1.2in,rmargin=1.2in}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \theoremstyle{plain}    
+ \newtheorem{thm}{Theorem}[section]
+ \numberwithin{equation}{section} %% Comment out for sequentially-numbered
+ \numberwithin{figure}{section} %% Comment out for sequentially-numbered
+ \theoremstyle{plain}
+ \theoremstyle{definition}
+  \newtheorem{xca}[section]{Exercise}%%Delete [section] for sequential numbering
+ \theoremstyle{definition}
+ \newtheorem{defn}[thm]{Definition}
+ \theoremstyle{definition}
+  \newtheorem{example}[thm]{Example}
+ \theoremstyle{remark}    
+ \newtheorem*{note*}{Note} 
+ \theoremstyle{plain}    
+ \newtheorem{cor}[thm]{Corollary} %%Delete [thm] to re-start numbering
+ \theoremstyle{definition}
+ \newtheorem*{defn*}{Definition}
+ \theoremstyle{plain}    
+ \newtheorem*{thm*}{Theorem} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\gln}{gl_n(\F)}
+\let\ker=\undefined
+\DeclareMathOperator{\ker}{Ker}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Z}{Z}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\s}{span}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\gl}{gl}
+\newcounter{xcacount}
+\let\xca=\undefined
+\newtheorem{xca}[xcacount]{Exercise}
+\newcommand{\sln}{sl_n(\F)}
+\newcommand{\son}{so_n(\F)}
+\newcommand{\spn}{sp_n(\F)}
+
+\usepackage{babel}
+\makeatother
+\begin{document}
+
+\title{18.745: Lecture 3}
+
+
+\author{Professor: Victor Ka\v{c}\\
+Scribe: Alexey Spiridonov}
+
+\maketitle
+\begin{xca}
+Show that the complete list of $n$-dimensional $\g$ with $\dim\Z(\g)=n-2$
+is 
+\end{xca}
+\begin{enumerate}
+\item $H_{1}\oplus Ab_{n-3}$, with $H_{1}$ as in Homework 2.
+\item $b\oplus Ab_{n-2}$, with $b$ and $Ab$ as in Homework 2.
+\end{enumerate}
+%
+
+\begin{proof}
+Let $B=\{ x_{1},\dots,x_{n-2}\}$ be a basis for $\Z(\g)$. Let $a,b\in\g$
+be some vectors such that $\s(B\cup\{ a,b\})=\g$. $a,b$ are linearly
+independent since they span a 2-dimensional subspace. The commutator
+of $b$ is 0 on an $n-1$ dimensional subspace of $\g$: $[b,x_{i}]=0,[b,b]=0$,
+so we must have $[a,b]\neq0$, since $b\notin\Z(\g)$. Let $c=[a,b]$;
+we then have two cases:
+\begin{enumerate}
+\item If $c\in\Z(\g)$, we call $a=p_{1}$ and $b=q_{1}$, and we see that
+$\{ a,b,c\}$ is just $H_{1}$.
+\item Otherwise, write $c$ in the basis $B\cup\{ a,b\}$: $c=\sum z_{i}x_{i}+z_{a}a+z_{b}b$.
+We know that at least one of $z_{a},z_{b}$is non-zero. Without loss
+of generality, let this be $z_{a}$. Then, $[c,b]=z_{a}[a,b]=z_{a}c$
+(since $\ad b$ kills the other basis vectors). Renormalizing $b:=z_{a}^{-1}b$,
+we have $[c,b]=c$, so $b,c$ span the non-commutative subalgebra
+of dimension 2. Observe that (since $z_{a}\ne0$), $B\cup\{ b,c\}$
+is a basis for $\g$, so we have the desired result.
+\end{enumerate}
+\end{proof}
+
+\section{Homework policy}
+
+The exercises from the previous two lectures are due every Tuesday.
+Lecture write-ups should be handed in within two weeks of the date
+of the lecture.
+
+
+\section{Representations}
+
+Representations are very useful tools for analysing the structure
+of Lie algebras. There are some theorems that only have proofs using
+representation theory, although they can be stated without it. 
+
+\begin{defn}
+A \emph{representation} of a Lie algebra $\g$ in a vector space $V$
+over a field $\F$ is a homomorphism $\pi:\g\rightarrow\gl V$. In
+particular, this means that $\pi([a,b])=[\pi(a),\pi(b)]$.
+\end{defn}
+
+\section{Examples}
+
+\begin{example}
+$\pi(a)=0$ for all $a\in\g$. This is called the \emph{trivial representation}.
+\end{example}
+%
+
+\begin{example}
+Let $\g$ be a subalgebra of $\gl V$, and let $\pi(a)=a$. This is
+called the defining (tautological, identity) representation.
+\end{example}
+%
+
+\begin{example}
+The adjoint representation, $\ad:\g\rightarrow\gl\g$ is defined by
+$\ad(a)\rightarrow(\ad a)$. 
+
+To check that $\ad[a,b]=[\ad a,\ad b]$, we apply it to $c$, getting
+\[
+[[a,b],c]\overset{?}{=}(\ad a\ad b-\ad b\ad a)c=[a,[b,c]]-[b,[a,c]],\]
+ which is just the Jacobi identity. So, this linear map is indeed
+a representation.
+\end{example}
+\begin{note*}
+In these lecture notes, I will denote the center of $\g$ as $\Z(\g)$.
+\end{note*}
+\begin{cor}
+$\ad$ defines an embedding of $\g/\Z(\g)$ into $\gl\g$, since $\ker\ad=\Z(\g)$.
+\end{cor}
+In particular, if $\Z(g)=0$, we embed $\g$ as a subalgebra of $\gl\g$.
+It's thus natural to ask: can always embed $\g$ in some $\gl V$?
+The answer is (stated without proof):
+
+\begin{thm}
+(Ado's Theorem) In fact, any finite-dimensional Lie algebra can be
+embedded in some $\gl V$, $V$ finite-dimensional.
+\end{thm}
+There are some general ways of constructing representations.
+
+\begin{enumerate}
+\item Let $\pi:\g\rightarrow\gl V$ be a representation, and there $U\subset V$
+is an invariant subspace, i.e.$\pi(\g)U\subset U$. Then, the restriction
+$\pi|_{U}:U\rightarrow\gl U$ is a representation.
+\item Taking $U$ as above, we can look at the quotient space $V/U$ as
+well. Then, $\pi|_{V/U}:\g\rightarrow\gl(V/U)$. This warrants some
+explanation. $\pi$ takes $g\in\g$ to $A\in\End V$; $U$ is invariant,
+so $A\subset AU$. Thus, it can be viewed as an operator on $V/U$:
+$A(v+U)=Av+U$.
+\item Take 2 representation $\pi_{1},\pi_{2}$ of $\g$ in vector spaces
+$V_{1}$ and $V_{2}$, respectively. Then, we can consider the direct
+sum: for $g\in\g$, $(\pi_{1}\oplus\pi_{2})(g)=\pi_{1}(g)\oplus\pi_{2}(g)\in V_{1}\oplus V_{2}$.
+\end{enumerate}
+
+\section{Engel's Theorem}
+
+Now we prove the first non-trivial theorem about Lie algebras. First,
+a reminder:
+
+\begin{defn*}
+An operator $A$ on a vector space is nilpotent if there exists $n>0$
+such that $A^{n}=0$.
+\end{defn*}
+\begin{thm*}
+(Engel's Theorem) Let $\g\subset\gl V$ be a subalgebra consisting
+of nilpotent operators. Assume $V$ is finite-dimensional. Then, there
+exists a $v\ne0$ in $V$ such that every $g\in\g$ annihilates $v$.
+\end{thm*}
+\begin{proof}
+We will proceed by induction on the dimension of $\g$ (which is a
+subspace of the finite-dimensional $\End V$). 
+
+The base case is $\dim V=1$. Then, $\g=\F a$, with $a$ is a nilpotent
+operator on $V$. Take $N$ such that $a^{N}=0$, but $a^{N-1}\ne0$.
+Then, $\exists v$ such that $a^{N-1}v\ne0$. However, $a(a^{N-1}v)=0$,
+so $v'=a^{N-1}v$ is the desired vector.
+
+Assume that the theorem holds for all $\g$ of dimension $<n$. We
+will prove that it holds for $\g$ of dimension $n\ge2$. 
+
+Take a proper subalgebra $\h\subset\g$ of the maximal possible dimension.
+Since $\F a$ is a subalgebra of $\g$. $\dim\h\ge1$. Consider a
+representation of $\h$ given by $\pi:h\rightarrow\ad h,h\in\h$,
+$\pi$ acting on $\g$. The fact that $\h$ is a subalgebra means
+that $\h$ is an invariant subspace with respect to $\pi$.
+
+Take $\pi'=\ad_{\g/\h}$ to be the representation of $\h$ in $\g/\h$.
+In Lecture 2, we proved a lemma: if $g\in\g$ is nilpotent, then so
+is $\ad g$. Therefore, $\ad h$, considered as a Lie algebra over
+$\g/\h$, consists of nilpotent operators. We know that $\dim\h<\dim\g$,
+so by induction, there is a non-zero vector $\bar{a}\in V$ that's
+annihilated by all $\pi(h),h\in\h$. Let $a$ be some preimage of
+$\bar{a}$ in $\g$ under the map $\g\rightarrow\g/\h$. Then, we
+have $[\h,a]\subset\h$; in other words, $\h\oplus\F a$ is a subalgebra
+of $\g$. It isn't equal to $\h$, and so, by maximality of $\h$
+it must be $\g$. Hence, $\h$ must have codimension 1.
+
+Applying the inductive assumption to $\h$, we get a nonzero $v\in V$
+such that $\h v=0$. Thus, the subspace $U\subset V$ of all vectors
+annihilated by $\h$ is non-empty. 
+
+$U$ is $a$-invariant. Take $u\in U$, then we have this equivalence,
+$a(u)\in U\Leftrightarrow h(a(u))=0\forall h\in\h$. Expanding the
+second formulation, we have $ha(u)=([h,a]+ah)u$. $[h,a]\in\h$, so
+the first term is zero; similarly $h(u)=0$, so $a(h(u))=0$. Hence,
+$U$ is indeed $a$-invariant. Thus, we can consider the restriction
+of $a$ to $U$. $a$ is nilpotent, so $\exists u\in U$ such that
+$au=0$, but $u\ne0$. This $u$ is the desired vector.
+\end{proof}
+It's natural to ask: What if $\g$ is a subspace, but not a subalgebra?
+Does the theorem still hold? It turns out that the answer is no. The
+following exercise provides a counterexample.
+
+\begin{xca}
+Find a 2-dimensional subspace $S$ of $3\times3$ matrices that consists
+of nilpotent matrices, so that no $0\ne v\in\F^{3}$ is annihilated
+by every $s\in S$.\\
+
+\end{xca}
+We want two matrices $A,B$ such that any linear combination has characteristic
+polynomial $x^{3}$, but with non-overlapping eigenspaces. If we take
+\[
+A=\left(\begin{array}{ccc}
+0 & 1 & 0\\
+0 & 0 & 1\\
+0 & 0 & 0\end{array}\right),\]
+ it has a 0th eigenspace, which is spanned by $e_{1}=(1,0,0)$. Then,
+$B$ mustn't annihilate $e_{1}$, but needs to kill some linear combination
+of $e_{2}$ and $e_{3}$. Suppose $Be_{3}=0$. Then, \[
+B=\left(\begin{array}{ccc}
+a & b & 0\\
+c & d & 0\\
+e & f & 0\end{array}\right),(B-\lambda I)=\left(\begin{array}{ccc}
+a-\lambda & b+g & 0\\
+c & d-\lambda & g\\
+e & f & -\lambda\end{array}\right)\]
+We want \begin{multline*}
+-\lambda^{3}=(a-\lambda)(-\lambda(d-\lambda)-fg)-(b+g)(-\lambda c-eg)=\\
+=g(be-af+eg)+(g(f+c)+bc-ad)\lambda+(a+d)\lambda^{2}-\lambda^{3}\end{multline*}
+ no matter what $g$ is. Thus, $e=0$, $f=-c$,$af=0$, $a=-d$, and
+$ad=bc$. Assume $f\ne0$; then, $a=d=0$, and $b=0$. We can thus
+take \[
+B=\left(\begin{array}{ccc}
+0 & 0 & 0\\
+1 & 0 & 0\\
+0 & -1 & 0\end{array}\right).\]
+
+
+We see that its 0th eigenspace is spanned by $(0,0,1)$, and so no
+$v\in\F$is killed by both $A$ and $B$, as we wanted. By construction,
+the subspace spanned by $A$ and $B$ consists of nilpotent matrices,
+so we have the desired result.
+
+
+\section{Equivalent Formulations}
+
+In this section, we present some corollaries of Engel's Theorem. 
+
+\begin{enumerate}
+\item \label{repcor}Let $\pi:\rightarrow\gl V$ be a representation of
+$\g$ in a finite dimensional vector space $V$, such that all $\pi(g),g\in\g$
+are nilpotent operators. Then, there exists nonzero $v\in V$ that
+gets annihilated by all $\pi(g)$. Moreover, there exists a basis
+of $V$, in which all $\pi(g)$ are strictly upper-triangular. 
+
+\begin{proof}
+$\pi(\g)$ is a subalgebra of $\gl V$; applying Engel's theorem,
+we find a nonzero $v\in V$ such that $\pi(g)v=0\forall g\in\g$.
+
+To construct the basis, take a $v_{1}=v$ as above. Then, $\F v_{1}$
+is $\pi(g)$-invariant, since it gets annihilated. (Hence, every $\pi(g)$
+has a column of zero coefficients corresponding to $v_{1}$ if it's
+used as a basis vector). By invariance of $\F v_{1}$, we may consider
+$V_{2}=V/\F v_{1}$, and the corresponding representation $\pi_{1}$
+of $\g$ induced by $\pi$. The operators $\pi_{1}(g)$ are also nilpotent;
+we apply Engel's Theorem again to get $v_{2}'$ that's annihilated
+by all $\pi_{1}(g)$. Then, a pre-image $v_{2}\in V$ of $v_{2}'$
+is sent to $\F v_{1}$by every $\pi(g)$. We proceed to make $V_{3}$
+and get $v_{3}$, etc. In the end, we have the desired basis. 
+\end{proof}
+\item A subalgebra $\g\subset\gl V,\dim V<\infty$ consists of nilpotent
+matrices iff in some basis of $V$, all matrices of $g\in\g$ are
+strictly upper-triangular.
+
+\begin{proof}
+If all matrices of $\g$ are strictly upper-triangular, they are all
+nilpotent. To see this, take $e_{1},\dots e_{n}$ to be the standard
+basis vectors. Then (with $c$ standing for arbitrary constants),
+$Ae_{1}=0,Ae_{2}=ce_{1}\Rightarrow A^{2}e_{2}=0,Ae_{3}=ce_{1}+ce_{2}\Rightarrow A^{3}e_{3}=0,\dots$.
+Hence, $A^{n}e_{i}=0$ for all $i$.
+
+The converse follows entirely from \ref{repcor}, by applying it with
+$\pi$ chosen to be the defining representation.
+\end{proof}
+\end{enumerate}
+Here is another exercise to conclude the lecture.
+
+\begin{xca}
+Compute the centers of the Lie algebras $\gln,\sln,\son,\spn$.\\
+
+\end{xca}
+\begin{enumerate}
+\item $\gln$ is the entire space of matrices. If $n=1$, the entire space
+is commutative (and hence $\text{gl}_{1}(\F)$ is its own center).
+Otherwise, denote by $M_{i,j}$ the matrix of zeros with a single
+1 at position $i,j$. Then, if $x\in\Z(\gln)$, $M_{i,j}x=xM_{ij}$.
+The first term is the $j$th row of $x$ placed as the $i$th row
+in the product. The second term is the $i$th column of $x$ placed
+as the $j$th column in the product. The other entries in both matrices
+are 0. Therefore, everything in the $j$th row of $x$ (except for
+$j,j$) must be equal to 0. Hence, $x$ must be diagonal. Moreover,
+notice that $(M_{i,j}x)_{i,j}=x_{j,j}$, while $(xM_{i,j})_{i,j}=x_{i,i}$.
+So, $x_{i,i}=x_{j,j}$. This forces $x=aI$ for some $a\in\F$.
+\item $\sln$ is the algebra of matrices with trace 0. If $n=1$, the algebra
+and its center are trivial. When $n\geq2$, the matrices $M_{i,j},i\ne j$
+used before are in the algebra. Hence, the same argument shows that
+$\Z(\sln)\in\{ aI|a\in\F\}$. But, since these are trace 0 matrices,
+$a=0$, and $\Z(\sln)=0$.
+\item \label{son}We have a symmetric $B$. Suppose $x\in\Z(\son)$; then,
+we have $x^{T}B+Bx=0$ and $xz=zx$ for any $z\in\g$. Let $y=(M_{ij}-M_{ji})$,
+and $z=B^{-1}y$, then, it is in $\g$: \[
+z^{T}B+Bz=y^{T}(B^{-1})^{T}B^{T}+BB^{-1}y=y^{T}+y=0\]
+Multiplying the commutation relation by $B$, we have $0=Bxz-Bzx=-x^{T}Bz-Bzx=x^{%T
+}y+yx$. Since $y$ is antisymmetric, this is equivalent to $(yx)^{T}=(yx)$.
+Observe that $yx$ is all zeros, except for a copy of $j$th row of
+$x$ in the $i$th row place, and a negated copy of the $i$th row
+of $x$ in the $j$th row place. The fact that $yx$ is symmetric
+means that all but four positions of $x$ are forced to be 0. We get
+no constraint on $x_{i,j}$ and $x_{j,i}$, since these land on the
+diagonal in $xy$. However, we do get that $x_{i,i}=-x_{j,j}$. Supposing
+that $n\geq3$, this means we can zero out all the off-diagonal elements.
+Additionally, we would get $x_{i_{1},i_{1}}=-x_{i_{2},i_{2}},x_{i_{2},i_{2}}=-x_{i_{3},i_{3}},x_{i_{1},i_{1}}=-x_{i_{3},i_{3}}$,
+which implies that the diagonal is zero as well. So, for $n\geq3$,
+we have $\Z(\g)=0$. The same holds for $n=1$, trivially. When $n=2$,
+we change the basis to make $B=y\Bigl(\begin{array}{cc}
+1 & 0\\
+0 & x\end{array}\Bigr)$, with $y\ne0,x\ne0$. Then, for $A=\Bigl(\begin{array}{cc}
+a & b\\
+c & d\end{array}\Bigr)$, we have \[
+0=A^{T}B+BA=y\Bigl(\begin{array}{cc}
+a & cx\\
+b & dx\end{array}\Bigr)+y\Bigl(\begin{array}{cc}
+a & b\\
+cx & dx\end{array}\Bigr),\]
+which implies that (assume that $\text{char }\F\ne2$): $a=d=0$ and
+$b=-cx$. Given \[
+C=\Bigl(\begin{array}{cc}
+0 & -cx\\
+c & 0\end{array}\Bigr),D=\Bigl(\begin{array}{cc}
+0 & -dx\\
+d & 0\end{array}\Bigr),\]
+ they clearly always commute. So, for $n=2$, $\Z(\g)=\g$.
+\item The computation is very similar to \ref{son}. This time, our $B$
+is antisymmetric. Suppose $x\in\Z(\son)$; then, we have $x^{T}B+Bx=0$
+and $xz=zx$ for any $z\in\g$. Let $y=(M_{ij}+M_{ji})$, and $z=B^{-1}y$,
+then, it is in $\g$: \[
+z^{T}B+Bz=y^{T}(B^{-1})^{T}(-B)^{T}+BB^{-1}y=y-y^{T}=0\]
+Multiplying the commutation relation by $B$, we have $0=Bxz-Bzx=-x^{T}Bz-Bzx=x^{%T
+}y+yx$. Since $y$ is symmetric, this means that $yx=-(yx)^{T}$. Observe
+that $yx$ is all zeros, except for a copy of $j$th row of $x$ in
+the $i$th row place, and a copy of the $i$th row of $x$ in the
+$j$th row place. Since $yx$ is antisymmetric, all but four positions
+of $x$ are forced to be 0. We get no constraint on $x_{i,j}$ and
+$x_{j,i}$, since these land on the diagonal in $yx$. However, we
+do get that $x_{i,i}=x_{j,j}$. Supposing that $n\geq3$, this means
+we can zero out all the off-diagonal elements. Additionally, we have
+equality relations between any element of the diagonal, meaning that
+$x=aI$ (and we can pick any $a$). However, $aI$ can only be in
+$\g$ if $2aB=0$. This is impossible, except in characteristic 2.
+
+
+When $n=2$, $B=\Bigl(\begin{array}{cc}
+0 & x\\
+-x & 0\end{array}\Bigr)$, with $x\ne0$. Then, for $A=\Bigl(\begin{array}{cc}
+a & b\\
+c & d\end{array}\Bigr)$, to be in $\g$. we must have \[
+0=A^{T}B+BA=x\Bigl(\begin{array}{cc}
+-c & a\\
+-d & b\end{array}\Bigr)+x\Bigl(\begin{array}{cc}
+c & d\\
+-a & -b\end{array}\Bigr)\]
+ so we see that $a=-d$. If $C\in\Z(\g)$, then we also know $a=d$
+(from above). So, if $C$ commutes with everything, it has the form
+$\Bigl(\begin{array}{cc}
+0 & u\\
+v & 0\end{array}\Bigr)$. Then, the following must hold for all $A\in\g$:
+
+\[
+0=AC-CA=\Bigl(\begin{array}{cc}
+bv & au\\
+-av & cu\end{array}\Bigr)-\Bigl(\begin{array}{cc}
+cu & -au\\
+av & bv\end{array}\Bigr)\Rightarrow C=0.\]
+ The only antisymmetric matrix of dimension 1 is 0, so that case is
+nonsensical. Thus, the center of $\spn$ is always 0.\end{enumerate}
+
+\end{document}

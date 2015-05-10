@@ -1,0 +1,80 @@
+/* What follows is an adapted version of the Jello Layout,
+   as described here
+     http://www.positioniseverything.net/articles/jello.html
+   This is mostly not my code.
+*/ 
+
+/* Jello */
+body {
+  padding: 0 12em 0 12em; /* these side paddings together determine the natural min-width */
+  margin: 0;
+  text-align: center; /* this centers the wrappers in older IEwin versions */
+  background: #ccccff;
+  color: black;
+}
+
+#sizer {
+  margin: 0 auto 0 auto; /* this centers the wrappers in standards browsers */
+  width: 75%; /* here is the critical value for customizing the Jello behavior */
+  max-width: 28em;  /* version for IE is at the bottom of this style block */
+}
+
+#expander {
+  background: white;
+  margin: 0 -12em 0 -12em; /* these side margins should be the same
+                              or slightly less than body paddings */
+  min-width: 24em; /* This prevents Safari from losing the negative
+                      margins in narrow windows */
+  position: relative;
+}
+
+/* Holly hack for IE. Must be zero, not the usual 1% value, due to IE bug
+ * \*/
+* html #expander { height: 0; }
+/* */
+
+/* helps IE get the child percentages right. */
+#wrapper { width: 100%; } 
+
+/* * * * * * * * * * * * * * * * * */
+
+#lsidebar {
+  width: 5%;
+  float: left;
+  display: inline; /* IEwin doubled margin bug fix */
+  text-align: left;
+  margin-left: 0;
+} 
+
+#content {
+  width: 80%;
+  margin-right: 5%;
+  text-align: left;
+  float: right;
+  display: inline; /* IEwin doubled margin bug fix */
+}
+
+#rsidebar {
+  width: 5%;
+  float: right;
+  display: inline; /* IEwin doubled margin bug fix */
+  text-align: left;
+  margin-left: 0;
+} 
+
+/* http://positioniseverything.net/easyclearing */
+
+.clearfix:after {
+  content: "."; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;
+}
+
+.clearfix {display: inline-table;}
+
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */

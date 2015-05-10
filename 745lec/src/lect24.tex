@@ -1,0 +1,170 @@
+\documentclass[11pt]{article}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{pstricks}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf 18.745 Introduction to Lie Algebras } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Scribes: #4}{Lecture #1}}
+
+
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\N}{\mathbin}{AMSb}{"4E}
+\DeclareMathSymbol{\Z}{\mathbin}{AMSb}{"5A}
+\DeclareMathSymbol{\R}{\mathbin}{AMSb}{"52}
+\DeclareMathSymbol{\Q}{\mathbin}{AMSb}{"51}
+\DeclareMathSymbol{\I}{\mathbin}{AMSb}{"49}
+\DeclareMathSymbol{\C}{\mathbin}{AMSb}{"43}
+\DeclareMathSymbol{\F}{\mathbin}{AMSb}{"46}
+
+\newcommand{\sll}{\mbox{sl}}
+\newcommand{\gl}{\mbox{gl}}
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\tr}{\mbox{tr\ }}
+\newcommand{\Mat}{\mbox{Mat}}
+\newcommand{\Lie}{\mbox{Lie}}
+\newcommand{\Der}{\mbox{Der\ }}
+\newcommand{\End}{\mbox{End\ }}
+\newcommand{\ad}{\mbox{ad\ }}
+\newcommand{\im}{\mbox{im\ }}
+\newcommand{\Ker}{\mbox{ker\ }}
+
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\He}{\mathfrak{H}}
+
+\newcommand{\sk}{\vspace*{1em}}
+
+\newtheorem{defn}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{proof}{Proof}
+\newtheorem{prop}{Proposition}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{24}{Fall 2004}{Prof.\ Victor Ka\v{c}}{Maksim Lipyanskiy and Yakov Shapiro}
+
+For the last two lectures ${\mathfrak g}$ will be a finite-dimensional semisimple Lie algebra over an algebraically closed field $\mathbb{F}$ of characteristic $0$.
+
+Choose a Cartan subalgebra ${\mathfrak h}$ in ${\mathfrak g}$. Let $\Delta \subset {\mathfrak h}^*$ be the set of roots, $\Delta_+$ the subset of positive roots. Let ${\mathfrak g}= {\mathfrak h} \oplus (\bigoplus_{\alpha \in \Delta} {\mathfrak g}_\alpha)$ be the root space decomposition of ${\mathfrak g}$. 
+
+Recall that ${\mathfrak g}_\alpha = \mathbb{F}E_\alpha$. Let ${\mathfrak n}_+ = \bigoplus_{\alpha \in \Delta_+} {\mathfrak g}_\alpha$, and ${\mathfrak n}_- = \bigoplus_{\alpha \in \Delta_-} {\mathfrak g}_\alpha$. We then have the \emph{triangular decomposition} ${\mathfrak g}={\mathfrak n}_- \oplus {\mathfrak h} \oplus {\mathfrak n}_+$. Let ${\mathfrak b} = {\mathfrak h} \oplus {\mathfrak n}_+$; ${\mathfrak b}$ is called a \emph{Borel subalgebra} of ${\mathfrak g}$. Note that $[{\mathfrak b}, {\mathfrak b}] = {\mathfrak n}_+$. Since ${\mathfrak n}_+$ is a nilpotent subalgebra of ${\mathfrak g}$, ${\mathfrak b}$ is a solvable subalgebra.
+
+If $H_1,\, H_2,\, \ldots \, H_r$ is a basis of ${\mathfrak h}$, then $\{E_{-\beta} \, (\beta \in \Delta_+),\,  H_i \, (i=1,\, 2,\, \ldots \, r),$ $ E_{\beta} \, (\beta \in \Delta_+)\}$ form an ordered basis of ${\mathfrak g}$ if we choose an ordering on the positive roots $\beta_1,\, \beta_2,\, \ldots\, \beta_N$ (where $r+2N= \dim {\mathfrak g}$). Then, by the Poincar\'{e}-Birkhoff-Witt theorem, the elements
+$$
+E_{-\beta_1}^{m_1}E_{-\beta_2}^{m_2} \ldots E_{-\beta_N}^{m_n} h_1^{s_1} h_2^{s_2} \ldots h_r^{s_r} E_{\beta_1}^{n_1} E_{\beta_2}^{n_2} \ldots E_{\beta_r}^{n_r} \quad (m_i,\, s_i,\, n_i \in \mathbb{Z}_{+}) 
+$$
+form a basis of the universal enveloping algebra $U({\mathfrak g})$ of ${\mathfrak g}$. (When all $m_i$, $s_i$, and $n_i$ are zero, the product is $1$).
+
+A \emph{highest weight ${\mathfrak g}$-module} with highest weight $\Lambda \in {\mathfrak h}^*$ is defined by the property that it contains a non-zero vector $v_\Lambda$ such that
+\begin{enumerate}
+\item[(1)]  $h v_\Lambda = \Lambda(h) v_\Lambda$ for all $h \in {\mathfrak h}$.
+\item[(2)] ${\mathfrak n}_+ v_\Lambda = 0$
+\item[(3)] $U({\mathfrak g})v_\lambda = V$
+\end{enumerate}
+By the above description of the basis of $U({\mathfrak g})$, properties (1) and (2) imply that (3) is equivalent to the following:
+\begin{enumerate}
+\item[(3')] $U({\mathfrak n}_-)v_\Lambda = V$
+\end{enumerate}
+
+For $\mu \in {\mathfrak h}^*$, the weight subspace of a ${\mathfrak g}$-module $V$ is given by $V_\mu = \{ v \in V : h v =  \mu (h)v \mbox{ for all } h \in {\mathfrak h} \}$. If $V_\mu$ is non-zero, $\mu$ is called a weight of the ${\mathfrak g}$-module $V$.
+
+A non-zero vector $v \in V_\mu$ is called \emph{singular} if ${\mathfrak n}_+ v = 0$. If one exists, $\mu$ is called a \emph{singular weight}.
+
+\textbf{Example.} Any $\Lambda \in {\mathfrak h}^*$ is a singular weight of a highest weight ${\mathfrak g}$-module with highest weight $\Lambda$.
+
+\textbf{Notation.} Given $\Lambda \in {\mathfrak h}^*$, let $D(\Lambda) = \{ \Lambda - \sum_{i=1}^r k_i \alpha_i : k_i \in \mathbb{Z}_+ \} \subset {\mathfrak h}^*$, where $\Pi = \{ \alpha_1,\, \alpha_2,\, \ldots \, \alpha_r \}$ is the set of simple roots of ${\mathfrak g}$.
+
+\begin{prop} Let $V$ be a highest weight ${\mathfrak g}$-module with highest weight $\Lambda$. Then
+\begin{enumerate}
+\item[(a)] $V = \bigoplus_{\lambda \in D(\Lambda)}V_\lambda$
+\item[(b)] $V_\Lambda = \mathbb{F}v_\Lambda$ and $\dim V_\lambda < \infty$
+\item[(c)] $V$ is an irreducible ${\mathfrak g}$-module if and only if $\Lambda$ is its only singular weight.
+\item[(d)] $V$ contains a unique proper maximal submodule.
+\item[(e)] If $v$ is a singular vector with weight $\lambda$, then $\Omega (v) = (\lambda + 2\rho, \lambda)v$, where $(\cdot \, , \cdot )$ is a non-degenerate symmetric invariant bilinear form on ${\mathfrak g}$, $\Omega$ is the corresponding Casimir operator, and $2\rho = \sum_{\alpha \in \Delta_+} \alpha$.
+\item[(f)] $\Omega|_V = (\Lambda + 2\rho, \Lambda) Id_V$
+\item[(g)] If $\lambda$ is a singular weight, then $(\lambda + \rho, \lambda + \rho)=(\Lambda + \rho, \Lambda + \rho)$.
+\item[(h)] If $\Lambda \in {\mathfrak h}^*_{\mathbb{R}} = \mathbb{R} \Delta$, then $V$ has finitely many singular weights.
+\end{enumerate}
+\end{prop}
+
+\emph{Proof.} (a) and (b) follow from the property (3'), which shows that any vector in $V$ is a linear combination of elements of the form $E_{-\beta_{i_1}}E_{-\beta_{i_2}} \ldots E_{-\beta_{i_k}}v_\Lambda$, and each such element has weight $\Lambda - \beta_{i_1}-\beta_{i_2} - \ldots - \beta_{i_k}$.
+
+(c) By a lemma from lecture 19, for any ${\mathfrak g}$-submodule $U$ of $V$
+\begin{equation} \label{TwentyFour_Sum}
+U = \bigoplus_{\lambda \in D(\Lambda)} (U \cap V_\lambda)
+\end{equation}
+Now let $\lambda = \Lambda - \sum_i k_i \alpha_i$, where all $k_i$-s are in $\mathbb{Z}_+$. Choose $\lambda$ to be an element of $D(\Lambda)$ of minimal height for which $U \cap V_\lambda \neq 0$. Let $v \in (U \cap V_\lambda)$ be non-zero. Then for any $\alpha \in \Delta_+$ we will $E_\alpha v \in V_{\lambda + \alpha}$, and $E_\alpha v$ has a weight smaller than the weight of $v$. Therefore, by our choice of $\lambda$, $E_\alpha v = 0$ for all $\alpha \in \Delta_+$, so $v$ must be a singular vector.
+
+Conversely, if $v$ is a singular vector of weight $\lambda$, then $U({\mathfrak g})v = U({\mathfrak n}_-)v$, and this is a proper submodule of $V$ unless $\lambda = \Lambda$.
+
+(d) also follows from (\ref{TwentyFour_Sum}), because the sum of all proper submodules of $V$ satisfies (\ref{TwentyFour_Sum}) and does not contain $v_\lambda$, so it is the only maximal proper submodule.
+
+(e) Recall that $\Omega = \sum_i u_i v_i$, where $(u_i, v_j)=\delta_{ij}$, $\{ u_i \}$ is a basis of ${\mathfrak g}$ and $\{ v_i \}$ is the dual basis. Since $\Omega$ is independent on the choice of basis, we can make any selection we want. We will use $\{ E_\alpha \ (\alpha \in \Delta_+),\ E_{-\alpha} \ (\alpha \in \Delta_+), \ H_i \ (i=1,2, \ldots n )\}$ as a basis $\{ u_i \}$ for ${\mathfrak g}$. The dual basis is $\{ E_{-\alpha} \ (\alpha \in \Delta_+),\ E_{\alpha} \ (\alpha \in \Delta_+), \ H^i \ (i=1,2, \ldots n )\}$, where $(E_\alpha, E_{-\alpha}) = 1$ for all $\alpha \in \Delta_+$ and $(H_i, H^j)=\delta_{ij}$. We now have
+$$
+\Omega = \sum_{\alpha \in \Delta_+}(E_\alpha E_{-\alpha} + E_{-\alpha}E_\alpha) + \sum_i H_i H^i = 2 \sum_{\alpha \in \Delta_+} E_{-\alpha}E_\alpha + 2\nu^{-1}(\rho) + \sum_i H_iH^i
+$$
+because $[E_{-\alpha}, E_\alpha]=(E_{-\alpha}, E_\alpha)\nu^{-1} (\alpha) = \nu^{-1}(\alpha)$.
+
+Therefore, if $v$ is a singular vector with weight $\lambda$, then $\Omega (v) = 2 \lambda (\nu^{-1}(\rho)) + \sum_i\lambda(H_i) \lambda (H^i) = 2 (\lambda, \rho) + (\lambda, \lambda)$. This proves (e).
+
+(f) By (e), if $v_\Lambda$ is the highest weight vector in $V_\Lambda$, then $\Omega v_\Lambda = (\Lambda + 2\rho, \Lambda) v_\Lambda$. But any other vector in $V$ has the form $g v_\Lambda$, where $g \in U({\mathfrak g})$. However, $\Omega$ commutes with ${\mathfrak g}$ and hence with $U({\mathfrak g})$. So $\Omega(gv)=g\Omega(v)$. Therefore, $\Omega (g v_\Lambda) = g \Omega (v_\Lambda) = (\Lambda + 2\rho, \Lambda) g v_\Lambda$. Thus (f) holds.
+
+(g) follows from (e) and (f): together they imply that $(\Lambda + 2\rho, \Lambda) = (\lambda + 2\rho, \lambda)$.
+
+(h) All weights of $V$ lie in $D_\Lambda$, hence they also lie in ${\mathfrak h}^*_{\mathbb{R}}$. So the set of singular weights must lie in the intersection of a discrete subset $D(\Lambda)$ of the Euclidean space with the compact subset given by $\{\lambda| \space |\lambda + \rho|^2 = |\Lambda + \rho|^2 \}$. Hence the set of singular weights is contained in a finite set. \hfill $\Box$
+
+A \emph{Verma module} with highest weight $\Lambda \in {\mathfrak h}^*$, denoted by $M(\Lambda)$, is a highest weight module with highest weight $\Lambda$ such that any other highest weight module with highest weight $\Lambda$ is a quotient of $M(\Lambda)$.
+
+\begin{prop}
+\begin{enumerate}
+\item[(a)] For any $\Lambda \in {\mathfrak h}^*$, $M(\Lambda)$ exists and is unique up to isomorphism.
+\item[(b)] The vectors $E_{-\beta_1}^{k_1} E_{-\beta_2}^{k_2} \ldots E_{-\beta_n}^{k_n}$, where $k_i \in \mathbb{Z}_+$ and $\Delta_+ = \{ \beta_1, \beta_2, \ldots \beta_n \}$, form a basis of $M(\Lambda)$.
+\item[(c)] $M(\Lambda)$ has a unique irreducible quotient, $L(\lambda) = M(\lambda)/N(\lambda)$, where $N(\lambda)$ is the unique maximum submodule of $M(\lambda)$.
+\item[(d)] $M(\Lambda) \cong M(\Lambda ')$ (respectively $L(\Lambda) \cong L(\Lambda')$) if and only if $\Lambda = \Lambda'$.
+\end{enumerate}
+\end{prop}
+
+\emph{Proof.} (a) We construct $M(\Lambda)$ as $U({\mathfrak g}) / U({\mathfrak g}) <{\mathfrak n}_+, h- \Lambda (h) \ \ (h \in {\mathfrak h})>$, where ${\mathfrak g}$ acts by multiplication on the left, and the highest weight vector $v_\Lambda$ is the image of $1$ in $U({\mathfrak g})$. Uniqueness is proved by universality.
+
+(b) is clear from the description of the basis of $U({\mathfrak g})$, which shows that no non-zero linear combination of the vectors from (b) can belong to the left ideal described above.
+
+(c) follows from part (d) of the previous proposition.
+
+(d) follows from (c), since the set of roots of $M(\Lambda)$ is $D(\Lambda)$, but $D(\Lambda)= D(\Lambda')$ iff $\Lambda = \Lambda'$. The second part of (d) also follows from (c), because $L(\Lambda)$ determines its highest weight $\Lambda$ uniquely. \hfill $\Box$
+
+\textbf{Example.} For $sl_2 = <E, F, H>$, ${\mathfrak h} = \mathbb{C}H$ and each $\Lambda \in {\mathfrak h}^*$ is just given by a number $\Lambda=\Lambda(H)$. Also, we have $\rho(H)=1$. Then $M(\Lambda)$ is the span of $v_\Lambda,\, Fv_\Lambda,\, F^2 v_\Lambda,\, \ldots $. $F$ acts on it in the obvious way, and the action of $E$ and $H$ is determined by the key lemma: $E(F^k v_\Lambda) = k (\Lambda - k + 1)F^{k-1} v_\Lambda$ and $H (F^k v) = (\Lambda - 2k)v_\Lambda$. By the key lemma, $M(\Lambda)$ is irreducible unless $\Lambda \in \mathbb{Z}_+$. If $\Lambda \in \mathbb{Z}_+$, then $F^{k+1} v_\Lambda$ is a singular vector, and ${\cal F}(\Lambda) = < F^{\Lambda + i}v_\Lambda : i=1,\, 2,\, \ldots >$ is a submodule of $M(\Lambda)$, isomorphic to the Verma module with highest weight $\Lambda - 2 (\Lambda + 1) = -\Lambda -2$ .
+
+\end{document} 

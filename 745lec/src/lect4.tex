@@ -1,0 +1,297 @@
+\documentclass[11pt]{article}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{pstricks}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf 18.745 Introduction to Lie Algebras } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Transcribed by: #4}{#1}}
+
+
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\N}{\mathbin}{AMSb}{"4E}
+\DeclareMathSymbol{\Z}{\mathbin}{AMSb}{"5A}
+\DeclareMathSymbol{\R}{\mathbin}{AMSb}{"52}
+\DeclareMathSymbol{\Q}{\mathbin}{AMSb}{"51}
+\DeclareMathSymbol{\I}{\mathbin}{AMSb}{"49}
+\DeclareMathSymbol{\C}{\mathbin}{AMSb}{"43}
+\DeclareMathSymbol{\F}{\mathbin}{AMSb}{"46}
+
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\tr}{\mbox{tr\ }}
+\newcommand{\Mat}{\mbox{Mat}}
+\newcommand{\Lie}{\mbox{Lie}}
+\newcommand{\Der}{\mbox{Der\ }}
+\newcommand{\End}{\mbox{End\ }}
+\newcommand{\ad}{\mbox{ad\ }}
+\newcommand{\im}{\mbox{im\ }}
+\newcommand{\Ker}{\mbox{ker\ }}
+
+\newcommand{\sll}{\ensuremath{\mathfrak{sl}}}
+\newcommand{\gl}{\ensuremath{\mathfrak{gl}}}
+\newcommand{\g}{\ensuremath{\mathfrak{g}}}
+\newcommand{\h}{\ensuremath{\mathfrak{h}}}
+\newcommand{\m}{\ensuremath{\mathfrak{m}}}
+\newcommand{\He}{\ensuremath{\mathcal{H}}}
+\newcommand{\be}{\ensuremath{\mathfrak{b}_2}}
+\newcommand{\bk}{\ensuremath{\mathfrak{b}}}
+\newcommand{\nk}{\ensuremath{\mathfrak{n}}}
+%\renewcommand{\ad}[1]{\ensuremath{{\bf ad}(#1)}}
+
+\newcommand{\sk}{\vspace*{1em}}
+
+\newtheorem{defn}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{proof}{Proof}
+\newtheorem{prop}{Proposition}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{Lecture 4: Nilpotent and Solvable Lie Algebras}{Fall 2004}{Prof.\ Victor
+Ka\v{c}}{Anthony Tagliaferro}
+
+
+
+
+{\bf Definition}
+Given a Lie algebra \g, define the following descending sequences
+of ideals of \g;
+\begin{align}
+\text{(central series)}~~~~~ \g \supset [\g,\g] &= \g^1 \supset 
+[[\g,\g],\g]=\g ^3 \supset [\g ^3,\g] = \g^4 
+\supset \dots \supset [\g ^{k-1},\g] = \g^{k} \supset \dots \\
+\text{(derived series)}~~~~~ \g \supset [\g,\g] &= \g' \supset [\g',\g']=\g''
+\supset \dots \supset [\g^{(k-1)},\g^{(k-1)}] = g^{(k)} \supset \dots
+\end{align}
+
+{\bf Exercise 4.1} Show that: \\
+a) All members of the central and derived series are ideals of  \g \\
+b) $\g^{k+1} \supset \g^{(k)}$
+
+\paragraph{Solution}
+
+a) First, let's show that \g$^k$ is an ideal of  \g. Notice that:
+\begin{equation}
+[\g^k,\g]=\g^{k+1} \subset \g^k
+\end{equation}
+It therefore follows that $\g^k$ is an ideal for all $k$. \\
+Now, let's show that $\g^{(k)}$ is an ideal. To do this, we'll use induction on $k$.
+First notice that:
+\begin{equation}
+[\g^{(1)},\g] = [[\g,\g],\g] \subset [\g,\g] = \g^{(1)}
+\end{equation}
+this is true since we know $[\g,\g] \subset \g$. It follows that
+$\g^{(1)}$ is an ideal of \g.  Now all we have to prove is that
+$\g^{(k)}$ is an ideal if $\g^{(k-1)}$ is one. Therefore, consider an
+arbitrary element $x=[a,b] \in [\g^{(k)},\g]$ where $a \in \g^{(k)}$~
+and $b \in \g$. Then, by definition of $\g^{(k)}$, $a= [c,d]$ where
+$c,d \in \g^{(k-1)}$. Using the Jacobi identity, we find that:
+\begin{equation}
+[[c,d],b] = [[c,b],d] + [c,[d,b]]
+\end{equation}
+but, since $\g^{(k-1)}$ is an ideal, $[c,b],[d,b] \in \g^{(k-1)}$. Therefore, it follows that:
+\begin{equation}
+[a,b] = [[c,d],b] = [[c,b],d] + [c,[d,b]] \in [\g^{(k-1)},\g^{(k-1)}] = \g^{(k)}
+\end{equation}
+Hence, since the element $x=[a,b]$ was arbitrary, $[\g^{(k)},\g] \subset \g^{(k)}$ and therefore
+$\g^{(k)}$ is an ideal for all $k$.
+
+b)We need to show that $\g^{k+1} \supset \g^{(k)}$. Again, we'll use
+induction on $k$.
+\begin{equation}
+\g^{(1)} = [\g,\g] = \g^2 ~~ \Rightarrow ~~ \g^{(1)} \subset \g^2
+\end{equation}
+Now consider an arbitrary element of $\g^(k)$, $x = [a,b]$ where $a,b
+\in \g^{(k-1)}$, we're assuming that since $a \in \g^{(k-1)}$, $a \in
+\g^k$ and also notice that $b \in \g$. Therefore $[a,b] \in [\g^k, \g]
+= \g^{k+1}$. Hence $\g^{(k)} \subset \g^{k+1}$ for all $k$. $\square$
+
+\paragraph{Definition}
+A Lie algebra is called {\it nilpotent} (resp. {\it solvable}) if $\g^k = 0$ 
+(resp. $\g^{(k)} = 0$) for $k$ sufficiently large.
+
+\paragraph{Remark}
+Notice that it follows from {\it Exercise 4.1b} that a nilpotent Lie algebra is also
+solvable.
+
+{\bf Examples} \\
+1) Abelian Lie algebras are nilpotent. \\
+2) The Heisenberg Lie Algebras $\He_k$ are nilpotent since 
+$\He_k^{(1)} = \C$ and $[[\He_k,\He_k],\He_k]=0$ \\
+3) \be $= \F a +\F b$, $[a,b]=0$ is solvable.
+since \be $^{(1)} = \F b$, $\be^{(2)}=0$ but it is not
+nilpotent since $\be^n = \F b$ for $n \geq 2$.
+
+
+\paragraph{Exercise 4.2} Let $\bk_k(\F)$ be the subalgebra of $\gl_k(\F)$ consisting
+of all upper-triangular matrices and $\nk_k(\F)$ be the subalgebra of $\gl_k(\F)$ consisting
+of all strictly upper triangular matrices. Show that: \\
+a) $\bk_k(\F)$~ is a solvable Lie algebra (but not nilpotent) \\
+b) $\nk_k(\F)$~ is a nilpotent Lie algebra (in particular, $\nk_3(\F) \approx \He_1$)
+
+\paragraph{Solution}
+The gist of this problem is to show that the Lie bracket of any two upper triangular
+matrices is even more upper triangular. It will actually prove easier to prove part (b)
+first. \\
+b) First notice that if $e_{ij}$ is a basis element of $\gl_k(\F)$, then the quantity $j-i$
+tells us which diagonal the nonzero entry of $e_{ij}$ lies on. Let's compute the Lie
+bracket $[e_{ij},e_{mn}] = \delta_{jm}e_{in} - \delta_{ni}e_{mj}$. Let's say that
+$j-i=r$ and $n-m=s$. Then, when $j=m$, $n-i=n+r-j=n+r-m=s+r$, so $n-i=r+s$ and similarly
+if $n=i$, then $j-m = s+r$. The payoff from this little bit of arithmetic comes from the
+following observation. First, define:
+\begin{equation}
+\h_{k,m} = \Bigl\{\sum_{i,j}x_{ij}e_{ij} |x_{ij} \in \F; j-i \geq m; i,j \leq k \Bigr\}
+\end{equation}
+Then, we've shown that $[\h_{k,m},\h_{k,n}] \subset \h_{k,m+n}$. Notice also that
+$\nk_k(\F) = \h_{k,1}$ and $\bk_k(\F) = \h_{k,0}$. Also notice from the definition
+that $\h_{k,k+1} = 0$. Proving that $\nk_k(\F)$ is nilpotent is now trivial:
+\begin{align*}
+\nk_k(\F)^2 & = \h_{k,1}^2 \subset \h_{k,2} \\
+\nk_k(\F)^3 & = [\h_{k,1}^2,\h_{k,1}] \subset [\h_{k,2},\h_{k,1}] \subset \h_{k,3} \\
+\vdots & \\
+\nk_k(\F)^k &= \h_{k,1}^k \subset \h_{k,k+1} = 0 \\
+\end{align*}
+Therefore $\nk_k(\F)$ is nilpotent. Now, on to proving $\bk_k(\F)$ is solvable. \\
+a) To prove this, we will use a proposition that will appear later in these notes. The
+proposition states that if a Lie algebra contains a solvable ideal and if the Lie algebra
+modulo this ideal is solvable, then the ideal itself is solvable. Notice that 
+$\nk_k(\F) \subset \bk_k(\F)$ and that $\nk_k(\F)$ is solvable (since it's nilpotent).
+Also notice that $\bk_k(\F)/\nk_k(\F) = $ the set of diagonal matrices, which is abelian, hence
+solvable. Therefore, by the proposition, $\bk_k(\F)$ is solvable. \\
+Notice that in particular, 
+\begin{equation}
+\nk_3(\F) = span \left\{ q = \begin{pmatrix} 0 & 1 & 0\\ 0&0&0\\0&0&0 \end{pmatrix},
+p = \begin{pmatrix} 0&0&0\\ 0&0&1\\0&0&0 \end{pmatrix},
+c = \begin{pmatrix} 0 & 0 & 1\\ 0&0&0\\0&0&0 \end{pmatrix} \right\}
+\end{equation}
+These matrices exactly satisfy the conditions for the Heisenberg algebra $\He_1$. Hence
+$\nk_3(\F) \approx \He_1$.
+
+Also, we have proved that $\bk_k(\F)$ is solvable, but we have yet to show that is not nilpotent.
+To demonstrate this, consider the commutator: $[e_{ii},e_{ij}] = e_{ij}$ for $i < j$. Since
+$e_{ii}$ is in $\bk_k(\F)$, it follows that $e_{ij} \in \bk_k(\F)^2$, and therefore, 
+$e_{ij} \in [\bk_k(\F),\bk_k(\F)^2] = \bk_k(\F)^3$. Hence $e_{ij} \in \bk_k(\F)^k$ for all
+$k$ follows by induction. Thus $\bk_k(\F)$ is not nilpotent. $\square$
+
+
+\paragraph{Remark} Notice that any subalgebra and factor (quotient) 
+algebra of a nilpotent (resp. solvable)
+Lie algebra is a nilpotent (resp. solvable) Lie algebra.
+
+\paragraph{Proposition}
+1) The center of a nonzero nilpotent Lie algebra \g~is nonzero. \\
+2) If \g/center(\g) is a nilpotent Lie algebra, then \g~is a nilpotent Lie algebra.
+
+
+\paragraph{Proof}
+a) Let $k \geq 2$ be the minimal integer such that $\g^k = 0$. Then
+$\g^{k-1} \neq 0 $ and $[\g^{k-1},\g] = \g^k = 0$. Hence $\g^{k-1}
+\subset center(\g)$ \\ b) If \g/center(\g) is a nilpotent Lie algebra
+then any commutator in \g/center(\g) of length $k$~$(k \gg 0)$ is
+zero: \\
+\begin{align}
+ 0 &= [[ \dots [a_1+e,a_2+e],a_3+e], \dots ,a_k+e] \\
+&=[\dots [a_1,a_2],a_3],\dots ,a_k] +e
+\end{align}
+Hence in \g, we have: $[\dots [a_1,a_2], \dots ,a_k] \in e$, where $e$ denotes 
+the center of \g. Hence any commutator of length $k+1$ in \g~is zero, in other words,
+$\g^{k+1} =0$.
+
+\paragraph{Theorem} ({\it The Engel Characterization of Nilpotent Lie Algebras}) \\
+A finite dimensional Lie algebra \g~is nilpotent if and only if $\ad{a}$ is a nilpotent
+operator for any $a \in \g$.
+\paragraph{Proof} If \g ~ is nilpotent, then for $k \gg 0$, any commutator of length
+$k$ is zero, in particular, $(\ad{a})^kb=0$, being a commutator of length $k+1$. \\
+Conversely, suppose $(\ad{a})^k = 0$ for all $a \in \g$, $k \gg 0$. Conside the
+adjoint representation defined by:
+\begin{align}
+\g & \rightarrow \gl_{\g} \\
+a & \mapsto \ad{a}
+\end{align}
+Then $\ad{\g} \subset \gl_{\g}$ is isomorphic to $\g/center(\g)$ since $center(\g) = \Ker \ad$.
+So it suffices to prove that $\ad{\g}$ is a nilpotent Lie algebra. Now, we can apply Engel's 
+Theorem: all operators from $\ad{\g} \subset \gl_{\g}$ are nilpotent, hence 
+$\ad{\g} \subset \nk_{\g}$ (the Lie algebra of strictly upper-triangular matrices, for some choice
+of a basis of \g), and so \ad{\g} is a subalgebra of a nilpotent Lie algebra, hence is a nilpotent
+Lie algebra itself. In particular, we see that $(\ad{a})^{dim \g}=0$.
+
+\paragraph{Discussion} What follows is a discussion of the classification of finite dimensional 
+nilpotent Lie algebras.
+
+Consider only the 2-step nilpotent Lie algebras: $\g \supset \mathfrak{e}$ where $\mathfrak{e}=center(\g)$ and 
+$\bar{\g} = \g/\mathfrak{e}$ is abelian (if and only if $\g^3 = 0$). \\
+We have the following invariant of \g : the map $\varphi$,
+\begin{align}
+\varphi : \bar{\g} \otimes \bar{\g} & \rightarrow e \\
+\varphi(\bar{a} \otimes \bar{b}) & = [a,b]
+\end{align}
+Where $a$ and $b$ are the pre-images in \g~ of $\bar{a}$ and $\bar{b}$.
+The only condition on $\varphi$ is skew-symmetry:
+\begin{equation}
+\varphi(\bar{b} \otimes \bar{a}) = -\varphi(\bar{a} \otimes \bar{b})
+\end{equation}
+So we have a bijective correspondence between the set of 2-step nilpotent Lie algebras and the
+set of skew-symmetric maps ($\varphi: \bar{\g} \otimes \bar{\g} \rightarrow center(\g)$).
+
+\paragraph{Exercise 4.3} Show that if \g~ is 2-step nilpotent and dim center(\g) = 1, then
+$\g \approx \He_k$.
+
+\paragraph{Solution}
+By definition, \g~is nilpotent if $\g/center(\g)$ is abelian. Therefore, 
+$[\g,\g] \subset center(\g)$. If the dimension of the center of \g~is one, the we can conclude
+that the derived algebra of \g also has dimension one. Therefore, by a Exercise 2.3, we can conclude
+that: $\g = \be \oplus ab_{n-2}$ or $\g = \He_k \oplus ab_{n-2k-1}$ where $ab_n$ denotes
+the n-dimensional Lie abelian algebra. However, $\be \oplus ab_{n-2}$ is not nilpotent. Therefore
+$\g = \He_k \oplus ab_{n-2k-1}$. However, we know that dim($center(\g)$)= 1, hence $\g=\He_k$. $\square$
+
+
+
+
+
+\paragraph{Remark} As discussed in lecture, the next case, dim center(\g) is a ``wild'' 
+problem and the general
+classification of nilpotent Lie algebras is believed to be impossible, if not very difficult.
+
+\paragraph{Proposition} Let \g~be a Lie algebra and let \h~be an ideal of \g. Then \g~is
+solvable if and only if \g/\h~is solvable and \h~is solvable.
+
+\paragraph{Remark} This is not true if ``solvable'' is replaced by ``nilpotent'', as the case
+of \be, where $[a,b]=b$, demonstrates.
+
+\paragraph{Proof} \g~is solvable, therefore \h~is solvable and \g/\h~is solvable. \\
+Conversely, if $\bar{\g} = \g/\h$ is solvable, then $\g^{(k)} \subset \h$. However, if in
+addition, \h~is solvable (i.e. $\h^{(l)}=0$ for some $l \geq 1$), then
+$\g^{(k+l)} \subset \h^{(l)} = 0$, so $\g^{(k+l)}=0$. Hence \g~is solvable.
+
+\end{document}

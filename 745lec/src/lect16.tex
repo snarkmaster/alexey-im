@@ -1,0 +1,662 @@
+\documentclass[11pt]{article}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[dvips]{graphicx}
+\usepackage[dvips]{color}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf 18.745 Introduction to Lie Algebras } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Transcribed by: #4}{#1}}
+
+
+\DeclareSymbolFont{AMSb}{U}{msb}{m}{n}
+\DeclareMathSymbol{\N}{\mathbin}{AMSb}{"4E}
+\DeclareMathSymbol{\Z}{\mathbin}{AMSb}{"5A}
+\DeclareMathSymbol{\R}{\mathbin}{AMSb}{"52}
+\DeclareMathSymbol{\Q}{\mathbin}{AMSb}{"51}
+\DeclareMathSymbol{\I}{\mathbin}{AMSb}{"49}
+\DeclareMathSymbol{\C}{\mathbin}{AMSb}{"43}
+\DeclareMathSymbol{\F}{\mathbin}{AMSb}{"46}
+
+\newcommand{\GL}{\mbox{GL}}
+\newcommand{\tr}{\mbox{tr\ }}
+\newcommand{\Mat}{\mbox{Mat}}
+\newcommand{\Lie}{\mbox{Lie}}
+\newcommand{\Der}{\mbox{Der\ }}
+\newcommand{\End}{\mbox{End\ }}
+\newcommand{\ad}{\mbox{ad\ }}
+\newcommand{\im}{\mbox{im\ }}
+\newcommand{\Ker}{\mbox{ker\ }}
+
+\newcommand{\sll}{\ensuremath{\mathfrak{sl}}}
+\newcommand{\gl}{\ensuremath{\mathfrak{gl}}}
+\newcommand{\g}{\ensuremath{\mathfrak{g}}}
+\newcommand{\h}{\ensuremath{\mathfrak{h}}}
+\newcommand{\m}{\ensuremath{\mathfrak{m}}}
+\newcommand{\He}{\ensuremath{\mathcal{H}}}
+\newcommand{\be}{\ensuremath{\mathfrak{b}_2}}
+\newcommand{\bk}{\ensuremath{\mathfrak{b}}}
+\newcommand{\nk}{\ensuremath{\mathfrak{n}}}
+%\renewcommand{\ad}[1]{\ensuremath{{\bf ad}(#1)}}
+
+
+
+\newcommand{\sk}{\vspace*{1em}}
+
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{theorem}[1][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{exercise}[1][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{solution}[1][Solution]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{claim}[1][Claim]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt \advance \topmargin by -\headheight \advance
+\topmargin by -\headsep \textheight 8.9in \oddsidemargin 0pt
+\evensidemargin \oddsidemargin \marginparwidth 0.5in \textwidth
+6.5in
+
+\parindent 0in
+\parskip 1.5ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\lecture{Lecture 16: More On Root Systems}{Fall 2004}{Prof.\
+Victor Ka\v{c}}{J.W. Powell}
+
+\emph{The exercises will be stated as they occurred during the
+course of the lecture, embedded within the rest of the notes.
+Then, they will be restated at the end of all the notes with
+solutions.}
+
+\begin{remark}
+We proved previously that the root system $(V, \,\Delta)$ coming
+from a finite dimensional Lie algebra is of the form $V=\R
+\otimes_{\Q} \h^{*}_{\Q}$ and $(\alpha,\beta)$ $\in \Q$ for
+$\alpha,\beta \in \Delta$.  Also, choosing basis $B=\{
+\beta_1,\beta_2,\ldots,\beta_r \}$ of $V$ consisting of roots, any
+other root is a linear combination of elements from $B$ with
+rational coefficients.
+
+Indeed, if $\alpha = \sum_i c_i \beta_i$, then $(\alpha,\beta_j) =
+\sum_i c_i (\beta_i,\beta_j)$, where $\left[
+(\beta_i,\beta_j)\right]_{{i,j}=1}^r$ is a non-singular matrix
+over $\Q$, and hence the $c_i$ are rational numbers by Cramer's
+Rule.
+
+As for indecomposable abstract root systems, it follows from the
+proof of uniqueness of $(\cdot,\cdot)$ up to a factor that, after
+multiplying it by a factor so that $(\alpha,\alpha)\in \Q$ for one
+root $\alpha$, we will have $(\alpha,\beta)\in \Q$ for all
+$\alpha,\beta \in Q$ and the above argument again applies.
+
+\begin{example}
+1,$\sqrt 2 $ are linearly independent over $\Q$ but are dependent
+over $\R$.  Also, the set $\Z \cdot 1 + \Z \cdot \sqrt 2 $ is not
+discrete in $\R$.
+\end{example}
+\end{remark}
+
+\begin{definition}
+A lattice $L$ in a Euclidean space $V$ over $\R$ is a discrete
+subgroup of $V$ which spans $V$ over $\R$.
+\end{definition}
+
+\begin{example}
+Let $\Delta$ be a finite subset of $V$ such that
+$(\alpha,\beta)\in \Q$ for $\forall \alpha,\beta \in \Delta$.
+Then, $\Z \, \Delta$ is a lattice in $V$.  Indeed, choose a basis
+$B \subset \Delta$ of $V$.  All vectors of $\Delta$ will have
+rational coordinates in the basis, and hence $\Z \, \Delta$ is a
+discrete subgroup of $V$.
+\end{example}
+%
+Equivalently, a lattice $L$ in a Euclidean space V over $\R$ of
+dimension $r$ is a free abelian subgroup of rank $r$, that is $L =
+\Z \beta_1 + \cdots + \Z \beta_r$, where $\beta_1,\ldots,\beta_r$
+are linearly independent.
+%
+The root lattice of an abstract room system $(V,\Delta)$ is $Q =
+\Z \, \Delta$.  We have constructed the following root systems:
+%
+\begin{itemize}
+\item $\Delta_{A_r} = \{ \epsilon_i - \epsilon_j |
+i,j=1,\ldots,r+1, \,\, i\not = j \}$ and $Q_{A_r} = \{ \sum _{i=1}
+^{r+1} a_i \epsilon_i | \sum _{i=1}^{r+1}a_i=0 \mbox{ for } a_i
+\in \Z \}$ in the vector space $V = \{ \sum a_i \epsilon_i | a_i
+\in \R, \sum a_i = 0 \}$.
+%
+\item $\Delta_{B_r} = \{ \pm \epsilon_i \pm \epsilon_j, \pm
+\epsilon_i | i,j=1,\ldots,r, \,\, i\not = j \}$ and $Q_{B_r} = \{
+\sum _{i=1} ^{r} a_i \epsilon_i | a_i \in \Z \}$ in the vector
+space $V = \sum \R \epsilon_i $.
+%
+\item $\Delta_{C_r} = \{ \pm \epsilon_i \pm \epsilon_j, \pm 2
+\epsilon_i | i,j=1,\ldots,r, \,\, i\not = j \}$ and $Q_{C_r} = \{
+\sum _{i=1} ^{r} a_i \epsilon_i | a_i \in \Z, \,\, \sum_{i=1}^{r}
+a_i \in 2 \Z \}$ in the vector space $V = \sum \R \epsilon_i $.
+%
+\item $\Delta_{D_r} = \{ \pm \epsilon_i \pm \epsilon_j |
+i,j=1,\ldots,r, \,\, i \not = j \}$ and $Q_{D_r} = Q_{C_r}$ in the
+vector space $V = \sum \R \epsilon_i $.  Here $r \not = 2$.
+\end{itemize}
+%
+\begin{exercise}
+Prove that $Q_{A_r}$ and $Q_{C_r}$ are as above.
+\end{exercise}
+%
+In addition to the lattices $Q_{A_r}, Q_{B_r}, Q_{C_r}, Q_{D_r}$,
+there are exceptional lattices.  For instance, $\Gamma_r = \{
+\sum_{i=1}^r a_i \epsilon_i \, | \, \mbox{all } a_i \in \Z \mbox{
+or all } a_i \in \Z + \frac{1}{2}, \,\, \sum_{i=1}^{r} a_i \in 2
+\Z$ \}.  This lives in the vector space $V = \bigoplus_{i=1}^{r}
+\R \epsilon_i$ with $(\epsilon_i, \epsilon_j) = \delta_{ij}$.  The
+most important example of such a lattice is $\Gamma_8$.
+%
+\begin{definition}
+A lattice is called \emph{integral} (resp. \emph{even}) if
+$(\alpha,\beta)\in \Z$ (resp. $(\alpha,\alpha)\in 2\Z$) for all
+$\alpha,\beta \in Q$.
+\end{definition}
+Obviously an even lattice is integral: $(\alpha + \beta,\alpha +
+\beta) = (\alpha,\alpha) + 2(\alpha,\beta)+(\beta,\beta)
+\rightarrow (\alpha,\beta) \in \Z$, because $(\alpha +
+\beta,\alpha + \beta), (\alpha,\alpha), (\beta,\beta) \in 2\Z$.
+%
+\begin{example}
+$\Gamma_{8n} \,\, (n=1,2,\ldots)$ are even lattices, since
+$(\alpha,\alpha) = \sum_{i=1}^{n} a_i^2 = \sum_{i=1}^{n} a_i \mod
+2$.  Recall that $a_i^2 \equiv a_i \mod 2$ if $a_i$ is integral.
+All other vectors are of the form $\rho + \alpha$ where $\rho =
+(\frac{1}{2},\frac{1}{2},\cdots,\frac{1}{2})$ and $\alpha$ has
+integer coordinates.  But then $(\rho + \alpha, \rho + \alpha) =
+(\rho,\rho)+\sum_{i=1}^n a_i + (\alpha,\alpha) = 8n/4 + \mbox{even
+integer} \in 2 \Z$.
+\end{example}
+%
+\begin{theorem}
+Let $Q$ be an even lattice in a Euclidean space $V$.  Let
+$\Delta=\{ \alpha \in Q \, | \, (\alpha,\alpha)=2 \}$ and assume
+$\Delta$ spans $V$ over $\R$.  Then $(V,\Delta)$ is an abstract
+root system.
+\end{theorem}
+%
+\begin{proof}
+We show that each of the requirements for an abstract root system
+is met.
+\begin{itemize}
+\item $\Delta$ spans $V \rightarrow$ assumed \item $\Delta$ is
+finite $\rightarrow$ $\Delta$ is intersection of discrete $Q$ and
+compact sphere $\{ v \in V \, | \, (v,v)=2 \}$ \item $\alpha \in
+\Delta \rightarrow k \alpha \in \Delta$ if $k=\pm 1$.  This is
+obvious.
+\end{itemize}
+It remains to check the string property.  Take $\alpha,\beta \in
+\Delta$.  Then, $(\alpha \pm \beta, \alpha \pm \beta) = 4 \pm
+2(\alpha,\beta) \geq 0$.  Hence, $\alpha + \beta$ is a root iff
+$(\alpha,\beta) = -1$, and $\alpha - \beta$ is a root iff
+$(\alpha,\beta)=+1$.\qed
+\end{proof}
+%
+All possible inner products $(\alpha,\beta)$ for $\alpha,\beta \in
+\Delta$ are:
+\begin{itemize}
+\item +2 iff $\alpha = + \beta$ ($p=2,q=0$) \item -2 iff $\alpha =
+- \beta$ ($p=0,q=2$) \item +1 iff $\alpha - \beta \in \Delta$,
+$\alpha + \beta \not \in \Delta$ ($p=1,q=0$) \item -1 iff $\alpha
++ \beta \in \Delta$, $\alpha - \beta \not \in \Delta$ ($p=0,q=1$)
+\item 0 iff $\alpha + \beta, \alpha - \beta \not \in \Delta$
+($p=q=0$)
+\end{itemize}
+Hence the string property, $p-q = (\alpha,\beta)$, holds in all
+cases. \qed
+%
+Let $\Delta_{E_8} = \{ \alpha \in \Gamma_8 | (\alpha,\alpha)=2 \}
+= \{ \pm \epsilon_i \pm \epsilon_j (i \not = j), \frac{1}{2} ( \pm
+\epsilon_1 \cdots \pm \epsilon_8 ) (\mbox{even \# of - signs})
+\}$. Then $(V,\Delta_{E_8})$ is an abstract root system.
+Moreover, $\Z\,\Delta_{E_8} = \Gamma_8$ so $\Gamma_8 = Q_{E_8}$.
+%
+\begin{exercise}
+Show that $\Z \, \Delta_{E_8} = \Gamma_8 = Q_{E_8}$.
+\end{exercise}
+%
+There are 240 roots in $\Delta_{E_8}$.  This makes it larger than
+$\Delta_{A_8}$, $\Delta_{B_8}$, $\Delta_{C_8}$, and
+$\Delta_{D_8}$.  Respectively, these have $8\cdot (8+1)=72$,
+$2\cdot 8^2= 128$, $2\cdot 8^2 = 128$ and $2\cdot (8^2-8)=112$
+roots.
+%
+\begin{exercise}
+Confirm the sizes of $\Delta_{A_8}$ through $\Delta_{D_8}$.
+\end{exercise}
+%
+The case $\Gamma_8$ is the largest exception to the otherwise
+exhaustive classification into $A_r$ through $D_r$.
+%
+\begin{example}
+Define the following as a sublattice of $Q_{E_8}$:  $Q_{E_7} = \{
+\alpha \in \Gamma_{E_8} \, | \, (\rho,\alpha)=0 \}$, where $\rho =
+(\frac{1}{2},\frac{1}{2},\ldots,\frac{1}{2})$ and $\Delta_{E_7} =
+\{ \alpha \in Q_{E_7} \, | \, (\alpha,\alpha)=2 \}$.  This is
+another exceptional algebra that does not fit into the $A_r$
+through $D_r$ classification scheme.
+\end{example}
+%
+\begin{example}
+Define the following as a sublattice of $Q_{E_7}$:  $Q_{E_6} = \{
+\alpha \in Q_{E_7} \, | \, (\epsilon_7 + \epsilon_8,\alpha)=0 \}$,
+$\Delta_{E_6} = \{ \alpha \in Q_{E_6} \, | \, (\alpha,\alpha)=2
+\}$.  This is a third exceptional algebra that does not fit into
+the $A_r$ through $D_r$ classification scheme.
+\end{example}
+%
+\begin{exercise}
+Find $\Delta_{E_7}$ and $\Delta_{E_6}$.  Show they respectively
+span $Q_{E_7}$ and $Q_{E_6}$ over $\Z$.  Also, show that $\left|
+\Delta_{E_7} \right| = 126$ and $\left| \Delta_{E_6} \right| =
+72$.
+\end{exercise}
+%
+Another important lattice is $Q_{F_4}= \{ \sum_{i=1}^4 a_i
+\epsilon_i \, | \, \mbox{all } a_i \in \Z \mbox{ or all } a_i \in
+\Z + \frac{1}{2} \}$.  Let $\Delta_{F_4} = \{ \alpha \in Q_{F_4}
+\, | \, (\alpha,\alpha) = 2 \mbox{ or } 1 \} = \{ \pm \epsilon_i
+\pm \epsilon_j \, (i \not = j), \,\, \pm \epsilon_i , \,\,
+\frac{1}{2} (\pm \epsilon_1 \pm \epsilon_2 \pm \epsilon_3 \pm
+\epsilon_4 ) \} $. The vector space is $V = \bigoplus_{i=1}^{4} \R
+\epsilon_i$ with $(\epsilon_i,\epsilon_j)=\delta_{ij}$.
+%
+\begin{exercise}
+Check that $\Delta_{F_4}$ is an abstract root system and that it
+spans $Q_{F_4}$.  Also check that $\left| \Delta_{F_4} \right| =
+48$.
+\end{exercise}
+%
+The last exceptional root system is $\Delta_{G_2} = \{ \alpha \in
+Q_{A_2} \, | \, (\alpha,\alpha) = 2 \mbox{ or } 6 \} = \{
+\epsilon_i - \epsilon_j \, (i,j=1,2,3; \, i \not = j),\, \pm
+(\epsilon_i + \epsilon_j - 2\epsilon_k) \, (i \not = j \not = k
+\not = i) \}$.  We can calculate that $\left| \Delta_{G_2} \right|
+= 12$.
+%
+\begin{exercise}
+Check that the string property holds for $\Delta_{G_2}$.
+\end{exercise}
+%
+There are three distinct indecomposable root systems $(V,\Delta)$
+that live in a vector space $V$ with dimension 2.  These are $A_2
+= \{ \epsilon_i - \epsilon_j \, (i,j = 1,2,3; \, i \not = j) \}$,
+$B_2 = \{ \pm \epsilon_i \pm \epsilon_j, \, \pm \epsilon_i \, (i
+\not = j; \, i,j=1,2) \} \simeq C_2$ and $G_2$ as defined above.
+They are depicted below.
+%
+\begin{figure}[ht]
+%\includegraphics[width=14.48cm]{diagrams.pdf}
+\begin{center}
+\input{diagram.pstex_t}
+\end{center}
+\caption{Here $\{ \alpha, \beta \}$ is a subset of the simple
+roots.}
+\end{figure}
+%
+\section{Exercises and Solutions}
+%
+\begin{exercise}
+Prove that $Q_{A_r}$ and $Q_{C_r}$ are as above.
+\end{exercise}
+\begin{solution} First the solution regarding $Q_{A_r}$, and then that regarding $Q_{C_r}$.
+\begin{claim} $Q_{A_r} \subset \Z \, \Delta_{A_r}$ \end{claim}
+\begin{proof} Go through the list for $i=1,\ldots,r+1$,
+attributing $a_i \epsilon_i$ to $-a_i \epsilon_{i+1}$.  That is:
+
+\vspace{3mm}
+\begin{tabular}{l}
+$a_1 \epsilon_1 \rightarrow a_1 (\epsilon_1 - \epsilon_2) + a_1
+\epsilon_2$ \\
+$a_2 \epsilon_2 + a_1 \epsilon_2 \rightarrow (a_1 +
+a_2)(\epsilon_2-\epsilon_3) + (a_1+a_2)\epsilon_3$ \\
+$(a_1+a_2+a_3)\epsilon_3 \rightarrow
+(a_1+a_2+a_3)(\epsilon_3-\epsilon_4)+(a_1+a_2+a_3)\epsilon_4$ \\
+\hspace{10mm} $\vdots$ \\
+$(a_1 + \cdots + a_r)\epsilon_r \rightarrow (a_1+\cdots
+a_r)(\epsilon_r - \epsilon_{r+1} +
+(a_1+\cdots+a_r)\epsilon_{r+1} = (a_1+\cdots a_r)(\epsilon_r - \epsilon_{r+1}$\\
+$(a_1+\cdots+a_{r+1}) \epsilon_{r} = 0 \cdot \epsilon_r $ \qed
+\end{tabular}
+\end{proof}
+\begin{claim} $\Z \, \Delta_{A_r} \subset Q_{A_r}$ \end{claim}
+\begin{proof}
+Each $\alpha \in \Z \Delta_{A_r}$ is of the form $a (\epsilon_i -
+\epsilon_j)$ for some $a \in \Z$.  Then, any linear combination of
+such roots come in pairs of $\epsilon$'s, one with coefficient
+$+a$ and the other with $-a$.  Thus, the sum of the coefficients
+is 0 and so is contained in $\Z$.\qed
+\end{proof}
+%
+$\Z \, \Delta_{A_r} \subset Q_{A_r}$ and $Q_{A_r} \subset \Z \,
+\Delta_{A_r} \Rightarrow \Z \, \Delta_{A_r} = Q_{A_r}$. \qed
+%
+\begin{claim}$Q_{C_r} \subset \Z \, \Delta_{C_r}$\end{claim}
+\begin{proof}
+Use the same process as with the $Q_{A_r}$ proof, getting roots of
+the form $a_1 (\epsilon_1 - \epsilon_2),
+(a_1+a_2)(\epsilon_2-\epsilon_3),\ldots,(a_1+\cdots+a_r)(\epsilon_r
+- \epsilon_{r+1})$.  We have $(a_1+\cdots+a_r)\epsilon_{r+1}$
+left.  By the definition of $Q_{C_r}$, this sum $\in 2 \Z$.  This,
+then, is of the form $\Z \, \Delta_{C_r}$ since $2 \epsilon_{r+1}
+\in \Delta_{C_r}$.\qed
+\end{proof}
+%
+\begin{claim}$\Z \, \Delta_{C_r} \subset Q_{C_r}$\end{claim}
+\begin{proof}
+Each term $\alpha \in \Z \, \Delta_{C_r}$ is of the form:
+%
+\begin{itemize}
+\item $ a \,(+\epsilon_i + \epsilon_j) \rightarrow $ contributes
+$+2$ to sum \item $a \,(-\epsilon_i + \epsilon_j) \rightarrow $
+contributes $0$ to sum \item $a \,(-\epsilon_i - \epsilon_j)
+\rightarrow $ contributes $-2$ to sum \item $2 a \epsilon_i
+\rightarrow $ contributes $+2$ to sum
+\end{itemize}
+for $a \in \Z$.  Each of these possibilities contribute an even
+integer to the sum of all the coefficients, showing that $\sum_i
+a_i \in 2 \Z$. \qed
+\end{proof}
+%
+Thus, $\Z \, \Delta_{C_r} \subset Q_{C_r}$ and $Q_{C_r} \subset \Z
+\, \Delta_{C_r} \Rightarrow Q_{C_r} = \Z \, \Delta_{C_r}$ QED.
+\end{solution}
+%
+%
+\begin{exercise}
+Show that $\Z \, \Delta_{E_8} = \Gamma_8 = Q_{E_8}$.
+\end{exercise}
+%
+\begin{solution}
+We will use a similar technique as with the previous exercise.
+Recall that $\Gamma_8 = \{ \sum_{i=1}^8 a_i \epsilon_i \, | \,
+\forall a_i \in \Z \mbox{ or } \forall a_i \in \Z + \frac{1}{2};
+\,\, \sum_{i=1}^8 a_i \in 2 \Z \}$ and $\Delta_{E_8} = \{ \alpha
+\in \Gamma_8 \, | \, (\alpha,\alpha) = 2 \} = \{ \pm \epsilon_i
+\pm \epsilon_j \, (i \not = j); \,\, \frac{1}{2}(\pm \epsilon_1
+\cdots \pm \epsilon_8) \mbox{ (even \# of - signs)} \}$.
+%
+\begin{claim}
+$Q_{E_8} \equiv \Z \, \Delta_{E_8} \subset \Gamma_8$
+\end{claim}
+%
+\begin{proof}
+Clearly both general types of roots in $\Delta_{E_8}$ satisfy
+$\forall a_i \in \Z$ or $\forall a_i \in \Z + \frac{1}{2}$.  Now
+we check the constraint on the sum of the coefficients.
+%
+\begin{itemize}
+\item $+\epsilon_i + \epsilon_j \rightarrow +2\Z$ \item $\pm
+(\epsilon_i - \epsilon_j ) \rightarrow 0$ \item $-\epsilon_i -
+\epsilon_j \rightarrow -2 \Z$ \item $\frac{1}{2}(\pm \epsilon_1
+\cdots \pm \epsilon_8) \rightarrow (4,2,0,-2,-4) \, \Z \in 2 \Z$
+
+\end{itemize}
+\end{proof}
+%
+\begin{claim}
+$\Gamma_8 \subset \Z \, \Delta_{E_8} \equiv Q_{E_8}$
+\end{claim}
+%
+\begin{proof}
+Separate elements of $\Gamma_8$ into two cases, $\forall a_i \in
+\Z$ and $\forall a_i \in \Z + \frac{1}{2}$, and treat separately.
+\begin{enumerate}
+\item cd Decompose $\sum_{i=1}^8 a_i \epsilon_i \in \Gamma_8$ into
+$a_1 (\epsilon_1 - \epsilon_2) + (a_1+a_2)(\epsilon_2-\epsilon_3)
++ \cdots + (a_1+\cdots +a_7)(\epsilon_7 - \epsilon_8) +
+(a_1+\cdots + a_8)\epsilon_8$.  But we know that $a_1+\cdots + a_8
+\equiv 2 S \in 2 \Z$.  Then, write $2 S \epsilon_8 = S (\epsilon_8
+- \epsilon_1) + S (\epsilon_8 - \epsilon_2) + S (\epsilon_1 +
+\epsilon_2)$.  We have thus expressed this element of $\Gamma_8$
+as an element of $\Z \, \Delta_{E_8}$.
+
+\item First, we know that since $\sum _{i=1}^{8} \in 2 \Z$,
+$\sum_{i=1}^{8} a_i \epsilon_i$ can be written as a sum of terms
+of the form $\frac{1}{2}(\pm \epsilon_1 \cdots \pm \epsilon_8)$.
+Translate the problem to the ``nearest'' problem of the former
+type by sending $a_i \rightarrow a_i + \frac{1}{2}$. Then, we know
+that $\sum _{i=1}^{8} a_i \in 2 \Z$ by the above argument. Since
+$(-\frac{1}{2},\ldots,-\frac{1}{2}) \in \Delta_{E_8}$, then $\sum
+_{i=1}^{8}$ must also $\in \Z \, \Delta_{E_8}$.
+\end{enumerate}
+\end{proof}
+Thus, $\Gamma_8 \subset \Z \, \Delta_{E_8}$ and $\Z \,
+\Delta_{E_8} \subset \Gamma_8 \Rightarrow \Z \, \Delta_{E_8}
+\subset \Gamma_8$. \qed
+\end{solution}
+%
+%
+\begin{exercise}
+Confirm the sizes of $\Delta_{A_8}$ through $\Delta_{D_8}$.
+\end{exercise}
+
+\begin{solution}
+\begin{itemize}
+\item $\Delta_{A_r}$:  Recall that $\Delta_{A_r} = \{ \epsilon_i -
+\epsilon_j \, | \, i,j=1,\ldots,r+1, \,\, i \not = j \}$.
+%
+There are $\frac{(r+1)!}{(r-1)! \, 2!}$ ways of choosing a pair of
+indices $i$ and $j$. Each pair has 2 ways of being arranged around
+the minus sign. Thus, $r (r+1)$ roots exist.
+%
+\item $\Delta_{B_r} = \{ \pm \epsilon_i \pm \epsilon_j; \, \pm
+\epsilon_i \, | \, i,j=1,\ldots,r; i \not = j \}$.  The first sort
+of root has $2^2$ choices of sign arrangement and
+$\frac{r(r+1)}{2}$ choices of indices $i,j$.  The second sort of
+root has $2$ choices of sign and $r$ choices of index.  This gives
+a total of $2r(r-1) + 2r = 2r^2$ roots.
+%
+\item $\Delta_{C_r} = \{ \pm \epsilon_i \pm \epsilon_j; \, \pm 2
+\epsilon_i \, | \, i,j=1,\ldots,r; i \not = j \}$.  Identical to
+the above case.
+%
+\item $\Delta_{D_r} = \{ \pm \epsilon_i \pm \epsilon_j \, | \,
+i,j=1,\ldots,r; i \not = j \}$.  This case just has $2r(r-1)$
+roots, for reasons stated in the $\Delta_{B_r}$ case.
+%
+\end{itemize}
+These solutions all hold in the specific case $r=8$.  \qed.
+\end{solution}
+%
+%
+\begin{exercise}
+Find $\Delta_{E_7}$ and $\Delta_{E_6}$.  Show they respectively
+span $Q_{E_7}$ and $Q_{E_6}$ over $\Z$.  Also, show that $\left|
+\Delta_{E_7} \right| = 126$ and $\left| \Delta_{E_6} \right| =
+72$.
+\end{exercise}
+%
+\begin{solution}
+$\Delta_{E_7} = \{\alpha \in Q_{E_7} \, | \, (\alpha,\alpha)=2 \}
+\subset \Delta_{E_8} = \{ \pm \epsilon_i \pm \epsilon_j \, (i \not
+= j), \,\, \frac{1}{2} (\pm \epsilon_1 \cdots \pm \epsilon_8) \}$.
+To get $\Delta_{E_7}$ take $\Delta_{E_8}$ and impose the condition
+$(\rho,\alpha)=0$.  Impose the same constraint on $Q_{E_8}$ to
+obtain $Q_{E_7}$.  Since $\Delta_{E_8}$ spanned $Q_{E_8}$, it is
+clear that $\Delta_{E_7}$ obtained as above will span $Q_{E_7}$
+obtained this same way.
+
+$\left| \Delta_{E_7} \right| = \frac{8!}{4! \, 4!}+2 \frac{8!}{6!
+\, 2!} = 70 + 2\cdot 28 = 126$.
+
+$\Delta_{E_6}$ is obtained from $\Delta_{E_7}$ by imposing the
+condition that $(\epsilon_7 + \epsilon_8, \alpha) = 0$.  Applying
+the same condition to $Q_{E_7}$ gives $Q_{E_6}$.  Then, the same
+argument as above indicates that $\Delta_{E_6}$ spans $Q_{E_6}$.
+
+Actually imposing this condition on the given expression of
+$\Delta_{E_6}$ gives the alternative expression $\Delta_{E_6} = \{
+\frac{1}{2}(\pm \epsilon_1 \cdots \pm \epsilon_6) \pm
+\frac{1}{2}(\epsilon_7 - \epsilon_8) \mbox{ (with a total of 4 -
+signs)}; \,\, \pm (\epsilon_i - \epsilon_j) \, (i,j=1,\ldots,6; \,
+i \not =j); \,\, \pm (\epsilon_7 - \epsilon_8) \}$.  Then, we
+calculate $\left| \Delta_{E_6} \right| = 2 \frac{6!}{3! \, 3!} + 2
+\frac{6!}{2! \, 4!} + 2 = 40 + 30 + 2 = 72$.
+\end{solution}
+%
+%
+\begin{exercise}
+Check that $\Delta_{F_4}$ is an abstract root system and that it
+spans $Q_{F_4}$.  Also check that $\left| \Delta_{F_4} \right| =
+48$.
+\end{exercise}
+%
+\begin{solution}
+$\Delta_{F_4} = \{ \alpha \in Q_{F_4} \, | \, (\alpha,\alpha) = 2
+\mbox{ or } 1 \} = \{ \pm \epsilon_i \pm \epsilon_j \, (i \not =
+j); \,\, \pm \epsilon_i ; \,\, \frac{1}{2}(\pm \epsilon_1 \cdots
+\pm \epsilon_4) \}$ and $Q_{F_4} = \{ \sum_{i=1}^{4} a_i
+\epsilon_i \, | \, \forall a_i \in \Z \mbox{ or } \forall a_i \in
+\Z + \frac{1}{2} \}$.
+
+\begin{enumerate}
+\item $\left| \Delta_{F_4} \right| = 2^2 \frac{4!}{2! \, 2!} +
+2\frac{4!}{3! \, 1!} + 2^4 \frac{4!}{4! \, 0!} = 48$
+
+\item Roots in $\Delta_{F_4}$ of the first two types have integer
+coefficients.  Sums of integers times these roots have only
+integer coefficients, therefore.  If an odd number of roots of the
+last type with half integer coefficients occur, the overall sum
+has half-integer coefficients in front of the $\epsilon_i$'s.
+Otherwise, they are still integers.  Thus, $Q_{F_4} \subset \Z \,
+\Delta_{F_4}$.
+
+\item Properties 1 and 2 of an abstract root system obviously
+satisfied. All that remains is to show that the string property
+holds.
+%
+\begin{itemize}
+\item $\alpha = \epsilon_i + \epsilon_j, \,\, \beta = \epsilon_k -
+\epsilon_m \,\, (i\not = m, \, j \not = k)$.  $\langle \beta,
+\alpha \rangle = \delta_{ik} - \delta_{jm}$.  $p = \delta_{ik}$
+and $q = \delta_{jm}$.
+
+\item $\alpha = \epsilon_i + \epsilon_j, \,\, \beta = \epsilon_k$.
+$\langle \beta, \alpha \rangle = \delta_{ik} + \delta_{jk}$. $p =
+\delta_{ik} + \delta_{jk}$ and $q = 0$.
+
+\item $\alpha = \epsilon_i, \,\, \beta = \epsilon_j + \epsilon_k$.
+$\langle \beta, \alpha \rangle = 2\delta_{ij} + 2\delta_{ik}$. $p
+= 2\delta_{ij} + 2\delta_{ik}$ and $q = 0$.
+
+\item $\alpha = \epsilon_i, \,\, \beta = \epsilon_j - \epsilon_k$.
+$\langle \beta, \alpha \rangle = 2\delta_{ij} - 2\delta_{ik}$. $p
+= 2\delta_{ij}$ and $q = 2\delta_{ik}$.
+
+\item $\alpha = \epsilon_i, \,\, \beta = \frac{1}{2} ( \pm
+\epsilon_1 \cdots \pm \epsilon_4 )$. $ ( \beta, \alpha ) = \pm
+\frac{1}{2} \,\, ( \mbox{+ if +} \epsilon_i \mbox{ in } \alpha
+\mbox{ and - if } -\epsilon_i \mbox{ in } \alpha ) \Rightarrow
+\langle \beta, \alpha \rangle = \pm 1$ with same conditions. $p =
+1 ( \mbox{if +}\epsilon_i), \, 0 (\mbox{ if }-\epsilon_i)$ and $q
+= 1 (\mbox{if -}\epsilon_i), \, 0 (\mbox{ if }+\epsilon_i)$.
+
+\item $\alpha = \frac{1}{2} ( \pm \epsilon_1 \cdots \pm \epsilon_4
+), \,\, \beta = \epsilon_i + \epsilon_j$. $\langle \beta, \alpha
+\rangle = \mbox{sign}_{\alpha}(\epsilon_i)+
+\mbox{sign}_{\alpha}(\epsilon_j)$. $p = 1 ( \mbox{if } +\epsilon_i
++ \epsilon_j \mbox{ in } \alpha, \,\, 0 ( \mbox{else} ) )$ and $q
+= 1 ( \mbox{if } -\epsilon_i - \epsilon_j \mbox{ in } \alpha),
+\,\, 0 (\mbox{else} )$.
+
+\item $\alpha = \frac{1}{2} ( \pm \epsilon_1 \cdots \pm \epsilon_4
+), \,\, \beta = \epsilon_i$. $\langle \beta, \alpha \rangle =
+\mbox{sign}_{\alpha}(\epsilon_i)$. $p = 1 (\mbox{if } +\epsilon_i
+\mbox{ in } \alpha) , \,\, 0 (\mbox{else})$ and $q = 1 (\mbox{if }
+-\epsilon_i\mbox{ in } \alpha), \,\, 0 (\mbox{else})$.
+\end{itemize}
+%
+\end{enumerate}
+\end{solution}
+%
+%
+\begin{exercise}
+Check that the string property holds for $\Delta_{G_2}$.
+\end{exercise}
+%
+\begin{solution}
+$\Delta_{G_2} = \{ \alpha \in Q_{A_2} \, | \, (\alpha,\alpha) = 2
+\mbox{ or } 6 \} = \{ \epsilon_i - \epsilon_j \, (i,j=1,2,3 \, i
+\not = j); \,\, \pm (\epsilon_i + \epsilon_j - 2\epsilon_k) \, (i
+\not = j \not = k \not = i) \}$
+
+\begin{itemize}
+\item $\alpha = \epsilon_i - \epsilon_j$, $\beta = \epsilon_i -
+\epsilon_k \rightarrow \langle \beta , \alpha \rangle = 1$.  $p=2,
+q=1$.
+
+\item $\alpha = \epsilon_i - \epsilon_j$, $\beta = \epsilon_k -
+\epsilon_k \rightarrow \langle \beta , \alpha \rangle = 1$.  $p=2,
+q=1$.
+
+\item $\alpha = \epsilon_i - \epsilon_j$, $\beta = \epsilon_i +
+\epsilon_j - 2\epsilon_k \rightarrow \langle \beta , \alpha
+\rangle = 0$. $p=0, q=0$.
+
+\item $\alpha = \epsilon_i - \epsilon_j$, $\beta = \epsilon_i +
+\epsilon_k - 2\epsilon_j \rightarrow \langle \beta , \alpha
+\rangle = 3$. $p=3, q=0$.
+
+\item $\alpha = \epsilon_i + \epsilon_j - 2\epsilon_k$, $\beta =
+\epsilon_i + \epsilon_k - 2\epsilon_j \rightarrow \langle \beta ,
+\alpha \rangle = -1$. $p=0, q=1$.
+
+\item $\alpha = \epsilon_i + \epsilon_j - 2\epsilon_k$, $\beta =
+\epsilon_i - \epsilon_j \rightarrow \langle \beta , \alpha \rangle
+= 0$. $p=0, q=0$.
+
+\item $\alpha = \epsilon_i + \epsilon_j - 2\epsilon_k$, $\beta =
+\epsilon_i - \epsilon_k \rightarrow \langle \beta , \alpha \rangle
+= 1$. $p=1, q=0$.
+
+\item $\alpha = \epsilon_i + \epsilon_j -2 \epsilon_k$, $\beta =
+\epsilon_k - \epsilon_i \rightarrow \langle \beta , \alpha \rangle
+= -1$. $p=0, q=1$.
+
+\end{itemize}
+\end{solution}
+
+\end{document}

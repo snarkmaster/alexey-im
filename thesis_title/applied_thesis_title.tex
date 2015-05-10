@@ -1,0 +1,214 @@
+%% LyX 1.6.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[11pt,english]{amsbook}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{amsthm}
+\usepackage{setspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{section}{chapter}
+\numberwithin{equation}{section} %% Comment out for sequentially-numbered
+\numberwithin{figure}{section} %% Comment out for sequentially-numbered
+\theoremstyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{changepage}
+\usepackage{fancyhdr}
+% Uncomment this if you need to have a \title{} entry, but don't want 
+% LaTeX to generate its own title page.
+% \let\maketitle\relax
+
+\usepackage{babel}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{adjustwidth}{-0.5in}{-0.5in}
+\newcommand{\TitleGap}{\vspace{0.12in}}
+
+\begin{onehalfspace}
+\begin{center}
+\textbf{\LARGE \vspace{-.75in}}
+\par\end{center}{\LARGE \par}
+\end{onehalfspace}
+
+\begin{center}
+\textbf{\LARGE Pattern-avoidance in Binary Fillings of Grid Shapes}{\Large \TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{onehalfspace}
+\begin{center}
+{\Large by\TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\LARGE Alexey Spiridonov}{\Large \TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large A.B., Princeton University, 2004\TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large Submitted to the Department of Mathematics}
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large in partial fulfillment of the requirements for the degree
+of\TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large Doctor of Philosophy\TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large at the\TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large MASSACHUSETTS INSTITUTE OF TECHNOLOGY\TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large June 2009\TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large © Alexey Spiridonov, 2009. All rights reserved.\TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large The author hereby grants to MIT permission to reproduce and
+to distribute publicly paper and electronic copies of this thesis
+document in whole or in part in any medium now known or hereafter
+created.\vspace{0.7in}}
+\par\end{center}{\Large \par}
+\end{onehalfspace}
+
+\begin{onehalfspace}
+\noindent \begin{flushleft}
+{\Large Author . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . .}
+\par\end{flushleft}{\Large \par}
+\end{onehalfspace}
+
+\begin{onehalfspace}
+\noindent \begin{flushright}
+{\Large Department of Mathematics}\\
+{\Large May 8, 2009\TitleGap }
+\par\end{flushright}{\Large \par}
+\end{onehalfspace}
+
+\begin{onehalfspace}
+\noindent \begin{flushleft}
+{\Large Certified by . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . .}
+\par\end{flushleft}{\Large \par}
+\end{onehalfspace}
+
+\begin{onehalfspace}
+\noindent \begin{flushright}
+{\Large Alexander Postnikov}\\
+{\Large Associate Professor of Applied Mathematics}\\
+{\Large Thesis Supervisor\TitleGap }
+\par\end{flushright}{\Large \par}
+\end{onehalfspace}
+
+\begin{onehalfspace}
+\noindent \begin{flushleft}
+{\Large Accepted by . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . .}
+\par\end{flushleft}{\Large \par}
+\end{onehalfspace}
+
+\begin{onehalfspace}
+\noindent \begin{flushright}
+{\Large Michel X. Goemans}\\
+{\Large Chairman, Applied Mathematics Committee\TitleGap }
+\par\end{flushright}{\Large \par}
+\end{onehalfspace}
+
+\begin{onehalfspace}
+\noindent \begin{flushleft}
+{\Large Accepted by . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . .}
+\par\end{flushleft}{\Large \par}
+\end{onehalfspace}
+
+\begin{onehalfspace}
+\noindent \begin{flushright}
+{\Large David S. Jerison}\\
+{\Large Chairman, Department Committee on Graduate Students}
+\par\end{flushright}{\Large \par}
+\end{onehalfspace}
+
+\newpage{}
+
+\begin{center}
+\textbf{\Large \thispagestyle{empty}Pattern-avoidance in Binary Fillings
+of Grid Shapes}{\Large \TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{onehalfspace}
+\begin{center}
+{\Large by\TitleGap }
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\Large Alexey Spiridonov}
+\par\end{center}{\Large \par}
+
+\begin{center}
+{\large \vspace{0.35in}Submitted to the Department of Mathematics}\\
+{\large on May 8, 2009 in partial fulfillment of the}\\
+{\large requirements for the degree of}\\
+{\large Doctor of Philosophy}{\Large \TitleGap }
+\par\end{center}{\Large \par}
+\end{onehalfspace}
+
+\begin{onehalfspace}
+\begin{flushleft}
+\textbf{\Large Abstract}{\Large \TitleGap }
+\par\end{flushleft}{\Large \par}
+\end{onehalfspace}
+
+\noindent {\large A }\emph{\large grid shape}{\large{} is a set of
+boxes chosen from a square grid; any Young diagram is an example.
+We consider a notion of pattern-avoidance for $0$-$1$ fillings of
+grid shapes, which generalizes permutation pattern-avoidance. A filling
+avoids a set of patterns if none of its sub-shapes, obtained by removing
+some rows and columns, equal any of the patterns. We focus on patterns
+that are }\emph{\large pairs}{\large{} of $2\times2$ fillings. }{\large \par}
+
+{\large Totally nonnegative Grassmann cells are in bijection with
+Young shape fillings that avoid particular $2\times2$ pair, which
+are, in turn, equinumerous with fillings avoiding another $2\times2$
+pair. The latter ones correspond to acyclic orientations of the shape's
+bipartite graph. Motivated by this result, due to Postnikov and Williams,
+we prove a number of such analogs of Wilf-equivalence for these objects
+--- that is, we show that, }\emph{\large in certain classes of shapes,
+some pattern-avoiding fillings are equinumerous with others}{\large . }{\large \par}
+
+{\large The equivalences in this paper follow from two very different
+bijections, and from a family of recurrences generalizing results
+of Postnikov and Williams. We used a computer to test each of the
+described equivalences on a diverse set of shapes. All our results
+are }\emph{\large nearly }{\large tight, in the sense that we found
+no natural families of shapes, in which the equivalences hold, but
+the results' hypotheses do not. }{\large \par}
+
+{\large One of these bijections gives rise to some new combinatorics
+on tilings of skew Young shapes with rectangles, which we name }\emph{\large Popeye
+diagrams}{\large . In a special case, they are exactly Hugh Thomas's
+}\emph{\large snug partitions}{\large{} for $d=2$. We show that Popeye
+diagrams are a lattice, and, moreover, each diagram is a sublattice
+of the Tamari lattice. We also give a simple enumerative result.\TitleGap}{\large \par}
+
+\noindent {\large Thesis Supervisor: Alexander Postnikov}{\large \par}
+
+\noindent {\large Title: Associate Professor of Applied Mathematics}{\large \par}
+
+\end{adjustwidth}
+\end{document}

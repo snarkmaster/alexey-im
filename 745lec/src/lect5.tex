@@ -1,0 +1,155 @@
+\documentclass[10pt,twoside]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts}
+
+\newcommand{\Rr}{\mathbb R}
+\newcommand{\Cc}{\mathbb C}
+\newcommand{\Qq}{\mathbb Q}
+\newcommand{\Zz}{\mathbb Z} 
+\newcommand{\Ff}{\mathbb F}
+\newcommand{\mg}{\mathfrak{g}}
+\newcommand{\mh}{\mathfrak{h}}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{conjecture}{Conjecture}[section]
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+\title{18.745: Lecture 5}
+\author{Professor: Victor Ka\v{c} \\ Scribe: Zhongtao Wu}
+\date{}
+\maketitle
+
+
+\begin{definition}
+If $\mh$ is a Lie algebra and $\pi: \mh \rightarrow gl_V$ is its representation, and $\lambda \in \mh^*$, then the subspace $V_{\lambda}^\mh=\{v\in V | \pi(a)v=\lambda(a)v$ for all $a\in \mh \}$ is called a weight space of $\mh$ attached to $\lambda$.  
+\end{definition}
+
+\begin{lemma}[Lie's lemma]
+Let $\Ff$ be a field of characteristic $0$; let $\pi$ be a representation of $\mg$ in a finite-dimensional vector space $V$, and let $\mh$ be an ideal of $\mg$.  Then for any $\lambda\in \mh^*$, $\pi(\mg)V^{\mh}_{\lambda} \subset V^{\mh}_{\lambda}$. (i.e weight spaces of $\mh$ are $\mg$-invariant.)
+\end{lemma}
+
+\begin{proof}
+We may assume $V^{\mh}_\lambda \neq 0$.  We want to prove that if $\pi(g)v \in V^\mh_\lambda$, then $\pi(g)v\in V^\mh_\lambda$, namely:
+$$\pi(h)(\pi(g)v)=\lambda(h)\pi(g)v, \; \forall h\in\mh, g\in\mg, v\in V^\mh_\lambda$$
+Using $AB=BA+[A,B]$, we can rewrite the equation as: 
+$$\pi(g)\pi(h)v+\pi([h,g])v=\lambda(h)\pi(g)v.$$
+Since $\mh$ is an ideal, $[h,g]\in \mh$. So we can use the definition of $V^\mh_\lambda$ to further simplify the equation to:
+$$\lambda(h)\pi(g)v+\lambda([h,g])(v)=\lambda(h)\pi(g)v$$
+or equivalently $\lambda([h,g])(v)=0$.  So we need to show that if $V^\mh_\lambda \neq 0$, then $\lambda([h,g])=0$ for all $h\in\mh, g\in\mg$. 
+
+Pick a non-zero vector $v\in V^\mh_\lambda$ and take any $g\in\mg$.  Denote by $W_m$ the span of vectors $v,\pi(g)v, \dotsc , \pi(g)^mv$.  We have an increasing sequence of subspaces $W_0=\Ff v\subset W_1=\Ff v+\Ff \pi(g)v \subset \dotsb \ $ in $V$.  Take the smallest $N$, such that the vectors $v, \pi(g)v, \dotsc, \pi(g)^{N-1}v$ are linearly independent, but $v,\dotsc, \pi(g)^Nv$ are linearly dependent, i.e, $\pi(g)^Nv=$ linear combination of $v,\dotsc, \pi(g)^{N-1}v$;  and the same holds for $\pi(g)^{N+1}v, \dotsc$.  Hence,
+$$\pi(g)W_{N-1}\subset W_{N-1}=W_N=W_{N+1}=\dotsb$$
+We shall prove that for any $h\in \mh$, $\pi(h)W_m\subset W_m$ for all $m$ less than $N$, and moreover, that in the basis $v,\pi(g)v, \dotsc, \pi(g)^mv$, the operator $\pi(h)$ has the matrix form
+ $\begin{pmatrix}
+\lambda(h) & * &  \\
+           & \ddots &    \\
+0 &   & \lambda(h) 
+\end{pmatrix}$
+
+We do it by induction on $n$: 
+For $n=0$, we have matrix $(\lambda(h))$.  
+Suppose this is true for $<n$, then: 
+$$\pi(h)\pi(g)^{n}v=\pi(h)\pi(g)\pi(g)^{n-1}v=\pi([h,g])\pi(g)^{n-1}v+\pi(g)\pi(h)\pi(g)^{n-1}v.$$
+Since $[h,g]\in \mh$, the first term $\pi([h,g])\pi(g)^{n-1} \in W_{n-1}$.  For our second term, we use the induction hypothesis on $\pi(h)\pi(g)^{n-1}v$ to get:
+\begin{align*}
+  \pi(g)\pi(h)\pi(g)^{n-1}v &= \pi(g)(\lambda(h)\pi(g)^{n-1}v+c_{n-2}\pi(g)^{n-2}v+\dotsb +c_0v) \\
+                            &= \lambda(h)\pi(g)^{n}v+c_{n-2}\pi(g)^{n-2}v+\dotsb +c_0\pi(g)v
+\end{align*}
+So we proved the inductive step.  
+In particular, both $\pi(h)$ and $\pi(g)$ are operators on $W_{N-1}$ and $\pi(h)$ is upper triangular on $W_{N-1}$ with $\lambda(h)$ on the diagonal.  But $\pi([h,g])=[\pi(h), \pi(g)]$ on $W_{n-1}$; if we take $\operatorname{tr}_{W_{N-1}}$ of both sides, we get $N\lambda([h,g])=0$.  So $\lambda([h,g])=0$ since $\operatorname{char}\Ff=0$.  
+
+\end {proof}
+
+From the above lemma, we can easily prove the following main theorem in this section.
+\begin{theorem}[Lie's theorem]
+Let $\Ff$ be an algebraically closed field of characteristic $0$.  Let $\mg$ be a solvable Lie algebra and let $\pi: \mg \rightarrow gl_V$ be a representation of $\mg$ in a finite dimensional vector space $V$ over $\Ff$.  Then there exists a common eigenvector $v\in V$ for all operators $\pi(a)$, $a\in \mg$. 
+i.e, $\pi(a)v=\lambda(a)v$, where $\lambda(a)\in \Ff$, $v\neq 0$. 
+\end{theorem}
+
+\begin{proof}
+Note that $\pi(g) \subset gl_V$ is a finite dimensional subalgebra since $\operatorname{dim}gl_V=(\operatorname{dim}V)^2$, so we may assume that $\operatorname{dim}{\mg}<\infty$ and prove Lie's theorem by induction on $n=\operatorname{dim}\mg$.
+
+If $n=1$, i.e, $\mg=\Ff a$, then we take for $v$ any eigenvector of $\pi(a)$.  (We use here that $\Ff$ is algebraically closed.)
+
+For any $n> 1$, since $\mg$ is solvable, $[\mg, \mg] \subsetneq \mg$; so we can take a subspace $\mh$ of $\mg$ of codimension 1 containing $[\mg, \mg]$. Then $\mh$ is an ideal of $\mg$ since $[\mh, \mg] \subset [\mg, \mg] \subset \mh$.  $\operatorname{dim}\mh=n-1$, so we can apply the inductive assumption and find $v\in V$ such that $\pi(h)v=\lambda(h)v$ for all $h\in \mh$.  Obviously $\lambda \in \mh^*$, so $V_\lambda^\mh \neq 0$.  Apply Lie's lemma, we get $\pi(a)V_\lambda^\mh \subset V^\mh_\lambda$ for all $a\in \mg$.  Write $\mg=\mh+\Ff a$, we have $\pi(a)V^\mh_\lambda \subset V^\mh_\lambda$.  But $V^\mh_\lambda$ is a finite dimensional vector space over an algebraically closed field, hence the operator $\pi(a)$ has an eigenvector $v\in V^\mh_\lambda$.  This is the desired $v$.  
+\end{proof}   
+
+
+\noindent
+{\em Exercise 5.1}: Lie's lemma and hence Lie's theorem hold over an algebraically closed field of $\operatorname{char}\Ff=p> \dim V$.
+
+\begin{proof}
+The only place we used $\operatorname{char}\Ff =0$ in our proof of Lie's lemma is concluding $\lambda([\mh, \mg])=0$ from the identity $N\lambda([\mh,\mg])=0$, where $N$ is the dimension of the subspace $W_{N-1}$.  But if $\operatorname{char}\Ff=p> \dim V > \dim W_{N-1}=N$, such an argument is still valid.  
+\end{proof}
+
+
+\noindent
+{\em Exercise 5.2}: Take $\mg=\mathfrak{H}_1$ acting on $\Ff [x]$ by $P=\frac{d}{dx}$, $Q=x$, $c=1$.  Suppose $\operatorname{char}\Ff=p>0$, then $U=\oplus_{j\geq p}\Ff x^j$ is a subrepresentation.  Hence $V=\Ff [x]/U$ is a p-dimensional representation of $\mathfrak{H}_1$.  It can be shown that there is no common eigenvector for $P$ and $Q$, so Lie's theorem fails. 
+
+\begin{proof}
+
+Suppose $f\in U$, then $Q(f)\in U$. If $\deg f>p$, then $\deg P(f) \geq p$ and hence $P(f) \in U$.  Otherwise, $\deg f=p$, i.e, $f=c x^p$ for some constant $c$.  Then $P(f)=cpx^{p-1}=0$ since $\operatorname{char} \Ff =p$.  Hence, $U$ is a subrepresentation, and the quotient $V=\Ff [x]/U$ is a $p$-dimensional representation of $\mg$.  
+
+Next, notice that the only nonzero eigenvector for $Q$ is a scalar of $x^{p-1}$.  But $x^{p-1}$ is not an eigenvector for $P$, since $P(x^{p-1})=(p-1)x^{p-2}$.  So Lie's theorem fails.  
+
+\end{proof}
+
+
+\noindent
+{\em Exercise 5.3}: If $\mg$ is abelian, then $\lambda([h,g])=0$ for all $\lambda \in \mh^*$, $g,h\in \mg$.  So Lie's lemma and hence Lie's theorem hold over any algebraically closed field, even if $\operatorname{char} \Ff \neq 0$. 
+
+\begin{proof}
+If $\mg$ is abelian, then the commutator $[\pi(g), \pi(h)]$ is identically 0.  So we have $$\pi(h)(\pi(g)v)=\pi(g)\pi(h)v=\lambda(h)(\pi(g)v), \ \forall h \in \mh, g \in \mg.$$  This means that $\pi(g)V_{\lambda}^\mh \subset V^\mh_\lambda$, hence Lie's lemma holds.
+
+
+\end{proof}
+
+
+Lie's theorem implies the following corollary:  
+\begin{corollary} 
+
+(a)\; For any representation $\pi$ of a solvable Lie algebra $\mg$ in a finite dimensional vector space $V$, there exists a basis of $V$ for which the matrices of all operators $\pi(g)$, $g\in \mg$ are upper triangular.
+
+(b)\; A subalgebra $\mg \subset gl_V$, $\operatorname{dim}V < \infty$, is solvable if and only if in some basis the matrices of all operators from $\mg$ are upper triangular.
+
+(c) \;  If $\mg$ is a finite dimensional solvable Lie algebra, then $[\mg,\mg]$ is a nilpotent Lie algebra. 
+ 
+
+\end{corollary}
+
+\begin{proof}
+\noindent
+(a)  By Lie's theorem, there exists a common eigenvector $v$ for $\pi(\mg)$.  Let $v_1=v$.  The subspace $\Ff v_1$ is $\pi(\mg)$ invariant, hence we may consider the representation $\pi_{V/\Ff v_1}$ of $\mg$ in $V/\Ff v_1$.  Apply Lie's theorem, we can find a common eigenvector $v_2' \in V/\Ff v_1$ for $\pi_{V/\Ff v_1}(\mg)$.  This means that if $v_2 \in V$ is a preimage of $v_2'$, then $\pi(\mg)v_2 \in \Ff v_1 + \Ff v_2$.  Next, consider $V/(\Ff v_1 + \Ff v_2)$ and construct $v_3 \in V$ such that $\pi(\mg)v_3 \in \Ff v_1+ \Ff v_2+ \Ff v_3$, etc.
+
+So for any $a \in \mg$, \begin{align*} 
+\pi(a)v_1 & \in \Ff v_1 \\
+\pi(a)v_2 & \in \Ff v_1 + \Ff v_2 \\
+\pi(a)v_3 & \in \Ff v_1 + \Ff v_2 + \Ff v_3\\
+\cdots
+\end{align*}
+But this exactly means that $\pi(a)$ is upper triangular in the basis $v_1, \dotsc, v_n$.  
+
+\medskip 
+\noindent
+(b) If the matrices of all operators from $\mg$ are upper triangular in some basis, then it is a subalgebra of the solvable Lie algebra $b_k(\Ff)$, which consists of all upper triangular matrices.  Hence, $\mg$ is also solvable.
+
+Conversely, if $\mg \subset gl_V$ is solvable, then we can apply part (a) to find a basis in which all matrices are upper triangular.
+
+\medskip
+\noindent
+(c)  Consider $\operatorname{ad}:\mg \rightarrow gl_\mg$, the adjoint representation of $\mg$.  $\operatorname{Ker} \operatorname{ad}=\operatorname{center}(\mg)$ is abelian, hence is a solvable ideal.  Also, $\operatorname{ad}(\mg)=\mg/\operatorname{center}(\mg) \subset gl_\mg$ and $\operatorname{ad}([\mg,\mg])=[\mg,\mg]/[\mg,\mg]\cap \operatorname{center}(\mg) \subset gl_\mg$.  In order to prove $[\mg, \mg]$ is a nilpotent Lie algebra, it suffices to prove $\operatorname{ad}[\mg, \mg]$ is nilpotent.  But $\operatorname{ad}\mg \subset gl_\mg$ is a solvable subalgebra, hence is an upper triangular subalgebra of $gl_\mg$ in some basis of $\mg$ by part (b).  But the commutator of two upper triangular matrices is strictly upper triangular, hence $\operatorname{ad}[\mg,\mg] \subset$ strictly upper triangular.  So $\operatorname{ad}[\mg,\mg]$ is a nilpotent Lie algebra; hence $[\mg,\mg]$ is a nilpotent Lie algebra.  
+
+\end{proof}
+\end{document}

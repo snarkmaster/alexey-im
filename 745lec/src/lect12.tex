@@ -1,0 +1,301 @@
+% ----------------------------------------------------------------
+% AMS-LaTeX Paper ************************************************
+% **** -----------------------------------------------------------
+\documentclass[12pt]{amsart}
+\usepackage{latexsym,amsmath, amscd, amssymb, amsthm, euscript}
+% ----------------------------------------------------------------
+%\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+%\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+%\addtolength{\textwidth}{+4cm} \addtolength{\textheight}{+2cm}
+%\hoffset-2cm \voffset-1cm \setlength{\parskip}{5pt}
+%\setlength{\parskip}{5pt} %\textwidth = 330 pt \textheight = 530 pt
+% THEOREMS -------------------------------------------------------
+\newtheorem*{thm}{Theorem}
+\newtheorem*{exer}{Exercise}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{sublem}{Sub-Lemma}
+\newtheorem*{app}{Appendix}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem*{notation}{Notation}
+\newtheorem*{defn}{Definition}
+
+\theoremstyle{definition}
+\newtheorem{eqtext}[equation]{}
+\theoremstyle{definition}
+\newtheorem{notrem}[subsection]{Notational Remark}
+\newtheorem*{obs}{Observation}
+\newtheorem*{rem}{Remark}
+\newtheorem{anitem}[subsubsection]{}
+\newtheorem{blank}[subsection]{}
+\newtheorem*{example}{Example}
+\numberwithin{equation}{subsection}
+\newtheorem*{claim}{Claim}
+\newtheorem{pg}[subsection]{}
+\newtheorem{specialcase}[subsection]{Special Case}
+\newtheorem{generalcase}[subsection]{General Case}
+
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+
+%\renewcommand{\O}{{\mathcal{O}}}
+
+% MATH -----------------------------------------------------------
+% ----------------------------------------------------------------
+\begin{document}
+
+\begin{center}
+\begin{tabular}{|lr|}
+\hline
+18.745 Introduction to Lie Algebras&Fall 2004\\
+\multicolumn{2}{|c|}{Lecture 12 - October 19th, 2004}\\
+Professor Victor Ka$\breve{c}$&Scribe: David Meyer\\
+\hline
+\end{tabular}
+\end{center}
+
+%\date{\today}%
+
+% ----------------------------------------------------------------
+
+%\date {} \maketitle%
+
+\setcounter{section}{0}
+
+
+\begin{defn}
+An \emph{Abstract Jordan Decomposition} of an element of a Lie Algebra $\g$
+is a decomposition of the form $a = a_s + a_n$ where $ad(a_s)$ is a semisimple operator and $ad(a_n)$
+is a nilpotent operator (on $\g$), and $[a_s, a_n] = 0$.
+\end{defn}
+
+\begin{example}
+If $\g = gl_N(\mathbb{F})$, where $\mathbb{F}$ is algebraically closed, then
+$A = A_s + A_n \in \g$ (the concrete Jordan decomposition) is also an abstract Jordan decomposition,
+since $ad(A_s)$ is semisimple, $ad(A_n)$ is nilpotent, and $[ad(A_s), ad(A_n)] = ad[A_s,A_n] = 0$.
+\end{example}
+
+\begin{rem}
+Note that $A_s' = A_s + \lambda{}I, A_n' = A_n - \lambda{}I$ is another abstract Jordan decomposition, for
+any $\lambda \in \mathbb{F}$. Thus we see that the abstract Jordan decomposition is not unique itself. The uniqueness
+fails in this case because I is a central element.
+\end{rem}
+
+\begin{claim}
+An abstract Jordan decomposition is unique (if it exists) if $center(\g) = 0$. For if
+$a = a_s + a_n = a_s' + a_n'$ are two abstract Jordan decompositions, then:
+$$ad(a) = ad(a_s) + ad(a_n) = ad(a_s') + ad(a_n'),$$
+both usual Jordan decompositions of $ad(a)$. Hence by the uniqueness of the usual Jordan
+decomposition, $ad(a_s) = ad(a_s')$ and $ad(a_n) = ad(a_n')$, or \mbox{$ad(a_s - a_s') = ad(a_n - a_n') = 0$}.
+Then since $center(\g) = 0$, we conclude that $a_s = a_s'$ and $a_n = a_n'$. 
+\end{claim}
+
+\begin{rem}
+In some situations, an abstract Jordan decomposition may not exist, but it is difficult to construct examples of this.
+\end{rem}
+
+\newtheorem*{exer1}{Exercise 12.1}
+\begin{exer1}
+If $\g$ is the Lie Algebra of an algebraic group over an algebraically closed field $\mathbb{F}$,
+then any $a \in \g$ has an abstract Jordan decomposition.
+\end{exer1}
+\begin{proof}
+Beyond the scope of this write up.
+\end{proof}
+
+\newtheorem*{exer2}{Exercise 12.2}
+\begin{exer2}
+Using Levi's Theorem, show that any 4-dimensional Lie Algebra over an algebraically closed field
+of characteristic 0 is solvable or $sl_2(\mathbb{F}) \oplus $\{one dimensional abelian\}.
+\end{exer2}
+\begin{proof}
+Let $\g$ be a 4-dimensional Lie Algebra over an algebraically closed field of characteristic 0.
+By Levi's Theorem, there exists a semisimple subalgebra $S$ of $\g$ such that
+$\g = S \oplus R(\g)$, where $R(\g)$ is the radical of $\g$, and $S \cap R(\g) = 0$.
+If $\g$ is solvable, we are done, so let us consider the case where $\g$ is not solvable.
+In this case, $dim(S) > 0$. The cases of $dim(S) = 1$ and $dim(S) = 2$ are not possible, since then $S$ would be solvable.
+Suppose $dim(S)=3$. By exercises 8.2 and 8.3, we note that the only semisimple 3-dimensional Lie Algebra (over an algebraically
+closed field of characteristic 0) is $sl_2(\mathbb{F})$.  So $S = sl_2(\mathbb{F})$, and we have a homomorphism 
+$sl_2(\mathbb{F}) \longrightarrow Der(R(\g))$. However, $Der(R(\g))$ is one dimensional, and so 
+the kernel of this map will be an ideal of $sl_2(\mathbb{F})$ of dimension 2 or 3. If of dimension 2, the kernel would be solvable,
+violating the semisimplicity of $sl_2(\mathbb{F})$. So the kernel must have dimension 3, and so $sl_2(\mathbb{F})$ commutes
+with $R(\g)$. Thus $\g = sl_2(\mathbb{F}) \oplus $\{one dimensional abelian\}.
+
+All that remains is to handle the case where $dim(S) = 4$. We wish to show there are no semisimple 4-dimensional Lie algebras.
+
+
+Assume $\g$ is semisimple.
+Choose a Cartan subalgebra $\h$ of $\g$ (note that $\h$ must be non-zero), and
+write the generalized root space decomposition. Note that by Theorem 1(b) in Lecture 
+12, roots come in pairs, and so $dim(\h)$ is even.
+
+\par{Case $dim(\h) = 2$:}
+Then $\g = \h + \g_\alpha + \g_{-\alpha}$.
+Choose nonzero $E \in \g_\alpha$ and nonzero $F \in \g_{-\alpha}$. Let $H=[E,F] \in \h$.
+Then, the  Jacobi identity, 
+$$[H,[E,F]] + [E,[F,H]] + [F,[H,E]] = 0,$$ 
+implies: $[E,[F,H]] = [[H,E],F]$, with both sides in $\h$. Since $ad(H)$ cannot be 0, we must 
+have one (and thus both) of $[F,H]$ and $[H,E]$ nonzero. 
+
+Write $[H,E] = cE$, for nonzero $c \in \mathbb{F}$. This forces $[F,H] = cF$. Now we can choose a final basis 
+vector $B$ for $\h$ and subtract away a multiple of $H$ such that $[B,B]=0$, $[B,H]=0$, and $[B,E]=0$. But by the Jacobi identity, we have
+[B,[E,F]] + [E,[F,B]] + [F,[B,E]] = 0 which implies $[F,B] = 0$, and thus $ad(B)=0$ which contradicts semisimplicity.
+
+\par{Case $dim(\h) = 4$:} 
+Not possible, since $\g$ is not nilpotent.
+\end{proof}
+
+\begin{prop}
+Let $\g$ be a Lie Algebra (over an algebraically closed field $\mathbb{F}$) with center 0, such that
+all derivations of $\g$ are inner. (In particular, $\g$ is semisimple). Then any element of
+$\g$ admits a (unique) abstract Jordan decomposition.
+\end{prop}
+\begin{proof}
+Take $a \in \g$. Then $A = ad(a) = A_s + A_n$ (the usual Jordan decomposition) where 
+$A_s,A_n \in gl_{\g}$, $A_s$ semisimple, $A_n$ nilpotent, and $A_s A_n = A_n A_s$.
+(In $End(\g)$). Let $\g = \bigoplus{\g_{\lambda}}$, $\lambda$ taken over the
+eigenvalues of $A_s$, be the eigenspace decomposition of $\g$ with respect to $A_s$.
+
+Let us prove that $A_s = ad(a_s)$ for some element $a_s \in \g$. To do this, we must check that
+$A_s$ is a derivation of $\g$, ie, that $A_s([x,y]) = [A_s x, y] + [x, A_s y]$. Luckily,
+it suffices to check this for a basis of eigenvectors of $A_s$. Take $x \in \g_{\lambda}$ and
+$y \in \g_{\mu}$. Recall that $[x,y] \in \g_{\lambda + \mu}$, since
+$\g_{\lambda}$ and $\g_{\mu}$ are generalized eigenspaces of $ad(a)$. Now it is easy to see:
+\begin{eqnarray*}
+LHS &=& A_s([x,y]) = (\lambda + \mu)[x,y]\\
+RHS &=& [A_s x, y] + [x, A_s y] = \lambda [x,y] + \mu [x,y] = 
+  (\lambda + \mu)[x,y].
+\end{eqnarray*}
+So $A_s$ is a derivation of $\g$. Since all derivations of $\g$ are inner,
+we have that $A_s = ad(a_s)$ for some $a_s \in \g$. Hence, letting $a_n = a - a_s$,
+we see that $ad(a_n) = ad(a - a_s) = A - A_s = A_n$ is nilpotent, and $[ad(a_s),ad(a_n)] = 0 = ad[a_s,a_n]$.
+Since $center(\g)=0$, it follows that $[a_s,a_n]=0$. Thus $a = a_s + a_n$ is an abstract Jordan decomposition
+of $a$. Uniqueness follows from $center(\g) = 0$.
+\end{proof}
+
+From now on, we will assume that $\mathbb{F}$ is an algebraically closed field of characteristic 0,
+and that $\g$ is a finite-dimensional semisimple Lie Algebra over $\mathbb{F}$.
+
+Let $\h$ be a Cartan subalgebra and let $\g = \bigoplus_{\alpha \in \h^*}{\g_\alpha}$ be
+the generalized root space decomposition, where: 
+$$\g_\alpha = \{ a \in \g | (ad(h) - \alpha(h) I)^N a = 0 \textrm{ for some } N>0, \textrm{ for all } h \in \h\}.$$
+
+Recall that $[\g_\alpha, \g_\beta] \subset \g_{\alpha + \beta}$, and $\g_0 = \h$.
+For semisimple algebras, we can say much more however.
+
+\newcounter{bigthmcount}
+\setcounter{bigthmcount}{0}
+\newtheorem{bigthm}[bigthmcount]{Theorem}
+\begin{bigthm}\ 
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item With respect to the Killing Form, $\g_\alpha$, $\g_\beta$ are orthogonal
+(ie, $K(\g_\alpha, \g_\beta) = 0$), if $\alpha + \beta \neq 0$.
+\item $K\mid_{\g_{-\alpha} + \g_{\alpha}}$ is a non-degenerate bilinear form. In particular,
+$K\mid_\h$ is non-degenerate, and $K$ defines a non-degenerate pairing of $\g_\alpha$ and $\g_{-\alpha}$.
+\item $\h$ is a maximal abelian subalgebra of $\g$.
+\item $\h$ consists of semisimple elements. (ie, $ad(h)$ is semisimple for all $h \in \h$).
+\end{enumerate}
+\end{bigthm}
+\begin{proof}\ 
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item holds in any finite-dimensional Lie Algebra. Let $a \in \g_\alpha$, $b \in \g_\beta$. Then
+for arbitrary $\gamma$:
+$$(ad(a))(ad(b))(\g_\gamma) \subset \g_{\gamma + \alpha + \beta}.$$
+Hence, $((ad(a))(ad(b)))^N (\g_\gamma) \subset \g_{\gamma + N(\alpha + \beta)} = 0$ for N sufficiently large
+since $\alpha + \beta \neq 0$ and since there are only finitely many $\gamma$ for which $\g_\gamma \neq 0$. So
+$(ad(a))(ad(b))$ is a nilpotent operator on $\g$. Hence $tr(ad(a) ad(b)) = 0$. Thus, $K(\g_\alpha, \g_\beta) = 0$.
+
+\item follows from (a) and the fact that K is non-degenerate on $\g$, since by (a) the kernel of
+$K\mid_{\g_{-\alpha} + \g_{\alpha}}$ lies in the kernel of $K\mid_{\g}$.
+
+\item By the easy part of Cartan's Criterion, $K(\h, [\h, \h]) = 0$, since $\h$ is solvable. But by
+(b), $[\h, \h] = 0$ since $K\mid_{\h}$ is non-degenerate. So $\h$ is abelian. Also, $\h$
+is maximal abelian since it is maximal among nilpotent subalgebras (being a Cartan subalgebra).
+
+\item Take $h \in \h$, and write the abstract Jordan decomposition $h = h_s + h_n$.
+For each $h' \in \h$, $[ad(h), ad(h')] = ad([h,h']) = 0$, hence
+$ad(h_s)$ and $ad(h_n)$ commute with $ad(h')$ (see remark below). Hence since $center(\g) = 0$, 
+$[h_s,h'] = 0$ and $[h_n, h'] = 0$. Therefore, $h_s \in \h$ and $h_n \in \h$, since
+$\h$ is maximal abelian. To show $h_n = 0$, we compute:
+$$K(h_n, h') = tr(ad(h_n) ad(h')) = 0.$$
+(since $ad(h_n)$ is nilpotent, and $ad(h')$ commutes with $ad(h_n)$, their composition is nilpotent).
+Hence $K(h_n, \h) = 0$. Hence by (b), $h_n = 0$, and $h = h_s$ is semisimple.
+\end{enumerate}
+\end{proof}
+
+\begin{rem}
+We used the following fact from Linear Algebra:
+
+If A and B are commuting operators on a finite-dimensional vector
+space $V$, then $A_s$ and $B$ are also commuting. Indeed, consider
+the generalized eigenspace decomposition for $A$, $V = \bigoplus_{\lambda}{V_\lambda}$.
+Each $V_\lambda$ is $B$-invariant. But $A_s$ on $V_\lambda$ is just $\lambda I$, hence
+$A_s B = B A_s$ on $V_\lambda$ for each $\lambda$. Hence $A_s B = B A_s$ on $V$.
+\end{rem}
+
+Theorem 1 says that the generalized root space decompositions are just regular root spaces:
+$$\g_\alpha = \{ a \in \g | [h,a] = \alpha(h) a \textrm{ for all } h \in \h \}$$
+since all $ad(h)$ are semisimple operators.
+
+Let $\Delta = \{ \alpha \in \h^* | \alpha \neq 0, \g_\alpha \neq 0 \}$.
+An element of $\Delta$ is called a \emph{root} of $\g$, and $\g_\alpha$ the attached root space.
+($\alpha(h)$ is the eigenvalue of $ad(h)$, hence the word ''root'')
+
+The root space decomposition now becomes:
+\begin{eqnarray*}
+\g&=&\h \oplus \Big(\bigoplus_{\alpha \in \Delta}{\g_\alpha}\Big)\text{, where}\\
+\g_\alpha&=&\{ a \in \g | [h,a] = \alpha(h) a \textrm{ for all } h \in \h\},
+\end{eqnarray*}
+and $\h$ is the maximal abelian subalgebra of $\g$.
+
+\begin{rem}
+We have a linear map $\nu:\h \longrightarrow \h^*$ defined by $(\nu(h))(h') = K(h,h')$. But K is non-degenerate,
+hence $\nu$ is an isomorphism. This gives us a bilinear form on $\h^*$: 
+$$K(\nu(h), \nu(h')) = K(h,h') = \nu(h)(h') = \nu(h')(h).$$
+\end{rem}
+
+\begin{bigthm}\ 
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item If $\alpha \in \Delta$, $e \in \g_\alpha$, $f \in \g_{-\alpha}$, then
+$[e,f] = K(e,f) \nu^{-1}(\alpha) \in \h$.
+\item If $\alpha \in \Delta$, then $K(\alpha, \alpha) \neq 0$.
+\end{enumerate}
+\end{bigthm}
+\begin{proof}\ 
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item $[e,f] \in [\g_{\alpha}, \g_{-\alpha}] \subset \g_0 = \h$, so
+$[e,f] - K(e,f)\nu^{-1}(\alpha) \in \h$. To prove that it is 0, we need to check that
+$$K([e,f] - K(e,f)\nu^{-1}(\alpha), h') = 0,\ \forall h' \in \h.$$
+But this is just a computation:
+\begin{multline*}
+K([e,f] - K(e,f)\nu^{-1}(\alpha), h')$ = $K([e,f], h') - K(e,f) K(\nu^{-1}(\alpha), h') = \\
+K(e, [f,h']) - K(e,f) \alpha(h')$ = $\alpha(h') K(e,f) - K(e,f) \alpha(h') = 0.
+\end{multline*}
+\item Assume the contrary, that $K(\alpha, \alpha) = 0$, ie, $\alpha(\nu^{-1}(\alpha)) = 0$. Consider
+the following 3-dimensional subalgebra of $\g$:
+$$\mathbb{F}e + \mathbb{F}f + \mathbb{F}\nu^{-1}(\alpha),$$ 
+where $e \in \g_\alpha$, $f \in \g_{-\alpha}$, and $K(e,f) = 1$.
+(we can choose such elements by Theorem 1(b)).
+
+By (a), $[e,f] = \nu^{-1}(\alpha)$. Also, we have: 
+\begin{eqnarray*} 
+[\nu^{-1}(\alpha), e] & = & \alpha(\nu^{-1}(\alpha)) e = 0, \\{} 
+[\nu^{-1}(\alpha), f] & = & -\alpha(\nu^{-1}(\alpha)) f = 0.
+\end{eqnarray*}
+Hence this 3-dimensional subalgebra is solvable (even nilpotent). Hence by Lie's Theorem,
+in its adjoint representation, it can be represented by upper triangular matrices in some basis.
+Hence its derived algebra, $\mathbb{F}\nu^{-1}(\alpha)$ can be represented by strictly upper-triangular
+matrices, which is impossible since $\nu^{-1}(\alpha) \in \h$ is a semisimple element.
+\end{enumerate}
+\end{proof}
+
+
+\end{document}
+
+

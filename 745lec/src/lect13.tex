@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{theorem}[prop]{Theorem}
+\newtheorem{lemma}[prop]{Lemma}
+\newtheorem{exercise}{Exercise}[section]
+\setcounter{section}{12}
+\begin{document}
+\section{Roots of a semisimple Lie algebra}
+Recall that the Killing form $K$ gives a non-degenerate bilinear pairing ${\mathfrak g}_\alpha \times {\mathfrak g}_{-\alpha} \to \mathbb{F}$. In addition, $[e, f]=K(e, f)\nu^{-1}(\alpha)$ for any $e \in {\mathfrak g}_\alpha$, $f \in {\mathfrak g}_{-\alpha}$. Also, $K(\alpha, \alpha)\neq 0$ for any $\alpha \in \Delta$.
+
+For each $\alpha \in \Delta$, choose a non-zero $E \in {\mathfrak g}_\alpha$ and an $F \in {\mathfrak g}_{-\alpha}$ such that $K(E, F) = \frac{2}{K(\alpha, \alpha)}$. Let $H = \frac{2 \nu^{-1}(\alpha)}{K(\alpha, \alpha)}$. Then $[E, F]=H$, $[E, H] = -\alpha(H)E = -2E$ and $[F, H]=\alpha(H)F = 2F$ (as $\alpha (\nu^{-1}(\alpha)) = K(\alpha, \alpha)$). So the span of $E$, $F$ and $H$ is isomorphic to $sl_2 (\mathbb{F})$.
+
+\begin{lemma}[Basic lemma for $sl_2$] Let $\pi$ be a representation of $sl_2(\mathbb{F})$ in a vector space $V$, and $v \in V$ be such that $\pi (E)v = 0$ and $\pi (H) v = \lambda v$, $\lambda \in \mathbb{F}$. Then 
+\begin{enumerate}
+\item \label{Thirteen_Five}$\pi (H) \pi (F)^n v = (\lambda - 2n) \pi (F)^n v$
+\item \label{Thirteen_Six} $\pi(E) \pi (F)^n v = n(\lambda - n + 1) \pi (F)^{(n-1)}v$
+\item \label{Thirteen_Seven} If $V$ is finite-dimensional, then $\lambda \in \mathbb{Z}_+$, the vectors $\pi(F)^j v \ (0 \leq j \leq \lambda)$ are linearly independent, and $\pi(F)^{(\lambda + 1)}v$=0.
+\end{enumerate}
+\end{lemma}
+
+\emph{Proof.} (\ref{Thirteen_Five}) and (\ref{Thirteen_Six}) are proved by induction on $n$; we leave the details to the reader. For (\ref{Thirteen_Seven}), notice that if $\lambda - n + 1$ were non-zero for all integer $n \geq 1$, then (\ref{Thirteen_Six}) would imply, by induction, that $\pi (F)^n v \neq 0$ for any $n \in \mathbb{Z}_+$. In this case (\ref{Thirteen_Five}) would mean that $\pi (H)$ has infinitely many eigenvalues, which is impossible in a finite-dimensional space. Therefore, $\lambda$ is a non-negative integer.
+
+Next, it follows from (\ref{Thirteen_Six}) by induction that $\pi (F)^j v \neq 0$ for $j \leq \lambda$. Then (\ref{Thirteen_Five}) says that $\pi (F)^j v$ is an eigenvector of $\pi(H)$ that corresponds to the eigenvalue $\lambda - 2j$; therefore $v,\, \pi(F)v,\, \pi(F)^2v, \ldots \pi(F)^\lambda(v)$ must be linearly independent. Finally, $\pi(F)^{\lambda + 1}(j)$ must be zero, because otherwise (\ref{Thirteen_Six}) would imply, by induction, that $\pi (F)^n v$ is non-zero for infinitely many values of $n$, and $\pi(H)$ would have infinitely many eigenvalues, which cannot possibly happen. \hfill $\Box$
+
+\begin{exercise} Prove parts (\ref{Thirteen_Five}) and (\ref{Thirteen_Six}) in the basic lemma for $sl_2(\mathbb{F})$.
+\end{exercise}
+
+\emph{Solution.} Not surprisingly, we use induction on $n$. Let's start with part (\ref{Thirteen_Five}). The case $n=0$ is given. Assume this is true for some $n$. Then for $n+1$,
+\begin{eqnarray}
+\pi (H) \pi (F)^{n+1}v=\pi (F)\pi (H) \pi (F)^n v - \pi ([F, H]) \pi (F)^n v = \nonumber\\
+= \pi (F) ((\lambda - 2n)\pi (F)^n v) -2 \pi (F) \pi(F)^n v = (\lambda - 2(n+1)) \pi(F)^{n+1}v \nonumber
+\end{eqnarray}
+so, by induction, the statement is true for all $n$.
+
+In part (\ref{Thirteen_Six}), as much as we'd like to, we cannot begin with $n=0$, because $\pi (F)$ may not be invertible. So let's use $n=1$ as the inductive base:
+$$
+\pi(E) \pi (F)v = \pi (F)\pi (E)v - \pi([F, E])v = \pi(H)v = \lambda v
+$$
+because $\pi (E) v =0$, $\pi (H)v = \lambda v$ and $[E, F] = H$.
+
+So for $n=1$, this is true. If it is true for some $n$, then, for $n+1$, we write
+\begin{eqnarray}
+\pi(E) \pi (F)^{n+1}v=\pi (F) \pi (E) \pi(F)^n (v) - \pi ([F, E]) \pi (F)^n (v) = \nonumber\\
+=\pi(F) (n(\lambda - n + 1)\pi(F^{n-1})v) + \pi (H) \pi(F)^n (v)= \nonumber\\
+= (n(\lambda -n +1) + (\lambda - 2n))\pi (F)^n v = (n+1)(\lambda - (n+1) +1)\pi (F)^n v \nonumber
+\end{eqnarray}
+so, by induction, this statement is also true for all n.
+
+\begin{exercise} \label{Thirteen_SecondBasic} Assume $\pi$ is a representation of $sl_2(\mathbb{F})$ in a vector space $V$, and $v \in V$ is such that $\pi(F)v = 0$ and $\pi(H)v = \lambda v$. Prove that $\pi(H)\pi(E)^n v = (\lambda + 2n)\pi(E)^n v$, that $\pi(F) \pi(E)^n v = -n (\lambda+n-1)\pi(E)^{(n-1)}v$, and that if $V$ is given to be finite-dimensional, then $-\lambda \in \mathbb{Z}_+$, the vectors $\pi(E)^j v$, $0 \leq j \leq -\lambda$, are linearly independent, and $\pi (E)^{-\lambda + 1}v = 0$.
+\end{exercise}
+
+\emph{Solution.} Rather than rewrite the proof of the basic lemma for $sl_2$ with minor changes (which is possible), we'll reduce this fact to the basic lemma. Namely, consider the isomorphism $\varphi : sl_2 \to sl_2$ for which
+$$
+\varphi(E)=F, \quad \varphi(F)=E, \quad \varphi(H)=-H
+$$
+One checks easily that $\varphi$ is a Lie algebra isomorphism. Therefore, the representation $\pi '$ of $sl_2$ in ${\mathfrak g}$ defined by $\pi 'A(u) = \pi (\varphi (A))u$ is indeed a representation. Obviously, $\pi '$ satisfies the assumptions of the basic lemma, except that $\pi' (H) v = -\lambda v$. Replacing all $\lambda$-s by $-\lambda$-s in the conclusions of the basic lemma, we see that, first, $\pi' (H) \pi' (F)^n v = (-\lambda - 2n) \pi' (F)^n v$. Second, $\pi'(E) \pi' (F)^n v = n(-\lambda - n + 1) \pi' (F)^{(n-1)}v$. And third, if $V$ is finite-dimensional, then $-\lambda \in \mathbb{Z}_+$, the vectors $\pi'(F)^j v \ (0 \leq j \leq -\lambda)$ are linearly independent, and $\pi'(F)^{(-\lambda + 1)}v$=0. All that's left is to replace $\pi' (E)$ by $\pi (F)$, $\pi'(F)$ by $\pi (E)$, and $\pi'(H)$  by $-\pi(H)$. Once we do that, the last three statemenbs become the three statements we need.
+
+\begin{theorem} In the above notation,
+\begin{enumerate}
+\item \label{Thirteen_Eight} $\dim ({\mathfrak g}_\alpha) = 1$ if $\alpha \in \Delta$.
+\item \label{Thirteen_Nine} If $\alpha,\, \beta \in \Delta$, then $\{ \beta + n \alpha : n \in \mathbb{Z}\} \cap (\Delta \cup \{ 0 \})$ is a finite connected string. I.e. it is $\{\beta - p\alpha,\, \beta - (p-1)\alpha,\, \ldots\, \beta+(q-1)\alpha,\, \beta + q\alpha\}$, where $p,\, q \in \mathbb{Z}_+$ and $p-q= \frac{2K(\alpha, \beta)}{K(\alpha, \alpha)}$. In particular, $\frac{2K(\alpha, \beta)}{K(\alpha, \alpha)} \in \mathbb{Z}$.
+\item \label{Thirteen_Ten} If $\alpha,\, \beta,\, (\alpha + \beta) \in \Delta$, then $[{\mathfrak g}_\alpha, {\mathfrak g}_\beta]={\mathfrak g}_{\alpha + \beta}$
+\item \label{Thirteen_Eleven} If $\alpha \in \Delta$, then $n\alpha \in \Delta$ iff $n= \pm 1$.
+\end{enumerate}
+\end{theorem}
+
+\emph{Proof.} Part (\ref{Thirteen_Eight}) is proved by contradiction. Assume $\dim {\mathfrak g}_\alpha > 1$. Consider the subalgebra ${\mathfrak a}_\alpha = \mathbb{F}E \oplus \mathbb{F}F \oplus \mathbb{F}H$ constructed above, where $E \in {\mathfrak g}_\alpha$, $F \in {\mathfrak g}_{-\alpha}$, $H = \frac{2 \nu^{-1}(\alpha)}{K(\alpha, \alpha)} \in {\mathfrak h}$ and $[E, F]=H$, $[E, H] = -2E$, $[F, H] = 2F$. Since ${\mathfrak g}_\alpha$ and ${\mathfrak g}_{-\alpha}$ are non-degenerately paired by $K$, $\dim {\mathfrak g}_{-\alpha} > 1$. Therefore, there is a non-zero $v \in {\mathfrak g}_{-\alpha}$ for which $K(E, v)=0$. For that $v$, $[E, v]=K(E, v)\nu^{-1}(\alpha) = 0$, and $[H, v]= -\alpha (H)v = -2v$. Observe that ${\mathfrak a}_\alpha$ is isomorphic to $sl_2(\mathbb{F})$, and it is represented in ${\mathfrak g}$ by the adjoint representation. Further, ${\mathfrak g}$ is finite-dimensional and contains a non-zero $v$ in ${\mathfrak g}$ for which $\ad E(v)=0$ and $\ad H(v)=-2v$. This contradicts part $\ref{Thirteen_Seven}$ of the basic lemma for $sl_2$, therefore $\dim {\mathfrak g}_\alpha= 1$.
+
+We proceed to part (\ref{Thirteen_Nine}). Let $q$ be the largest non-negative integer for which $\beta + q\alpha \in \Delta \cup \{ 0\}$; it must exist, because $\Delta$ is a finite set. Pick a non-zero $v \in {\mathfrak g}_{\beta + q \alpha}$, and again consider the adjoint representation of ${\mathfrak a}_\alpha$ in ${\mathfrak g}$. Then $\ad E (v) \in {\mathfrak g}_{\beta + (q+1)\alpha} = \{ 0 \}$, i.e. $\ad E (v) =0$. Also, 
+$$
+\ad H (v) = [H, v] = ((\beta + q \alpha)(H))v = \left( \frac{2 K(\beta, \alpha)}{K(\alpha, \alpha)} + 2 q \right) v
+$$
+so, once again, the basic lemma for $sl_2$ applies. It tells us that $\frac{2 K(\beta, \alpha)}{K(\alpha, \alpha)} + 2 q$ lies in $\mathbb{Z}_+$, and moreover, $\beta + q\alpha ,\, \beta+ (q-1)\alpha ,\, \ldots \, \beta + q\alpha -2 \left( \frac{K(\beta, \alpha)}{K(\alpha, \alpha)} + q \right)$ all lie in $\Delta \cup \{ 0 \}$, because $\frac{2 K(\beta, \alpha)}{K (\alpha, \alpha)} +2q,\, \frac{2 K(\beta, \alpha)}{K (\alpha, \alpha)} +2q -2,\, \ldots -\frac{2 K(\beta, \alpha)}{K (\alpha, \alpha)} -2q$ are eigenvalues of $\ad H$.
+
+Denote $\frac{2 K(\beta, \alpha)}{K (\alpha, \alpha)} +q$ by $p$, and let $p'$ be the largest non-negative integer for which $\beta - p\alpha \in \Delta \cup \{ 0 \} $. Choose a non-zero $v' \in {\mathfrak g}_{\beta - p'\alpha}$. Then $\ad F (v')=0$ (because $\ad F (v') \in {\mathfrak g}_{\beta - (p+1)\alpha} = \{ 0 \})$, and $\ad H (v')= \left( \frac{2 K(\beta, \alpha)}{K (\alpha, \alpha)} -2p' \right) v'$. Applying the second version of the basic lemma (Exercise \ref{Thirteen_SecondBasic}), we conclude that $2p' - 2\frac{K(\beta, \alpha)}{K(\alpha, \alpha)} \in \mathbb{Z}_+$, and $\beta - p'\alpha,\, \beta - (p'-1)\alpha,\, \ldots \, \beta - p'\alpha + 2 \left( - \frac{K(\beta, \alpha)}{K(\alpha, \alpha)} + p' \right)$ all lie in $\Delta \cup \{ 0 \}$. Denote $- \frac{2K(\beta, \alpha)}{K(\alpha, \alpha)} + p'$ by $q'$. Since $p'$ and $q$ are the largest possible, we have $p' \geq p$ and $q \geq q'$. But on the other hand, $p' - q' = p -q = \frac{2 K(\alpha, \beta)}{K(\alpha, \alpha)}$. So both inequalities must be equalities, i.e. $p'=p$ and $q'=q$. Therefore, $\{ \beta + n\alpha : n \in \mathbb{Z}_+ \} \cap (\Delta \cup \{ 0 \}) = \{ \beta - p\alpha,\, \beta - (p-1)\alpha ,\, \ldots\, \beta + q\alpha \}$ as claimed.
+
+Part (\ref{Thirteen_Ten}) follows from this easily. Let $\alpha ,\, \beta \in \Delta$, and let $p$ be the maximum non-negative integer for which $\beta - p\alpha \in \Delta$. As before, if $v \neq 0$ is an element of ${\mathfrak g}_{\alpha - p\beta}$, then $\ad (F)v=0$ and $\ad (H)v = \left( \frac{2K(\beta, \alpha)}{K(\alpha, \alpha)} -2p \right) v$. So by the second version of the basic lemma (Exercise \ref{Thirteen_SecondBasic}), $\ad (E)^j v \neq 0$ if $0 \leq j \leq 2p - \frac{2 K(\beta, \alpha)}{K(\alpha, \alpha)} = p+q$. Also, $q \geq 1$, because $\alpha + \beta \in \Delta$. Therefore $0 \neq \ad (E)^p v \in {\mathfrak g}_\beta$, $0 \neq \ad (E)^{p+1}v \in {\mathfrak g}_{\alpha + \beta}$, and of course, $0 \neq E \in {\mathfrak g}_\alpha$. Hence $[{\mathfrak g}_\alpha, {\mathfrak g}_\beta] = {\mathfrak g}_{\alpha + \beta}$, because each of these subspaces is one-dimensional.
+
+Finally, (\ref{Thirteen_Eleven}) is a consequence of the above. Let $\beta = n \alpha \in \Delta$. Then, by (\ref{Thirteen_Eight}), $\frac{2K (\beta, \alpha)}{K(\beta, \beta)} \in \mathbb{Z}$, i.e. $\frac{2}{n} \in \mathbb{Z}$. So all we need to show is that $n$ can't be $2$ (the same result for $-\alpha$ will then imply that $n$ can't be $-2$). However, ${\mathfrak g}_{2\alpha}=[{\mathfrak g}_\alpha, {\mathfrak g}_\alpha]$ by (\ref{Thirteen_Ten}) and $[{\mathfrak g}_\alpha, {\mathfrak g}_\alpha] =0$ by (\ref{Thirteen_Eight}). Thus $2 \alpha$ is not in $\Delta$, and $n$ can't be $2$. \hfill $\Box$
+\end{document} 

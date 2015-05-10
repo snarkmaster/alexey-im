@@ -1,0 +1,413 @@
+%% LyX 1.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=1in,bmargin=1in,lmargin=1.2in,rmargin=1.2in}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \theoremstyle{plain}
+ \newtheorem{thm}{Theorem}[section]
+ \newtheorem{prop}{Proposition}[section]
+ \numberwithin{equation}{section} %% Comment out for sequentially-numbered
+ \numberwithin{figure}{section} %% Comment out for sequentially-numbered
+ \theoremstyle{plain}
+ \theoremstyle{definition}
+  \newtheorem{xca}[section]{Exercise}%%Delete [section] for sequential numbering
+ \theoremstyle{definition}
+ \newtheorem{defn}[thm]{Definition}
+ \theoremstyle{definition}
+  \newtheorem{example}[thm]{Example}
+ \theoremstyle{remark}
+ \newtheorem*{note*}{Note}
+  \newtheorem*{obs*}{Observation}
+ \newtheorem*{conclusion*}{Conclusion}
+ \theoremstyle{plain}
+ \newtheorem{cor}[thm]{Corollary} %%Delete [thm] to re-start numbering
+ \theoremstyle{definition}
+ \newtheorem*{defn*}{Definition}
+ \theoremstyle{plain}
+ \newtheorem*{thm*}{Theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\e}{\varepsilon}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\D}{\Delta}
+\newcommand{\gln}{gl_n(\F)}
+\let\ker=\undefined
+\DeclareMathOperator{\ker}{Ker}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Z}{Z}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\s}{span}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\gl}{gl}
+\newcounter{xcacount}
+\let\xca=\undefined
+\newtheorem{xca}[xcacount]{Exercise}
+\newcommand{\sln}{\text{sl}_n(\F)}
+\newcommand{\son}{\text{so}_n(\F)}
+\newcommand{\spn}{\text{sp}_n(\F)}
+\newcommand{\spr}{\text{sp}_{2r}(\F)}
+\newcommand{\slr}{\text{sl}_{2r}(\F)}
+\newcommand{\sori}{\text{sl}_{2r}(\F)}
+\newcommand{\sor}{\text{so}_{2r}(\F)}
+
+\usepackage{babel}
+\usepackage{mathdots}
+\makeatother
+
+\begin{document}
+
+\title{18.745: Lecture 15}
+
+\vspace{0.1in}
+\author{Professor: Victor Ka\v{c}\\
+Scribe: Maksim Maydanskiy}
+
+\maketitle
+
+\vspace{0.1in}
+\setcounter{section}{15}
+Recall that for $n=2r$ we defined $\spr = \{ A \subset \slr | A^t J +J A^t=0 \} $, where $J$ was any skew symmetric, but via a change of basis may be taken to be \begin{equation*}
+J=\left(\begin{array}{cccccc}
+0 & 0 & 0 & \cdots &  & 1\\
+0 & 0 &  &  & \iddots\\
+0 &  & \ddots & 1 &  & \vdots\\
+\vdots &  & -1 & \ddots &  & 0\\
+ & \iddots &  &  & 0 & 0\\
+-1 &  & \cdots & 0 & 0 & 0\end{array}\right) \end{equation*}
+
+
+\vspace{0.1in}
+\begin{xca}
+Prove that $\spr =\{ \left( \begin{array}{cc}
+a & b\\
+c & d \end{array} \right) | d=-a', b=b', c=c' \} $, where $'$ is the transposition with respect to the antidiagonal of an $r \times r$ matrix.
+
+\begin{note*}
+ For $\sor$ we have $b'=-b$, $c'=-c$.
+\end{note*}
+
+\end{xca}
+
+\begin{proof}[Solution]
+
+Denote the antidiagonal $r \times r$ matrix by $j$. Then $M= \left( \begin{array}{cc}
+a & b\\
+c & d \end{array} \right) \in \spr \Leftrightarrow$
+$$\left( \begin{array}{cc}
+a & b\\
+c & d \end{array} \right)
+\left( \begin{array}{cc}
+0 & j\\
+-j& 0 \end{array} \right) +
+ \left( \begin{array}{cc}
+0 & j\\
+-j& 0 \end{array} \right)
+\left( \begin{array}{cc}
+a & b\\
+c & d \end{array} \right) =0 \Leftrightarrow
+$$
+$$\left( \begin{array}{cc}
+a^t & c^t\\
+b^t & d^t \end{array} \right)
+\left( \begin{array}{cc}
+0 & j\\
+-j& 0 \end{array} \right) +
+\left( \begin{array}{cc}
+jc & jd\\
+-ja& -jb \end{array} \right)= 0 \Leftrightarrow $$
+
+$$\left( \begin{array}{cc}
+-c^t j + jc & a^t j +jd\\
+-d^t j -ja& b^t j-jb \end{array} \right)= 0 \Leftrightarrow
+ \begin{array}{r}
+-c^t j + jc=0\\ a^t j +jd=0\\
+-d^t j -ja =0 \\ b^t j-jb =0 \end{array} \Leftrightarrow
+\begin{array}{lcr}
+ c&=&- j^{-1}c^t j\\ d&=& j^{-1}a^t j\\
+a&=&-j^{-1}d^t j \\ b&=& j^{-1}b^t j \end{array}
+$$
+
+Now for $A=\{a_{i,j}\}_{i,j}$ we have $jA= \{a_{n+1-i, j}\}_{i,j}$ and $Aj= \{a_{n+1-i,n+1-j}\}_{i,j}$. Since
+$j^{-1} =j$, we get $j^{-1}A^t j= \{a_{n+1-i, n+1-j}\}_{i,j} = A'$, and so indeed $M \in \spr \Leftrightarrow c=c', b=b', a=-d'$.
+
+
+\end{proof}
+
+
+Inside $\spr$ we have
+
+
+
+ \begin{equation*} h=\left(\begin{array}{cccccc}
+a_{1}\\
+ & \ddots\\
+ &  & a_{r}\\
+ &  &  & -a_{r}\\
+ &  &  &  & \ddots\\
+ &  &  &  &  & -a_{1}\end{array}\right).\label{jandh}\end{equation*}
+
+ as a Cartan subalgebra. Indeed, in this basis $\spr$ contains a matrix with distinct eigenvalues, and so by a remark in one of the previous lectures the intersectio of $\spr$ and the diagonal subalgebra is a Cartan subalgebra. In light of Exercise 1, this intersection is as above.
+
+ The vectors $F_{i,j} = E_{i,j} - E_{n+1-i, n+1-j}$ for $1 \leq i, j \leq r$, $i\neq j$
+
+ and $F_{i,j}=E_{i,j}-E_{n+1-j,n+1-i}$ for $r+1 \leq j \leq n$, $1 \leq i \leq r$ are root vectors. The corresponding roots are $\D_{\text{sp}}= \{ \e_i-\e_j \text{ for } i, j = 1, \ldots, r, \text{ with } i\neq j; \e_i+\e_j \text{ for } i, j = 1, \ldots, r; -\e_i-\e_j \text{ for } i, j = 1, \ldots, r \}$. Note that $\pm2\e_i$ are roots.
+
+ \begin{note*}
+ This set is indecomposable for all $r \geq 1$, hence $\spr$ is simple.
+ \end{note*}
+
+ \begin{proof}
+For $r \geq 2$ we have the chains
+$\e_a +\e_b, -\e_b + \e_c, \e_c+\e_b$ if $c\neq b$ and $\e_a +\e_b, -\e_b + \e_a, \e_c+\e_b$ if $a\neq b$. This shows that all $\e_i + \e_j$'s are connected (if $r=1$ this statement is vacuously true).
+
+The chain $\e_a+\e_b, \e_a - \e_b$ for $a \neq b$ shows that all $\e_i -\e_j$'s are connected to the $\e_i + \e_j$'s (and hence among themselves).
+
+The $-\e_i-\e_j$'s are connected to $\e_i+\e_j$'s by obvious chains $-\e_i-\e_j, \e_i+\e_j$.
+
+This shows that any two roots are connected, and $\D$ is indecomposable.
+
+ \end{proof}
+
+ \begin{prop}
+  If $\D$ is decomposable, i.e. $\D=\D' \cup \D''$, with $\alpha'+\alpha''\notin \D \cup \{0\}$ for all $\alpha' \in \D, \alpha'' \in \D$ then we have a corresponding decomposition of $\g$ into direct sum of ideals $\g = \g' \oplus \g''$ where \[\g'=\h' \oplus \left(\bigoplus_{\alpha' \in \D'} \g_{\alpha'} \right)\] for $\h'=\s \{ \nu^{-1} ( \D' ) \} $ and $$\g''=\h'' \oplus \left(\bigoplus_{\alpha'' \in \D''} \g_{\alpha''} \right)$$ for $\h''=\s \{ \nu^{-1} ( \D'' ) \} $.
+ \end{prop}
+
+ \begin{proof}
+%Why is $[\g_{\alpha'},\g_{\alpha''} ] =0$? This is precisely because $\alpha'+\alpha'' \notin \D \cup \{0\}$.
+Because $\alpha'+\alpha'' \notin \D \cup \{0\}$, we get, $[\g_{\alpha'},\g_{\alpha''} ] \subset \g_{\alpha'+\alpha''} =0$.
+
+Since $\F [\g_{\alpha},\g_{-\alpha} ] = \F  \nu^{-1} ( \D' ) $ we conclude,  say by Jacobi identity, $[\h',\g_{\alpha''} ]=0$ and $[\h'',\g_{\alpha'} ]=0$, so $[\g',\g'']=0$.
+It remains to show that $\g'$ and $\g''$ are subalgebras. First note that $\beta' \in \D'$ implies $-\beta' \in \D'$. Indeed, we have $-\beta' \in \D$, and supposing $-\beta' \in \D''$ leads to $\beta' +(-\beta') \in \D \cup \{0\}$, a contradiction. Now if $\alpha', \beta' \in \D'$ then   $\gamma=\alpha'+\beta' \notin \D''$, because that would mean $\gamma +(-\beta')=\alpha' \in \D$ for $\gamma \in \D''$ and $-\beta' \in \D'$, another contradiction. So either $\alpha', \beta' \in \D' \cup {0}$ and $[\g_{\alpha'}, \g_{\beta'}] = \g_{\alpha'+\beta'} \in \g'$ or $\alpha', \beta' \notin \D \cup {0}$ and $[\g_{\alpha'}, \g_{\beta'}] = 0$. It is now clear that $\g'$ is a subalgebra. Similarly, $\g''$ is also a subalgebra.
+ \end{proof}
+
+\begin{defn*}
+An \textbf{abstract root system} is a pair $(V, \D)$, where $V$ is a finite dimensional vector space over $\R$ of dimension $r$, and $\D$ is a finite set of vectors in $V$, such that the following axioms hold
+\begin{enumerate}
+\item $0 \notin  \D$, $V=\s \{\D\}$
+\item If $\alpha \in \D$ then $k \alpha \in \D$ iff $k=1$ or $-1$ for all $k \in \Z$
+\item (\emph{string property}) If $\alpha, \beta \in \D$then $\{\beta + j \alpha | j \in \Z\} \cap (\D \cup {0}) = \{ \beta + j \alpha | -p \leq j \leq q \}$ where $p, q \in \Z_{+}$ and $p-q =  \frac {2(\alpha,\beta)}{(\alpha, \alpha)}$.
+\end{enumerate}
+Elements of $\D$ are called roots, and rank of the root system is $\text{rank}(V,\D) =r$.
+\end{defn*}
+
+In what follows we will often call abstract root systems simply root systems.
+
+\begin{example}
+Let $\g$ be any semisimple Lie algebra over a chosen field $\F$ of characteristic $0$, $\D \in \h^{*}$ the set of roots, $V=(\s \text{ over } \R \text{ of } \D)= \R \otimes_{\Q} \h^{*}_{\Q}$, where $\h^{*}_{\Q}$ is the span of $\D$ over $\Q$, and $(\cdot,\cdot)$ - the bilinear extension of $K\mid_{\h_{\Q}}$ (which we know has rational values on $\h_{\Q}$) to $\h_{\R}$- the span of $\D$ over $\R$. Then by Theorems 3 and 4 from preceding lectures $(V, \D)$ is an abstract root system called $\g$-root system.
+\end{example}
+\begin{example}
+$\text{dim }V =1$, $\D=\{\alpha, -\alpha\}$
+\begin{picture}(600,10)(-20,-2)
+\put (-4,0){$\alpha$}
+\put (12,0){$-\alpha$}
+\put (10,-3){\vector(1,0){15}}
+\put (10,-3){\vector(-1,0){15}}
+\put (-10,-3){\line(1,0){40}}
+\put (10,-3){\circle*{2}}
+\end{picture}
+
+This is the only root system of rank 1, by the first two axioms. The string property obviously holds here.
+\end{example}
+
+\begin{defn*}
+An abstract root system is called \textbf{indecomposable} if there is no decomposition into a union of two nonempty sets $\D =\D' \cup \D''$ such that $\alpha'+\alpha''\notin \D \cup \{0\}$ for all $\alpha' \in \D', \alpha'' \in \D''$.
+\end{defn*}
+
+\begin{prop}
+A root system $(V, \D)$ is decomposable iff $V = V' \oplus V'' $ where $V' \perp V''$ and $\D = \D' \cup \D''$ where $\D'=V' \cap \D$ and $\D'' = V'' \cap \D$.
+\end{prop}
+
+\begin{proof}
+First, suppose that $\D = \D' \cup \D''$ such that $\alpha'+\alpha'' \notin \D \cup \{0\}$ for all $\alpha' \in \D', \alpha'' \in \D''$. Then by the string property $q=0$. But $-\alpha'' \in \D''$ (since if $-\alpha'' \in \D'$ then $\alpha'' +(-\alpha'') = 0 \in \D \cup \{0\}$, a contradiction), hence $\alpha' - \alpha'' \notin \D \cup \{0\}$, so, by the string property $p=0$ as well, and hence $(\alpha', \alpha'')=0$. Taking $V'= \s \D'$, $V'' =\s \D''$ we get the desired decomposition of $V$.
+
+Conversely, suppose $V=V' \oplus V''$ and $\D=\D' \cup \D''$ for $\D'=V' \cap \D, \D''=V'' \cap \D
+$ and $(\alpha', \alpha'')=0$ for all $\alpha' \in \D'$, $\alpha'' \in \D''$. We shall show that $\alpha'+\alpha'' \notin \D \cup \{0\}$ for all $\alpha' \in \D', \alpha'' \in \D''$, so that $\D=\D' \cup \D''$ is a decomposition of $\D$. Note that $\alpha' + \alpha'' \neq 0$ because $\alpha' \in V'$, $\alpha'' \in V''$ and $V' \cap V'' =0$. If $\alpha' + \alpha'' \in \D$ then either $\alpha' +\alpha'' \in \D'$ or $\D''$. Without loss of generality, suppose $\alpha' +\alpha'' \in \D''$. But then $0=(\alpha', \alpha'+\alpha'')=(\alpha',\alpha')$, which is impossible.
+\end{proof}
+
+\begin{conclusion*}
+Thus $(V, \D)$ uniquely decomposes into a sum of indecomposable root systems $V= \oplus_{j} V_j$, where $V_i \perp V_j$ for $i \neq j$, and $\D = \cup_j \D_j$ with $\D_j \subset V_j$.
+\end{conclusion*}
+
+This reduces the study of general root systems to indecomposable ones.
+
+\begin{defn*}
+Two indecomposable abstract root systems $(V_1, \D_1)$ an $(V_2, \D_2)$ are \textbf{isomorphic} if there exists a vector space isomorphism $\varphi: V_1 \mapsto V_2$  such that $\varphi(\D_1)=\D_2$ and $(\varphi(a), \varphi(b))=\gamma (a,b)$ for all $a,b \in V_1$ and a constant $\gamma \in \R^{+}$.
+\end{defn*}
+
+\begin{note*}
+If $(\cdot, \cdot)$ is replaced with $\gamma (\cdot, \cdot)$ for some $\gamma \in \R^{+}$ we get an isomorphic root system.
+\end{note*}
+
+
+\begin{prop}
+If $(V,\D)$ is an \textsl{indecomposable} abstract root system, and $(\cdot, \cdot)$ its bilinear form, then for any other positive definite symmetric bilinear form $(\cdot, \cdot)_1$ for which the string property (the third axiom) holds, there exists a $\delta \in \R^{+}$, such that $(\alpha, \beta)_1=\delta (\alpha, \beta)$.
+\end{prop}
+
+\begin{proof}
+Fix $\alpha \in \D$. Then for any $\beta \in \D$ there exist a sequence $\alpha=\gamma_0, \gamma_1, \ldots, \gamma_k=\beta$ such that $\gamma_i+\gamma_{i+1} \in \D \cup \{0\}$ and $(\gamma_i, \gamma_{i+1})\neq 0$ for all $i= 0, \ldots, k-1$.
+
+To see that, for a root $\alpha$ define $C=\{\gamma \in \D | \text{ there exists a sequence of } \gamma \text{'s as above } \}$ and $B=\D \setminus C$. Then $\gamma \in C$ and $\beta \in B$ imply $(\gamma, \beta)=0$. Indeed, $(\gamma, \beta) \neg 0$ by string property means either $\gamma +\beta \in \D$ or $\gamma - \beta \in \D$, and so the strings $\gamma, \beta$ or $\gamma, -\beta, \beta$, respectively, imply $\beta \in C$, a contradiction. Now $C$ and $B$ are orthogonal subsets of $\D$ and $C$ is nonempty, since it contains $\alpha$. By proposition 15.2, and since $\D$ is indecomposable, we conclude that $B$ is empty, as wanted.
+
+%Indeed, as $\D$ is indecomposable, there is a sequence of $\gamma$'s. If at some point $(\gamma_i,\gamma_{i+1})=0$, then $\gamma_i+\gamma_{i+1}\neq 0$ and by the string property since $\gamma_i+\gamma_{i+1} \in \D$ we have $\gamma_i-\gamma_{i+1} \in \D$, so we can extend the sequence to $\gamma_i, \gamma_{i+1}-\gamma_i, \gamma_i-\gamma_{i+1}, \gamma_{i+1}$, where all consecutive pairs of terms are non-orthogonal.
+
+Now, define $\delta$ by $(\alpha, \alpha)_1 = \delta (\alpha, \alpha)$. We will show that $(\beta, \beta)_1 = \delta (\beta, \beta)$ for the same $\delta$. We know $$\frac {2(\alpha,\gamma_1)}{(\alpha, \alpha)}= \frac {2(\alpha,\gamma_1)_1}{(\alpha, \alpha)_1}= p-q$$
+so $(\alpha,\gamma_1)=\delta (\alpha,\gamma_1)$, and as
+$$\frac {2(\alpha,\gamma_1)}{(\gamma_1, \gamma_1)}= \frac {2(\alpha,\gamma_1)_1}{(\gamma_1, \gamma)_1}= p-q$$ and $(\alpha, \gamma_1)\neq 0$ we get $(\gamma_1, \gamma_1)_1=\delta (\gamma_1, \gamma_1)$.
+
+Similarly $(\gamma_2, \gamma_2)_1=\delta (\gamma_2, \gamma_2)$ and so on, until $\gamma_k=\beta$.
+
+Finally the string property implies $(\alpha,\beta)_1=\delta (\alpha,\beta)$ for all roots, and as the roots span $V$ the same is true for all $a,b$.
+\end{proof}
+
+
+We have 4 series of abstract root systems:
+
+Type $A_r$: We take $V=\{a \in \R^{r+1} \mid \Sigma a_i =0\}$ and for the standard basis  $\e_i$ of  $\R^{r+1}$  we let $\D_{A_r} = \{ \e_i - \e_j \mid i,j = 1, \ldots, r+1\}$. The inner product is the standart one on $\R^{n+1}$ i.e. $(\e_i, \e_j) = \delta_{i,j}$. To check that this is a root system we only need to verify the string property (the other two axioms obviously hold). The explicit computation for $\alpha = \e_i-\e_j$, $\beta=\e_k - \e_l$ is given by the following cases (note that $(\alpha, \alpha)=2$ for all roots $\alpha$):
+\begin{enumerate}
+\item $i \neq k,l; j\neq k,l$. Then $(\alpha,\beta)=0$ and $\alpha+\beta, \alpha-\beta \notin \D \cup \{0\}$, so $p=q=0$ and the string property holds.
+\item $\alpha = \e_i-\e_j$, $\beta=\e_j - \e_k$. Then $(\alpha, \beta)=-1$ and $q=1$, $p=0$, so the string property holds again.
+\item $\alpha = \e_i-\e_j$, $\beta=-\e_i + \e_k$. Then $(\alpha, \beta)=-1$ and $q=1$, $p=0$, so the string property holds.
+\item $\alpha = \e_i-\e_j$, $\beta=-\e_i - \e_j$. Then $(\alpha, \beta)=-2$ and $q=2$, $p=0$, so the string property holds.
+\item $\alpha = \e_i-\e_j = \beta$. Then $(\alpha, \beta)=2$ and $q=0$, $p=2$, so the string property holds.
+\end{enumerate}
+
+\begin{xca}
+Taking $V=\R^r$ with the standard basis $\e_i$, $i=1, \ldots r$ we define
+
+ $$\D_{B_r}= \D_{\text{so}_{2r+1}} = \{ \e_i - \e_j, -\e_i - \e_j, \e_i + \e_j ; \e_i, -\e_i \mid i,j = 1, \ldots, r$$
+
+ $$\D_{C_r}= \D_{\text{sp}_{2r}} = \{ \e_i - \e_j, -\e_i - \e_j, \e_i + \e_j ; 2\e_i, -2\e_i  \mid i,j = 1, \ldots, r\}$$
+
+  $$\D_{D_r}= \D_{\text{so}_{2r}} = \{ \e_i - \e_j, -\e_i - \e_j, \e_i + \e_j \mid i,j = 1, \ldots, r \}$$
+Prove that these are root systems, i.e. that the string property holds by \emph{explicitly} verifying it.
+
+\end{xca}
+
+\begin{proof}[Solution]
+We have the following obvious
+
+
+
+\begin{obs*}
+Suppose a pair $(V, \D)$ of a finite dimensional vector space over $\R$  and a finite set of vectors in it satisfy the first two axioms of abstract root system, and $\alpha, \beta \in \D$. Then the string property holds for $\alpha, \beta$  iff it holds for $\alpha, -\beta$ iff it holds for $-\alpha, \beta$.
+\end{obs*}
+
+% subtr alph, p times add alph q times
+%p-q =  \frac {2(\alpha,\beta)}{(\alpha, \alpha)}
+
+
+We will carry out the proof for all three of above root systems in parallel. We have the following cases:
+\begin{description}
+\item[ 0, 0] $\alpha=\e_i-\e_j, \beta=\e_k-\e_l$. In all three root systems,
+\begin{enumerate}
+\item $i \neq k,l; j\neq k,l$. Then $(\alpha,\beta)=0$ and $\alpha+\beta, \alpha-\beta \notin \D \cup \{0\}$ so $p=q=0$ and the string property holds.
+\item $\alpha = \e_i-\e_j$, $\beta=\e_j - \e_k$. Then $(\alpha, \beta)=-1$ and $q=1$, $p=0$, so the string property holds again.
+\item $\alpha = \e_i-\e_j$, $\beta=-\e_i + \e_k$. Then $(\alpha, \beta)=-1$ and $q=1$, $p=0$, so the string property holds.
+\item $\alpha = \e_i-\e_j$, $\beta=-\e_i - \e_j$. Then $\alpha=- \beta$ and automatically $q=2$, $p=0$, so the string property holds.
+\item $\alpha = \e_i-\e_j = \beta$. Then automatically $q=0$, $p=2$, so the string property holds.
+\end{enumerate}
+
+\item[ 0, 1] $\alpha=\e_i-\e_j, \beta=\e_k+\e_l$.
+\begin{enumerate}
+\item $i \neq k,l; j\neq k,l$. Then $(\alpha,\beta)=0$ and $p=q=0$ for all three root systems,  the string property holds.
+\item $\alpha = \e_i-\e_j$, $\beta=\e_j + \e_k$. Then $(\alpha, \beta)=-1$ and $q=1$, $p=0$ for all three root systems,  the string property holds.
+\item $\alpha = \e_i-\e_j$, $\beta=\e_i + \e_k$. Then $(\alpha, \beta)=1$ and $q=0$, $p=1$,for all three root systems,  the string property holds.
+\item $\alpha = \e_i-\e_j$, $\beta=\e_i + \e_j$. Then $(\alpha, \beta)=0$ and $q=p=1$ for $\D_{C_r}$, $p=q=0$ for $\D_{B_r}, \D_{D_r}$,and the string property holds in all three.
+\end{enumerate}
+
+\item[ 1, 0] $\alpha=\e_i+\e_j, \beta=\e_k-\e_l$.
+\begin{enumerate}
+\item $i \neq k,l; j\neq k,l$. Then $(\alpha,\beta)=0$ and $p=q=0$ for all three root systems,  the string property holds.
+\item $\alpha = \e_i+\e_j$, $\beta= -\e_j + \e_k$. Then $(\alpha, \beta)=-1$ and $q=1$, $p=0$ for all three root systems,  the string property holds.
+\item $\alpha = \e_i+\e_j$, $\beta=\e_i - \e_k$. Then $(\alpha, \beta)=1$ and $q=0$, $p=1$,for all three root systems,  the string property holds.
+\item $\alpha = \e_i +\e_j$, $\beta=\e_i - \e_j$. Then $(\alpha, \beta)=0$ and $q=p=1$ for $\D_{C_r}$, $p=q=0$ for $\D_{B_r}, \D_{D_r}$,and the string property holds in all three.
+\end{enumerate}
+
+\item[ 1, 1] $\alpha=\e_i+\e_j, \beta=\e_k+\e_l$. Then in all three root systems
+\begin{enumerate}
+\item $i \neq k,l; j\neq k,l$. Then $(\alpha,\beta)=0$ and $p=q=0$, the string property holds.
+\item $\alpha = \e_i+\e_j$, $\beta=\e_j + \e_k$. Then $(\alpha, \beta)=1$ and $q=0$, $p=1$,  the string property holds.
+\item $\alpha = \e_i+\e_j=\beta$ Then automatically $q=0$, $p=2$, so the string property holds.
+\end{enumerate}
+
+By the Observation we get that the string property holds in all three root systems in the cases
+\item[ 0,-1] $\alpha=\e_i-\e_j, \beta=-\e_k-\e_l$
+\item[-1, 0] $\alpha=-\e_i-\e_j, \beta=\e_k-\e_l$
+\item[-1, 1] $\alpha=-\e_i-\e_j, \beta=\e_k+\e_l$
+\item[ 1,-1] $\alpha=\e_i+\e_j, \beta=-\e_k-\e_l$
+\item[-1,-1] $\alpha=\-e_i-\e_j, \beta=-\e_k-\e_l$
+
+This complets the proof for $\D_{D_r}$ and leaves only the cases involving "singletons" for the other two root systems.
+
+\item[ $\diamond$, 0] $\alpha=(2)\e_i$, $\beta=\e_j-e_k$.
+
+\begin{enumerate}
+\item $i \neq j,k$. Then $(\alpha,\beta)=0$ and $p=q=0$, the string property holds.
+\item $i=j$. Then $(\alpha, \beta)=1$ for $\D_{B_r}$ and $q=0$, $p=2$,  the string property holds and $(\alpha, \beta)=2$, $(\alpha, \alpha)=4$ for $\D_{B_r}$ and $q=0$, $p=1$,  the string property holds.
+\item $i=k$. Then $(\alpha, \beta)=-1$ for $\D_{B_r}$ and $q=2$, $p=0$,  the string property holds and $(\alpha, \beta)=-2$, $(\alpha, \alpha)=4$ for $\D_{C_r}$ and $q=0$, $p=2$,  the string property holds.
+\end{enumerate}
+
+
+\item[ $\diamond$, 1] $\alpha=(2)\e_i$, $\beta=\e_j+e_k$.
+\begin{enumerate}
+\item $i \neq j,k$. Then $(\alpha,\beta)=0$ and $p=q=0$, the string property holds.
+\item $i=j$. Then $(\alpha, \beta)=1$ for $\D_{B_r}$ and $q=0$, $p=2$,  the string property holds and $(\alpha, \beta)=2$, $(\alpha, \alpha)=4$ for $\D_{C_r}$ and $q=0$, $p=1$,  the string property holds.
+\end{enumerate}
+
+
+\item[ 0, $\diamond$] $\alpha=\e_j-e_k$, $\beta=(2)\e_i$.
+\begin{enumerate}
+\item $i \neq j,k$. Then $(\alpha,\beta)=0$ and $p=q=0$, the string property holds.
+\item $i=j$. Then $(\alpha, \beta)=1$ for $\D_{B_r}$ and $q=0$, $p=1$,  the string property holds and $(\alpha, \beta)=2$ for $\D_{B_r}$ and $q=0$, $p=2$,  the string property holds.
+\item $i=k$. Then $(\alpha, \beta)=-1$ for $\D_{B_r}$ and $q=1$, $p=0$,  the string property holds and $(\alpha, \beta)=-2$ for $\D_{B_r}$ and $q=2$, $p=1$,  the string property holds.
+\end{enumerate}
+
+\item[ 1, $\diamond$] $\alpha=\e_i+e_j$, $\beta=(2)\e_k$.
+\begin{enumerate}
+\item $i \neq j,k$. Then $(\alpha,\beta)=0$ and $p=q=0$, the string property holds.
+\item $i=j$. Then $(\alpha, \beta)=1$ for $\D_{B_r}$ and $q=0$, $p=2$,  the string property holds and $(\alpha, \beta)=2$ for $\D_{C_r}$ and $q=0$, $p=2$,  the string property holds.
+\end{enumerate}
+
+\item[ $\diamond$,$\diamond$] $\alpha=(2)\e_i$, $\beta=(2)\e_j$.
+\begin{enumerate}
+\item $i \neq j$. Then $(\alpha,\beta)=0$ and $p=q=1$ in both, the string property holds.
+\item $i=j$ This is automatic.
+\end{enumerate}
+
+By the Observation we get that the string property holds in both root systems in the cases
+\item[-$\diamond$, 0] $\alpha=-(2)\e_i$, $\beta=\e_j-e_k$
+\item[-$\diamond$, 1] $\alpha=-(2)\e_i$, $\beta=\e_j+e_k$
+\item[ $\diamond$,-1] $\alpha=(2)\e_i$, $\beta=-\e_j-e_k$
+\item[-$\diamond$,-1] $\alpha=-(2)\e_i$, $\beta=-e_j-e_k$
+\item[ 0,-$\diamond$] $\alpha=\e_j-e_k$, $\beta=-(2)\e_i$
+\item[-1, $\diamond$] $\alpha=-\e_i-e_j$, $\beta=(2)\e_k$
+\item[ 1,-$\diamond$] $\alpha=\e_i+e_j$, $\beta=-(2)\e_k$
+\item[-1,-$\diamond$] $\alpha=-\e_i-e_j$, $\beta=-(2)\e_k$
+\item[-$\diamond$, $\diamond$] $\alpha=-(2)\e_i$, $\beta=(2)\e_j$
+\item[ $\diamond$,-$\diamond$] $\alpha=(2)\e_i$, $\beta=-(2)\e_j$
+\item[-$\diamond$,-$\diamond$] $\alpha=-(2)\e_i$, $\beta=-(2)\e_j$
+
+This exhausts the possibilities, and shows that $\D_{B_r}$ and $\D_{C_r}$ are indeed root systems.
+
+
+
+\end{description}
+
+
+\end{proof}
+
+\end{document}

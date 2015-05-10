@@ -1,0 +1,435 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newtheorem{lem}{Lemma}
+
+\newtheorem*{Theorem}{Theorem}
+
+\newtheorem*{Def}{Definition}
+
+\newtheorem*{cor}{Corollary}
+
+\newtheorem*{Prop}{Proposition}
+
+\newcommand*{\g}{\mathfrak{g}}
+\newcommand*{\gN}{\mathfrak{N}}
+\newcommand*{\rg}{\textnormal{Rad }\g}
+\newcommand*{\ad}{\textnormal{ad }}
+\newcommand{\F}{{\mathbb{F}}}
+\newcommand{\s}{{\mathfrak{s}}}
+
+\newenvironment*{Ex}
+{\noindent \textbf{Example.}\hspace{.1 em}}
+
+\newenvironment*{Problem}[1]
+{\vspace{1em} \noindent \textbf{Exercise #1:}\hspace{.5em}}
+
+\title{18.745: Lecture 23}
+\author{Professor: Victor Ka\v{c}\\ Scribes: 
+David Meyer and Christopher Davis}
+\date{December 2nd, 2004}
+
+\begin{document}
+\maketitle
+
+From now on, let $\g$ be an arbitrary finite-dimensional Lie Algebra 
+over an algebraically closed field $\F$ of characteristic 0.
+
+\begin{Theorem} (Weyl Complete Reducibility)
+If $\g$ is semisimple, then any finite-dimensional $\g$-module $V$ is 
+completely reducible, ie:
+for any submodule $U$ there exists a complementary submodule $U'$ 
+so that $V = U \oplus U'$.
+\end{Theorem}
+
+\begin{cor}
+Any finite-dimensional $\g$-module is isomorphic to a direct sum of 
+irreducible $\g$-modules.
+\end{cor}
+
+\begin{Theorem} (Levi)
+Let $\g$ be any finite-dimensional Lie Algebra over $\F$, 
+and $R(\g)$ the radical of $\g$. Then there exists a semisimple 
+subalgebra $\s$ of $\g$ such that $\g = \s + R(\g)$.
+(As previously noted, $\s \cap R(\g) = \{0\}$).
+\end{Theorem}
+
+\begin{Theorem} (Mal'cev)
+In Levi's theorem, if $\s_1$ is another semisimple subalgebra of $\g$ 
+such that $\g = \s_1 + R(\g)$,
+then there exists an automorphism $\phi$ of $\g$ such that $\phi(\s) = \s_1$.
+\end{Theorem}
+
+Recall that a ``projector'' of a vector space $V$ to a subspace $U
+\subset 
+V$ is a linear operator $P$ on $V$ such that
+$P(V)=U$ and $P(u) = u$ for all $u \in U$. Note that $V = U \oplus
+Ker(P)$ 
+for any projector $P$.
+
+Given a projector $P_0$ of $V$ to $U$, any other projector of $V$ to
+$U$ 
+is of the form $P = P_0 + A$ where
+$A(V) \subset U$ and $A(U) = 0$. 
+
+\begin{proof} (\textbf{Weyl's Theorem})
+Consider $End\ V$ as a $\g$-module, with: 
+$a*A = [a,A] = aA - Aa$, for $a \in \g$, $A \in End\ V$. 
+Notational Remark: since $V$ is a $\g$-module, we are 
+identifying elements of $\g$ with elements of $End\ V$.
+Hence, ``$aA$'' and ``$Aa$'' represent composition in 
+$End\ V$, while $a*A$ represents the $\g$-module action defined above.
+
+Let $M$ be the subspace of $End\ V$ consisting of all $A$ such 
+that $A(V) \subset U$ and $A(U)=0$. This is a submodule of $End\ V$:
+$$(a*A)V = (aA - Aa)V \subset a(A(V)) + A(a(V)) \subset a(U) + A(V) \subset U$$
+$$(a*A)U = (aA - Aa)U \subset a(A(U)) + A(a(U)) \subset a(0) + A(U) = 0$$
+Pick an arbitrary projector $P_0:V \longrightarrow U$, and define 
+the following 1-cocycle:
+$$f: \g \longrightarrow M; f(a) = a*P_0 = a P_0 - P_0 a$$
+It is clear $f$ maps into $M$ since $a$ and $P_0$ commute on U, and: 
+$$(a P_0 - P_0 a)V \subset a(P_0(V)) + P_0(a(V)) 
+\subset a(U) + P_0(V) \subset U$$
+
+$f$ is also clearly a 1-cocycle, since:
+$$f([a,b]) = [a,b]*P_0 = a*(b*P_0) - b*(a*P_0) = a*f(b) - b*f(a).$$
+(the second equality is just the defining property of a $\g$-module)
+
+Thus, by the main theorem of Lecture 22, $f$ is trivial: 
+there exists $A \in M$ such that
+$f(a) = a*A$ for all $a \in \g$. Equivalently: $a*P_0 = a*A$, 
+or $a*(P_0 - A) = 0$. Let $P = P_0 - A$. Observe 
+that $P$ is just a projector of $V$ to $U$, and we have $a*P = 0$, 
+ie, $aP = Pa$, for all $a \in \g$. Hence, $Ker(P)$ is $a$-invariant
+for all $a \in \g$, and thus $Ker(P)$ is a $\g$-submodule of V. 
+Since $V = U \oplus Ker(P)$, $Ker(P)$ is a $\g$-submodule of $V$
+complementary to $U$, as desired.
+\end{proof}
+
+\begin{proof} (\textbf{Levi's Theorem}, using induction on dim $\g$)
+If $Rad(\g)$ is not abelian, consider $\bar{\g} = \g/[Rad(\g), Rad(\g)]$.
+Since $dim(\bar{\g}) < dim(\g)$, by the inductive assumption there exists 
+semisimple $\bar{\s} \subset \bar{\g}$ such that $\bar{\g} = \bar{\s} + Rad(\bar{\g})$.
+Hence $\g = \g_1 + Rad(\g)$, where $\g_1$ is the preimage of $\bar{\s}$ in $\g$, and $dim(\g_1) < dim(\g)$.
+Now apply the inductive assumption to $\g_1$, so that we can write $\g_1 = \s + Rad(\g_1)$, with $\s$ semisimple.
+Thus $\g = \s + (Rad(\g_1) + Rad(\g))$.  Note that $Rad(\g_1) +
+Rad(\g)$ is an ideal of $\g$:  Write an arbitrary element of $Rad(\g_1) +
+Rad(\g)$  as
+$a+b$, where $a \in Rad(\g_1)$ and $b \in Rad(\g)$.  Write an
+arbitrary element of $\g$ as $c+d$, where $c \in \g_1$ and $d \in
+Rad(\g)$.  Then 
+
+\begin{align*}
+[a+b,c+d] &= [a, c+d] + [b, c+d] \\
+&= [a, c] + [a,d] + [b, c+d],
+\end{align*}
+
+\noindent We have $[a,c] \in Rad(\g_1)$ because $Rad(\g_1)$ is an
+ideal of $\g_1$, $[a,d],[b,c+d] \in Rad(\g)$ because $Rad(\g)$ is an
+ideal.  Furthermore, $Rad(\g_1) +
+Rad(\g)$ is solvable, because $(Rad(\g_1) +
+Rad(\g))^{(n)} \subseteq Rad(\g_1)^{(n)} + Rad(\g)$, 
+which follows from the fact that $Rad(\g_1)$ is a sub-algebra 
+and $Rad(\g)$ is an ideal of $\g$.  Hence, if $Rad(\g_1)^{(n)} = 0$, 
+and $Rad(\g)^{(m)} = 0$, then $(Rad(\g_1) +
+Rad(\g))^{(m+n)} = 0$.
+Hence, we have a
+solvable ideal of $\g$ which contains $Rad(\g)$, so we conclude that
+our ideal is in fact $Rad(\g)$, yielding the equality $$\g = s + Rad(\g).$$
+
+What remains is to consider the case when $Rad(\g)$ is abelian.
+Consider the $\g$-module structure $End\ \g$ defined by:
+$$a*m = (ad\ a)m - m(ad\ a)$$ for $a \in \g$, $m \in End\ \g$.
+Further, consider the following submodule of $End\ \g$:
+$$\tilde{M} = \{ m \in End\ \g | m(\g) \subset Rad(\g) \textrm{ and } m(Rad(\g)) = 0 \}$$
+Let $M = \tilde{M}/\tilde{R}$ where $\tilde{R} = \{ ad(a) | a \in Rad(\g) \}$.
+Note that since $Rad(\g)$ is abelian, it acts trivially on $M$. Hence,
+$M$ is actually an $\s$-module. (where $\s = \g/Rad(\g)$)
+
+\begin{Problem}{23.1}
+Show that $\tilde{M}$ is a submodule of $End(\g)$, and $\tilde{R}$ is a submodule of $\tilde{M}$.
+\end{Problem}
+\begin{proof}
+$\tilde{M}$ is clearly a subspace of $End(\g)$. Given $a \in \g$ and $m \in \tilde{M}$:
+$$(a*m)(\g) \subset (ad\ a)m(\g) + m((ad\ a) \g) \subset (ad\ a)Rad(\g) + m(\g) \subset Rad(\g)$$
+$$(a*m)(Rad(\g)) \subset (ad\ a)m(Rad(\g)) + m(ad\ a)(Rad(\g)) \subset (ad\ a)0 + m(Rad(\g)) = 0$$
+Hence $a*m \in \tilde{M}$. So $\tilde{M}$ is a submodule of $End(\g)$.\\
+$\tilde{R}$ is also clearly a subspace of $End(\g)$. Given $ad\ a \in \tilde{R}$, with $a \in Rad(\g)$:
+$$(ad\ a)(\g) = [a,\g] \subset Rad(\g)$$
+$$(ad\ a)(Rad(\g)) = [a, Rad(\g)] = 0$$
+Hence $\tilde{R}$ is a subspace of $\tilde{M}$. To see that it is a
+submodule, 
+note that for $ad\ a \in \tilde{R}$ and $b \in \g$:
+$$b*(ad\ a) = (ad\ b)(ad\ a) - (ad\ a)(ad\ b) = [ad\ b,ad\ a] = ad([b,a]) \in \tilde{R}$$
+\end{proof}
+
+
+
+
+Let $P_{0}$ be a projector of
+$\g$ to $\rg$, and consider the following 1-cocycle:
+\begin{align*}
+f:s &\rightarrow M \\
+a &\rightarrow (\ad \tilde{a})P_{0} - P_{0}(\ad \tilde{a}),
+\end{align*}
+
+\noindent where $\tilde{a}$ is any preimage of $a$ under the map $\g
+\rightarrow \g/\rg$.
+
+\begin{Problem}{23.2}
+The map $f$ above is a well-defined 1-cocycle.
+\end{Problem}
+
+\begin{proof}
+Let $b \in \rg$.
+\begin{align*}
+(\ad \tilde{a})P_{0} - P_{0}(\ad \tilde{a}) -((\ad \tilde{a} +
+\tilde{b})P_{0}
+-P_{0}(\ad \tilde{a} + \tilde{b})) &=\\
+(\ad \tilde{b})P_{0} - P_{0}(\ad \tilde{b}) &= \ad -\tilde{b},
+\end{align*}
+\noindent since we are assuming $\rg$ is abelian, and since $P_{0}$
+acts as the identity on $\rg$.  Hence, the map $f$ is well-defined,
+since the target of our map is $\tilde{M}/\tilde{R}$.
+
+It remains to make sure that our map is indeed a 1-cocycle.  In the
+notation above, it's clear that $[\tilde{a},\tilde{b}]$ maps to
+$[a,b]$.  So, on one hand,
+\begin{align*}
+f([a,b]) &= (\ad [\tilde{a}, \tilde{b}])P_{0} - P_{0}(\ad
+[\tilde{a},
+\tilde{b}]) \\
+\intertext{and on the other hand} a f(b) - b f(a) &= (\ad a)f(b)
+-f(b)(\ad a) - (\ad b)f(a) + f(a)(\ad b)\\
+&= (\ad a)((\ad \tilde{b})P_{0} - P_{0} (\ad \tilde{b})) - ((\ad
+\tilde{b})P_{0} -P_{0}(\ad \tilde{b}))(\ad a)\\
+& \hspace{2 em} - (\ad b)((\ad \tilde{a})P_{0} - P_{0}(\ad
+\tilde{a})) + ((\ad \tilde{a})P_{0} - P_{0}(\ad \tilde{a}))(\ad b)\\
+&= (\ad [\tilde{a}, \tilde{b}])P_{0} - P_{0}(\ad [\tilde{a},
+\tilde{b}]).
+\end{align*}
+\end{proof}
+
+By the Fundamental Theorem on Cohomology, which may be applied
+because $s$ is semi-simple, there exists $m \in M$ such that $a_{m}
+= (\ad \widetilde{a})P_{0} - P_{0}(\ad \widetilde{a})$.  But, simply
+writing out $a_{m}$ and subtracting, this means that
+\begin{equation}
+(\ad \widetilde{a})(P_{0} - \widetilde{m}) -(P_{0} -
+\widetilde{m})(\ad \widetilde{a}) = \ad r_{a}, \label{eqn1}
+\end{equation}
+ where $\widetilde{m}$
+is a preimage of $m$ in $\widetilde{M}$, and $r_{a} \in \rg$.
+
+Consider the projector $P = P_{0} - \widetilde{m}$ of $\g$ to $\rg$.
+
+\vspace{1 em} \noindent Case 1:  If all $r_{a} = 0$, then equation
+\ref{eqn1} above implies that $\ad \tilde{a}$ commutes with $P$ for
+all $a \in \g$.  In this case, let $s = \textnormal{Ker } P$.
+Because $P$ is a projector, $s \cap \rg = 0$ and $\g = s + \rg$. So
+we get that $\g = s \oplus \rg$ as vector spaces.  This is in fact a
+direct sum of ideals:  that $\rg$ is an ideal is clear, and $s$ is
+an ideal because, by the commutativity mentioned above, for every $a
+\in \g, s_{1} \in s$,
+$$0 = [a,P(s_{1})] = P([a,s_{1}]).$$
+
+\vspace{1 em} \noindent Case 2: Now assume that not all $r_{a} = 0$.
+Let $\g_{1} = \{a\in \g \mid P(\ad a) = (\ad a)P.\}$  This is a
+subalgebra by the first properties of the adjoint representation. It
+is a \textit{proper} subalgebra by our assumption, and equation
+\ref{eqn1} together with the facts that $(\ad r_{a})P = 0$ since
+$\rg$ is abelian and $P(\ad r_{a}) = \ad r_{a}$ since $P$ is a
+projector, implies $$P(\ad a - r_{a}) = (\ad a - r_{a})P.$$  Hence,
+$\g = \g_{1} + \rg$.
+
+Applying the inductive assumption, we can find a subalgebra $s$ of
+$\g_{1}$ such that $\g_{1} = s + \textnormal{Rad } \g_{1}$, a direct
+sum of vector spaces.  Hence, $\g = s + \rg + \textnormal{Rad }
+\g_{1}$.  As in the proof of Weyl's Theorem, this is equivalent to
+$\g = s + \rg$.
+
+\end{proof}
+
+\begin{proof}
+(\textbf{Mal'cev's Theorem}) Suppose the radical is abelian, and,
+from Levi's Theorem, we have $\g = s \oplus \rg$.  Let $P_{s}$ and
+$P_{r}$ be the canonical projectors of $\g$ onto $s$ and $\rg$,
+respectively.  Let $a_{r}, b_{r} \in \rg$, and $a_{s}, b_{s} \in s$.
+Say $a = a_{r} + a_{s}$, $b = b_{r} + b_{s}$.  Such decompositions
+exist and are unique, because of our decomposition of $\g$.  Because
+$\rg$ is an ideal, $P_{s}([a,b]) = [s_{1},s_{2}]$, and thus $P_{s}$
+is a Lie algebra homomorphism.  Furthermore, by again considering
+the decomposition $a = a_{r} + a_{s}$, it's clear that $P_{r} +
+P_{s} = 1$.
+
+Let $s_{1} \oplus \rg = \g$ be another Levi decomposition.
+
+By the adjoint representation, since it is an ideal, $\rg$ is an
+$s_{1}$ module.  Define the 1-cocycle $f: s_{1} \rightarrow \rg$ by
+the formula $f(a) = P_{r}(a)$.
+
+\begin{Problem}{23.3}
+Check that $f$ is indeed a 1-cocycle.
+\end{Problem}
+
+\begin{proof}
+Write decompositions of two elements $a, b \in s_{1}$ as above (in
+particular, $a_{s} \in s$, not $s_{1})$.  Then
+\begin{align*}
+P_{r}([a_{r}+a_{s},b_{r}+b_{s}]) &= [a_{r},b_{r}]+[a_{s},b_{r}] +
+[a_{r},b_{s}] \\
+&= [a_{s},b_{r}] + [a_{r},b_{s}]
+\end{align*}
+\noindent since we are assuming $\rg$ to be abelian.  This clearly
+equals $$[a_{r} + a_{s}, P_{r}(b_{r} + b_{s})] - [b_{r}+b_{s},
+P_{r}(a_{r}+a_{s})],$$ and so $f$ is a 1-cocycle.
+\end{proof}
+
+By the Fundamental Theorem, this cocycle is trivial.  So, there
+exists $r \in \rg$ such that $P_{r}(a) = [a,r]$, for any $a \in
+s_{1}$.  So we have that $P_{r} = -\ad r$ on $s_{1}$.
+
+Since $\rg$ is abelian, $(\ad r)^{2} = 0$.  Hence $\exp{(\ad r)} = 1
++ (\ad r)$, and, from Exercise 9.2, that must be an automorphism of
+$\g$.  Call it $\sigma$.
+
+Let $a \in s_{1}$.  We have $$\sigma(a) = (1 + \ad r)a = (1 -
+P_{r})a = P_{s}(a) \in s.$$  Hence, we have an automorphism $\sigma$
+of $\g$ such that $\sigma(s_{1}) \subseteq s$.  An automorphism is,
+of course, injective, and by the vector space decompositions $\g = s
+\oplus \rg$ and $\g = s_{1} \oplus \rg$, we have that the dimensions
+of $s$ and $s_{1}$ are equal.  Hence, $\sigma(s_{1}) = s$.
+
+\begin{Problem}{23.4}  As in the proof of Levi's Theorem, reduce Mal'cev's Theorem in
+the case of non-abelian radical $\rg$ to the case where $\rg$ is
+abelian.
+
+\end{Problem}
+
+\begin{proof}
+
+We take a slightly different route, following Jacobson, \cite{Ja62}.
+Let $\mathfrak{N}$ denote the sum of all the nilpotent ideals of
+$\g$.  That $\gN$ is a nilpotent ideal is obvious.  We will prove
+inductively that for every $i \geq 1$, there is an automorphism
+$A_{i}$ of $\g$ such that $A_{i}(s_{1}) \subseteq s + \gN^{(i)}$.
+Considering dimensions and the fact that $\gN$ is solvable, we will
+be able to conclude Mal'cev's Theorem.
+
+Considering the equation
+$$P_{r}([a_{r}+a_{s},b_{r}+b_{s}]) = [a_{r},b_{r}]+[a_{s},b_{r}] +
+[a_{r},b_{s}],$$ we see that $P_{r}([a,b]) \in [\g, \rg]$ for each
+$a,b \in s_{1}$.
+
+\begin{lem}
+With notation as above, we have that $[\g, \rg] \subseteq \gN$.
+\end{lem}
+
+\begin{proof}
+We know from lecture five that $[\rg, \rg] \subseteq \gN$.  By
+Engel's Theorem, this is equivalent to $\ad [a_{r}, b_{r}]$ being
+nilpotent for $a_{r},b_{r} \in \rg$.  Using the Jacobi identity, and
+the fact that $\rg$ is an ideal, we get that $\ad [a, b_{r}]$ is
+nilpotent for any $a \in \g$.
+\end{proof}
+
+\begin{lem}
+As $s_{1}$ is semi-simple, we have $[s_{1},s_{1}] = s_{1}$.
+\end{lem}
+
+\begin{proof}
+This follows from the structure theorem:  the result holds for a
+simple Lie algebra $t$ because it contain no non-trivial proper
+ideals, and thus $[t,t]$ of such an ideal is either $0$ or the whole
+simple algebra, and as $t$ is not abelian, it must be the latter.
+The result continues to hold under passage to direct sums.
+\end{proof}
+
+Now, consider any $a \in s_{1}$.  We have just seen that we may
+write $a = [a_{1},a_{2}]$, for some $a_{1}, a_{2} \in s_{1}$. Hence,
+from what we proved above, $P_{r}(a) \in \gN$.  We know that $P_{r}
++ P_{s} = 1$, so we have that $s_{1} \subseteq s + \gN^{(1)}$.  This
+provides the first step in our induction, with the identity
+automorphism playing the role of $A_{1}$.
+
+Simplify notation by assuming that $s_{1} \subseteq s + \gN^{(k)}$
+(i.e., if necessary, replace $s_{1}$ with the isomorphic Lie Algebra
+$A_{k}(s_{1})$).  Because $s$ is semi-simple, $s \cap \rg =
+\emptyset$, and hence $P_{r}(s_{1}) \subseteq \gN^{(k)}$.
+
+We can make $\gN^{(k)}$ into a $s_{1}$-module by defining $a\cdot z=
+[P_{s}(a),z]$.  We check that this is indeed a module:
+
+\begin{align*}
+[a,b] \cdot z & = [P_{s}([a,b]),z] \\
+& = [[P_{s}(a),P_{s}(b)],z] \\
+& = -[[P_{s}(b),z],P_{s}(a)] - [[z,P_{s}(a)],P_{s}(b)] \\
+& = [P_{s}(a),[P_{s}(b),z]] + [P_{s}(b),[z,P_{s}(a)]] \\
+& = [P_{s}(a),[P_{s}(b),z]] - [P_{s}(b),[P_{s}(a),z]] \\
+& = a \cdot (b \cdot z) - b \cdot (a \cdot z),
+\end{align*}
+
+\noindent as required.  As $\gN^{(k+1)}$ is an ideal, we can
+consider also $\gN^{(k)}/\gN^{(k+1)}$ as an $s_{1}$-module, with
+action $a \cdot \overline{z} = \overline{[P_{s}(a),z]}$.
+
+From what we saw two paragraphs ago, $[P_{r}(a),P_{r}(b)] \in
+\gN^{(k+1)}$, for $a,b \in s_{1}$.  So, $$\overline{P_{r}([a,b])} =
+\overline{[a_{s},b_{r}]} - \overline{[b_{s},a_{r}]} = a \cdot
+\overline{b_{r}} - b \cdot \overline{a_{r}}.$$  Define the map $f: a
+\rightarrow \overline{P_{r}(a)}$.  The map is linear because the
+projector is linear, and the above equation says precisely that $f$
+is a one-cocycle.  Hence, by the fundamental theorem on cohomology,
+there is some element $\overline{z} \in \gN^{(k)}/\gN^{(k+1)}$ such
+that, for any $a \in s_{1}$, we have $\overline{P_{r}(a)} = a \cdot
+\overline{z} = \overline{[P_{r}(a),z]}$, where $z$ is any lift of
+$\overline{z}$.
+
+Let $A = \exp(\ad z)$.  Again, from exercise 9.2, this is an
+automorphism.  We have
+\begin{align*}
+A(a) & = a + [z,a] + \frac{1}{2!}[z,[z,a]] + \cdots \\
+& \equiv a + [z,a] \bmod \gN^{(k+1)} \\
+& \equiv a_{r} + a_{s} + [z,a_{r}] + [z,a_{s}] \bmod \gN^{(k+1)} \\
+\intertext{and we know $a_{s} \in \gN^{(k)}$ and $\overline{a_{r}} =
+\overline{[a_{r},z]}$, so} & \equiv a_{s} \bmod \gN^{(k+1)}.
+\end{align*}
+
+\noindent Thus, we have that $A(s_{1}) \subseteq s + \gN^{(k+1)}$,
+and we proceed by induction.
+
+\end{proof}
+
+\noindent As already mentioned, the proof is now complete, when we
+consider that the dimensions of $s$ and $s_{1}$ must be the same.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{99}
+\newcommand{\au}[1]{{#1},}
+\newcommand{\rawti}[1]{\textit{#1}}
+\newcommand{\ti}[1]{\rawti{#1},}
+\newcommand{\jo}[1]{{#1}}
+\newcommand{\vo}[1]{\textbf{#1}}
+\newcommand{\yr}[1]{(#1),}
+\newcommand{\pp}[1]{#1.}
+\newcommand{\ppc}[1]{#1,}
+\newcommand{\pps}[1]{#1;}
+\newcommand{\bk}[1]{{#1},}
+\newcommand{\inbk}[1]{in{#1}}
+\newcommand{\plain}[1]{#1}
+\newcommand{\xxx}[1]{{arXiv:#1}}
+
+
+\bibitem[Ja62]{Ja62}
+\au{N. Jacobson} \ti{Lie Algebras} \pp{Interscience Publishers,
+1962}
+
+
+\end{thebibliography}
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

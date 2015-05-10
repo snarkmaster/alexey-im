@@ -1,0 +1,2128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+  Dynkin diagrams with editable labels, and EPS output.
+  
+  Copyright (C) Alexey Spiridonov, 2006-2007
+  
+  This is my first JavaScript program ever, so please excuse the ugliness.
+  
+  Thanks go to Mihai Parparita for a number of very helpful tips.
+
+  I found the following links helpful, and borrowed code ideas from several:
+
+  http://simon.incutio.com/slides/2006/etech/javascript/js-reintroduction-notes.html
+  http://developer.mozilla.org/en/docs/JavaScript
+  http://www.infimum.dk/HTML/slantinfo.html
+  http://www.scottandrew.com/weblog/articles/cbs-events
+  http://www.yourtotalsite.com/examples/yellow_fade_technique/YellowFade.js
+  http://www.axentric.com/aside/fat/
+  http://validator.w3.org
+  http://www.jslint.com
+  http://jigsaw.w3.org/css-validator/
+  
+  Last, but not least, Firebug (http://getfirebug.com/) made debugging 
+  much faster and easier. 
+  
+  XXX: TODOs/ideas not marked in the code 
+  security:
+    - um, I'm taking a bunch of unvalidated strings from the user. 
+      could this potentially cause issues? (XSS?)
+  bugs:
+    - Use Jello layout. (currently, window sizing/text scaling is broken)
+    - Save as EPS that works outside of FF.
+  features:
+    - editability and genericity?
+    - saving state?
+    - add a reference link using
+      http://atlas.math.umd.edu/dissemination/spherical/explorer/rootSystem.cgi
+      maybe even serve results in an iframe?
+      same goes for:
+      http://www-math.univ-poitiers.fr/~maavl/ 
+    - at least, have a section with links to related sites.
+  cleanness:
+    - some banner if no javascript
+    - CSS: you can use class="foo bar"
+    - Auto-detect background color for fade (steal code from "fade anything?")
+    - remove cruft
+    - don't forget to jslint periodically.
+    - the design is fugly.
+    - the implementation is crufty and inelegant (and not using some of the 
+    - niceties of JS that could make it a lot better).
+  compatibility:
+    - ugh. according to CSS2, floats must have an explicit width.
+      how do I make my layout in a non-broken way?
+      tables, probably.
+    - re-check in IE & Opera
+    - XHTML-check *generated* page
+-->
+<head>
+  <title>Dynkin Diagrams</title>
+  <style type="text/css">
+    html, body { background: white; color: black; }
+    input.node { border: 0.08em solid; 
+                 /* rounded corners in mozilla and future browsers */
+                 border-radius: 0.5em; -moz-border-radius: 0.5em; 
+                 padding: 0.02em; width: 2em; height: 1.1em;
+                 font-size: 1.5em;
+                 text-align: center; }
+    div.linehelper { position: absolute; 
+                     line-height: 0em; 
+                     width: 0em; height: 0em; 
+                     border-style: solid; }
+    div.pane { text-align: center; 
+               float: left; 
+               padding-bottom: 1em; }
+    div.pane div {  border: 1px dotted blue; padding: 0.2em; }
+    div.pane div div {  border: none; }
+    div.pane_divider { float: left; padding-bottom: 1em; 
+                       width: 1em; height: 1em; }
+    div.pane div.intra_pane_spacer { border: none; padding: 0.5em; }
+    div.pane div.hline { border-right: 0; border-left: 0; 
+                         border-bottom: 1px dotted blue; border-top: 0;
+                         margin-top: 0.3em; margin-bottom: 0.3em;
+                         padding: 0; }
+
+    div.main_section { width: 45em; margin-top: 0.5em; }
+
+    a { color: blue; /*also update span in catalog generator*/
+        text-decoration: none; }
+    a:hover { color: #ffa500; /*also update span in catalog generator*/
+              text-decoration: underline; }
+    a:active { color: red; 
+               text-decoration: underline; }
+    div#footnote p { margin-top: 0.5em; 
+                     font-size: 75%; 
+                     font-style: italic; 
+                     color: gray; }
+    span.email { font-style: normal; font-weight: bold; }
+    div#footnote { margin-top: 1.5em; }
+    div#footnote a { color: gray; border-bottom:1px dotted; }
+    div#footnote hr { border-right: 0; border-left: 0; 
+                      border-bottom: 0; border-top: 1px dotted gray; 
+                      height: 0; width: 33%;
+                      /*IE*/ text-align: left; 
+                      /*Moz*/ margin: 0 auto 0 0; }
+    
+    #helplist li { margin: 0.5em; }
+    #helplist pre { margin-left: 1em; }
+    p.label_choice { text-align: left; 
+                     margin-top: 0.2em; margin-bottom: 0em; 
+                     clear: both; }
+  </style>
+</head>
+<body onload="initDiagrams();">
+<script type="text/javascript"> <!--
+  ///////////////////////////////////////////////////////////////////
+  // Code defining diagrams families & exceptional diagrams
+  //
+  // Exceptional diagrams are hard-coded.
+  // The infinite series are generated by makeDynkinDiagramSeries and 
+  // makeAffineDiagramSeries. 
+  ///////////////////////////////////////////////////////////////////
+
+  var labeling_config = {
+    none: { base: "empty" },
+    bourbaki: { base: "sequential" },
+    dynkin: { base: "sequential" },
+    gap: { base: "sequential" },
+    kernel: { base: "none", extended_only: true }
+  };
+
+  // Debug test diagram.
+  // XXX: tests diagonal lines, which are not useful otherwise,
+  // and don't work in IE.
+  var dtest = { edges : [
+                  { from: 0, to: 1, type: "r" }, // going right
+                  { from: 1, to: 2, type: "r", arrow: "back3" },
+                  { from: 2, to: 3, type: "ur" }, // up and right
+                  { from: 2, to: 4, type: "dr" }, // down and right
+                  { from: 3, to: 5, type: "l", arrow: "back2" }, 
+                  { from: 2, to: 5, type: "u" }, 
+                  { from: 2, to: 6, type: "d" },
+                  { from: 6, to: 1, type: "ul" },
+                  { from: 5, to: 1, type: "dl" },
+                  { from: 4, to: 6, type: "l", arrow: "fwd2" },
+                  { from: 2, to: 7, type: "r", no_node: true },
+                  { from: 7, to: 8, type: "r", arrow: "fwd4" }
+                ],
+                extended_edges: [
+                  { from: 6, to: 9, type: "dl" },
+                  { from: 3, to: 10, type: "ur" }
+                ],
+                labelings: {
+                  gap: [9, 8, 7, 6, 5, 4, 3, 2, 1],
+                  dynkin: [1, 2, 3, 4, 9, 8, 7, 6, 5],
+                  kernel: [1, 1, 2, 3, 2, 1, 1, 2, 3, 4, 4]
+                },
+                n: 9
+              };
+  
+  ///////////////////////////////////////////////////////////////////
+  // Functions shared between standard & affine diagrams
+  //
+  
+  function constantLabeling(n, c) {
+    var labeling = [];
+    for (var i = 0; i < n; ++i) { 
+      labeling[i] = c;
+    }
+    return labeling;
+  }
+  
+  ///////////////////////////////////////////////////////////////////
+  // Standard Dynkin diagram subsection
+  //
+
+  // Exceptional Dynkin diagrams
+  var exceptional_dynkin_diagrams = {
+    "E||6": { edges: [ 
+            { from: 0, to: 2, type: "r" },
+            { from: 2, to: 3, type: "r" },
+            { from: 3, to: 4, type: "r" },
+            { from: 4, to: 5, type: "r" },
+            { from: 3, to: 1, type: "u" } 
+          ],
+          extended_edges: [
+            { from: 1, to: 6, type: "u" }
+          ],
+          labelings: { dynkin: [1, 6, 2, 3, 4, 5],
+                       kernel: [1, 2, 2, 3, 2, 1, 1] },
+          n: 6
+        },
+    "E||7": { edges: [ 
+            { from: 0, to: 2, type: "r" },
+            { from: 2, to: 3, type: "r" },
+            { from: 3, to: 4, type: "r" },
+            { from: 4, to: 5, type: "r" },
+            { from: 5, to: 6, type: "r" },
+            { from: 3, to: 1, type: "u" } 
+          ],
+          extended_edges: [
+            { from: 0, to: 7, type: "l" }
+          ],
+          labelings: { dynkin: [1, 7, 2, 3, 4, 5, 6],
+                       kernel: [2, 2, 3, 4, 3, 2, 1, 1] },
+          n: 7
+        },
+    "E||8": { edges: [ 
+            { from: 0, to: 2, type: "r" },
+            { from: 2, to: 3, type: "r" },
+            { from: 3, to: 4, type: "r" },
+            { from: 4, to: 5, type: "r" },
+            { from: 5, to: 6, type: "r" },
+            { from: 6, to: 7, type: "r" },
+            { from: 3, to: 1, type: "u" } 
+          ],
+          extended_edges: [
+            { from: 7, to: 8, type: "r" }
+          ],
+          labelings: { dynkin: [1, 8, 2, 3, 4, 5, 6, 7],
+                       kernel: [2, 3, 4, 6, 5, 4, 3, 2, 1] },
+          n: 8
+        },
+    "F||4": { edges: [ 
+            { from: 0, to: 1, type: "r" },
+            { from: 1, to: 2, type: "r", arrow: "fwd2" },
+            { from: 2, to: 3, type: "r" } 
+          ],
+          extended_edges: [
+            { from: 0, to: 4, type: "l" }
+          ],
+          labelings: { kernel: [2, 3, 4, 2, 1] },
+          n: 4
+        },
+    "A||1": { edges: [ ],
+          extended_edges: [
+            { from: 0, to: 1, type: "r", arrow: "back2", 
+              no_node: true, half: true },
+            { from: 1, to: 2, type: "r", arrow: "fwd2", half: true }
+          ],
+          labelings: { kernel: [1, undefined, 1] },
+          exceptional: false, // in order to render together with the series
+          n: 2
+        },
+    "G||2": { edges: [ 
+            { from: 0, to: 1, type: "l", arrow: "fwd3" } 
+          ],
+          extended_edges: [
+            { from: 1, to: 2, type: "l" }
+          ],
+          labelings: { dynkin: [2, 1], gap: [2, 1], kernel: [3, 2, 1] }, 
+          n: 2
+        }
+  };
+
+  //
+  // Code to generate the infinite families.
+  //
+  // First, we define a function for every family, then call them 
+  // to fill out the data structure.
+  //
+
+  // n should be at least 2
+  function makeASeriesDiagram(n) {
+    var i;
+    var diagram = { edges: [ ], labelings: {} };
+    for (i = 0; i < n - 1; i++) {
+      diagram.edges[i] = { from: i, to: i + 1, type: "r" };
+    }
+    diagram.n = n;
+
+    // Fancy code to draw a nice, centered cycle using 
+    // vertical and horizontal lines. (EPS combines these into one slanted
+    // line)
+    diagram.extended_edges = 
+        [ { from: 0, to: n, type: "u", no_node: "combine" } ];
+    var m = n - (n % 2);
+    for (i = 0; i < m; i++) {
+      diagram.extended_edges[i + 1] = 
+          { from: n + i, to: n + i + 1, type: "r", no_node: "combine" };
+    }
+    diagram.extended_edges[m + 1] = 
+        { from: n + m, to: n - 1, type: "d" };
+    diagram.extended_edges[Math.floor(m/2)].no_node = undefined;
+    if (n % 2 === 0) {
+      diagram.extended_edges[Math.floor(m/2)].half = true;
+      diagram.extended_edges[Math.floor(m/2) + 1].half = true;
+    }
+    
+    diagram.labelings.kernel = constantLabeling(n, 1);
+    // The only visible extended node.
+    diagram.labelings.kernel[n + Math.floor(n/2)] = 1; 
+
+    return diagram;
+  }
+
+  function reverseLabeling(n) {
+    var a = [];
+    for (var i = 0; i < n; i++) {
+      a[n - i - 1] = i + 1;
+    }
+    return a;
+  }
+
+  // This should only be called when making B, C, or D diagrams.
+  function makeProtoNonADiagram(m, n) {
+    var diagram = makeASeriesDiagram(m);
+    diagram.labelings.gap = reverseLabeling(n);
+    diagram.labelings.kernel = constantLabeling(n, 2);
+    diagram.labelings.kernel[n] = 1;    
+    diagram.n = n;
+    return diagram;
+  }
+
+  // n should be at least 2
+  function makeBSeriesDiagram(n) {
+    var diagram = makeProtoNonADiagram(n, n);
+    diagram.edges[n - 2].arrow = "fwd2";
+    if (n > 2) {
+      diagram.extended_edges = [ { from: 1, to: n, type: "u" } ];
+    } else {
+      diagram.extended_edges = [ { from: 1, to: 2, type: "r", arrow: "back2" } ];
+    }
+    diagram.labelings.kernel[0] = 1;
+    return diagram;
+  }
+
+  // n should be at least 2
+  function makeCSeriesDiagram(n) {
+    var diagram = makeProtoNonADiagram(n, n);
+    diagram.edges[n - 2].arrow = "back2";
+    diagram.extended_edges = [
+      { from: 0, to: n, type: "l", arrow: "fwd2" }
+    ];
+    diagram.labelings.kernel[n-1] = 1;
+    return diagram;
+  }
+
+  // n should be at least 4
+  function makeDSeriesDiagram(n) {
+    var diagram = makeProtoNonADiagram(n - 1, n);
+    diagram.edges[n - 2] = { from: n - 3, to: n - 1, type: "u"};
+    diagram.extended_edges = [ { from: 1, to: n, type: "d" } ];
+    diagram.labelings.kernel[0] = 1;    
+    diagram.labelings.kernel[n-2] = 1;
+    diagram.labelings.kernel[n-1] = 1;
+    return diagram;
+  }
+  
+  // Creates diagrams for the A, B, C, and D series up to size n
+  function makeDynkinDiagramSeries(diagrams, n) {
+    // Mark the exceptional diagrams as such.
+    for (var name in diagrams) {
+      if (diagrams[name].exceptional === undefined) {
+        diagrams[name].exceptional = true;
+      }
+    }
+    // Generate the series
+    for (var i = 2; i <= n; i++) {
+      diagrams["A||" + i] = makeASeriesDiagram(i); 
+      diagrams["B||" + i] = makeBSeriesDiagram(i);
+      diagrams["C||" + i] = makeCSeriesDiagram(i);
+      if (i >= 4) {
+        diagrams["D||" + i] = makeDSeriesDiagram(i);
+      }
+    }
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  // Affine Dynkin diagrams subsection
+  //
+
+  // Exceptional Affine Dynkin Diagrams
+  var exceptional_affine_diagrams = {
+    "A|(2)|2": { edges: [ 
+            { from: 0, to: 1, type: "r", arrow: "back4" } 
+          ],
+          labelings: { kernel: [2, 1] },
+          exceptional: false, // to make it display as part of the series
+          n: 2
+        },
+    "D|(3)|4": { edges: [
+            { from: 0, to: 1, type: "r" },
+            { from: 1, to: 2, type: "r", arrow: "back3" }
+          ],
+          labelings: { kernel: [1, 2, 1] },
+          n: 3
+        },
+    "E|(2)|6": { edges: [ 
+            { from: 0, to: 1, type: "r" },
+            { from: 1, to: 2, type: "r" },
+            { from: 2, to: 3, type: "r", arrow: "back2" },
+            { from: 3, to: 4, type: "r" }
+          ],
+          labelings: { kernel: [1, 2, 3, 2, 1] },
+          n: 5
+        }
+  };
+
+  //
+  // Code to generate the infinite families.
+  //
+  // Analogous to the standard diagrams.
+  //
+
+  // n should be at least 4
+  function makeA2SeriesDiagram(n) {
+    var diagram;
+    var i, l;
+    if (n % 2 === 0) {
+      l = n/2;
+      diagram = makeProtoNonADiagram(l + 1, l + 1);
+      diagram.edges[0].arrow = "back2";
+      diagram.edges[l - 1].arrow = "back2";
+    } else {
+      l = (n+1)/2;
+      diagram = makeProtoNonADiagram(l + 1, l + 1);
+      diagram.edges[0] = { from: 0, to: 2, type: "d" };
+      diagram.edges[1] = { from: 2, to: 1, type: "l" };
+      diagram.edges[l - 1].arrow = "back2";
+    }
+    diagram.extended_edges = undefined;
+
+    diagram.labelings = { kernel: constantLabeling(l + 1, 2) };
+    if (n % 2 === 0) {
+      diagram.labelings.kernel[l] = 1;
+    } else {
+      diagram.labelings.kernel[0] = 1;
+      diagram.labelings.kernel[1] = 1;
+      diagram.labelings.kernel[l] = 1;
+    }
+
+    return diagram;
+  }
+
+  // n should be at least 3
+  function makeD2SeriesDiagram(n) {
+    var diagram = makeProtoNonADiagram(n, n);
+    diagram.edges[0].arrow = "back2";
+    diagram.edges[n - 2].arrow = "fwd2";
+    diagram.extended_edges = undefined;
+    
+    diagram.labelings = { kernel: constantLabeling(n, 1) };
+    
+    return diagram;
+  }
+
+  function makeAffineDiagramSeries(diagrams, n) {
+    // Mark the exceptional diagrams as such.
+    for (var name in diagrams) {
+      if (diagrams[name].exceptional === undefined) {
+        diagrams[name].exceptional = true;
+      }
+    }
+    // Generate the series
+    for (var i = 3; i <= n; i++) {
+      if (i > 3) {
+        diagrams["A|(2)|" + i] = 
+            makeA2SeriesDiagram(i); 
+      }
+      diagrams["D|(2)|" + i] =
+          makeD2SeriesDiagram(i);
+    }
+  }  
+
+  ///////////////////////////////////////////////////////////////////
+  // End of diagram definitions
+  ///////////////////////////////////////////////////////////////////
+
+
+
+  ///////////////////////////////////////////////////////////////////
+  // Helper functions
+  // 
+  // These bits are used for EPS or HTML output, and possibly other
+  // logic.
+  ///////////////////////////////////////////////////////////////////
+
+  function isExtendedDiagram(diagram) {
+  	return document.getElementById("extended").checked && 
+  	       diagram.extended_edges;
+  }
+
+  // If a user toggle is set, return the reverse of the arrow.
+  // Otherwise, return the arrow unchanged.
+  function maybeFlipArrow(arrow) {
+    var flip = {
+      fwd2: "back2",
+      fwd3: "back3",
+      fwd4: "back4",
+      back2: "fwd2",
+      back3: "fwd3",
+      back4: "fwd4"
+    };
+    if (!document.getElementById("reverse_arrows").checked ||
+        !flip[arrow]) {
+      return arrow;
+    } else {
+      return flip[arrow];
+    }
+  }
+  
+  // 'E|(2)|6' -> 'E<sup>(2)</sup><sub>6</sub>'
+  function htmlDiagramName(name) {
+    var parts = name.split('|');
+    return parts[0] + 
+           (parts[1] ? '<sup>' + parts[1] + '</sup>' : '') +
+           (parts[2] ? '<sub>' + parts[2] + '</sub>' : '');
+  }
+
+  // 'E|(2)|6' -> 'E_{6}^{(2)}'
+  function latexDiagramName(name) {
+    var parts = name.split('|');
+    return parts[0] + 
+           (parts[2] ? '_{' + parts[2] + '}' : '') +
+           (parts[1] ? '^{' + parts[1] + '}' : '');
+  }
+
+  // 'E|(2)|6' -> 'E-2_6'
+  function fileDiagramName(name) {
+    var parts = name.split('|');
+    var filename = parts[0] + 
+                   (parts[1] ? '-' + parts[1] : '') +
+                   (parts[2] ? '_' + parts[2] : '');
+    return filename.replace(/[()]/g, '');
+  }
+
+  function getEPSFileName() {
+    return fileDiagramName(cur_diagram_name) + 
+      (isExtendedDiagram(cur_diagram) ? "-extended" : "") +
+      (document.getElementById("reverse_arrows").checked ? 
+          "-rev-arrows" : "");
+  }
+
+  function getValue(id) {
+    return document.getElementById(id).value;
+  }
+  
+  function shallowCopy(obj) {
+    var copy = {};
+    for (var a in obj) {
+      copy[a] = obj[a];
+    }
+    return copy;
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  // End of helper functions
+  ///////////////////////////////////////////////////////////////////
+
+
+
+  ///////////////////////////////////////////////////////////////////
+  // HTML Output code
+  // 
+  // This implements the functions for a generic diagram output 
+  // device, as described below.
+  ///////////////////////////////////////////////////////////////////
+
+  function htmlDrawText(top, left, vsize, hsize, text) {
+    var line_break = "\n             ";
+    return "<div style=\"width: " + hsize/this.font_size + "em;" + 
+                        "line-height: " + ((vsize*2)/3)/this.font_size + 
+                              "em; " + line_break +
+                        "border: 1px solid; text-align: center; " + line_break + 
+                        "vertical-align: middle; " + line_break + 
+                        "position: absolute;" + line_break +
+                        "font-size: " + this.font_size + "em;" + 
+                        "left: " + left/this.font_size + "em; " + 
+                        "top: " + top/this.font_size + "em; \">" + text +
+                        "</div>\n";
+  }
+  
+  function htmlDrawArrow(top, left, vsize, hsize1, hsize2) {
+    var line_break = "\n                                  ";
+    return "<div class=\"linehelper\" " + 
+                "style=\"position: absolute;" + line_break +
+                        "left: " + left + "em; " +
+                        "top: " + top + "em;" + line_break + 
+                        "border-width: " + vsize/2 + "em " +
+                                           hsize1 + "em " +
+                                           vsize/2 + "em " + 
+                                           hsize2 + "em;" + line_break +
+                        "border-color:white;" + line_break + 
+                        "border-right-color: black;" + line_break + 
+                        "border-left-color: black;\"></div>";
+  }
+  function htmlDrawLeftArrow(top, left, vsize, hsize) {
+    return htmlDrawArrow(top, left + hsize/16, vsize, hsize, 0);
+  }
+  function htmlDrawRightArrow(top, left, vsize, hsize) {
+    return htmlDrawArrow(top, left + hsize/8, vsize, 0, hsize);
+  }
+
+  function htmlStraightLine(top, left, height, width) { 
+    return "<div class=\"linehelper\" " + 
+                "style=\"left: " + left + "em; " +
+                        "top: " + top + "em; \n" + 
+           "                               border-width: " + 
+                        height + "em " + width + "em 0em 0em;\">\n" + 
+           "</div>\n";
+  }
+  function htmlVerticalLine(top, left, length, arrow) {
+    if (arrow) { 
+      alert("can't handle vertical arrow: " + arrow);
+    }
+    return htmlStraightLine(top, left, length, this.line_width);
+  }
+  function htmlHorizontalLine(top, left, length, arrow) {
+    var line_width = this.line_width;
+    if (!arrow) {
+      return htmlStraightLine(top, left, line_width, length);
+    } else {
+      arrow = maybeFlipArrow(arrow);
+
+      var line; 
+
+      var arrow_lines = arrow.substr(arrow.length - 1, 1);
+      if (arrow_lines == "2" || arrow_lines == "3") {
+      	line = htmlStraightLine(top - (1/3+1/4)*line_width, left, 
+      	                        line_width/2, length) + 
+      	       htmlStraightLine(top + (4/3-1/4)*line_width, left, 
+      	                        line_width/2, length);
+	if (arrow_lines == "3") {
+          line += htmlStraightLine(top + (1/4)*line_width, left, 
+                                   line_width/2, length);
+        }
+      } else if (arrow_lines == "4") {
+      	line = htmlStraightLine(top - (1/6)*line_width, left, 
+      	                        line_width/2, length) + 
+      	       htmlStraightLine(top + (4/6)*line_width, left, 
+      	                        line_width/2, length) +
+      	       htmlStraightLine(top - line_width, left, 
+      	                        line_width/2, length) + 
+      	       htmlStraightLine(top + (3/2)*line_width, left, 
+      	                        line_width/2, length);
+      }
+      
+      var cur_arrow;
+      if (arrow.substr(0, 3) == "fwd") {
+        cur_arrow = htmlDrawRightArrow;
+      } else if (arrow.substr(0,4) == "back") {
+        cur_arrow = htmlDrawLeftArrow;
+      } else {
+        cur_arrow = function () { return ""; };
+        alert("can't handle horizontal arrow: " + arrow);
+      }
+      
+      // XXX: Nasty hack to make arrows on half-edges show up reasonably.
+      var adj_arrow_hsize = 0.75*this.arrow_size;
+      var adj_arrow_len; 
+      if (cur_arrow == htmlDrawLeftArrow) {
+        adj_arrow_len = 0.8*output_html.h_edgelen;
+      } else if (cur_arrow == htmlDrawRightArrow) {
+        adj_arrow_len = 0.2*output_html.h_edgelen;
+      }
+      // Cancel the adjustments if we have a large enough arrow.
+      if (length > 0.8*output_html.h_edgelen) {
+        adj_arrow_len = length;
+        adj_arrow_hsize = this.arrow_size;
+      }
+      
+      return cur_arrow(top - this.arrow_size/2 + line_width/2,
+                       left + adj_arrow_len/2 - (1/2)*adj_arrow_hsize, 
+                       this.arrow_size, adj_arrow_hsize) + line;
+    }
+  }
+  
+  function htmlDiagonalLine(top, left, a, b, c, width) {
+    return "<div style=\"position:absolute; left: " + left + "em; " + 
+                                           "top: " + top + "em;\">\n" +
+           "  <div class=\"linehelper\" style=\"top: 0em; left: 0em;\n" + 
+           "                                    border-width: " +
+             (a ? (a + width) : 0) + "em 0em " + 
+             (b ? (b + width) : 0) + "em " + 
+             (c + width) + "em;\n" + 
+           "                                    border-color: white;\n" +
+           "                                    border-left-color: " + 
+                                                "black;\"></div>\n" + 
+           "  <div class=\"linehelper\" style=\"top: " + 
+                      (a ? width : 0) + "em; left: 0em;\n" + 
+           "                                    border-width: " +
+             a + "em 0em " + b + "em " + c + "em;\n" + 
+           "                                    border-color: transparent;\n" +
+           "                                    border-left-color: " + 
+                                                "white;\"></div>\n" + 
+           "</div>\n";
+  }
+  // Looks like /
+  function htmlRisingLine(top, left, length, arrow) {
+    if (arrow) {
+      alert("can't handle rising arrow: " + arrow);
+    }
+    return htmlDiagonalLine(top, left, 0, length, length,
+                        this.diag_line_width);
+  }
+  // Looks like \
+  function htmlFallingLine(top, left, length, arrow) {
+    if (arrow) {
+      alert("can't handle falling arrow: " + arrow);
+    }
+    return htmlDiagonalLine(top, left, length, 0, length,
+                        this.diag_line_width);
+  }
+  
+  function htmlDrawNode(top, left, label, options) {
+    return "<div style=\"position: absolute; " + 
+                        "left: " + left + "em; " +
+                        "top: " + top + "em;\">\n" +
+           "  <input class=\"node\" " + 
+                    "id=\"node" + options.index + "\" " + 
+                    "value=\"" + label + "\" />\n" + 
+           "</div>\n";
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  // End of HTML Output code
+  ///////////////////////////////////////////////////////////////////
+
+
+
+  ///////////////////////////////////////////////////////////////////
+  // EPS Output code
+  // 
+  // Analogous to the HTML output code. Caveats: 
+  //  1) Labels are taken from the DOM (and so depend on the HTML 
+  //     rendering).
+  //  2) (XXX) HTML implements (unused) diagonal lines, which are broken
+  //     in IE. EPS doesn't implement these methods, but instead conflates
+  //     multiple grid steps into straight lines (see A_n structures).
+  ///////////////////////////////////////////////////////////////////
+
+  // Escapes string so that it can be placed inside PostScript's ()
+  function epsEscape(text) {
+    var i, len, escaped = "";
+    for (i = 0, len = text.length; i < len; ++i) {
+      var cur = text.substr(i, 1);
+      if (cur == "(" || cur == ")" || cur == "\\") { 
+        escaped += "\\" + cur;
+      } else {
+        escaped += cur;
+      }
+    }
+    return escaped;
+  }
+  
+  function epsDrawNode(top, left, label, options) {
+    var coords = left + " " + top;
+    label = document.getElementById("node" + options.index).value;
+    var result = coords + " DrawCircle\n";
+    if (label == "X") {
+      result += coords + " DrawX\n";
+    } else if (label !== undefined) {
+      result += coords + " (" + epsEscape(label) + ") DrawText" +
+                 options.free_direction + "Node\n";
+    }
+    return result;
+  }
+  function epsFallingLine(top, left, length, arrow) {
+    alert("epsFallingLine not implemented!");
+  }
+  function epsRisingLine(top, left, length, arrow) {
+    alert("epsRisingLine not implemented!");
+  }
+  function epsHorizontalLine(top, left, length, arrow) {
+    // XXX: afai understand, objects shouldn't have an 'undefined' 
+    // property... (although it seems supported) so, i need this hack.
+    if (arrow === undefined) {
+      arrow = "none";
+    }
+    return left + " " + (left + length) + " " + top + " " + 
+           this.proc_hline[maybeFlipArrow(arrow)] + "\n";
+  }
+  function epsVerticalLine(top, left, length, arrow) {
+    return left + " " + top + " " + (top + length) + " DrawVLine\n";
+  }
+  function epsLine(x1, y1, x2, y2) {
+    return x1 + " " + y1 + " " + x2 + " " + y2 + " DrawLine\n";
+  }
+  
+  function epsPrefix(diagram, name, maxwidth, maxheight) {
+    var extra = 2*this.diagram_padding + this.node_height +
+                2*this.font_size;
+    var width = (maxwidth + extra)*0.06;
+    var height = (maxheight + extra)*0.06;
+    return "%!PS-Adobe-2.0 EPSF-1.2 \n" +
+"%%Title: " + 
+  (isExtendedDiagram(diagram) ? "Extended " : "") +
+  latexDiagramName(name) + 
+  (document.getElementById("reverse_arrows").checked ? 
+      ", reversed arrows. " : "") + " \n" +
+"%%Pages: 1 \n" +
+"%%DocumentFonts: Times-Roman \n" + 
+"%%BoundingBox: 0 " + (791 - height) + " " + width + " 791 \n" +
+"%%EndComments \n" +
+" \n" +
+"%%BeginProlog \n" +
+"save countdictstack mark newpath /showpage {} def /setpagedevice {pop} def \n" +
+"%%EndProlog \n" +
+"%%Page: 1 1 \n" +
+"%%BeginDocument: " + getEPSFileName() + ".eps \n" +
+" \n" +
+"/black {0.000 0.000 0.000 setrgbcolor} bind def \n" +
+"/white {1.000 1.000 1.000 setrgbcolor} bind def \n" +
+" \n" +
+"/blackstroke {gsave black stroke grestore} bind def \n" +
+"/bwstroke {gsave white eofill grestore gsave black stroke grestore} bind def \n" +
+"/drawtext { \n" +
+"  /text exch def \n" +
+"  gsave 1 -1 scale text black show grestore \n" +
+"} def \n" +
+" \n" +
+"/DrawTextAboveNode { \n" +
+"  /text exch def \n" +
+"  /y exch def \n" +
+"  /x exch def \n" +
+"  x text stringwidth pop 2 div sub  \n" +
+"    y nodesize sub fontsize 0.17 mul sub  \n" +
+"      moveto \n" +
+"  text drawtext \n" +
+"} def \n" +
+" \n" +
+"/DrawTextBelowNode { \n" +
+"  /text exch def \n" +
+"  /y exch def \n" +
+"  /x exch def \n" +
+"  x text stringwidth pop 2 div sub \n" +
+"    y nodesize add fontsize 0.83 mul add  \n" +
+"      moveto \n" +
+"  text drawtext \n" +
+"} def \n" +
+" \n" +
+"/DrawTextLeftOfNode { \n" +
+"  /text exch def \n" +
+"  /y exch def \n" +
+"  /x exch def \n" +
+"  x text stringwidth pop sub nodesize sub fontsize 0.15 mul sub \n" +
+"    y fontsize 2 div 0.69 mul add moveto \n" +
+"  text drawtext \n" +
+"} def \n" +
+" \n" +
+"/DrawTextRightOfNode { \n" +
+"  /text exch def \n" +
+"  /y exch def \n" +
+"  /x exch def \n" +
+"  x nodesize add fontsize 0.15 mul add \n" +
+"    y fontsize 2 div 0.69 mul add moveto \n" +
+"  text drawtext \n" +
+"} def \n" +
+" \n" +
+"/DrawCircle { \n" +
+"  /y exch def \n" +
+"  /x exch def \n" +
+"  newpath \n" +
+"  /savematrix matrix currentmatrix def \n" +
+"  x y translate nodesize nodesize scale 0 0 1 0 360 arc \n" +
+"  closepath \n" +
+"  savematrix setmatrix \n" +
+"  bwstroke \n" +
+"} def \n" +
+" \n" +
+"/DrawLine { \n" +
+"  /y2 exch def \n" +
+"  /x2 exch def \n" +
+"  /y1 exch def \n" +
+"  /x1 exch def \n" +
+"  newpath \n" +
+"  x1 y1 moveto \n" +
+"  x2 y2 lineto \n" +
+"  blackstroke \n" +
+"} def \n" +
+" \n" +
+"/DrawHLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  x1 y x2 y DrawLine \n" +
+"} def \n" +
+" \n" +
+"/DrawVLine { \n" +
+"  /y2 exch def \n" +
+"  /y1 exch def \n" +
+"  /x exch def \n" +
+"  x y1 x y2 DrawLine \n" +
+"} def \n" +
+" \n" +
+"/Draw2HLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  /ym y arrowsize sub def \n" +
+"  /yp y arrowsize add def \n" +
+"  x1 ym x2 ym DrawLine \n" +
+"  x1 yp x2 yp DrawLine \n" +
+"} def \n" +
+" \n" +
+"/Draw3HLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  /ym y 1.33 arrowsize mul sub def \n" +
+"  /yp y 1.33 arrowsize mul add def \n" +
+"  x1 ym x2 ym DrawLine \n" +
+"  x1 y x2 y DrawLine \n" +
+"  x1 yp x2 yp DrawLine \n" +
+"} def \n" +
+" \n" +
+"/Draw4HLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  /ym y arrowsize 1.5 div sub def \n" +
+"  /yp y arrowsize 1.5 div add def \n" +
+"  x1 ym x2 ym DrawLine \n" +
+"  x1 yp x2 yp DrawLine \n" +
+"  /ym ym arrowsize 1.3333 mul sub def \n" +
+"  /yp yp arrowsize 1.3333 mul add def \n" +
+"  x1 ym x2 ym DrawLine \n" +
+"  x1 yp x2 yp DrawLine \n" +
+"} def \n" +
+" \n" +
+"/DrawArrow { \n" +
+"  /height exch def \n" +
+"  /width exch def \n" +
+"  /y exch def \n" +
+"  /x exch def \n" +
+"  newpath \n" +
+"  x width sub y height sub moveto \n" +
+"  x width add y lineto \n" +
+"  x width sub y height add lineto \n" +
+"  blackstroke \n" +
+"} def \n" +
+" \n" +
+"/DrawFwd2HLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  x1 x2 y Draw2HLine \n" +
+"  x1 x2 add 2 div  \n" +
+"    y \n" +
+"    2 arrowsize mul   \n" +
+"    3 arrowsize mul DrawArrow \n" +
+"} def \n" +
+" \n" +
+"/DrawFwd3HLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  x1 x2 y Draw3HLine \n" +
+"  x1 x2 add 2 div  \n" +
+"    y \n" +
+"    2 arrowsize mul   \n" +
+"    3 arrowsize mul DrawArrow \n" +
+"} def \n" +
+" \n" +
+"/DrawFwd4HLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  x1 x2 y Draw4HLine \n" +
+"  x1 x2 add 2 div  \n" +
+"    y \n" +
+"    2 arrowsize mul   \n" +
+"    3 arrowsize mul DrawArrow \n" +
+"} def \n" +
+" \n" +
+"/DrawBack2HLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  x1 x2 y Draw2HLine \n" +
+"  x1 x2 add 2 div  \n" +
+"    y \n" +
+"    -2 arrowsize mul   \n" +
+"    3 arrowsize mul DrawArrow \n" +
+"} def \n" +
+" \n" +
+"/DrawBack3HLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  x1 x2 y Draw3HLine \n" +
+"  x1 x2 add 2 div  \n" +
+"    y \n" +
+"    -2 arrowsize mul   \n" +
+"    3 arrowsize mul DrawArrow \n" +
+"} def \n" +
+" \n" +
+"/DrawBack4HLine { \n" +
+"  /y exch def \n" +
+"  /x2 exch def \n" +
+"  /x1 exch def \n" +
+"  x1 x2 y Draw4HLine \n" +
+"  x1 x2 add 2 div  \n" +
+"    y \n" +
+"    -2 arrowsize mul   \n" +
+"    3 arrowsize mul DrawArrow \n" +
+"} def \n" +
+" \n" +
+"/DrawX { \n" +
+"  /y exch def \n" +
+"  /x exch def \n" +
+"  /diag nodesize 2 sqrt div def \n" +
+"  x diag sub  y diag add  \n" +
+"    x diag add  y diag sub  DrawLine \n" +
+"  x diag sub  y diag sub  \n" +
+"    x diag add  y diag add  DrawLine \n" +
+"} def \n" +
+" \n" +
+"% Set-up \n" +
+"1 -1 scale \n" +
+"0.06 0.06 scale \n" + 
+this.line_width + " setlinewidth \n" +
+"/fontsize " + this.font_size + " def \n" +
+"/nodesize " + this.node_height/2 + " def \n" +
+"/padding " + this.diagram_padding + " def \n" +
+"/maxheight " + maxheight + " def \n" +
+"/maxwidth " + maxwidth + " def \n" +
+"/arrowsize " + this.arrow_size + " def \n" +
+"padding nodesize add fontsize add \n" +
+"  nodesize padding add fontsize add 791 0.06 div sub \n" +
+"    translate \n" +
+"/Times-Roman findfont fontsize scalefont setfont \n\n";
+  }
+
+  function epsSuffix() {
+    return "\nshowpage \n" + 
+           "%%EndDocument\n" +
+           "%%Trailer\n" +
+           "cleartomark countdictstack exch sub { end } repeat restore\n" +
+           "%%EOF\n";
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  // End of EPS Output code
+  ///////////////////////////////////////////////////////////////////
+
+
+
+  ///////////////////////////////////////////////////////////////////
+  // Generic output code
+  //
+  // Wraps the above HTML- & EPS-specific functions, and 
+  ///////////////////////////////////////////////////////////////////
+
+  // Variables, which determine what we are currently displaying.
+  var cur_diagram_name = "E||6";
+  var cur_diagram = exceptional_dynkin_diagrams[cur_diagram_name];
+  var dynkin_diagrams, affine_diagrams;
+  
+  // Output device definitions & constants.
+  var html_vnodeshift = 0.85;
+  var output_html = {
+    drawNode: htmlDrawNode,
+    fallingLine: htmlFallingLine,
+    risingLine: htmlRisingLine,
+    horizontalLine: htmlHorizontalLine,
+    verticalLine: htmlVerticalLine,
+    prefix: function () { return ""; },
+    suffix: function () { return ""; },
+    
+    // XXX some of the numbers below should be modified by the metrics in
+    // the CSS "input.node". At the moment, changing one but not the other
+    // will make things look really wrong.
+
+    h_edgelen: 5,
+    v_edgelen: 4,
+    hnodeshift: 1.5,
+    vnodeshift: html_vnodeshift,
+    node_height: 1.1 + html_vnodeshift,
+    arrow_size: 1.2,
+    diagram_padding: 0.5,
+    line_width: 0.3,
+    font_size: 2,
+    
+    // Stuff used only by HTML code only
+    diag_line_width: 0.37,
+    drawText: htmlDrawText
+  };
+   
+  var eps_magnification = 0.33;
+  var output_eps = {
+    drawNode: epsDrawNode,
+    fallingLine: epsFallingLine,
+    risingLine: epsRisingLine,
+    horizontalLine: epsHorizontalLine,
+    verticalLine: epsVerticalLine,
+    specialLine: epsLine,
+    prefix: epsPrefix,
+    suffix: epsSuffix,
+
+    h_edgelen: 1500 * eps_magnification,
+    v_edgelen: 1200 * eps_magnification,
+    hnodeshift: 0 * eps_magnification,
+    vnodeshift: 0 * eps_magnification,
+    node_height: 2*168 * eps_magnification,
+    arrow_size: 75  * eps_magnification,
+    diagram_padding: 100 * eps_magnification,
+    line_width: 7.5 * eps_magnification,
+    font_size: 700 * eps_magnification,
+    
+    // Stuff used by EPS code only
+    proc_hline: {
+      "none": "DrawHLine",
+      "fwd2": "DrawFwd2HLine",
+      "fwd3": "DrawFwd3HLine",
+      "back2": "DrawBack2HLine",
+      "back3": "DrawBack3HLine",
+      "fwd4": "DrawFwd4HLine",
+      "back4": "DrawBack4HLine"
+    }
+  };
+  
+  function getCurrentLabeling() {
+    var labeling;
+    var radio_buttons = document.getElementsByName("labeling");
+    var num_radios = radio_buttons.length; 
+    for (var i = 0; i < num_radios; ++i) {
+      if (radio_buttons[i].checked) {
+        labeling = radio_buttons[i].value;
+        break;
+      }
+    }
+    return labeling;
+  }
+  
+  // Returns the string (HTML/EPS/...) representing the diagram,
+  // given a name and an output device.
+  //
+  // Constructs the diagram edge-by-edge, in the order, in which the edges
+  // were specified. Assumes that diagram node numbers start from 0, and
+  // that at every stage of the construction, there's one connected
+  // component.
+  function renderDiagram(diagram, name, out) {
+    var i, len, edge, factor;
+    var output = {};
+
+    var edges;
+    if (isExtendedDiagram(diagram)) {
+      edges = diagram.edges.concat(diagram.extended_edges);
+    } else {
+      edges = diagram.edges;
+    }
+
+    // Calculate node coordinates
+    var nodes = [{x: 0, y: 0}];
+    for (i = 0; (edge = edges[i]); i++) {
+      if (!nodes[edge.from]) {
+        alert("invalid diagram");
+      }
+      if (!nodes[edge.to]) {
+        nodes[edge.to] = {x: nodes[edge.from].x, y: nodes[edge.from].y};
+        factor = edge.half ? 0.5 : 1;
+        if (edge.type.indexOf("u") != -1) {
+          nodes[edge.to].y -= out.v_edgelen*factor;
+        }
+        if (edge.type.indexOf("d") != -1) {
+          nodes[edge.to].y += out.v_edgelen*factor;
+        }
+        if (edge.type.indexOf("l") != -1) {
+          nodes[edge.to].x -= out.h_edgelen*factor;
+        }
+        if (edge.type.indexOf("r") != -1) {
+          nodes[edge.to].x += out.h_edgelen*factor;
+        }
+        if (edge.no_node) {
+          nodes[edge.to].off = true;
+        }
+      }
+      // A hack to determine sensible placement for text relative to the
+      // nodes.
+      var reverse_dir = {"u": "d", "d": "u", "l": "r", "r": "l"};
+      if (!nodes[edge.to].off && !nodes[edge.from].off &&
+          edge.type.length == 1) {
+        nodes[edge.from][edge.type] = true;
+        nodes[edge.to][reverse_dir[edge.type]] = true;
+      }
+    }
+    
+    // Calculate minimum coordinates of nodes.
+    var min = {x: nodes[0].x, y: nodes[0].y},
+        max = {x: nodes[0].x, y: nodes[0].y};
+    for (i = 1, len = nodes.length; i < len; i++) {
+      if (nodes[i]) {
+        if (nodes[i].x < min.x) {
+          min.x = nodes[i].x;
+        } else if (nodes[i].x > max.x) {
+          max.x = nodes[i].x;
+        }
+        if (nodes[i].y < min.y) {
+          min.y = nodes[i].y;
+        } else if (nodes[i].y > max.y) {
+          max.y = nodes[i].y;
+        }
+      }
+    }
+    min.x -= out.diagram_padding;
+    min.y -= out.diagram_padding;
+    max.x += out.diagram_padding;
+    max.y += out.diagram_padding;
+    
+    var result = "";
+
+    // Render diagonal edges first, they can blow away straight edges.
+    for (i = 0; (edge = edges[i]); i++) {
+      factor = edge.half ? 0.5 : 1;
+      switch (edge.type) {
+        case "ur":
+          result += out.risingLine(out.vnodeshift + nodes[edge.to].y - min.y, 
+                                   out.hnodeshift + nodes[edge.from].x - min.x,
+                                   factor*out.v_edgelen, edge.arrow);
+        break;
+        case "ul":
+          result += out.fallingLine(out.vnodeshift + nodes[edge.to].y - min.y, 
+                                    out.hnodeshift + nodes[edge.to].x - min.x,
+                                    factor*out.v_edgelen, edge.arrow);
+        break;
+        case "dr":
+          result += out.fallingLine(out.vnodeshift + nodes[edge.from].y - min.y, 
+                                    out.hnodeshift + nodes[edge.from].x - min.x,
+                                    factor*out.v_edgelen, edge.arrow);
+        break;
+        case "dl":
+          result += out.risingLine(out.vnodeshift + nodes[edge.from].y - min.y, 
+                                   out.hnodeshift + nodes[edge.to].x - min.x,
+                                   factor*out.v_edgelen, edge.arrow);
+        break;
+        case "u": case "d": case "l": case "r":
+          // Draw straight edges in a separate pass
+        break;
+        default:
+          alert("invalid edge designation!");
+      }
+    }
+
+    var special_x, special_y;
+    // Render straight edges now that the diagonals are done.
+    for (i = 0; (edge = edges[i]); i++) {
+      // Combine no_node edges into a single edge in EPS
+      if (out.specialLine) {
+        if (edge.no_node == "combine") {
+          if (special_x === undefined) {
+            special_x = out.hnodeshift + nodes[edge.from].x - min.x;
+            special_y = out.vnodeshift + nodes[edge.from].y - min.y;
+          }
+          continue; 
+        } else if (special_x !== undefined) {
+          result += out.specialLine(special_x, special_y,
+                                    out.hnodeshift + nodes[edge.to].x - min.x,
+                                    out.vnodeshift + nodes[edge.to].y - min.y);
+          special_x = undefined;
+          continue;
+        }
+      }
+      factor = edge.half ? 0.5 : 1;
+      switch (edge.type) {
+        case "u":
+          result += out.verticalLine(out.vnodeshift + nodes[edge.to].y - min.y,
+                                     out.hnodeshift + nodes[edge.to].x - min.x,
+                                     factor*out.v_edgelen, edge.arrow);
+        break;
+        case "d":
+          result += out.verticalLine(out.vnodeshift + nodes[edge.from].y - min.y,
+                                     out.hnodeshift + nodes[edge.from].x - min.x,
+                                     factor*out.v_edgelen, edge.arrow);
+        break;
+        case "l": 
+          result += out.horizontalLine(out.vnodeshift + nodes[edge.to].y - min.y,
+                                       out.hnodeshift + nodes[edge.to].x - min.x,
+                                       factor*out.h_edgelen, edge.arrow);
+        break;
+        case "r":
+          result += out.horizontalLine(out.vnodeshift + nodes[edge.from].y - min.y,
+                                       out.hnodeshift + nodes[edge.from].x - min.x,
+                                       factor*out.h_edgelen, edge.arrow);
+        break;
+      }
+    }
+    
+    for (i = 0, len = nodes.length; i < len; i++) {
+      if (nodes[i] && !nodes[i].off) {
+        var label = "ERR";
+        
+        var labeling = getCurrentLabeling();
+        // Custom label
+        if (typeof(diagram.labelings[labeling]) == "object" &&
+            typeof(diagram.labelings[labeling][i]) != "undefined" &&
+            (!labeling_config[labeling].extended_only || 
+             (isExtendedDiagram(diagram) || !diagram.extended_edges))) {
+          label = diagram.labelings[labeling][i];
+        // Extended diagram label
+        } else if (i >= diagram.n) {
+          label = "X"; 
+        // Default label
+        } else {
+          if (labeling_config[labeling].base == "sequential") {
+            label = i + 1;
+          } else {
+            label = "";
+          }
+        }
+
+        var options = {index: i};
+        if (!nodes[i].u) {
+          options.free_direction = "Above";
+        } else if (!nodes[i].d) {
+          options.free_direction = "Below";
+        } else if (!nodes[i].l) {
+          options.free_direction = "LeftOf";
+        } else if (!nodes[i].r) {
+          options.free_direction = "RightOf";
+        } else {
+          options.free_direction = "Above";
+        }
+        result += out.drawNode(nodes[i].y - min.y, nodes[i].x - min.x, 
+                               label, options);
+      }
+    }
+    
+    output.height = max.y - min.y;
+    output.width = max.x - min.x;
+    output.text = out.prefix(diagram, name, output.width, output.height) + 
+                  result + 
+                  out.suffix();
+    
+    return output;
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  // End of generic output code
+  ///////////////////////////////////////////////////////////////////
+
+
+
+  ///////////////////////////////////////////////////////////////////
+  // Main control code
+  //
+  // This is the bit responsible for the web app logic.
+  //
+
+  // These functions take a list of element ids as arguments,
+  // and hide/show the corresponding page elements.
+  function showElts() {
+    for (var i = 0, len = arguments.length; i < len; i++) {
+      document.getElementById(arguments[i]).style.display = "block";
+    }
+  }
+  function hideElts() {
+    for (var i = 0, len = arguments.length; i < len; i++) {
+      document.getElementById(arguments[i]).style.display = "none";
+    }
+  }
+  
+  function updateDiagramAttributes() {
+    var diagram_attributes = {
+      // XXX: nbsps below are to address IE bugs.
+      diagram_name: htmlDiagramName(cur_diagram_name),
+      latex_diagram_name: latexDiagramName(cur_diagram_name),
+      diagram_extended: 
+          (isExtendedDiagram(cur_diagram) ? "extended&nbsp;" : ""),
+      diagram_reverse_arrows:
+          (document.getElementById("reverse_arrows").checked ? 
+              "reversed-arrow&nbsp;" : ""),
+      eps_file_name: getEPSFileName(),
+      diagram_affine: cur_diagram_name.split('|')[1] ? "&nbsp;Affine" : "",
+      max_dynkin_size: getValue("max_dynkin_diagram_size"),
+      max_affine_size: getValue("max_affine_diagram_size")
+    };
+    
+    for (var attribute in diagram_attributes) {
+      var i = 1, element;
+      while ((element = document.getElementById(attribute + i))) {
+        element.innerHTML = diagram_attributes[attribute];
+        i++;
+      }
+    }
+  }
+  
+  function getDiagramByName(name) {
+  	if (dynkin_diagrams[name]) {
+  		return dynkin_diagrams[name];
+  	} else {
+  		return affine_diagrams[name];
+  	}
+  }
+      
+  function drawDiagram(name, diagram) {
+    if (!diagram) {
+      diagram = getDiagramByName(name);
+    }
+
+    cur_diagram_name = name;
+    cur_diagram = diagram;
+    
+    var result = renderDiagram(diagram, name, output_html);
+    
+    document.getElementById("debug_html").firstChild.data = result.text;
+    
+    var canvas = document.getElementById("diagram_canvas");
+    canvas.style.height = (result.height + output_html.node_height) + "em";
+    canvas.innerHTML = result.text;
+
+    updateDiagramAttributes();
+
+    // Show results div
+    showElts("diagram_result");
+    
+    // Hide stuff related to the EPS file, since a new EPS file should
+    // be generated.
+    hideElts("eps_display_sec", "eps_save_nag", "eps_save_nag_hr");
+  }
+
+  function renderEPS() {
+    var eps_text = renderDiagram(cur_diagram, 
+                                 cur_diagram_name,
+                                 output_eps).text;
+
+    // Set up a failsafe display for the EPS data
+    document.getElementById("eps_output").firstChild.data = 
+      eps_text.replace(/\n/g,"\r\n");
+    showElts("eps_save_nag", "eps_save_nag_hr");
+    
+    return eps_text;
+  }
+  
+  function saveEPS() {
+    var filename = getEPSFileName() + ".eps";
+    var eps_text = renderEPS();
+    
+    // Try showing a data URI in a new window (works in Mozilla, and
+    // other modern browsers; not IE) 
+    var eps_url = "data:application/postscript;charset=utf-8," + 
+                  escape(eps_text);
+    try {
+        var data_uri_win = window.open(eps_url, filename);
+    } catch (err) {
+      // do nothing
+    }
+  }
+  
+  function getDiagramCatalog(diagrams) {
+    var i, d;
+    var catalog = "";
+    var diagram_names = [];
+    for (d in diagrams) {
+      diagram_names[diagram_names.length] = d;
+    }
+    diagram_names.sort();
+    var prev_letter = "A";
+    var prev_exceptional = false;
+    var cur_letter, cur_exceptional;
+    for (i = 0; (d = diagram_names[i]); i++) {
+      cur_letter = d.substr(0,1);
+      cur_exceptional = diagrams[d].exceptional;
+      if (diagrams[d].exceptional === undefined) {
+        cur_exceptional = false; // just to be clean
+      }
+      if ((prev_letter != cur_letter || 
+           prev_exceptional != cur_exceptional) && !prev_exceptional) {
+        catalog = catalog.substr(0, catalog.length - 7);
+        catalog += " <br/>\r\n";
+      }
+      prev_letter = cur_letter;
+      prev_exceptional = cur_exceptional;
+      // XXX: IE5/6 don't support hover on <a> without 
+      // href or name (in fact they claim not to support such
+      // things at all). So, I use this ugly span instead.
+      catalog += "<span style=\"color: blue; cursor: pointer;\" " + 
+                 "onmouseover=\"this.style.color='#ffa500'\"" +
+                 "onmouseout=\"this.style.color='blue'\"" +
+                 "onclick=\"drawDiagram('" + d + "')\">" + 
+                         htmlDiagramName(d) + "</span>&nbsp; ";
+    }
+    return catalog;
+  }
+  
+  function drawCurDiagram() {
+    drawDiagram(cur_diagram_name, cur_diagram);
+  }
+  
+  function setBackgroundColor(id, color) {
+    document.getElementById(id).style.backgroundColor = color;
+  }
+  
+  function fade(id) {
+    // Timing of the fade
+    var i;
+    var msec = 3000; // length of fade in milliseconds
+    var fps = 30; // frames per second
+    var period = 1000/fps; // interval between frames
+      
+    // Fade colors; the elements of the arrays are: [from, to]
+    // XXX: 'to' is hard-coded because it's a pain to portably
+    // get the background color of an element.
+    // XXX: Hex conversion is done to make it easier to switch to
+    // auto-detecting the background color later on.
+    var colors_str = ["#ffff66", "#ffffff"]; 
+    var colors = []; // [r, g, b], filled in by the loop below
+    for (var j in colors_str) {
+      var c = [];
+      var str = colors_str[j];
+      for (i = 0; i < 3; ++i) {
+        c[i] = parseInt(str.substr(2*i + 1, 2), 16);
+      }
+      colors[j] = c;
+    }
+    
+    var num_frames = msec/period;
+    for (var f = 0; f < num_frames; ++f) {
+      var t = f/(num_frames - 1);
+      var color = "#";
+      for (i = 0; i < 3; ++i) {
+        var digits = Math.round((1 - t)*colors[0][i] + t*colors[1][i]);
+        digits = digits.toString(16);
+        if (digits.length == 1) {
+          digits = "0" + digits;
+        }
+        color += digits;
+      }
+      setTimeout("setBackgroundColor('" + id + "', '" +
+                                          color + "');", f*period);
+    }
+    
+  }
+
+  function textHasHash(str) {
+    var hash_index = str.indexOf('#');
+    return hash_index > -1 && hash_index < str.length - 1;
+  }
+  function getTextPostHash(str) {
+    return str.substring(str.indexOf('#') + 1, str.length);
+  }
+
+  function addEvent(obj, eventType, fn) {
+    if (obj.addEventListener) {
+      obj.addEventListener(eventType, fn, false);
+      return true;
+    } else if (obj.attachEvent) {
+      return obj.attachEvent("on" + eventType, fn);
+    }
+    return false;
+  }
+  
+  function initDiagrams() {
+    dynkin_diagrams = shallowCopy(exceptional_dynkin_diagrams);
+    makeDynkinDiagramSeries(dynkin_diagrams, 
+                            getValue("max_dynkin_diagram_size")); 
+    affine_diagrams = shallowCopy(exceptional_affine_diagrams);
+    makeAffineDiagramSeries(affine_diagrams, 
+                            getValue("max_affine_diagram_size")); 
+
+    document.getElementById("dynkin_diagram_catalog").innerHTML = 
+        getDiagramCatalog(dynkin_diagrams);
+    // XXX: workaround for Windows Firefox 1.0 bug
+    document.getElementById("dynkin_diagram_catalog_label").innerHTML = 
+    	document.getElementById("dynkin_diagram_catalog_label").innerHTML;
+
+    document.getElementById("affine_diagram_catalog").innerHTML = 
+        getDiagramCatalog(affine_diagrams);
+    // XXX: workaround for Windows Firefox 1.0 bug
+    document.getElementById("affine_diagram_catalog_label").innerHTML = 
+    	document.getElementById("affine_diagram_catalog_label").innerHTML;
+
+    // Do a fade if the URL specifies a fade.
+    var url = unescape(window.location);
+    if (textHasHash(url)) {
+      var anchor = getTextPostHash(url);
+      var sec = document.getElementById(anchor + "_sec");
+      if (sec) {
+        sec.style.display = "block";
+        setTimeout("document.getElementById('" + anchor + 
+                    "_sec').scrollIntoView(true)", 1);
+      }
+      if (document.getElementById(anchor)) {
+        fade(anchor);
+      }
+    }
+    
+    // Add a fade event to every hash-containing anchor.
+    var makeFader = function (elt) {
+        return function() { fade(getTextPostHash(elt.href)); return true; };
+      };
+    var anchors = document.body.getElementsByTagName('a');
+    for (var i = 0; i < anchors.length; i++) {
+      if (textHasHash(anchors[i].href)) {
+        addEvent(anchors[i], 
+                 "click", 
+                 makeFader(anchors[i]));
+      }
+    }
+                                                            
+    drawCurDiagram();
+  }
+  
+--></script>
+
+<p style="float: right;
+          text-align: right;
+          background-color: #ddf; padding: 0em 0.2em 0.2em 0.2em;
+          margin: 0 0 0 0;">
+  <a href="https://alexey.im" style="font-size: 80%;">
+    Alexey Spiridonov's homepage
+  </a>
+</p>
+<h1 style="clear: right;">Dynkin Diagrams</h1>
+
+<div class="main_section">
+  <p>
+
+    The program lets you choose labels for the vertices of Dynkin
+    diagrams.  It has a catalog of all Dynkin diagrams (up to
+
+    <a href="#max_sizes" onclick="showElts('max_sizes_sec')">
+      size <span id="max_dynkin_size1">8</span></a>),
+
+    and of all extended and affine Dynkin diagrams (up to 
+
+    <a href="#max_sizes" onclick="showElts('max_sizes_sec')">
+    size <span id="max_affine_size1">9</span></a>). It can be used 
+    <a href="#offline_use" onclick="showElts('offline_use_sec')">offline</a>.
+
+  </p>
+  <p>
+  
+    Pick a diagram type, and, if needed, check the box "Extended diagram".
+
+  </p>
+
+</div>
+
+<div>
+  <div class="pane">
+
+    <div id="dynkin_diagram_catalog_label">
+      <b>Dynkin Diagrams</b>
+    </div>
+    <div>
+      <span id="dynkin_diagram_catalog">
+      </span>
+      <div class="hline"></div>
+      <p style="margin-top: 0em; margin-bottom: 0em; text-align: left;">
+        <input type="checkbox" id="extended" 
+               onclick="drawCurDiagram()"/>
+          Extended diagram <br/>
+      </p>      
+    </div>
+
+    <div class="intra_pane_spacer"></div>
+
+    <div>
+      <b>Output</b>
+    </div>
+    <div>
+      <div id="eps_save_nag" style="display: none">
+        <a href="#eps_display" 
+           onclick="showElts('eps_display_sec');">
+          <b> Click here if no <br/> 
+          file was saved.<br/> </b>
+        </a>
+      </div>
+      <div class="hline" id="eps_save_nag_hr" style="display: none"></div>
+      <input type="button" 
+             value="Save diagram as an EPS file" 
+             onclick="saveEPS()" /> 
+      <div class="hline"></div>
+      <a href="#eps_help" 
+         onclick="showElts('eps_help_sec');">
+        Using EPS Diagrams in L<sub>A</sub>T<sub>E</sub>X
+      </a>
+    </div>
+
+  </div>
+  <div class="pane_divider"> </div>
+  <div class="pane">
+
+    <div id="affine_diagram_catalog_label">
+      <b>
+        Affine Dynkin Diagrams
+        <a style="font-size: 0.6em;" href="#affine_diagram_help">[more info]</a> 
+      </b>
+    </div>
+    <div id="affine_diagram_catalog">
+    </div>
+    
+    <div class="intra_pane_spacer"></div>
+
+    <div>
+      <b>
+        Node Labels
+        <a style="font-size: 0.6em;" href="#labeling_help">[more info]</a>
+      </b>
+    </div>
+
+    <div>
+      <p class="label_choice">
+        <input id="rb_none" type="radio" name="labeling" value="none"
+               onclick="drawCurDiagram()" 
+               style="float: left;" checked="checked" /> 
+        <label for="rb_none" style="float: left; text-align: left;">
+          No labels
+        </label>
+      </p>
+      <p class="label_choice">
+        <input id="rb_kernel" type="radio" name="labeling" value="kernel" 
+               onclick="drawCurDiagram()"
+               style="float: left;" /> 
+        <label for="rb_kernel" style="float: left; text-align: left; ">
+          Vector from the Cartan matrix kernel <br/> 
+          (extended and affine diagrams only)
+        </label>
+      </p>
+      <div class="hline" style="clear: both; padding-top: 0.3em;"></div>
+      <i>Number the nodes canonically:</i>
+      <p class="label_choice">
+        <input type="radio" name="labeling" value="dynkin" 
+               onclick="drawCurDiagram()" />
+          Dynkin ordering 
+          <a href="#ref1">[1]</a><br/>
+        <input type="radio" name="labeling" value="bourbaki" 
+               onclick="drawCurDiagram()" /> 
+          Bourbaki ordering
+          <a href="#ref5">[5]</a><br/>
+      </p>
+        <!-- XXX: not useful enough?
+        <input type="radio" name="labeling" value="gap" 
+               onclick="drawCurDiagram()" /> 
+          <a href="http://atlas.math.umd.edu/dissemination/spherical/explorer/rootSystem.cgi">
+            Gap</a> <br/>      
+        -->
+    </div>
+
+<!--
+    The "reverse arrow" option is set to "display: none" below,
+    this divider belongs to it.
+    
+    <div class="intra_pane_spacer"></div>
+-->
+
+    <div style="display: none;">
+      <b>Options</b>
+    </div>
+    <div style="text-align: left; display: none;">
+      <input type="checkbox" id="reverse_arrows" 
+             onclick="drawCurDiagram()"/>
+        Reverse arrows <br/> (for Kac-Moody algebras) <br/>
+    </div>
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+
+<div id="diagram_result" style="display:none"> 
+
+  <h3> Diagram </h3>
+
+  <p id="diagram_instructions">
+    Here is the 
+    <b id="diagram_extended1"></b><i 
+       id="diagram_reverse_arrows1"></i><b 
+       id="diagram_name1"></b><span 
+       id="diagram_affine1"></span>&nbsp;Dynkin diagram.
+    <!-- the above nbsp addresses an IE bug -->
+    Click on any node to edit its label.
+  </p>
+
+  <div id="diagram_canvas" style="position: relative; 
+                                  margin-top: 1em; 
+                                  margin-bottom: 1em;
+                                  height: 10em">
+  </div>
+
+</div>
+
+<pre id="debug_html" style="border: 1px solid black; display: none;"
+     onclick="drawDiagram('Debug Test', dtest)">
+  Click this box to show a test dynamic diagram!
+</pre>
+
+<div class="main_section">
+  <h3 id="affine_diagram_help">
+    <a name="affine_diagram_help"></a> 
+    What Are Affine Dynkin Diagrams?
+  </h3>
+  <p>
+    Affine Dynkin diagrams, together with extended Dynkin diagrams,
+    completely describe all generalized Cartan matrices of affine type. They
+    are useful in working with Kac-Moody algebras, and in the theory of
+    symmetric spaces (see, e. g., <a href="#ref3">[3]</a> and <a
+    href="#ref4">[4]</a>). The diagrams on this site follow <a
+    href="#ref3">[3]</a>.
+  </p>
+</div>
+
+<div class="main_section">
+  <h3 id="labeling_help">
+    <a name="labeling_help"></a> 
+    What Are Labelings?
+  </h3>
+  <p>
+
+    Various labelings are widely used in the theory of Lie groups and
+    algebras (for instance, to describe weights of linear representations or
+    nilpotent orbits). The box above gives some useful choices.
+
+  </p>
+  <p>
+  
+    For an extended or affine diagram, the corresponding Cartan matrix is
+    singular. One of the above options shows a vector from its kernel. This
+    vector is unique (up to scaling), because we can get a standard Dynkin
+    diagram by deleting one node from any affine or extended diagram. See  
+    <a href="#ref3">[3]</a> for more information.
+
+  </p>
+  <p>
+  
+    The other options present two standard enumerations of the vertices. One
+    was introduced by Dynkin <a href="#ref1">[1]</a> (see also <a
+    href="#ref2">[2]</a>). Another was suggested by Bourbaki <a
+    href="#ref5">[5]</a>.
+
+  </p>
+</div>
+
+<div class="main_section">
+  <h3 id="references">
+    <a name="references"></a> 
+    References
+  </h3>
+  <ol>
+    <li id="ref1">
+      <a name="ref1"></a>
+      E. B. Dynkin, <i>Semisimple subalgebras of semisimple Lie
+      algebras,</i> Americ. Math. Soc. Transl., Series 2, Vol. 6 (1957), 245-378.
+      Reprinted in: <i>Selected Papers of E. B. Dynkin with Commentary</i>,
+      American Mathematical Society, International Press, 2000.
+    </li>
+    <li id="ref2">
+      <a name="ref2"></a>
+      A. L. Onishchik, E.B. Vinberg, <i>Lie groups and  algebraic
+      Groups</i>, Springer, 1990.
+    </li>
+    <li id="ref3">
+      <a name="ref3"></a>
+      V. Kac, <i>Infinite-dimensional Lie algebras</i>, Cambridge
+      University Press, 1990, Chapter 4.
+    </li>
+    <li id="ref4">
+      <a name="ref4"></a>
+      S. Helgason, <i>Differential geometry, Lie groups, and symmetric 
+      spaces</i>, American Mathematical Society, 2001, Chapter 10, Section 5.
+    </li>
+    <li id="ref5">
+      <a name="ref5"></a>
+      N. Bourbaki, <i>Lie groups and Lie algebras, Chapters 4-6</i>,
+      Springer, 2002.
+    </li>
+  </ol>
+</div>
+
+<div class="main_section" id="max_sizes_sec" style="display: none; ">
+  <h3 id="max_sizes">
+    <a name="max_sizes"></a> 
+    Maximum Sizes of Diagrams
+    <a style="font-size: 0.6em;" href="#" onclick="hideElts('max_sizes_sec')">
+      [hide]
+    </a> 
+  </h3>
+  <p>
+  If you need larger diagrams, you can enable them here. However, the
+  program won't look very pretty. Sorry :)
+  </p>
+  <!-- XXX: for some reason, the div doesn't shrink back in FF 1.5. 
+       similar to FF 1.0 bug? or not a bug at all?
+    -->
+  <div>
+    Generate Dynkin diagram series up to size:
+    <input id="max_dynkin_diagram_size" value="8" 
+           maxlength="2" size="2" onchange="initDiagrams()"/>
+  </div>
+  <div>
+    Generate affine Dynkin diagram series up to size:
+    <input id="max_affine_diagram_size" value="9" 
+           maxlength="2" size="2" onchange="initDiagrams()"/>
+  </div>
+</div>
+
+<div class="main_section" id="offline_use_sec" style="display: none; ">
+  <h3 id="offline_use">
+    Using This Program Offline
+    <a style="font-size: 0.6em;" href="#" onclick="hideElts('offline_use_sec')">
+      [hide]
+    </a> 
+  </h3>
+  <p>
+  
+    It's easy to use this program even when you don't have Internet access. 
+    Just save this page ("dynkin-diagrams.html") on your computer.  This is
+    usually done through "File -> Save As" or "File -> Save Page As".  There
+    is one caveat. You need to change the "Save as type" field to say
+    "Web Page, HTML only", <b>not</b> "Web Page, complete" or "Web Archive";
+    otherwise, the saved file won't work correctly. To use the saved file,
+    open it in your browser.
+
+  </p>
+</div>
+
+
+<div id="eps_help_sec" class="main_section" style="display: none;">
+  <h3 id="eps_help">
+    <a name="eps_help"></a>Inserting Dynkin diagrams into LaTeX papers
+    <a style="font-size: 0.6em;" href="#" onclick="hideElts('eps_help_sec')">
+      [hide]
+    </a> 
+  </h3>
+  
+  <p>
+    Here are simple, step-by-step instructions for professional-looking
+    Dynkin diagrams in your every paper.
+  </p>
+
+  <div id="helplist">
+  <ol>
+    <li>Click "Save diagram as an EPS file" above.</li>
+    <li>One of three things may happen:
+      <ol style="list-style-type: lower-alpha;">
+        <li> You will get a dialog with a choice of "Open" or "Save to
+             disk". Choose "Save to disk", and click OK.  If you get a "Save
+             As..." dialog, go to the next step.
+             <p style="margin-top: 0.3em; margin-bottom: 0em">
+             Otherwise, your browser is probably set up to automatically 
+             save files to a fixed location (check the Desktop). You
+             are looking for a file with a cryptic name, and a <tt>.ps</tt> 
+             extension. You need to rename and move this file to your LaTeX
+             directory; consult step 4, and skip to step 6.
+             </p>
+        </li>
+        <li> You will get a "Save As..." dialog. Skip to the next step. </li>
+        <li> You get nothing or garbage. Click 
+             <a href="#eps_display"
+                onclick="renderEPS();showElts('eps_display_sec')">
+             here</a> in order to save an EPS file by hand.
+        </li>        
+      </ol>
+    </li>
+    <li> You should now see a "Save As..." dialog box. Find the directory
+    containing your LaTeX files. </li>
+    <li> Now, you need to choose a sensible name for the file,
+    like <pre><span id="eps_file_name1">F4-extended</span>.eps</pre>Note
+    that the file must have an <tt>.eps</tt> extension. 
+    </li>
+    <li>
+    Click "Save".
+    </li>
+    <li> Now, open your LaTeX file. Add <pre>\usepackage{graphics}</pre>
+    to the preamble. Find the place in the text where you want the
+    diagram. Insert the following code there:
+    <pre>
+\begin{figure}
+  \begin{center}
+    \includegraphics{<span id="eps_file_name2"></span>}
+  \end{center}
+  \caption{\label{<span id="eps_file_name3"></span>} 
+           This is the<span id="diagram_affine2"></span> <span 
+           id="diagram_extended2"></span><span 
+id="diagram_reverse_arrows2"></span>Dynkin diagram for $<span 
+id="latex_diagram_name1"></span>$.}
+\end{figure}</pre>
+    You might need to adjust the file name; note that the <tt>.eps</tt>
+    extension is omitted). You can change the size of the picture using the
+    width option:
+    <pre>\includegraphics[width=2in]{<span id="eps_file_name4"></span>}</pre>
+    You can refer to the figure like this:
+    <pre>If you are not convinced, contemplate Figure \ref{<span 
+id="eps_file_name5"></span>}.</pre>
+    </li>
+  </ol>
+  </div>
+  
+  <p>
+  That's all, folks!
+  </p>
+  
+</div>
+
+<div id="eps_display_sec" class="main_section" style="display: none;">
+
+  <h3 id="eps_display">
+    <a name="eps_display"></a> An alternative way of saving the EPS file
+    <a style="font-size: 0.6em;" href="#" 
+       onclick="hideElts('eps_display_sec')">
+      [hide]
+    </a> 
+  </h3>
+
+  <p> Here are the the contents of the EPS file, in case the "Save as EPS"
+  button doesn't work for you. If your browser saves files automatically,
+  check your download directory first. The file might have a
+  <tt>.ps</tt> extension.</p>
+
+  <p>You can copy and paste the text below into your favorite editor, and save
+  the file with an <tt>.eps</tt> extension.</p>
+
+  <pre id="eps_output" style="border: 1px dotted black; 
+                              height: 15em; 
+                              overflow: auto;">
+       
+  </pre>
+
+</div>
+
+<div id="mit_x_license_sec" class="main_section" style="display: none;">
+  <h3 id="mit_x_license">
+    <a name="mit_x_license"></a>
+    The MIT X License
+    <a href="#" onclick="hideElts('mit_x_license_sec')"
+       style="font-size: 0.8em;">[hide]</a>
+  </h3>
+  <p>
+    <span style="font-style: italic; font-size: 0.9em;">
+    [The license text comes from 
+    <a href="http://www.opensource.org/licenses/mit-license.php">here</a>.
+    It is only being applied to the text outside the
+    <tt>&lt;script&gt;</tt> tags on this page. The JavaScript 
+    code is under the 
+    <a href="http://www.fsf.org/licensing/licenses/info/GPLv2.html">
+    GNU GPLv2</a>.]</span>
+  </p>
+  <p>
+    Copyright (c) 2006-2007 Alexey Spiridonov
+  </p>
+  <p>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+  </p>
+  <p>
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+  </p>
+  <p>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+  </p>
+</div>
+
+<div id="footnote" class="main_section">
+  <hr/>
+
+  <p>
+  
+  Please write to Alexey Spiridonov, <span class="email">le sha</span> at 
+  <span class="email">mit</span>, minus
+  the extra space, and plus <span class="email">edu</span>.
+  
+  Feel free to send questions, suggestions, patches, or whatever else comes
+  along.
+  
+  </p>
+  <p>
+
+  <a href="http://www.math.cornell.edu/~ebd/">Eugene B. Dynkin</a> suggested
+  the idea for this page, helped test it, and contributed many thoughts on
+  how to make it better. Thanks!
+
+  </p>
+  <p>
+
+  I developed this page in 
+  <a href="http://www.mozilla.com">Firefox</a>.
+  Users of other browsers -- do let me know how things go for you. 
+  Known issues: "Save EPS" doesn't work in IE or Opera; hints on fixing
+  this would be appreciated.
+
+  </p>
+  <p>
+
+  The JavaScript code of this program (the part enclosed between the 
+  <tt>&lt;script&gt;</tt> tags) is licensed under the 
+  <a href="http://www.fsf.org/licensing/licenses/info/GPLv2.html">
+  GNU GPLv2</a>. The remaining text on the page, and the 
+  <a href="http://validator.w3.org/check/referer">XHTML</a> / 
+  <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
+  markup are licensed under the 
+  <a href="#mit_x_license" onclick="showElts('mit_x_license_sec')">
+  MIT X License.</a>
+
+  </p>
+</div>
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+<!-- 
+var sc_project=2199414; 
+var sc_invisible=1; 
+var sc_partition=20; 
+var sc_security="4b02d35c"; 
+var sc_remove_link=1; 
+//-->
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter_xhtml.js"></script><noscript><div
+class="statcounter"><img class="statcounter"
+src="http://c21.statcounter.com/counter.php?sc_project=2199414&amp;java=0&amp;security=4b02d35c&amp;invisible=1"
+alt="simple hit counter" /></div></noscript>
+<!-- End of StatCounter Code -->
+
+<!-- Google Analytics Code -->
+<script src="http://www.google-analytics.com/urchin.js"
+type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1203959-1";
+urchinTracker();
+</script>
+</body>
+</html>

@@ -1,0 +1,699 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newtheorem*{lem}{Lemma}
+
+\newtheorem*{Theorem}{Theorem}
+
+\newtheorem*{Def}{Definition}
+
+\newtheorem*{Prop}{Proposition}
+
+\newcommand*{\g}{\mathfrak{g}}
+
+\newenvironment*{Ex}
+{\noindent \textbf{Example.}\hspace{.1 em}}
+
+\newenvironment*{Problem}[1]
+{\vspace{1em} \noindent \textbf{Exercise #1:}\hspace{.5em}}
+
+\title{18.745: Lecture 11}
+\author{Professor: Victor Ka\v{c}\\ Scribe: Christopher Davis}
+\date{October 10th, 2004}
+
+\begin{document}
+\maketitle
+
+\section*{Properties of semi-simple Lie algebras}
+
+\begin{Problem}{11.1} In this exercise, sum will always mean sum as vector spaces:
+
+\begin{enumerate}
+\item[(a)]
+The sum of two ideals of a Lie algebra is an ideal.
+\item[(b)]
+The sum of finitely many solvable ideals is a solvable ideal.
+\item[(c)]
+The sum of a collection of solvable ideals of a finite dimensional Lie algebra is a solvable ideal.
+\item[(d)]
+The sum of an ideal and a sub-algebra is a sub-algebra.
+\end{enumerate}
+\end{Problem}
+
+\begin{proof}
+(a):  Let $\g$ denote a Lie algebra over a field $\mathbb{F}$, let $\mathfrak{a}, \mathfrak{b}$
+  be two ideals.   An arbitrary element of
+  $\mathfrak{a} + \mathfrak{b}$ has the form $c_{1}a + c_{2}b$, with $c_{1}, c_{2} \in \mathbb{F}$, $a
+  \in \mathfrak{a}$, $b \in \mathfrak{b}$.  Let $g \in \g$.  Then 
+$$[g, c_{1}a + c_{2}b] = c_{1}[g,a] + c_{2}[g,b],$$
+where the latter is clearly in $\mathfrak{a} + \mathfrak{b}$, since
+$\mathfrak{a}$ and $\mathfrak{b}$ are ideals.
+
+(b):  Using induction, it will suffice to show that the sum of two
+solvable ideals is solvable.  Say $\mathfrak{a}^{(m)} =
+\mathfrak{b}^{(n)} = 0$.  Then, considering bilinearity,
+$(\mathfrak{a} + \mathfrak{b})^{(m+n)}$ is made of elements which are
+sums of terms $$[a_{m+n} \textnormal{ or } b_{m+n}, [a_{m+n-1}
+    \textnormal{ or } b_{m+n-1}, [ \ldots [a_{2} \textnormal{ or } b_{2},
+	a_{1} \textnormal{ or } b_{1}]\ldots ].$$  Because
+    $\mathfrak{a}$ and $\mathfrak{b}$ are ideals, each such term will
+    lie in either $\mathfrak{a}^{(m)}$ or $\mathfrak{b}^{(n)}$,
+    depending on whether there are at least $m$ terms from
+    $\mathfrak{a}$ or at least $n$ terms from $b$.  Thus, each term is
+    zero, and we conclude that the sum is solvable.  (It is an ideal
+    by part (a).)
+
+(c):  We now assume that $\g$ is finite dimensional, but also that we
+    now have an arbitrary collection of ideals,
+    $\mathfrak{a}_{\alpha}$.  Consider these ideals as vector
+    subspaces.  We clearly have that $\sum \mathfrak{a}_{\alpha}$ is a
+    subspace which contains each $\mathfrak{a}_{\alpha}$.  We claim
+    that we can find a finite subcollection $\mathfrak{a}_{1}, \ldots,
+    \mathfrak{a}_{n}$ of the ideals $\mathfrak{a}_{\alpha}$ so that
+    $$\sum \mathfrak{a}_{i} = \sum \mathfrak{a}_{\alpha}.$$
+
+Choose a
+    non-empty ideal $\mathfrak{a}_{1}$.  If $\mathfrak{a}_{1} = \sum
+    \mathfrak{a}_{\alpha},$ we are done, otherwise, pick another ideal
+    $\mathfrak{a}_{2}$ which is not contained in $\mathfrak{a}_{1}$.
+    If $\mathfrak{a}_{1} + \mathfrak{a}_{2} = \sum
+    \mathfrak{a}_{\alpha},$ we are done, otherwise repeat the
+    process.  At each stage, the dimension $\sum \mathfrak{a}_{i}$
+    goes up by at least one, and as it is contained in the finite
+    dimensional space $\g$, the process must terminate in a finite
+    number of steps.  At this point, we can reduce to part (b).
+
+(d):  Let $a_{1}, a_{2} \in \mathfrak{a}$ an ideal, $h_{1}, h_{2} \in
+    \mathfrak{h}$ a sub-algebra, and $c_{i} \in \mathbb{F}$ the field we are
+    working over.  Then $$[c_{1}a_{1} + c_{2}h_{1}, c_{3}a_{2} +
+    c_{4}h_{2}] = c_{1}[a_{1},c_{3}a_{2} + c_{4}h_{2}] +
+    c_{2}c_{3}[h_{1}, a_{2}] + c_{2}c_{4}[h_{1},h_{2}].$$  The first
+    two terms are in our ideal, and the third term is in our
+    sub-algebra.  Thus, we conclude that the sum of an ideal and a
+    sub-algebra is indeed a sub-algebra.  (The other properties follow
+    immediately from bilinearity of the bracket.)
+\end{proof}
+
+\begin{Def}
+The radical $R(\g)$ of a finite dimensional Lie algebra $\g$ is the sum (as vector spaces) of all $\g$'s solvable ideals.
+\end{Def}
+
+By $11.1$(c), $R(\g)$ is 
+a solvable ideal.  As it contains all the other solvable ideals, it is necessarily the maximal solvable
+ideal of $\g$.  Recalling that we call a Lie Algebra with no non-zero solvable ideals \textit{semi-simple}, we see that in
+the finite dimensional case, $\g$ is semi-simple if and only if $R(g) = 0$.
+
+\begin{Prop} For a finite dimensional Lie algebra $\g$, $\overline{\g}
+  = \g / R(\g)$ is a semi-simple Lie algebra.  
+\end{Prop}
+
+\begin{proof}  Consider any $g_{1}, g_{2} \in \g$, and let
+  $\overline{g_{1}}, \overline{g_{2}}$ be their images in
+  $\overline{\g}$.  We claim $\overline{[g_{1},g_{2}]} =
+  [\overline{g_{1}}, \overline{g_{2}}]$.  But this is immediate from
+  the fact that $R(\g)$ is an ideal, and thus taking different
+  representatives of $\overline{g_{1}}$ and $\overline{g_{2}}$ and
+  taking their bracket yields an element which differs from
+  $[g_{1},g_{2}]$ by an element of $R(\g)$.
+
+ Let $\overline{m}$ be a solvable ideal of
+  $\overline{\g}$. Let $m$ denote its preimage in $\g$.  Then the
+  above remarks show that $[\overline{m}, \overline{m}] =
+  \overline{[m,m]}$, and applying this repeatedly shows that
+  $\overline{m}$ is solvable if and only if $m^{(n)} \subseteq R(\g)$
+  for some $n$.  Because $R(\g)$ is solvable, this in turn implies
+  that $m$ is solvable, and thus, $m \subseteq R(\g)$.  Thus, our
+  original $\overline{m}$ must be $0$, and so $\overline{\g}$ is
+  indeed semi-simple.
+\end{proof}
+
+We will later prove the following, which provides a method for
+breaking the study of finite dimensional Lie algebras down into the
+study of (somewhat) simpler objects:
+
+\begin{Theorem}[Levi]  If $\g$ is a finite dimensional Lie algebra
+  over a field $\mathbb{F}$ of characteristic $0$, then there exists a
+  semi-simple sub-algebra $\mathfrak{s}$ of $\g$ such that $$\g =
+  \mathfrak{s} + R(\g),$$ a sum as vector spaces.  
+\end{Theorem}
+
+\noindent
+The above is also a
+  direct sum as vector spaces, because $\mathfrak{s} \cap R(\g)$ is
+  contained in $R(g)$, hence is solvable, and is contained in the
+  semi-simple $\mathfrak{s}$, and hence is $0$.  Such a situation is
+  called a $\textit{semi-direct sum}$ of a sub-algebra $\mathfrak{s}$
+  and an ideal $R(\g)$.
+
+Note that in such a case, we have a homomorphism of Lie algebras 
+\begin{align*}
+\mathfrak{s} &\rightarrow \textnormal{Der } R(\g), \\
+\intertext{defined by}
+s &\rightarrow \textnormal{ad } s|_{R(\g)}.
+\end{align*}
+
+\noindent
+This situation is reminiscent of the semi-direct product from
+group theory, and motivates the following definition.
+
+\begin{Def} Given a triple $(\mathfrak{s}, \mathfrak{r}, \varphi)$,
+  with $\mathfrak{s}$, $\mathfrak{r}$ Lie algebras and $\varphi$ a
+  homomorphism $\mathfrak{s} \rightarrow \textnormal{Der }
+  \mathfrak{r}$, we define the \textit{semi-direct sum} 
+ to be the Lie algebra $\g = \mathfrak{s}
+  \ltimes \mathfrak{r}$ as follows:
+
+\begin{itemize}
+\item
+As a vector space, $\g = \mathfrak{s} + \mathfrak{r}$, a direct sum of
+vector spaces.
+\item
+The commutator of two elements of $\mathfrak{s}$ (resp. of
+$\mathfrak{r}$) is defined as in $\mathfrak{s}$ (resp. in
+$\mathfrak{r}$).
+\item
+The commutator $[s,r]$, with $s \in \mathfrak{s}$ and $r \in
+\mathfrak{r}$, is defined to be $\varphi(s)(r)$.
+\end{itemize}
+\end{Def}
+
+\noindent
+That the above is well-defined follows from the next exercise:
+
+\begin{Problem}{11.2}
+The semi-direct sum $\g = \mathfrak{s}
+  \ltimes \mathfrak{r}$ as defined above is a Lie algebra.
+\end{Problem}
+
+\begin{proof} Implicit in the definition is that we extend all the
+  rules to make the bracket bilinear and skew-commutative.  It remains to check the Jacobi
+  identity.
+\begin{align*}
+[\lambda_{1}s_{1} + \mu_{1}r_{1}, [\lambda_{2}s_{2} + \mu_{2}r_{2},
+    \lambda_{3}s_{3} + \mu_{3}r_{3}]] + \hspace{1 em} &\\
+[\lambda_{2}s_{2} + \mu_{2}r_{2},
+    [\lambda_{3}s_{3} + \mu_{3}r_{3}, \lambda_{1}s_{1} +
+    \mu_{1}r_{1}]] + \hspace{1 em} &\\
+[\lambda_{3}s_{3} + \mu_{3}r_{3}, [\lambda_{1}s_{1} +
+    \mu_{1}r_{1}, \lambda_{2}s_{2}  + \mu_{2}r_{2}]]  & =\\
+[\lambda_{1}s_{1} + \mu_{1}r_{1}, \lambda_{2}\lambda_{3}[s_{2},s_{3}]
+    + \lambda_{2}\mu_{3}\varphi(s_{2})(r_{3}) -
+    \lambda_{3}\mu_{2}\varphi(s_{3})(r_{2}) + \mu_{2}\mu_{3}[r_{2},
+    r_{3}]] + \hspace{1 em} & \\ 
+[\lambda_{2}s_{2} + \mu_{2}r_{2}, -\lambda_{1}\lambda_{3}[s_{1},s_{3}]
+    + \mu_{1}\lambda_{3}\varphi(s_{3})(r_{1}) -
+    \lambda_{1}\mu_{3}\varphi(s_{1})(r_{3}) - \mu_{1}\mu_{3}[r_{1},
+    r_{3}]] + \hspace{1 em} & \\
+[\lambda_{3}s_{3} + \mu_{3}r_{3}, \lambda_{1}\lambda_{1}[s_{1},s_{2}]
+    + \lambda_{1}\mu_{2}\varphi(s_{1})(r_{2}) -
+    \mu_{1}\lambda_{2}\varphi(s_{2})(r_{1}) + \mu_{1}\mu_{2}[r_{1},
+    r_{2}]] & =\\
+\lambda_{1}\lambda_{2}\lambda_{3}[s_{1},[s_{2},s_{3}]] 
++ \lambda_{1}\lambda_{2}\mu_{3}\varphi(s_{1})(\varphi(s_{2})(r_{3})
+- \hspace{1 em} & \\
+\lambda_{1}\mu_{2}\lambda_{3}\varphi(s_{1})(\varphi(s_{3})(r_{2})
++\lambda_{1}\mu_{2}\mu_{3}\varphi(s_{1})([r_{2},r_{3}]) - \hspace{1
+    em} & \\
+\mu_{1}\lambda_{2}\lambda_{3}\varphi([s_{2},s_{3}])(r_{1}) 
++ \mu_{1}\lambda_{2}\mu_{3}[r_{1},\varphi(s_{2})(r_{3})]
+- \hspace{1 em} & \\
+\mu_{1}\mu_{2}\lambda_{3}[r_{1},(\varphi(s_{3})(r_{2})]
++\mu_{1}\mu_{2}\mu_{3}[r_{1},[r_{2},r_{3}]] - \hspace{1
+    em} & \\
+\lambda_{1}\lambda_{2}\lambda_{3}[s_{2},[s_{1},s_{3}]] 
++ \mu_{1}\lambda_{2}\lambda_{3}\varphi(s_{2})(\varphi(s_{3})(r_{1})
+- \hspace{1 em} & \\
+\lambda_{1}\lambda_{2}\mu_{3}\varphi(s_{2})(\varphi(s_{1})(r_{3})
+-\mu_{1}\lambda_{2}\mu_{3}\varphi(s_{2})([r_{1},r_{3}]) + \hspace{1
+    em} & \\
+\lambda_{1}\mu_{2}\lambda_{3}\varphi([s_{1},s_{3}])(r_{2}) 
++ \mu_{1}\mu_{2}\lambda_{3}[r_{2},\varphi(s_{3})(r_{1})]
+- \hspace{1 em} & \\
+\lambda_{1}\mu_{2}\mu_{3}[r_{2},(\varphi(s_{1})(r_{3})]
+-\mu_{1}\mu_{2}\mu_{3}[r_{2},[r_{1},r_{3}]] + \hspace{1
+    em} & \\
+\lambda_{1}\lambda_{2}\lambda_{3}[s_{3},[s_{1},s_{2}]] 
++ \lambda_{1}\mu_{2}\lambda_{3}\varphi(s_{3})(\varphi(s_{1})(r_{2})
+- \hspace{1 em} & \\
+\mu_{1}\lambda_{2}\lambda_{3}\varphi(s_{3})(\varphi(s_{2})(r_{1})
++\mu_{1}\mu_{2}\lambda_{3}\varphi(s_{3})([r_{1},r_{2}]) - \hspace{1
+    em} & \\
+\lambda_{1}\lambda_{2}\mu_{3}\varphi([s_{1},s_{2}])(r_{3}) 
++ \lambda_{1}\mu_{2}\mu_{3}[r_{3},\varphi(s_{1})(r_{2})]
+- \hspace{1 em} & \\
+\mu_{1}\lambda_{2}\mu_{3}[r_{3},(\varphi(s_{2})(r_{1})]
++\mu_{1}\mu_{2}\mu_{3}[r_{3},[r_{1},r_{2}]] & =\\
+\intertext{we can now simplify using the Jacobi identities for
+    $\mathfrak{r}$ and $\mathfrak{s}$, and the identity
+    $\varphi([s_{1},s_{2}])(r_{3}) =
+    \varphi(s_{1})(\varphi(s_{2})(r_{3})) - \varphi(s_{2})(\varphi(s_{1})(r_{3}))$.}
+\lambda_{1}\mu_{2}\mu_{3}\varphi(s_{1})([r_{2},r_{3}])  
++ \mu_{1}\lambda_{2}\mu_{3}[r_{1},\varphi(s_{2})(r_{3})]
+- \hspace{1 em} & \\
+\mu_{1}\mu_{2}\lambda_{3}[r_{1},(\varphi(s_{3})(r_{2})]
+-\mu_{1}\lambda_{2}\mu_{3}\varphi(s_{2})([r_{1},r_{3}]) + \hspace{1.5
+    em} & \\ 
++ \mu_{1}\mu_{2}\lambda_{3}[r_{2},\varphi(s_{3})(r_{1})]
+- \lambda_{1}\mu_{2}\mu_{3}[r_{2},(\varphi(s_{1})(r_{3})]- \hspace{1.5
+    em} & \\
+\mu_{1}\mu_{2}\lambda_{3}\varphi(s_{3})([r_{1},r_{2}])
++ \lambda_{1}\mu_{2}\mu_{3}[r_{3},\varphi(s_{1})(r_{2})]
+- \mu_{1}\lambda_{2}\mu_{3}[r_{3},(\varphi(s_{2})(r_{1})]
+    =\textnormal{ } & 0,
+\end{align*}
+where the last equality follows from the fact that $\varphi(s_{i})$ is
+a derivation.
+\noindent
+\end{proof}
+
+Note in particular that if $\varphi = 0$, then $\g = \mathfrak{s}
+  \ltimes \mathfrak{r}$ is just the usual direct sum of $\mathfrak{s}$
+  and $\mathfrak{r}$.
+
+Thus, we see that the classification of finite dimensional Lie
+algebras over a field of characteristic zero reduces to the
+determination of three things:
+
+\begin{enumerate}
+\item \label{semi}
+All finite-dimensional semi-simple Lie algebras.
+\item \label{solve}
+All finite-dimensional solvable Lie algebras.
+\item \label{hom}
+For $\mathfrak{s}$ semi-simple, $\mathfrak{r}$ solvable, all homomorphisms
+$\phi: \mathfrak{s} \rightarrow \textnormal{Der }\mathfrak{r}$.
+\end{enumerate}
+
+We will completely solve \ref{semi}, but \ref{solve} is a wild
+problem. 
+
+\begin{Problem}{11.3}
+Let $\g \subseteq gl_{m+n}(\mathbb{F})$ be the Lie algebra consisting
+of matrices of the form
+
+$$g = \left( \begin{array}{c|c}
+a & b \\ \cline{1-2} 
+0 & c 
+\end{array}\right),$$
+
+\noindent
+with $a \in gl_{m}$, $c \in gl_{n}$, and $b$ an $m \times n$ matrix.
+Compute $R(\g)$, the complementary $\mathfrak{s}$, and describe the
+homomorphism $\varphi: \mathfrak{s} \rightarrow \textnormal{Der }R(\g)$.
+\end{Problem}
+
+\begin{proof}  Because of the multiplication
+$$ \left[ \left( \begin{array}{c|c}
+a & b \\ \cline{1-2} 
+0 & c 
+\end{array}\right) , \left( \begin{array}{c|c}
+a & b \\ \cline{1-2} 
+0 & c 
+\end{array}\right) \right] = \left( \begin{array}{c|c}
+[a_{0},a_{1}] & * \\ \cline{1-2} 
+0 & [c_{0},c_{1}] 
+\end{array}\right),$$
+we see that if we have an ideal $R(\g)$ of $\g$, then the set of
+elements appearing in the ``$a$'' block must be an ideal of $gl_{m}$,
+and the elements appearing in the ``$c$'' block must be an ideal of
+$gl_{n}$.  Furthermore, as $R(\g)$ is solvable, these sets must be
+solvable.  
+
+We will see later in lecture that the maximal solvable ideal of
+$gl_{m}$ is simply the ideal of scalar matrices.  (This is not
+circular, as we will not use this exercise to prove it.)  We now claim
+that $R(\g)$ has no other restrictions, beyond this one.  In
+particular, $R(\g)$ consists of all matrices of the form:
+
+$$\left( \begin{array}{c|c}
+\lambda I_{m} & b \\ \cline{1-2} 
+0 & \mu I_{n} 
+\end{array}\right),$$
+
+\noindent
+for all $\lambda, \mu \in \mathbb{F}$, and all $m \times n$ matrices
+$b$.
+
+To see that this sub-algebra is solvable, consider
+$$ \left[ \left( \begin{array}{c|c}
+\lambda_{1} & b_{1} \\ \cline{1-2} 
+0 & \mu_{1} 
+\end{array}\right) , \left( \begin{array}{c|c}
+\lambda_{2} & b_{2} \\ \cline{1-2} 
+0 & \mu_{2} 
+\end{array}\right) \right] = \left( \begin{array}{c|c}
+0 & * \\ \cline{1-2} 
+0 & 0 
+\end{array}\right).$$
+
+Thus, the matrices in the derived algebra are strictly
+upper-triangular, and hence our sub-algebra is solvable.  Actually,
+the same calculation as above shows that our sub-algebra is an ideal.
+We simply note that not only does $[\lambda_{1}, \lambda_{2}] = 0$,
+but also $[\lambda_{1}, a_{2}] = 0$, for any $a_{2} \in gl_{m}$.
+
+For a general matrix $a \in \g$, we can, through subtraction, see that
+$$a \bmod R(\g) \equiv  \left( \begin{array}{c|c}
+d & 0 \\ \cline{1-2} 
+0 & e 
+\end{array}\right),$$ for some $d \in sl_{m}$ and $e \in sl{n}$.
+Because we are in the characteristic zero case, we see that there is
+no overlap, and so the above forms the complementary algebra.
+
+Simply by calculating the bracket, we see that 
+
+\begin{align*}
+\varphi: \mathfrak{s} & \rightarrow \textnormal{Der }R(\g) \\
+\left( \begin{array}{c|c}
+d & 0 \\ \cline{1-2} 
+0 & e 
+\end{array}\right) & \rightarrow \psi_{d,e} \\
+\intertext{where } \psi_{d,e}:\left( \begin{array}{c|c}
+\lambda & b \\ \cline{1-2} 
+0 & \mu 
+\end{array}\right) & \rightarrow \left( \begin{array}{c|c}
+0 & db-be \\ \cline{1-2} 
+0 & 0 
+\end{array}\right).
+\end{align*}
+
+\end{proof}
+
+The remainder of the lecture will concern methods to identify Lie
+algebras as semi-simple.  Recall the following definition:
+
+\begin{Def} Given a subalgebra $\g \subseteq gl_{V}$, we say that $V$
+  is irreducible with respect to $\g$ if the only invariant subspaces
+  of $V$ with respect to $\g$ are $0$ and $V$.
+\end{Def}
+
+\begin{Theorem}
+Let $V$ be a finite dimensional Lie algebra over an algebraically
+closed field $\mathbb{F}$ of characteristic zero.  Let $\mathfrak{g}
+\subseteq gl_{V}$ be a subalgebra such that $V$ is irreducible with
+respect to $\g$.  Then one of the following two possibilities holds:
+either $\g$ is semi-simple, or 
+$\g = \mathfrak{s} \oplus \mathbb{F}\textnormal{I}_{V}$, where
+$\mathfrak{s}$ is semi-simple and $\textnormal{I}_{V}$ denotes the
+identity operator on $V$.
+\end{Theorem}
+
+\begin{proof}
+
+Consider the weight space $$V_{\lambda} = \{ v \in V | a(v) =
+\lambda(a)v, a \in R(\g)\}.$$  (Here, the representation 
+$\pi$ is the defining representation of $\mathfrak{g}
+ \subseteq gl_{V}$, and we omit it.)  
+Because $R(\g)$ is solvable, Lie's Theorem assures us that the elements
+$a$ have a common non-zero eigenvector.  Simply because $a$ is a linear
+operator on $V$, we have that the associated function $\lambda(a)$ is
+linear, and thus the weight-space is non-zero for some $\lambda \in
+R(\g)^{*}$.
+
+By Lie's Lemma, $V_{\lambda}$ is invariant with respect to $\g$.  From
+our assumptions, we can then conclude $V_{\lambda} = 0$ or $V$.  But
+we know it's non-zero.  Thus, the elements of $R(\g)$ act either as
+scalars or as zero.  In the former case, the complementary semi-simple
+Lie algebra must then be $$\mathfrak{s} = \{a \in \g |
+  \textnormal{tr}(a) = 0 \},$$ and in this case the sum is actually a
+  direct sum, because the scalar matrices are in the center of $\g$.  
+
+\end{proof}
+
+\begin{Ex}
+For any two
+non-zero vectors $v_{1}$ and $v_{2}$ in some finite dimensional 
+vector space $V$, we can find an operator
+$g \in gl_{V}$ sending $v_{1}$ to $v_{2}$.  Thus, any non-zero
+invariant subspace of $gl_{V}$ must contain every non-zero vector.
+Clearly it must also contain the zero vector.  Hence, $V$ is
+irreducible with respect to $gl_{V}$.  
+
+If $V$ is a vector
+space over an algebraically closed field of characteristic zero, we
+can then apply the above theorem.
+The algebra $gl_{V}$ contains the scalar matrices, and in particular
+$$gl_{V} = sl_{V} \oplus \mathbb{F}\textnormal{I}_{V}.$$  This last
+equation follows from the fact that  $sl_{V}$ is an ideal in $gl_{V}$
+(this follows from Exercise $1.2$), $\mathbb{F}\textnormal{I}_{V}$,
+their intersection is empty, and the sum of their dimensions is the
+dimension of $gl_{V}$.  Our theorem thus lets us conclude that
+$sl_{V}$ is semi-simple.  (It should be noted that the above argument
+does not work if the characteristic of our field is $p > 0$ and $p$
+divides the dimension of $V$, because
+in that case the scalar matrices are inside of $sl_{V}$.)
+\end{Ex}
+
+\begin{Problem}{11.4}
+Prove that $sp_{V,B}$ is always semi-simple, and $so_{V,B}$ is
+semi-simple if and only if the $\textnormal{dim } V \neq 2$.
+(Assuming still that $\textnormal{char } \mathbb{F} = 0$, with
+$\mathbb{F}$ algebraically closed.)
+\end{Problem}
+
+\begin{proof}
+
+
+We first consider $sp_{V,B}$.  Choose $B$ so that $B$'s anti-diagonal
+elements, i.e. the ones $(b_{n1}, \ldots, b_{1 n})$, are $(-1, -1,
+\ldots, -1,1,\ldots, 1)$, with $n/2 := m$ of each.  Then the matrices of
+$sp_{V,B}$ are those for which 
+
+\begin{align*}
+\left( \begin{array}{cccccc}
+-a_{n1} & \ldots & -a_{m+1 1} & a_{m 1} & \ldots & a_{11} \\ 
+-a_{n2} & \ldots & -a_{m+1 2} & a_{m 2} & \ldots & a_{12} \\
+\vdots & & & & & \vdots\\ 
+\vdots & & & & & \vdots\\ 
+-a_{nn} & \ldots & -a_{m+1 n} & a_{m n} & \ldots & a_{1n} \\
+\end{array}\right) + \hspace{10 em} & \\
+\left( \begin{array}{ccccc}
+a_{n1} & \ldots & a_{n m+1} & \ldots & a_{nn} \\
+\vdots & & & & \vdots \\ 
+a_{m+1 1} & \ldots & a_{m+1 m+1} & \ldots & a_{m+1 n} \\
+-a_{m 1} & \ldots & -a_{m m+1} & \ldots &-a_{m n} \\
+\vdots & & & & \vdots\\  
+-a_{11} & & & & -a_{1n} \\
+\end{array}\right) 
+& = 0.
+\end{align*}
+
+\noindent
+Because the terms along the anti-diagonal are arbitrary, it's clear
+that if $v$ is a vector with no zero components, then we can map $v$
+to any vector $w$ by choosing those anti-diagonal elements suitably,
+and leaving the rest as zero.  Consider now a vector $v$ with $v_{i} =
+0$, and $v_{j} \neq 0$.  Choose a matrix in $sp_{V,B}$ with $a_{ij} =
+1$.  If $i+j = n+1$, then set the rest of the entries equal to zero.
+Else, set the necessary entry to $-1$, and the rest to zero.  If it
+appears at all, the $-1$ occurs in a row different from the $1$, and
+so our matrix maps $v$ to a vector $w$ with $w_{i} = v_{j} \neq 0$.
+Repeating this process and taking some linear combination, 
+we see that any invariant subspace containing
+$v$ contains an element which has no zero entries, and as we saw
+above, that subspace must therefore be all of $V$.  As the
+characteristic is not two, $sp_{V,B}$ does not contain the scalar
+matrices, and so, from the previous theorem, $sp_{V,B}$ is semi-simple.
+
+Consider now $so_{V,B}$.  Assume that $B = I_{n}$, and then the
+matrices of $so_{V,B}$ are such that $A + A^{T} = 0$.  Say $n=2$.
+Then $so_{V,B}$ is one-dimensional, and thus solvable, and in
+particular not semi-simple.
+
+Consider the
+following equation, where the $a_{ij}$ terms should be viewed as
+variables:
+
+$$\left( \begin{array}{ccccc}
+0 & -a_{21} & -a_{31} & \ldots &- a_{n1} \\ 
+a_{21} & 0 & -a_{32} & &\\
+a_{31} & a_{32} & \ddots & &\\ 
+\vdots & & & & \\ 
+a_{n1} & \ldots & & & 0
+\end{array}\right) \left( \begin{array}{c}
+v_{1} \\
+v_{2} \\
+v_{3} \\
+\vdots \\
+v_{n} \end{array}\right) = \left( \begin{array}{c}
+w_{1} \\
+w_{2} \\
+w_{3} \\
+\vdots \\
+w_{n} \end{array}\right).$$
+
+Using the same argument as above, we know that a non-zero
+invariant subspace contains a vector with no zero components.  It's
+then clear that we can choose our matrix $A$ so that $Av = (w_{1},
+\ldots, w_{i-1},?,w_{i+1},\ldots,w_{n})^{T}$, i.e., we can choose all
+but one of the image's coordinates, and we can choose the location of
+the unspecified coordinate.  Can we specify $n$ linearly independent
+vectors in this way?  Yes, as long as $n \geq 3$, because we can
+specify the vectors $e_{1} + a_{1}e_{n}, e_{2} + a_{2}e_{n}, \ldots,
+e_{n-1} + a_{n-1}e_{n}, b_{1}e_{1} + e_{n}$.  These
+$n$ being linearly dependent would imply either that 
+$b_{1} = 0$, in which case we're done, or else $b_{1}a_{1} = 1$,
+and in particular, $a_{1} \neq 0$.  Now, choose the matrix in $so_{V,B}$ with 
+$a_{21}=-1$, 
+$a_{12} = 1$, and the rest of the elements zero.  This matrix maps
+$e_{2}+b_{2}e_{n}$ to $e_{1}$ (this is where we use that $n \geq 3$).  
+This vector is linearly independent from the 
+first $n-1$ we wrote above as long as $a_{1} \neq 0$, which we just saw, 
+so we have our linearly independent set of vectors, so our invariant
+subspace must be all of $V$.
+We conclude that $V$ is irreducible with respect to
+$so_{V,B}$, and thus, if $n \geq 3$, we have that $so_{V,B}$ is semi-simple.
+
+\end{proof}
+
+Here is another theorem useful for determining semi-simplicity:
+
+\begin{Theorem}
+A finite dimensional Lie algebra $\g$ over a field $\mathbb{F}$ of
+characteristic zero is semi-simple if and only if its Killing form is non-degenerate.
+\end{Theorem}
+
+\begin{proof}
+Suppose the Killing form $K(a,b)$ is non-degenerate.  Let
+$\mathfrak{a}$ denote an abelian ideal of $\g$.  To show that $\g$ is
+semi-simple, it is equivalent to show that any such $\mathfrak{a} =
+0$.  Now, for $a \in \mathfrak{a}$,
+\begin{align*}
+\textnormal{ad }a: \g & \rightarrow \mathfrak{a} \\
+\mathfrak{a} & \rightarrow 0,
+\end{align*}
+simply because $\mathfrak{a}$ is an ideal.  Similarly, for $g \in \g$,
+we have:  $\textnormal{ad }g: \mathfrak{a} \rightarrow
+\mathfrak{a}$.  Write $\g = \mathfrak{a} \oplus V$, a direct sum as
+vector spaces.  We then can partially determine the form of 
+the following matrices:
+
+\begin{align*}
+\textnormal{ad }a & = \left( \begin{array}{c|c}
+0 & A \\ \cline{1-2} 
+0 & 0 
+\end{array}\right)\\
+\textnormal{ad }g & = \left( \begin{array}{c|c}
+B & C \\ \cline{1-2} 
+0 & D 
+\end{array}\right),
+\end{align*}
+\noindent
+where the first row and first column have size $\textnormal{dim }
+\mathfrak{a}$ and the second row and second column have size $\textnormal{dim }
+\mathfrak{V}$.  Their product is a strictly upper triangular matrix,
+and as $g \in \g$ was arbitrary, we conclude that either $a = 0$ or
+the Killing form is degenerate.  The former must hold, lest we have a
+contradiction, and so our $\g$ is semi-simple.
+
+Now, for the converse, assume $\g$ is semi-simple.  Let $$\mathfrak{r} = \{ a \in
+\g | K(a,\g) = 0 \}.$$  From lecture $9$, we know that $\mathfrak{r}$ is an
+ideal.  Considering the adjoint representation of $\mathfrak{r}$ in $gl_{\g}$,
+then implication $(2) \Rightarrow (3)$ in Cartan's Criterion shows
+that $\textnormal{ad }\mathfrak{r}$ is solvable.  Then, as usual,
+if $(\textnormal{ad }\mathfrak{r})^{(m)} = 0,$ we know
+$\mathfrak{r}^{(m)}$ is in the center of $\g$, and hence
+$\mathfrak{r}^{(m+1)}=0$, so $\mathfrak{r}$ is solvable, which implies
+$\mathfrak{r} = 0$, showing that the Killing form is indeed non-degenerate.
+
+\end{proof}
+
+The preceding theorem allows us to apply the following result to
+semi-simple Lie algebras.
+
+\begin{Theorem}
+If the Killing form on a finite dimensional Lie algebra is
+non-degenerate, then the center of $\g$, $Z(\g)$, equals zero, and all derivations
+of $\g$ are inner.  In particular, these claims hold for a semi-simple
+Lie algebra over a field of characteristic zero.
+\end{Theorem}
+
+\begin{proof}
+
+If $c \in Z(\g)$, then $\textnormal{ad }c = 0$, and so 
+$$K(c,a) = tr_{\g}(\textnormal{ad }c\textnormal{ ad
+}a) = 0,$$ hence $c = 0$.  Hence the adjoint map $$\textnormal{ad}:
+\g \rightarrow gl_{\g}$$ is injective, and we may identify $\g$ with
+its image.  Thus, we from now on assume $\g \subseteq \textnormal{Der
+}\g \subseteq gl_{\g}$.  It remains for us to prove $\g =
+\textnormal{Der } \g$.
+
+The Killing form on $\g$ is by definition the trace form on $gl_{\g}$,
+and its restriction to $\g$ is, by our assumption, non-degenerate.  
+
+Denote by $g^{\perp}$ the set $\{D \in \textnormal{Der } \g |
+(D,\g)_{\g}=0 \}$.
+
+\begin{Problem}{11.5}  If $V$ is a finite dimensional vector space
+  with a symmetric bilinear form  $B$ and a subspace $U$ on which $B$
+  is non-degenerate, then $V = U \oplus U^{\perp},$ where $$U^{\perp}
+  = \{ v \in V | B(v,u) = 0 \textnormal{ for all } u \in U \}.$$
+\end{Problem}
+
+\begin{proof}
+Through a change of basis if necessary, we can assume we have a basis
+$\{u_{1}, \ldots, u_{n}, w_{1}, \ldots, w_{m} \}$ for $V$ so that 
+$\{u_{1}, \ldots, u_{n} \}$ is a basis for $U$ on which $B$ is the
+identity.
+
+In this basis, $B$ takes the form of the matrix $$\left( \begin{array}{c|c}
+I_{n} & 0 \\ \cline{1-2} 
+0 & ? 
+\end{array}\right),$$ where we use symmetry to fill in the top right
+box.  From here, the assertion is obvious.
+\end{proof}
+
+Applying the exercise, $\g = \g \oplus \g^{\perp}$, a direct sum as
+vector spaces.  From exercise $1.5$(b), $\g$ is an ideal of
+$\textnormal{Der } \g$.  From Lecture $9$, we know that the trace form
+is invariant, and that $\g^{\perp}$ is an ideal of $\g$.  Thus, our
+direct sum as vector spaces is actually a direct sum of ideals, too,
+and furthermore, for any $D \in \g^{\perp}$, we have $[\g,D] = 0$.
+This means that $D$ acts as $0$ on every element $g \in \g$.  But
+since $D$ is by definition just a derivation of $\g$, we see that $D$
+is the trivial derivation, which completes the proof.
+
+\end{proof}
+
+Finally, we end with another exercise, which shows that the previous
+theorem does not have a converse:
+
+\begin{Problem}{11.6}
+All derivations of the two-dimensional non-abelian Lie algebra are
+inner, but its Killing form is degenerate.
+\end{Problem}
+
+\begin{proof}
+Consider a derivation $D$ of the non-abelian, two-dimensional Lie
+algebra.  We know $$Db = D[a,b] = [Da,b] + [a,Db].$$  Say $D(a) =
+\lambda_{11}a + \lambda_{21}b$ and $D(b) = \lambda_{12}a +
+\lambda_{22}b$.  Then the above equation means $$\lambda_{12}a +
+\lambda_{22}b = \lambda_{11}a +
+\lambda_{22}b,$$ which in turn implies $\lambda_{12} = \lambda_{11} =
+0$.  
+
+We now simply check that 
+\begin{align*}
+[\lambda_{22}a -\lambda_{21}b,a] &= \lambda_{21}b \\
+\intertext{and} [\lambda_{22}a -\lambda_{21}b,b] &= \lambda_{22}b,
+\end{align*}
+which matches our derivation $D$.  Thus we conclude that all
+derivations are inner.  Also, note that the center of our algebra is
+trivial.
+
+Now consider the Killing Form.  We have 
+$$\textnormal{ad }a = \left( \begin{array}{cc}
+0 & 1 \\
+0 & 0 
+\end{array}\right) \textnormal{and ad }b = \left( \begin{array}{cc}
+0 & 0 \\  
+-1 & 0 
+\end{array}\right).$$  So, 
+$K(b,a) = K(b,b) = 0$,
+and the Killing form is thus degenerate.  We conclude that the
+previous theorem does not have a converse.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,219 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsfonts, amsthm, amsmath, fullpage}
+
+\include{preamble}
+
+\begin{document}
+
+\setlength{\baselineskip}{15pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\begin{center}
+\textbf{18.745 Introduction to Lie algebra\\
+Victor Kac , Fall 2004 \\
+Lecture 6 , noted by Liu Ruochuan}
+\end{center}
+
+\noindent Throughout this lecture $\mathbb{F}$ will be assumed to
+be an algebraically closed field.
+\subsection*{Jordan Decomposition}
+ Now suppose $V$ is a finite dimensional vector
+space over $\mathbb{F}$ and $A$ is a linear operator on $V$. Let
+$\{\lambda_{1},\cdots,\lambda_{s}\}$ denote the set of distinct
+eigenvalues of $A$. By the theorem of Jordan normal form, in some
+basic of $V$, the matrix of $A$ is a direct sum of the Jordan
+blocks $J_{\lambda_{i}}$ assigned to some eigenvalue
+$\lambda_{i}$. If we denote by $V_{\lambda_{i}}$ the span of the
+vectors in the basis which correspond to all Jordan blocks
+assigned to $\lambda_{i}$, we obtain the following generalized
+eigenspace decomposition of $V$.
+\begin{center}
+ $V=\bigoplus_{i=1}^{s}V_{\lambda_{i}}$,
+\end{center}
+where the generalized eigenspace $V_{\lambda_{i}}$ can also be
+defined as
+\begin{center}
+$V_{\lambda_{i}}=\{v\in V|(A-\lambda_{i}I)^{N}v=0$ for some $N$ \}
+\end{center}
+We take $A_{s}$ as the diagonal part of the Jordan normal form of
+$A$, $A_{n}=A-A_{s}$. Then $A_{s}$ is semisimple, i.e
+diagonalizable operator and $A_{n}$ is
+a nilpotent operator. Moreover, $A_{s}A_{n}=A_{n}A_{s}$. This decomposition is called a Jordan decomposition of $A$. \\
+
+\noindent \textbf{Ex6.1} Show that there exist polynomials $P(x)$
+and $Q(x)$ such that $A_{s}=P(A)$ and $A_{n}=Q(A)$\\
+\textbf{Solution}. By Chinese remainder theorem, there exists a
+polynomial $P(x)$ such that
+$P(x)\equiv\lambda_{i}(mod(x-\lambda_{i})^{n})$ for every
+$\lambda_{i}$, where $n=$dim$V$. Then for $v\in V_{\lambda_{i}}$,
+we have $P(A)v=\lambda_{i}v$. That means $P(A)=A_{s}$ and
+$(1-P)(A)=A_{n}$.\\
+
+\noindent \textbf{Ex6.2} If linear operators $A$ and $B$ commute,
+then any eigenspace and generalized eigenspace of $A$ is
+$B$-invariant. Conclude that two commuting semi-simple operators
+can be diagonalized in the same basic.\\
+\textbf{Solution}. Let $V_{\lambda_{i}}$ be the generalized
+eigenspace of A with eigenvalue $\lambda_{i}$. For every $v\in
+V_{\lambda_{i}}$, we have $(A-\lambda_{i})^{N}v=0$ for some $N$.
+Since $A$ commutes with $B$, we get
+$(A-\lambda_{i})^{N}Bv=B(A-\lambda_{i})^{N}v=0$. Thus $Bv$ is in
+$V_{\lambda_{i}}$ by definition. That just means the generalized
+eigenspace of $A$ is $B$-invariant. The method for eigenspace case
+is the same. Now suppose $A$ and $B$ are both semi-simple. Let
+$V=\bigoplus_{i=1}^{s}V_{\lambda_{i}}$ be the eigenspace
+decomposition of $A$. Since $B$ is semi-simple and
+$V_{\lambda_{i}}$ is an invariant subspace w.r.t $B$, $B$ is
+semi-simple on $V_{\lambda_{i}}$. Then $B$ can be diagonalized in
+$V_{\lambda_{i}}$ under some basis. Now under the basis, which is
+the union of these basis, $A$ and $B$ are all diagonal.
+   \\
+
+\noindent The Jordan decomposition of a linear operator $A$ is
+unique in sense of \\
+\begin{theorem} Let $A=A_{s}^{'}+A_{n}^{'}$ where
+$A_{s}^{'}$ and
+$A_{n}^{'}$ are also linear operators which satisfy\\
+(1)$A_{s}^{'}$ is diagonalizable\\
+(2)$A_{n}^{'}$ is nilpotent\\
+(3)$A_{s}^{'}A_{n}^{'}=A_{n}^{'}A_{s}^{'}$ \\
+Then $A_{s}^{'}=A_{s}$, $A_{n}^{'}=A_{n}$.
+\end{theorem}
+\begin{proof} We first have
+$A_{s}^{'}-A_{s}=A_{n}-A_{n}^{'}$. Note that $A_{s}^{'}$ and
+$A_{n}^{'}$ commute with $A$. So by Ex 6.1, $A_{s}^{'}$ and
+$A_{n}^{'}$ commute with both $A_{s}$ and $A_{n}$. Then by Ex 6.2,
+$A_{s}^{'}-A_{s}$ is semisimple. But $A_{n}-A_{n}^{'}$ is
+nilpotent by the binomial formula. Since the only nilpotent
+semisimple operator is $0$, we conclude that $A_{s}^{'}=A_{s}$ and
+$A_{n}^{'}=A_{n}$ from the equation given above.
+\end{proof}
+
+\subsection*{Generalized Weight Space Decomposition}
+Let $\mathfrak{g}$ be a finite dimensional Lie algebra over
+$\mathbb{F}$ and $\pi$ a representation of $\mathfrak{g}$ in a
+finite dimensional vector space $V$ over $\mathbb{F}$. Consider
+the generalized eigenspace decomposition of $\mathfrak{g}$ w.r.t
+ad$a$ and of $V$ w.r.t $\pi(a)$.
+\begin{center}
+ $\mathfrak{g}=\bigoplus_{\alpha}\mathfrak{g}_{\alpha}^{a}$ where
+ $\mathfrak{g}_{\alpha}^{a}=\{g\in\mathfrak{g}|($ad$a-\alpha)^{N}g=0$
+ for some $N\}$
+\end{center}
+\begin{center}
+ $V=\bigoplus_{\lambda}V_{\lambda}^{a}$
+ where
+ $V_{\lambda}^{a}=\{v \in V|(\pi(a)-\lambda)^{N}v=0$
+ for some $N\}$
+\end{center}
+These two decompositions are related by \\
+
+\begin{proposition}
+$\pi(\mathfrak{g}_{\alpha}^{a})V_{\lambda}^{a} \subseteq
+V_{\lambda+\alpha}^{a}$
+\end{proposition}
+
+\noindent We need the following lemma to finish the proof.\\
+
+\begin{lemma} Let $A$ be a unital associate algebra over $\mathbb{F}$. Let
+$a$, $b \in A$ and $\alpha$, $\lambda\in\mathbb{F}$. Then we have
+the following identity
+\begin{center}
+$(a-\alpha-\lambda)^{N}b=\sum_{j=0}^{N}(^{N}_{j})($ad$a-\alpha)^{j}b(a-\lambda)^{N-j}$
+\end{center}
+\end{lemma}
+\begin{proof} Let $L_{x}$ and $R_{x}$ denote the operators of
+left and right multiplication in $A$ by $x$. Then associativity
+means that $L_{x}R_{y}=R_{y}L_{x}$. We have
+$L_{a-\alpha-\lambda}=($ad$a-\alpha)+R_{a-\lambda}$. Note that
+ad$a-\alpha$ commute with $R_{a-\lambda}$, hence
+$L_{a-\alpha-\lambda}^{N}=\sum_{j=0}^{N}(^{N}_{j})
+($ad$a-\alpha)^{j}R_{\alpha-\lambda}^{N-j}$ by the binomial
+formula. Now apply both sides to $b$ to obtain the identity.
+\end{proof}
+
+\noindent $Proof$ $of$ $the$ $proposition$. Suppose
+$g\in\mathfrak{g}_{\alpha}^{a}$, $v\in V_{\lambda}^{a}$. Apply the
+lemma to $A=$End(V), $a$ is $\pi(a)$, $b=\pi(g)$, hence
+\begin{center}
+$(\pi(a)-\alpha-\lambda)^{N}\pi(g)v=\sum_{j=0}^{N}(^{N}_{j})($ad$\pi(a)-\alpha)^{j}\pi(g)(\pi(a)-\lambda)^{N-j}v$
+\end{center}
+Take $N>$dim$\mathfrak{g}_{\alpha}^{a}+$dim$V_{\lambda}^{a}$, then
+each summand of the right hand side of the above equation is zero.
+That means the desired result.
+\\
+
+\noindent Suppose $\mathfrak{h}$ is a finite dimensional Lie
+algebra over $\mathbb{F}$. Let $\pi$ be a representation of
+$\mathfrak{h}$ in a finite dimensional vector space $V$ over
+$\mathbb{F}$ and let $\lambda\in\mathfrak{h}^{*}$. Then the
+generalized weight space attached to $\lambda$ is defined as
+\begin{center}
+$V_{\lambda}=\{v\in V|(\pi(h)-\lambda(h))^{N}v=0$ for every
+$h\in\mathfrak{h}$ and some $N\}$.
+\end{center}
+\begin{theorem} Notation as above and further assume
+char.$\mathbb{F}=0$ and $\mathfrak{h}$ is nilpotent. Then
+\begin{center}
+$V=\bigoplus_{\lambda\in\mathfrak{h}^{*}}V_{\lambda}$
+\end{center}
+\end{theorem}
+\textbf{Ex 6.3} a)Deduce the theorem from Ex 6.2 in the case
+when
+$\mathfrak{h}$ is abelian.\\
+b)Consider the adjoint representation of the unique 2-dimensional
+non-abelian Lie algebra to show that theorem $2$ fails if
+$\mathfrak{h}$ is not nilpotent.\\
+\textbf{Solution}. a) For any $a\in\mathfrak{h}$,
+$\pi(\mathfrak{h})V_{\lambda}^{a} \subset V_{\lambda}^{a}$ by Ex
+6.2 . So if there is at least one $\pi(a)$ has distinct
+eigenvalues, then we can apply induction on dim$V$. Otherwise we
+just need to prove that the only eigenvalue of every $\pi(a)$ is
+linear functional on $\mathfrak{h}$. Let $a$ and $b$ are elements
+of $\mathfrak{h}$. Suppose eigenvalues of $\pi(a)$ and $\pi(b)$
+are $\lambda$ and $\mu$ respectively. Then since $\mathfrak{h}$ is
+abelian, we have
+\begin{center}
+$(\pi(a+b)-\lambda-\mu)^{N}=\sum_{j=0}^{N}(^{N}_{j})(\pi(a)-\lambda)^{j}(\pi(b)-\mu)^{N-j}$
+\end{center}
+Now choose $N> 2n$ where $n=$dim$V$. Then apply the above equation
+to every $v\in V$ to conclude that the eigenvalue of $\pi(a+b)$ is
+$\lambda+\mu$.\\
+b)Denote the unique 2-dimensional non-abelian Lie algebra by
+$\mathfrak{b}=\mathbb{F}a+\mathbb{F}b$ which satisfies $[a,b]=b$.
+It is easy to see that $\mathbb{F}a$ is a generalized eigenspace
+of ad$a$, but it is not a generalized eigenspace of $b$. Thus the
+theorem may fails if the given Lie algebra is not nilpotent.
+\begin{proof}Take any $a\in\mathfrak{h}$, then $\mathfrak{h}=\mathfrak{h}^{a}_{0}$.
+Hence by the proposition which we just proved
+$\pi(\mathfrak{h})V_{\lambda}^{a} \subset V_{\lambda}^{a}$ for all
+$a\in\mathfrak{h}$ and eigenvalue $\lambda$ of $a$. So if there is
+at least one $\pi(a)$ has distinct eigenvalues, then we can apply
+induction on dim$V$. Otherwise we just need to prove that the only
+eigenvalue of every $\pi(a)$ is linear functional on
+$\mathfrak{h}$. Apply Lie's theorem that all $\pi(a)$ are upper
+triangular in some basis, then we deduce the desired result since
+the eigenvalue are just the numbers on diagonal.
+\end{proof}
+\noindent \textbf{Remark} It is easy to see that we can still get
+the decomposition even if char.$\mathbb{F}\neq 0$.
+But $\lambda$ may not be linear functional on $\mathfrak{h}$ in this case.\\
+
+\noindent \textbf{Ex 6.4} Consider the 2-dimensional
+representation of $H_{1}$ for char.$\mathbb{F}=2$
+\begin{center}
+$V=\mathbb{F}[x]/x^{2}\mathbb{F}[x]$, $p=\frac{\partial}{\partial
+x}$, $q=x$, $c=1$.
+\end{center}
+Then $V=V_{\lambda}$, but $\lambda$ is not a linear function.\\
+\textbf{Solution}. Note that $p$ and $q$ are all nilpotent. But
+$p+q$ is not nilpotent since $(p+q)^{2}(x)=x$. So in this case
+$\lambda$ is not a linear function.\\
+
+ \noindent \textbf{Ex 6.5}$^{*}$ If
+$\mathfrak{h}^{p}=0$, then the theorem still holds for
+char.$\mathbb{F}=p$.
+
+
+\end{document}

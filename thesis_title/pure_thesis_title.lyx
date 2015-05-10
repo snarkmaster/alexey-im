@@ -1,0 +1,847 @@
+#LyX 1.6.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass amsbook
+\begin_preamble
+\usepackage{changepage}
+\usepackage{fancyhdr}
+% Uncomment this if you need to have a \title{} entry, but don't want 
+% LaTeX to generate its own title page.
+% \let\maketitle\relax
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+theorems-ams-extended
+\end_modules
+\language english
+\inputencoding utf8
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize 11
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{adjustwidth}{-0.5in}{-0.5in}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newcommand{
+\backslash
+TitleGap}{
+\backslash
+vspace{0.17in}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\series bold
+\size largest
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-.75in}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+\size largest
+Pattern-avoidance in Binary Fillings of Grid Shapes
+\series default
+\size larger
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+by
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size largest
+Alexey Spiridonov
+\size larger
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+A.B., Princeton University, 2004
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+Submitted to the Department of Mathematics
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+in partial fulfillment of the requirements for the degree of
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+Doctor of Philosophy
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+at the
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+MASSACHUSETTS INSTITUTE OF TECHNOLOGY
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+June 2009
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+© Alexey Spiridonov, 2009.
+ All rights reserved.
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+The author hereby grants to MIT permission to reproduce and to distribute
+ publicly paper and electronic copies of this thesis document in whole or
+ in part in any medium now known or hereafter created.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1in}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+\align left
+
+\size larger
+Author .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+\align right
+
+\size larger
+Department of Mathematics
+\begin_inset Newline newline
+\end_inset
+
+May 8, 2009
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+\align left
+
+\size larger
+Certified by .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+\align right
+
+\size larger
+Alexander Postnikov
+\begin_inset Newline newline
+\end_inset
+
+Associate Professor of Applied Mathematics
+\begin_inset Newline newline
+\end_inset
+
+Thesis Supervisor
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+\align left
+
+\size larger
+Accepted by .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\noindent
+\align right
+
+\size larger
+David S.
+ Jerison
+\begin_inset Newline newline
+\end_inset
+
+Chairman, Department Committee on Graduate Students
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+\size larger
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+Pattern-avoidance in Binary Fillings of Grid Shapes
+\series default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+by
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size larger
+Alexey Spiridonov
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align center
+
+\size large
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{0.35in}
+\end_layout
+
+\end_inset
+
+Submitted to the Department of Mathematics
+\begin_inset Newline newline
+\end_inset
+
+on May 8, 2009 in partial fulfillment of the
+\begin_inset Newline newline
+\end_inset
+
+requirements for the degree of
+\begin_inset Newline newline
+\end_inset
+
+Doctor of Philosophy
+\size larger
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\align left
+
+\series bold
+\size larger
+Abstract
+\series default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\size large
+A 
+\emph on
+grid shape
+\emph default
+ is a set of boxes chosen from a square grid; any Young diagram is an example.
+ We consider a notion of pattern-avoidance for 
+\begin_inset Formula $0$
+\end_inset
+
+-
+\begin_inset Formula $1$
+\end_inset
+
+ fillings of grid shapes, which generalizes permutation pattern-avoidance.
+ A filling avoids a set of patterns if none of its sub-shapes, obtained
+ by removing some rows and columns, equal any of the patterns.
+ We focus on patterns that are 
+\emph on
+pairs
+\emph default
+ of 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ fillings.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\size large
+Totally nonnegative Grassmann cells are in bijection with Young shape fillings
+ that avoid particular 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ pair, which are, in turn, equinumerous with fillings avoiding another 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ pair.
+ The latter ones correspond to acyclic orientations of the shape's bipartite
+ graph.
+ Motivated by this result, due to Postnikov and Williams, we prove a number
+ of such analogs of Wilf-equivalence for these objects --- that is, we show
+ that, 
+\emph on
+in certain classes of shapes, some pattern-avoiding fillings are equinumerous
+ with others
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\size large
+The equivalences in this paper follow from two very different bijections,
+ and from a family of recurrences generalizing results of Postnikov and
+ Williams.
+ We used a computer to test each of the described equivalences on a diverse
+ set of shapes.
+ All our results are 
+\emph on
+nearly 
+\emph default
+tight, in the sense that we found no natural families of shapes, in which
+ the equivalences hold, but the results' hypotheses do not.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\size large
+One of these bijections gives rise to some new combinatorics on tilings
+ of skew Young shapes with rectangles, which we name 
+\emph on
+Popeye diagrams
+\emph default
+.
+ In a special case, they are exactly Hugh Thomas's 
+\emph on
+snug partitions
+\emph default
+ for 
+\begin_inset Formula $d=2$
+\end_inset
+
+.
+ We show that Popeye diagrams are a lattice, and, moreover, each diagram
+ is a sublattice of the Tamari lattice.
+ We also give a simple enumerative result.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+TitleGap
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\size large
+Thesis Supervisor: Alexander Postnikov
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\size large
+Title: Associate Professor of Applied Mathematics
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{adjustwidth}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

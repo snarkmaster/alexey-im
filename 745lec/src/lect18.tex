@@ -1,0 +1,477 @@
+%% LyX 1.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \theoremstyle{plain}    
+ \newtheorem{thm}{Theorem}[section]
+ \numberwithin{equation}{section} %% Comment out for sequentially-numbered
+ \numberwithin{figure}{section} %% Comment out for sequentially-numbered
+ \theoremstyle{plain}
+ \theoremstyle{definition}
+  \newtheorem{example}[thm]{Example}
+ \theoremstyle{definition}
+  \newtheorem{xca}[section]{Exercise}%%Delete [section] for sequential numbering
+ \theoremstyle{plain}    
+ \newtheorem{lem}[thm]{Lemma} %%Delete [thm] to re-start numbering
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{ulem}
+\usepackage[dvips]{graphicx}
+\usepackage[dvips]{color}
+%\usepackage{mathdots}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\fa}{\mathfrak{a}}
+\newcommand{\s}{\mathfrak{s}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\sut}{\mathfrak{n}}
+\newcommand{\ut}{\mathfrak{b}}
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\C}{\mathbb{C}}
+
+\let\ker=\undefined
+\DeclareMathOperator{\ker}{Ker}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Z}{Z}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\gl}{gl}
+\DeclareMathOperator{\sla}{sl}
+\DeclareMathOperator{\spa}{sp}
+\DeclareMathOperator{\so}{so}
+\DeclareMathOperator{\chr}{char}
+
+\newcommand{\gln}{\gl_n \F}
+\newcommand{\sln}{\sla_n \F}
+\newcommand{\son}{\so_n \F}
+\newcommand{\spn}{\spa_n \F}
+
+\let\xca=\undefined
+\newtheorem{xca}{Exercise}
+
+\usepackage{babel}
+\makeatother
+\begin{document}
+\title[Classification of Cartan matrices / Dynkin Diagrams]{Lecture 18: Classification of Abstract Cartan matrices / Dynkin Diagrams}
+
+\author[Prof. Victor Ka\v{c}; Scribes: Steven Sivek, Alexey Spiridonov]{
+Professor: Victor Ka\v{c}\\
+Transcribed by: Steven Sivek and Alexey Spiridonov}
+
+\maketitle
+
+
+\section{Examples of Dynkin diagrams}
+
+%
+\begin{figure}
+\input{alldds.pstex_t}
+
+
+\caption{\label{dd}Dynkin diagrams of all the indecomposable root systems,
+from top to bottom: $A_{r},B_{r},C_{r},D_{r},E_{8},E_{7},E_{6},F_{4},G_{2}.$}
+\end{figure}
+In the examples and exercises that follow, we will compute the Cartan
+matrices (as described in the previous lecture) for the indecomposable
+root systems that we have encountered earlier. We record these as
+elegant Dynkin diagrams, summarized in Figure \ref{dd}. Later in
+the lecture, we will prove that these are actually all the possible
+indecomposable root systems. We also compute extended Dynkin diagrams
+specifically for the purposes of this proof. 
+
+In the following examples, the rank of the root system is always denoted
+by $r$, and we get simple roots $\alpha_{1},\dots,\alpha_{r}$. The
+lowest negative root, used in the extended Dynkin diagram is denoted
+$\alpha_{0}$. Perhaps the most detailed explanation of how to compute
+a Cartan matrix is given in Exercise \ref{exce7e6}. 
+
+\begin{example}
+$A_{r}$: $(\varepsilon_{i},\varepsilon_{j})=\delta_{ij}$, $\Delta=\Delta_{sl_{r+1}(\F)}=\{\varepsilon_{i}-\varepsilon_{j}|i,j\in[r+1]\}\subset V$,
+where $V$ is the subspace of $\bigoplus_{i=1}^{r+1}\R\varepsilon_{i}$,
+on which the sum of coordinates (in the basis $\{\varepsilon_{i}\}$)
+is zero.
+
+Take $f\in V^{*}$ given by $f(\varepsilon_{1})=r+1,f(\varepsilon_{2})=r,\dots,f(\varepsilon_{r+1})=1$;
+hence, $f\ne0$ on $\Delta$, and $f$ is integer-valued on all the
+roots.
+
+Then, $\Delta_{+}=\{\varepsilon_{i}-\varepsilon_{j}|i<j\}$. What
+is $\Pi$? Clearly, $\alpha=\varepsilon_{i}-\varepsilon_{i+1}\in\Pi$,
+since $f(\alpha)=1$. There are $r$ simple roots altogether (since
+$\Pi$ spans $V$) and $r$ such $\alpha$, so $\Pi=\{\alpha_{i}=\varepsilon_{i}-\varepsilon_{i+1}\}_{i=1}^{r}$. 
+
+For the Cartan matrix, recall that:\[
+A=\left(\frac{2(\alpha_{i},\alpha_{j})}{(\alpha_{i},\alpha_{i})}\right)_{i,j=1}^{r}=\left(\begin{array}{ccccc}
+2 & -1 & 0 & \cdots & 0\\
+-1 & 2 & -1 &  & \vdots\\
+0 & -1 & 2 & \ddots & 0\\
+\vdots &  & \ddots & \ddots & -1\\
+0 & \cdots & 0 & -1 & 2\end{array}\right).\]
+
+
+Hence, the Dynkin diagram in Figure \ref{dd}a.
+
+The largest root is $\theta=\varepsilon_{1}-\varepsilon_{r+1}$, so
+$\alpha_{0}=\varepsilon_{r+1}-\varepsilon_{1}$ ($\alpha_{0}$ denotes
+the lowest negative root). This yields the extended Dynkin diagram
+(from the matrix on roots $\alpha_{0},\alpha_{1}\dots,\alpha_{r}$,
+denoted $\tilde{A}=\left(\frac{2(\alpha_{i},\alpha_{j})}{(\alpha_{i},\alpha_{i})}\right)$)
+in Figure \ref{dd}a.
+\end{example}
+%
+
+\begin{example}
+$B_{r}$: $\Delta=\Delta_{so_{2r+1}(\F)}=\{\pm\varepsilon_{i}\pm\varepsilon_{j}(i\ne j),\pm\varepsilon_{i}\}_{i,j=1}^{r}\subset V=\bigoplus_{i=1}^{r}\R\varepsilon_{i}.$ 
+
+Take the $f$ analogously to $A_{r}$ (but we have $r$, rather than
+$r+1$ roots now): $f(\varepsilon_{1})=r,\dots,f(\varepsilon_{r})=1$. 
+
+Then, $\Delta_{+}=\{\varepsilon_{i}+\varepsilon_{j}(i\ne j),\varepsilon_{i}-\varepsilon_{j}(i<j),\varepsilon_{i}\}$,
+and $f=1$ for $\varepsilon_{i}-\varepsilon_{i+1}$ and $\varepsilon_{r}$.
+Hence $\Pi=\{\varepsilon_{i}-\varepsilon_{i+1}\ (i=1,\dots,r-1),\varepsilon_{r}\}$.
+The Cartan matrix is almost identical, except that $A_{r,r-1}=\frac{2(\alpha_{r},\alpha_{r-1})}{(\alpha_{r},\alpha_{r})}=2(\alpha_{r},\alpha_{r-1})=-2$,
+so \[
+A=\left(\begin{array}{ccccc}
+2 & -1 & 0 & \cdots & 0\\
+-1 & 2 & -1 &  & \vdots\\
+0 & -1 & 2 & \ddots & 0\\
+\vdots &  & \ddots & \ddots & -1\\
+0 & \cdots & 0 & -2 & 2\end{array}\right).\]
+ The lowest root is $\alpha_{0}=-(\varepsilon_{1}+\varepsilon_{2})$,
+so we get the Dynkin diagrams in Figure \ref{dd}b.
+\end{example}
+%
+
+\begin{example}
+$C_{r}$: $\Delta=\Delta_{sp_{2r}(\F)}$. The roots are the same as
+above, except $\pm\varepsilon_{i}$ becomes $\pm2\varepsilon_{i}$;
+we also take the same $f$. Then, $f(\varepsilon_{i}-\varepsilon_{i+1})=1$
+for $i=1,2,\dots,r-1$ (label these simple roots $\alpha_{1},\dots,\alpha_{r-1}$),
+and we need an $r$th simple root. We might only possibly get $f=2$
+by summing some of the preceding $\alpha_{i}$. However, it's impossible
+to obtain $2\varepsilon_{r}$ this way. Hence, $\Pi=\{\varepsilon_{i}-\varepsilon_{i+1}\ (i=1,\dots,r-1),\ 2\varepsilon_{r}\}$.
+The new Cartan integers are $\frac{2(\alpha_{r-1},\alpha_{r})}{(\alpha_{r-1},\alpha_{r-1})}=-2$,
+and $\frac{2(\alpha_{r},\alpha_{r-1})}{(\alpha_{r},\alpha_{r})}=-1$,
+which gives us: \[
+A=\left(\begin{array}{ccccc}
+2 & -1 & 0 & \cdots & 0\\
+-1 & 2 & -1 &  & \vdots\\
+0 & -1 & 2 & \ddots & 0\\
+\vdots &  & \ddots & \ddots & -2\\
+0 & \cdots & 0 & -1 & 2\end{array}\right),\]
+ and the Dynkin diagram in Figure \ref{dd}c. The highest root is
+$\theta=2\varepsilon_{1}$, so $\alpha_{0}=-2\varepsilon_{1}$, and
+we get the extended Dynkin diagram in Figure \ref{dd}c.
+\end{example}
+%
+
+\begin{example}
+$D_{r}$: $\Delta=\Delta_{so_{2r}(\F)}=\{\pm\varepsilon_{i}\pm\varepsilon_{j}(i\ne j)\}_{i,j=1}^{r}$.
+Define $f\in V^{*}$ by $f(\varepsilon_{1})=r-1,\dots,f(\varepsilon_{r})=0$.
+
+Then $\Delta=\{\varepsilon_{i}\pm\varepsilon_{j}(i<j)\}$, and $\Pi=\{\varepsilon_{1}-\varepsilon_{2},\dots,\varepsilon_{r-1}-\varepsilon_{r},\varepsilon_{r-1}+\varepsilon_{r}\}$
+since we get $f(\alpha_{i})=1$ for all $i$.
+
+Compute \[
+A=\left(\begin{array}{cccccc}
+2 & -1 & 0 & \dots & \dots & 0\\
+-1 & 2 & -1 &  &  & \vdots\\
+0 & -1 & \ddots & \ddots & 0 & 0\\
+\vdots &  & \ddots & 2 & -1 & -1\\
+\vdots &  & 0 & -1 & 2 & 0\\
+0 & \dots & 0 & -1 & 0 & 2\end{array}\right),\]
+ so we have the Dynkin diagram in Figure \ref{dd}d.
+
+Then, $\theta=\varepsilon_{1}+\varepsilon_{2}$, so $\alpha_{0}=-\varepsilon_{1}-\varepsilon_{2}$,
+so we get the $\tilde{D_{r}}$ in Figure \ref{dd}d.
+\end{example}
+%
+
+\begin{example}
+$E_{8}$: $\Delta=\Delta_{E_{8}}=\{\pm\varepsilon_{i}\pm\varepsilon_{j}(i\ne j),\frac{1}{2}\underset{\text{(even number of + signs)}}{(\pm\varepsilon_{1}\pm\varepsilon_{2}\pm\dots\pm\varepsilon_{8})}\}_{i,j=1}^{8},$
+with $V=\bigoplus_{i=1}^{8}\R\varepsilon_{i}$. Let $f(\varepsilon_{1})=23,f(\varepsilon_{2})=6,f(\varepsilon_{3})=5,\dots f(\varepsilon_{8})=0$;
+we have an even number of odd $f(\varepsilon_{i})$, so $f$ is integer
+on all roots. Then, \[
+\Delta_{+}=\{\varepsilon_{i}\pm\varepsilon_{j}(i<j),\frac{1}{2}\underset{\text{(even number of + signs)}}{(\varepsilon_{1}\pm\varepsilon_{2}\pm\dots\pm\varepsilon_{8})}\}_{i,j=1}^{8}\]
+ and \[
+\Pi=\{\varepsilon_{2}-\varepsilon_{3},\varepsilon_{3}-\varepsilon_{4},\dots\varepsilon_{7}-\varepsilon_{8},\frac{1}{2}(\varepsilon_{1}-\varepsilon_{2}-\dots-\varepsilon_{7}+\varepsilon_{8})\}.\]
+ In particular, $f(\alpha_{i})=1$ for all $i$; $\theta=\varepsilon_{1}+\varepsilon_{2}$,
+so $\alpha_{0}=-\varepsilon_{1}-\varepsilon_{2}$ and we get the diagrams
+$E_{8}$ and $\tilde{E}_{8}$ in Figure \ref{dd}e.
+\end{example}
+\begin{xca}
+\label{exce7e6}From Exercise 16.4, we have:\begin{eqnarray*}
+\Delta_{E_{7}} & = & \{\varepsilon_{i}-\varepsilon_{j}(1\le i\ne j\le8),\frac{1}{2}\underset{\text{4+signs}}{(\pm\varepsilon_{1}\pm\varepsilon_{2}\pm\dots\pm\varepsilon_{8})}\}\\
+\Delta_{E_{6}} & = & \{\varepsilon_{i}-\varepsilon_{j}(1\le i\ne j\le6),\pm(\varepsilon_{7}-\varepsilon_{8}),\frac{1}{2}(\underset{\text{3+signs}}{\pm\varepsilon_{1}\pm\varepsilon_{2}\pm\dots\pm\varepsilon_{6}})\pm\frac{1}{2}(\varepsilon_{7}-\varepsilon_{8}))\}.\end{eqnarray*}
+ Perform the same analysis as in the Examples for $E_{7}$ and $E_{6}$.
+Show that their diagrams are as in Figure \ref{dd}f,g.
+\end{xca}
+For $E_{7}$, we will pick $f(\varepsilon_{i})$ so that all roots
+have non-zero integer values. For this, we need $f(\varepsilon_{i})$
+to be distinct integers (hence $\pm\varepsilon_{i}\pm\varepsilon_{j}$
+are all integer and non-zero). Additionally, we want an even number
+of the $f(\varepsilon_{i})$ to be odd. That way, roots of the second
+type also have integer values. Take $f(\varepsilon_{2})=7,f(\varepsilon_{3})=6,\dots,f(\varepsilon_{8})=1$;
+then, $\alpha_{1}=\varepsilon_{2}-\varepsilon_{3},\alpha_{2}=\varepsilon_{3}-\varepsilon_{4},\dots,\alpha_{6}=\varepsilon_{7}-\varepsilon_{8}$
+are all simple roots with value $1$. We have $(\alpha_{i},\alpha_{j})=-1$
+if $|i-j|=1$ and $0$ otherwise so far, and $(\alpha_{i},\alpha_{i})\equiv2$.
+There is just one more simple root, and it must be of the second type.
+We need to choose $f(\varepsilon_{1})$ appropriately. In order for
+$f$ to be integer-valued on all roots, $f(\varepsilon_{1})$ must
+be even. To avoid a zero-valued root, we will make it sufficiently
+large that \[
+\frac{1}{2}(f(\varepsilon_{1})-7-6-5-4+3+2+1)>0,\]
+since that's the closest we can get to zero if $f(\varepsilon_{1})$
+is large. Simplifying, we have: $f(\varepsilon_{1})$ even, and $f(\varepsilon_{1})>16$,
+so we'll take $f(\varepsilon_{1})=18$. Then $f(\alpha_{7})=1,\alpha_{7}=\frac{1}{2}(\varepsilon_{1}-\varepsilon_{2}-\varepsilon_{3}-\varepsilon_{4}-\varepsilon_{5}+\varepsilon_{6}+\varepsilon_{7}+\varepsilon_{8})$,
+and we have the last simple root. We have $(\alpha_{i},\alpha_{7})=0$
+for all $1\le i\ne4\le6$, with $(\alpha_{4},\alpha_{7})=-1$ and
+$(\alpha_{7},\alpha_{7})=2$. Hence, all the connections are simple,
+and we have the right diagram. The highest root is clearly $\theta=\varepsilon_{1}-\varepsilon_{8}\overset{f}\mapsto17,$
+so $\alpha_{0}=\varepsilon_{8}-\varepsilon_{0}$, which connects (simply)
+only with $\alpha_{7}$, so we have the right extended diagram too. 
+
+For $E_{6}$, we choose the same $f(\varepsilon_{2}),\dots f(\varepsilon_{8})$.
+This gives us the following simple roots: $\alpha_{1}=\varepsilon_{2}-\varepsilon_{3},\dots,\alpha_{4}=\varepsilon_{5}-\varepsilon_{6},\alpha_{5}=\varepsilon_{7}-\varepsilon_{8}$,
+with $(\alpha_{i},\alpha_{j})=-\delta_{ij}$ if $1\le i,j\le4$; all
+$(\alpha_{i},\alpha_{i})=2$, and $\alpha_{5}$ doesn't connect with
+any of these roots. Now, to choose the right $f(\varepsilon_{1})$,
+we assume it's large and take the smallest non-negative number we
+can get: \[
+\frac{1}{2}(f(\varepsilon_{1})-7-6-5+4+3-2+1>0,\]
+ so $f(\varepsilon_{1})>12$. As before, we want it to be even, and
+so pick $f(\varepsilon_{1})=14$, which gives the last simple root
+$f(\alpha_{6})=1,\alpha_{6}=\frac{1}{2}(\varepsilon_{1}-\varepsilon_{2}-\varepsilon_{3}-\varepsilon_{4}+\varepsilon_{5}+\varepsilon_{6}-\varepsilon_{7}+\varepsilon_{8})$.
+$\alpha_{7}$ connects only with $\alpha_{3}$ and $\alpha_{5}$;
+$(\alpha_{3},\alpha_{6})=-1,(\alpha_{5},\alpha_{6})=-1$ and $(\alpha_{6},\alpha_{6})=2$.
+So, the connections are all simple, and we get the correct diagram.
+The highest root in this case is $\theta=\varepsilon_{1}-\varepsilon_{6}\overset{f}\mapsto11$,
+so $\alpha_{0}=\varepsilon_{6}-\varepsilon_{1}$, which connects only
+with $\alpha_{4}$, which, again, gives the right extended diagram. 
+
+\begin{xca}
+From Exercises 16.5 and 16.6, we have:\begin{eqnarray*}
+\Delta_{F_{4}} & = & \{\pm\varepsilon_{i}\pm\varepsilon_{j},\pm\varepsilon_{i},\frac{1}{2}(\pm\varepsilon_{1}\pm\varepsilon_{2}\pm\varepsilon_{3}\pm\varepsilon_{4})\},1\le i\ne j\le4\\
+\Delta_{G_{2}} & = & \{\varepsilon_{i}-\varepsilon_{j},\pm(\varepsilon_{i}+\varepsilon_{j}-2\varepsilon_{k})\},1\le i,j,k\le3,\text{all distinct}\end{eqnarray*}
+Perform the same calculations for $F_{4}$ and $G_{2}$, and show
+that they have the diagrams in Figure \ref{dd}h,i.
+\end{xca}
+Here, we proceed exactly as in the previous exercise. For $F_{4}$,
+we pick $f(\varepsilon_{1})=8,f(\varepsilon_{2})=3,f(\varepsilon_{3})=2,f(\varepsilon_{4})=1$,
+which gives us the simple roots $\alpha_{1}=\varepsilon_{2}-\varepsilon_{3},\alpha_{2}=\varepsilon_{3}-\varepsilon_{4},\alpha_{3}=\varepsilon_{4},\alpha_{4}=\frac{1}{2}(\varepsilon_{1}-\varepsilon_{2}-\varepsilon_{3}-\varepsilon_{4})$,
+with simple connections between $\alpha_{1}$ and each of $\alpha_{2}$,
+$\alpha_{3}$, $\alpha_{4}$. Additionally, there is a double-arrow
+connection from $\alpha_{2}$ to $\alpha_{3}$, so we get the correct
+diagram. $\alpha_{0}=-\varepsilon_{1}-\varepsilon_{2}\overset{f}\mapsto-11$
+connects up only with $\alpha_{1}$, which gets us the extended diagram.
+
+For $G_{2}$, pick $f(\varepsilon_{1})=4,f(\varepsilon_{2})=2,f(\varepsilon_{3})=1$,
+which gives us simple roots $\alpha_{1}=\varepsilon_{2}-\varepsilon_{3}$
+and $\alpha_{2}=\varepsilon_{1}+\varepsilon_{3}-2\varepsilon_{2}$,
+with $(\alpha_{1},\alpha_{1})=2$,$(\alpha_{2},\alpha_{2})=6$, and
+$(\alpha_{1},\alpha_{2})=-3$, which gives the desired connection.
+$\alpha_{0}=\varepsilon_{2}+\varepsilon_{3}-2\varepsilon_{1}\overset{f}\mapsto-5$,
+with a simple connection to $\alpha_{2}$, as in the extended diagram.
+
+
+\section{Classification of Dynkin Diagrams}
+
+\begin{thm}
+The Dynkin diagrams of all indecomposable Cartan matrices are $A_{r},B_{r},C_{r},D_{r},E_{8},E_{7},E_{6},F_{4},G_{2}$. 
+
+%
+\begin{figure}
+\input{conntypes.pstex_t}
+
+
+\caption{\label{conntype}The four Dynkin diagram connection types, corresponding
+to the four types of $2\times2$ Cartan matrix minors.}
+\end{figure}
+
+\end{thm}
+\begin{proof}
+We have to choose connected graphs with connections of the 4 types
+depicted in Figure \ref{conntype}, such that the matrix of any subgraph
+has a positive determinant. In particular, our graphs contain no extended
+Dynkin diagrams as induced subgraphs, since these have determinant
+0. 
+
+%
+\begin{figure}
+\input{simplylaced.pstex_t}
+
+
+\caption{\label{simplac}Some diagrams for the simply laced case.}
+\end{figure}
+
+
+\paragraph*{Part 1}
+
+Classify all {}``simply laced'' Dynkin diagrams, i.e. using only
+0- or 1-edge connections (which correspond to a symmetric $A$). Such
+a graph contains no cycles, since those are $\tilde{A}_{r}$. If there
+are no branching points, we get $A_{r}$. Next, such a graph contains
+at most 1 branching point, since otherwise it contains $\tilde{D}_{r}$.
+If there is a branching point, one has at most 3 branches, since $\tilde{D}_{4}$
+is the 4-star in Figure \ref{simplac}a. Thus, we are left with a
+graph of the form $T_{p,q,r}(p\ge q\ge r\ge2)$ depicted in Figure
+\ref{simplac}b. But the graph cannot contain any of $\tilde{E}_{6}=T_{3,3,3},\tilde{E}_{7}=T_{4,4,2},\tilde{E}_{8}=T_{6,3,2},$
+hence the only possibilities are $D_{r},E_{6},E_{7},E_{8}$. Why?
+Suppose $r=3$, then $p\ge q\ge3$, so it contains $T_{3,3,3}$. Hence,
+$r=2$. From $\tilde{E}_{7}$, we can't have $q\ge4\Rightarrow q=2,3$,
+and we get $p\le5$ likewise. 
+
+%
+\begin{figure}
+\input{dblloop.pstex_t}
+
+
+\caption{\label{dblloop}A loop with one double-connection.}
+\end{figure}
+
+
+
+\paragraph*{Part 2}
+
+Classify all non-simply laced diagrams, i.e. those containing double-
+or triple-edge connections (corresponding to non-symmetric $A$).
+This can be done by a more complicated case analysis. However, we'd
+like an effective way of ruling out diagrams like the one in Figure
+\ref{dblloop}. This can be done by computing many large determinants,
+but we would rather argue using the following:
+
+\begin{xca}
+Prove the following two useful lemmas:
+\end{xca}
+\begin{lem}
+\label{lemmaa}Let \[
+A=\left(\begin{array}{cc}
+2 & \underline{\begin{array}{cccc}
+-a & 0 & \cdots & 0\end{array}}\\
+\left.\begin{array}{c}
+-b\\
+0\\
+\vdots\\
+0\end{array}\right\vert  & A_{n-1}\end{array}\right).\]
+ Then, $\det A=2\det A_{n-1}-ab\det A_{n-2}$, where $A_{n-2}$ is
+$A$ with the first and second rows and columns deleted. 
+\end{lem}
+\begin{proof}
+Denote by $A\backslash(i,j)$ the matrix $A$ with the $i$th row
+and $j$th column removed. In particular, $A_{n-2}=A\backslash(1,2)\backslash(1,1)$. 
+
+To prove this lemma, we expand the determinant by minors along the
+first row, getting $\det A=2\det A_{n-1}+a\det A\backslash(1,2)$;
+then, we expand $\det A\backslash(1,2)$ along its first column, which
+gives $\det A=2\det A_{n-1}-ab\det A_{n-2}$, as desired.
+\end{proof}
+\begin{lem}
+\label{lemmab}Let\[
+A=\left(\begin{array}{cccccc}
+c_{1} & -a_{1} & 0 & \cdots & 0 & -b_{n}\\
+-b_{1} & c_{2} & -a_{2} & 0 &  & 0\\
+0 & -b_{2} & c_{3} & \ddots & \ddots & \vdots\\
+\vdots & 0 & \ddots & \ddots & -a_{n-2} & 0\\
+0 &  & \ddots & -b_{n-2} & \,\,\,\,\, c_{n-1} & -a_{n-1}\\
+-a_{n} & 0 & \cdots & 0 & -b_{n-1} & c_{n}\end{array}\right).\]
+Then, $\det(A-\epsilon E_{12})=\det A-\epsilon(b_{1}\det A_{n-2}+a_{2}a_{3}\dots a_{n})$.
+In particular, if $\det A_{n-2}>0$, $b_{1}>0$, $a_{2}\dots a_{n}>0$,
+and $\epsilon>0$, then $\det A-\epsilon E_{12}<\det A$.
+\end{lem}
+\begin{proof}
+To prove this lemma, we expand the determinant of $A-\epsilon E_{12}$
+along the second column to get \[
+(a_{1}+\epsilon)\det A\backslash(1,2)+c_{2}\det A\backslash(2,2)+b_{2}\det A\backslash(3,2)=\det A+\epsilon\det A\backslash(1,2).\]
+ $A\backslash(1,2)$ looks like this:\[
+\left(\begin{array}{ccccc}
+-b_{1} & -a_{2} & 0 & \cdots & 0\\
+0 & c_{3} & \ddots & \ddots & \vdots\\
+\vdots & \ddots & \ddots & -a_{n-2} & 0\\
+0 & \ddots & -b_{n-2} & \,\,\,\,\, c_{n-1} & -a_{n-1}\\
+-a_{n} & \cdots & 0 & -b_{n-1} & c_{n}\end{array}\right).\]
+ If we expand its determinant along the first column, we get $-b_{1}\det A\backslash(1,2)\backslash(1,1)+(-1)^{n-1}a_{n}\det A\backslash(1,2)\backslash(n-1,1)$.
+The first part of the expression is simply $-b_{1}\det A_{n-2}$.
+As for the second part, the matrix we get is:\[
+\left(\begin{array}{cccc}
+-a_{2} & 0 & \cdots & 0\\
+c_{3} & \ddots & \ddots & \vdots\\
+\ddots & \ddots & -a_{n-2} & 0\\
+\ddots & -b_{n-2} & \,\,\,\,\, c_{n-1} & -a_{n-1}\end{array}\right),\]
+ which is lower triangular with a diagonal consisting of all $a_{i}$,
+$2\le i\le n-1$, hence with determinant $(-1)^{n-2}a_{2}a_{3}\dots a_{n-1}$.
+Putting all this together, we get the desired \[
+\det A+\epsilon(-b_{1}\det A_{n-2}-a_{2}a_{3}\dots a_{n}).\]
+
+\end{proof}
+Lemma \ref{lemmab} implies that in the non-simply laced case, there
+are no cycles as well. This is because $\det\tilde{A}_{r-1}=0$; so,
+any other cycle with subdiagrams of positive determinant must have
+determinant $<0$ by the lemma. For example, the diagram in Figure
+\ref{dblloop} has $A=\tilde{A}_{4}-E_{12}$, so $\det A<0$. 
+
+%
+\begin{figure}
+\input{g2cases.pstex_t}
+
+
+\caption{\label{g2cases}Possible neighbors of $G_{2}$ in a diagram. }
+\end{figure}
+
+
+Next, looking at the extended Dynkin diagrams we calculate that if
+the diagram contains $G_{2}$ (Figure \ref{dd}i) it must be $G_{2}$,
+by Lemma \ref{lemmaa}. Otherwise, it must contain one of the possibilities
+in Figure \ref{g2cases}, none of which have suitable determinant:
+their Cartan matrices are of the form \[
+A=\left(\begin{array}{ccc}
+2 & -a & 0\\
+-b & 2 & -1\\
+0 & -3 & 2\end{array}\right)\Rightarrow A_{n-1}=\left(\begin{array}{cc}
+2 & -1\\
+-3 & 2\end{array}\right)\text{ and }A_{n-2}=\left(\begin{array}{c}
+2\end{array}\right).\]
+Hence, by Lemma \ref{lemmaa}, $\det(A)=2\det(A_{n-1})-ab\det(A_{n-2})=2(1-ab)$,
+which is zero or negative since $a,b>0$. (The matrix of the second
+graph in the figure is actually $A^{T}$, but all the determinants
+are the same.)
+
+It remains to look at the case when we have only simple or double
+connections. Looking at the extended Dynkin diagrams, $\tilde{C}_{r}$
+(in Figure \ref{dd}c) cannot be a subdiagram. The variants with flipped
+arrow directions also don't work. They are obtained from the extended
+Cartan matrix $\tilde{A}$ of $\tilde{C}_{r}$by replacing some of
+$\tilde{A},\tilde{A}_{n-1},\tilde{A}_{n-2}$ by their transposes,
+which doesn't change any of the determinants in the calculation. Thus,
+by Lemma \ref{lemmaa}, their determinants are also 0.
+
+Therefore only one double connection is possible. But, then we cannot
+have branching points, since $\tilde{B}_{r}$ contains a double edge
+and a branching point. So, the only remaining case is a line with
+a left-right double edge, having $p$ single edges to the left, and
+$q$ single edges to the right. $\tilde{F}_{4}$ has $p=2,q=1$; its
+transpose has $p=1,q=2$. Hence, if the diagram contains $\tilde{F}_{4}$,
+it must be $\tilde{F}_{4}$. Otherwise, either $p=0$ or $q=0$, and
+we have $B_{r}$ or $C_{r}$.
+
+\end{proof}
+We have now shown that any finite-dimensional simple Lie algebra yields
+one of a very restricted set of Dynkin diagrams (and hence Cartan
+matrices). The next step in the classification of semisimple Lie algebras
+will be to give a construction associating an abstract Cartan matrix
+to a Lie algebra, and hence to prove that these four classes plus
+five exceptional algebras are in fact the only finite-dimensional
+simple Lie algebras.
+\end{document}
